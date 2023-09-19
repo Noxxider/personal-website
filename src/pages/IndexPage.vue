@@ -71,25 +71,25 @@
     </div>
     <!-- End of third section -->
 
-    <div
-      class="q-px-md q-pb-md row justify-center full-width"
-    >
+    <div class="q-px-md q-pb-md row justify-center full-width">
       <!-- Start of first column (text and button) -->
       <div
         class="q-my-auto col-xs-12 col-sm-6 q-pa-md responsive-padding text-left"
       >
         <!-- Heading for the first section -->
-        <div class="text-h5 text-weight-medium ">Software Development</div>
+        <div class="text-h5 text-weight-medium">Software Development</div>
         <!-- Subheading for the first section -->
         <div class="text-h6 q-mt-md text-weight-regular">
           <ul>
             <li>
-              <b>Proficient in:</b> HTML, JavaScript, CSS, Java, Python, C# and SQL
+              <b>Proficient in:</b> HTML, JavaScript, CSS, Java, Python, C# and
+              SQL
             </li>
           </ul>
           <ul>
             <li>
-              <b>Experienced in:</b> Vue, Node, .NET, Bootstrap and Android Development
+              <b>Experienced in:</b> Vue, Node, .NET, Bootstrap and Android
+              Development
             </li>
           </ul>
         </div>
@@ -99,7 +99,8 @@
         <div class="text-h6 q-mt-md text-weight-regular">
           <ul>
             <li>
-              English and Indonesian (Fluent), German (Proficient), French and Spanish (Intermediate)
+              English and Indonesian (Fluent), German (Proficient), French and
+              Spanish (Intermediate)
             </li>
           </ul>
         </div>
@@ -118,7 +119,7 @@
       </div>
       <!-- End of first column -->
       <!-- Start of second column (image) -->
-      <div class=" col-xs-12 col-sm-6 flex flex-center">
+      <div class="col-xs-12 col-sm-6 flex flex-center">
         <!-- Logo image -->
         <img
           class="responsive-image"
@@ -137,14 +138,14 @@
       style="padding-top: 50px; margin-top: -50px"
     >
       <!-- Container for fourth section content -->
-      <div class="q-py-xl flex-column text-left" >
+      <div class="q-py-xl flex-column text-left">
         <!-- Heading for the fourth section -->
-        <div class="text-h4 text-weight-medium">
-          Portfolio Snapshot
-        </div>
+        <div class="text-h4 text-weight-medium">Portfolio Snapshot</div>
         <!-- Description for the fourth section -->
         <div class="text-h6 q-mt-sm text-weight-regular">
-          From developing scalable SaaS applications to enhancing customer engagement strategies, my portfolio shows my dedication and skills in the web development domain.
+          From developing scalable SaaS applications to enhancing customer
+          engagement strategies, my portfolio shows my dedication and skills in
+          the web development domain.
         </div>
       </div>
     </div>
@@ -157,7 +158,7 @@
         <!-- Image for the first column -->
         <q-img
           class="q-mt-lg q-mb-md"
-          src="src\assets\project-one.png"
+          src="~assets/project-one.png"
           fit="contain"
           height="40vh"
         />
@@ -167,7 +168,8 @@
         </div>
         <!-- Content for the first column -->
         <div class="section-content text-h6 text-weight-regular">
-          Revolutionizing communication with a scalable SaaS web application.<br/><br/>Rangouts has a feed, a live map and ticket system for local event discovery.
+          Revolutionizing communication with a scalable SaaS web application.<br /><br />Rangouts
+          has a feed, a live map and ticket system for local event discovery.
         </div>
       </div>
       <!-- End of first column -->
@@ -177,7 +179,7 @@
         <!-- Image for the second column -->
         <q-img
           class="q-mt-lg q-mb-md"
-          src="src\assets\project-two.png"
+          src="~assets/project-two.png"
           fit="contain"
           height="40vh"
         />
@@ -187,7 +189,9 @@
         </div>
         <!-- Content for the second column -->
         <div class="section-content text-h6 text-weight-regular">
-          Developed a web application to identify top Instagram accounts in specified locations.<br /><br />My work is Parkbench property now so I can’t show the code.
+          Developed a web application to identify top Instagram accounts in
+          specified locations.<br /><br />My work is Parkbench property now so I
+          can’t show the code.
         </div>
       </div>
       <!-- End of second column -->
@@ -198,7 +202,7 @@
         <q-img
           class="q-mt-lg q-mb-md"
           height="40vh"
-          src="src\assets\project-three.png"
+          src="~assets/project-three.png"
           fit="contain"
         />
         <!-- Headline for the third column -->
@@ -207,7 +211,8 @@
         </div>
         <!-- Content for the third column -->
         <div class="section-content text-h6 text-weight-regular">
-          Enhancing restaurant QR menu code analytics, customer engagement strategies and menu design.
+          Enhancing restaurant QR menu code analytics, customer engagement
+          strategies and menu design.
         </div>
       </div>
       <!-- End of third column -->
@@ -243,7 +248,12 @@
       <!-- Start of white box -->
       <div
         class="q-pa-lg responsive-margin"
-        style="background-color: white; max-width: 600px; align-self: center; border-radius: 16px"
+        style="
+          background-color: white;
+          max-width: 600px;
+          align-self: center;
+          border-radius: 16px;
+        "
       >
         <!-- Headline -->
         <div class="text-h4 text-weight-medium text-center">
@@ -251,7 +261,9 @@
         </div>
         <!-- Subheadline -->
         <div class="text-h6 q-my-md text-weight-regular">
-          I'm not just about codes and algorithms; I'm also a singer, having sang acapella internationally. Music is a passion that resonates deeply with me.
+          I'm not just about codes and algorithms; I'm also a singer, having
+          sang acapella internationally. Music is a passion that resonates
+          deeply with me.
         </div>
       </div>
       <!-- End of white box -->
@@ -263,10 +275,17 @@
       <!-- Container for final section content -->
       <div class="q-py-xl flex-column text-left" style="max-width: 1000px">
         <!-- Heading for the final section -->
-        <div class="text-h4 text-weight-medium">I would love to join your team</div>
+        <div class="text-h4 text-weight-medium">
+          I would love to join your team
+        </div>
         <!-- Improved subheadline for the final section -->
         <div class="text-h6 text-weight-regular q-my-md">
-          Don't hesitate to reach out via <a href="mailto:ravino.juwono@gmail.com?subject=Inquiry%20from%20a%20Potential%20Collaborator%20or%20Employer">email</a> or text. You can view my resume by clicking the button below
+          Don't hesitate to reach out via
+          <a
+            href="mailto:ravino.juwono@gmail.com?subject=Inquiry%20from%20a%20Potential%20Collaborator%20or%20Employer"
+            >email</a
+          >
+          or text. You can view my resume by clicking the button below
         </div>
         <!-- Button for the final section -->
         <q-btn
@@ -290,7 +309,10 @@
       <div class="footer-item q-pa-md responsive-margin-footer full-width">
         <div class="text-h5 text-weight-medium">Ravino Juwono</div>
         <div class="text-h6 text-weight-light q-mt-lg">
-          <b>Email:</b> <a href="mailto:ravino.juwono@gmail.com" style="color:white">ravino.juwono@gmail.com</a>
+          <b>Email:</b>
+          <a href="mailto:ravino.juwono@gmail.com" style="color: white"
+            >ravino.juwono@gmail.com</a
+          >
         </div>
 
         <div class="text-h6 text-weight-light q-mt-sm">
@@ -306,7 +328,12 @@
         </div>
 
         <div class="text-h6 text-weight-light q-mt-sm">
-          <a href="https://www.linkedin.com/in/ravinojuwono" target="_blank" class="text-white">Linkedin</a>
+          <a
+            href="https://www.linkedin.com/in/ravinojuwono"
+            target="_blank"
+            class="text-white"
+            >Linkedin</a
+          >
         </div>
       </div>
     </div>
@@ -335,13 +362,14 @@ export default defineComponent({
 }
 
 @media screen and (min-width: 600px) {
-.responsive-image {
-  height: auto;
-  max-width: 55%;
-  width: auto;
-  margin-top: 48px;
-  margin-bottom: 48px;
-}}
+  .responsive-image {
+    height: auto;
+    max-width: 55%;
+    width: auto;
+    margin-top: 48px;
+    margin-bottom: 48px;
+  }
+}
 
 @media screen and (max-width: 600px) {
   .responsive-image {
