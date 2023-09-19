@@ -1,1 +1,109 @@
 // app global css in SCSS form
+
+.large-screen-only {
+    @media (max-width: $breakpoint-xl-min) {
+      display: none;
+    }
+  
+    @media (min-width: $breakpoint-xs-max) {
+      display: block;
+    }
+  }
+  
+  .small-screen-only {
+    @media (max-width: $breakpoint-xs-max) {
+      display: block;
+    }
+  
+    @media (min-width: $breakpoint-xs-max) {
+      display: none;
+      render: none;
+    }
+  }
+  
+  .text-left {
+    text-align: left;
+  }
+  
+  body {
+    color: #262626;
+  }
+  
+  .row {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row
+  }
+  
+  .layout {
+    background-color: #f9f9f9;
+  }
+  
+  .footer-section {
+    display: flex;
+    min-height: 30vh;
+    background-color: #202030; 
+    justify-content: space-evenly;
+    align-items: center; /* Center items vertically */
+    width: 100%;
+  }
+  
+  .footer-item {
+    flex: 1; /* Each item should take up an equal amount of space */
+    text-align: left; /* Center the text */
+  }
+  
+  @media (max-width: 600px) {
+    .footer-section {
+      flex-direction: column;
+    }
+  
+    .footer-item {
+      text-align: left;
+    }
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  .responsive-padding {
+    padding-left: 96px;
+    padding-right: 96px;
+  }
+  
+  .responsive-margin-footer {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    padding-left: 96px;
+    padding-right: 96px;
+  }
+  
+  @media screen and (max-width: 1000px) {
+    .responsive-margin-footer {
+      margin-top: 32px;
+      margin-bottom: 32px;
+      padding-left: 32px;
+      padding-right: 32px;
+    }
+  }
+  
+  .my-section {
+    max-width: 100%;
+    max-height: calc(100vh - 56px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  @media screen and (max-width: 1000px) {
+    .my-section {
+      max-width: 100%;
+      max-height: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+  
+  
