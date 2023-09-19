@@ -290,7 +290,7 @@
       <div class="footer-item q-pa-md responsive-margin-footer full-width">
         <div class="text-h5 text-weight-medium">Ravino Juwono</div>
         <div class="text-h6 text-weight-light q-mt-lg">
-          <b>Email:</b> zenu.qr@gmail.com
+          <b>Email:</b> <a href="mailto:ravino.juwono@gmail.com" style="color:white">ravino.juwono@gmail.com</a>
         </div>
 
         <div class="text-h6 text-weight-light q-mt-sm">
