@@ -8,6 +8,8 @@
         250-863-2454 |
         <a href="https://www.linkedin.com/in/ravinojuwono" target="_blank"
           >LinkedIn Profile</a
+        > | <a href="http://www.ravinojuwono.com" target="_blank"
+          >Personal Website</a
         >
       </div>
     </div>
@@ -226,13 +228,13 @@
       </div>
     </div>
 
-    <div class="responsive-padding">
+    <div class="responsive-padding q-mx-auto">
       <div class="q-mt-xl q-mb-none text-h4 text-weight-medium">
         <q-btn
           label="Download As PDF"
           type="primary"
           class="full-width shadow-1"
-          style="min-width: 400px"
+          style="max-width: 400px"
           no-caps
           @click="downloadResume()"
           padding="md xl"
@@ -240,13 +242,13 @@
           unelevated
         />
       </div>
-      
+
       <div class="q-mt-xl q-mb-xl text-h4 text-weight-medium">
         <q-btn
           label="Download Reference Letter"
           type="primary"
           class="full-width shadow-1"
-          style="min-width: 400px"
+          style="max-width: 400px"
           no-caps
           @click="downloadReference()"
           padding="md xl"
@@ -301,7 +303,7 @@ export default defineComponent({
   methods: {
     downloadResume() {
       window.open(
-        "https://drive.google.com/file/d/110gROmOe0FrRrZab-MQtjZ9fM-a1ChRs/view?usp=sharing",
+        "https://drive.google.com/file/d/1nyMNSyVgsjveT2zhqXghtxsTR-mXV6U_/view?usp=sharing",
         "_blank"
       );
     },
