@@ -237,13 +237,7 @@
 
     <!-- Start of picture background div -->
     <div
-      class="full-width flex justify-end items-center"
-      style="
-        background-image: url(src/assets/acapella.png);
-        background-size: cover;
-        background-position: center;
-        height: 70vh;
-      "
+      class="full-width flex justify-end items-center landingSinging"
     >
       <!-- Start of white box -->
       <div
