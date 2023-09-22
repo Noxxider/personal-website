@@ -29,7 +29,7 @@
         <ul>
           <li>
             <h6 class="q-mt-none text-weight-regular">
-              Spearheading a project to enhance restaurant QR menu code
+              Leading a project to enhance restaurant QR menu code
               analytics and customer engagement strategies utilizing Vue, Node,
               and PostgreSQL.
             </h6>
@@ -303,7 +303,7 @@ export default defineComponent({
   methods: {
     downloadResume() {
       window.open(
-        "https://drive.google.com/file/d/1nyMNSyVgsjveT2zhqXghtxsTR-mXV6U_/view?usp=sharing",
+        "https://drive.google.com/file/d/10kKQPFusBYLFAh9QDlL94NIhKf4xbF0X/view?usp=sharing",
         "_blank"
       );
     },
