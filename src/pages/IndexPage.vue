@@ -119,13 +119,14 @@
       </div>
       <!-- End of first column -->
       <!-- Start of second column (image) -->
-      <div class="col-xs-12 col-sm-6 flex flex-center">
+      <div class="col-xs-12 col-sm-6 flex flex-center" >
         <!-- Logo image -->
         <img
           class="responsive-image"
           alt="Quasar logo"
           src="~assets/landing-two.png"
           fit="contain"
+          style="max-height: 700px"
         />
       </div>
       <!-- End of second column -->

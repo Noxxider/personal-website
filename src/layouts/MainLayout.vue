@@ -33,6 +33,19 @@
             class="large-screen-only q-ml-md"
             padding="md"
           />
+
+          <q-btn
+            flat
+            no-caps
+            round
+            dense
+            size="18px"
+            to="/contact"
+            color="secondary"
+            label="Contact"
+            class="large-screen-only q-ml-md"
+            padding="md"
+          />
         </div>
 
         <img
@@ -95,6 +108,12 @@ const linksList = [
     title: "LinkedIn",
     icon: "person",
     link: "https://linkedin.com/in/ravinojuwono",
+  },
+
+  {
+    title: "Contact",
+    icon: "phone",
+    link: "/contact",
   },
 ];
 
