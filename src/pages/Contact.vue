@@ -1,9 +1,11 @@
 <template class="layout">
   <q-page class="flex flex-center">
     <!-- Header Section -->
-    <div>
-      <h4 class="text-weight-medium text-center">Contact Information</h4>
-
+    <div class="q-mx-md">
+      <h4 class="text-weight-medium text-center q-mb-none">Contact Information</h4>
+    <h6 class="q-mt-sm q-mb-lg text-weight-regular" style="max-width: 500px" ref="email">
+          Need a website or custom software? Let's connect—I'm always open to projects and employment opportunities!
+        </h6>
       <!-- Email -->
       <div class="flex" style="max-width: 500px">
         <svg
@@ -21,8 +23,8 @@
         </svg>
 
         <h6 class="q-my-auto q-mx-md text-weight-regular" ref="email">
-          ravino.juwono@gmail.com
-        </h6>
+  <a href="mailto:ravino.juwono@gmail.com">ravino.juwono@gmail.com</a>
+</h6>
 
         <q-btn
           :ripple="false"
