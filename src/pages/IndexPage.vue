@@ -13,7 +13,7 @@
         <div class="text-h3 text-weight-bold">Hello!</div>
         <!-- Subheading for the first section -->
         <div class="text-h4 q-my-md">
-          I’m Vino, a fresh physics grad turned software developer
+          I’m Vino, a physics grad turned software developer
         </div>
         <!-- Button for the first section -->
         <q-btn
@@ -57,14 +57,14 @@
       <div class="q-py-xl flex-column text-center" style="max-width: 700px">
         <!-- Heading for the third section -->
         <div class="text-h5 text-weight-medium">
-          Blending Scientific Insight with Innovative Web Development
+          Blending Scientific Insight with Innovative Software Development
         </div>
         <!-- Description for the third section -->
         <div class="text-h6 q-my-md text-weight-regular">
-          From delving into physics at UBCO to crafting innovative web
+          From delving into physics to crafting innovative web
           solutions, my journey has been nothing short of exciting.<br /><br />With
-          a knack for software development, I've honed my skills in Vue.js,
-          Node.js, and more, spearheading projects and creating impactful
+          a knack for software development, I've honed my skills in Vue,
+          Node, and more, leading projects and creating impactful
           digital solutions.
         </div>
       </div>
