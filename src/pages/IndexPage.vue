@@ -320,14 +320,14 @@ export default defineComponent({
   data() {
     return {
       techIcons: [
-        { src: "src/assets/carousel/android.svg", alt: "Android" },
-        { src: "src/assets/carousel/aws.svg", alt: "AWS" },
-        { src: "src/assets/carousel/azure.svg", alt: "Azure" },
-        { src: "src/assets/carousel/bootstrap.svg", alt: "Bootstrap" },
-        { src: "src/assets/carousel/csharp.svg", alt: "C#" },
-        { src: "src/assets/carousel/css.svg", alt: "CSS" },
-        { src: "src/assets/carousel/docker.svg", alt: "Docker" },
-        { src: "src/assets/carousel/figma.svg", alt: "Figma" },
+        { src: "~assets/carousel/android.svg", alt: "Android" },
+        { src: "~assets/carousel/aws.svg", alt: "AWS" },
+        { src: "~assets/carousel/azure.svg", alt: "Azure" },
+        { src: "~assets/carousel/bootstrap.svg", alt: "Bootstrap" },
+        { src: "~assets/carousel/csharp.svg", alt: "C#" },
+        { src: "~assets/carousel/css.svg", alt: "CSS" },
+        { src: "~assets/carousel/docker.svg", alt: "Docker" },
+        { src: "~assets/carousel/figma.svg", alt: "Figma" },
         { src: "src/assets/carousel/html5.svg", alt: "HTML5" },
         { src: "src/assets/carousel/ionic.svg", alt: "Ionic" },
         { src: "src/assets/carousel/java.svg", alt: "Java" },
