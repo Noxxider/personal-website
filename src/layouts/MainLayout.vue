@@ -33,7 +33,7 @@
           <q-btn
             class="large-screen-only q-px-xl q-mx-xl"
             no-caps
-            to="/events"
+            to="/"
             text-color="dark"
             label="Home"
             style="padding: 8px 12px"
@@ -42,7 +42,7 @@
           <q-btn
             class="large-screen-only q-px-xl"
             no-caps
-            to="/settings"
+            to="/contact"
             text-color="dark"
             label="Contact"
             style="padding: 8px 12px"
