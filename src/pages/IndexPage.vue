@@ -65,7 +65,7 @@
         gradient-length="30%"
       >
         <div class="q-px-md" v-for="icon in techIcons" :key="icon.alt">
-          <img :src="icon.src" :alt="icon.alt" height="90" />
+          <img :src="getIconPath(icon.name)" :alt="icon.alt" height="90" />    
           <div class="custom-paragraph" style="font-weight: 500">
             {{ icon.alt }}
           </div>
@@ -320,33 +320,39 @@ export default defineComponent({
   data() {
     return {
       techIcons: [
-        { src: "~assets/android.svg", alt: "Android" },
-        { src: "@/assets/carousel/aws.svg", alt: "AWS" },
-        { src: "~assets/carousel/azure.svg", alt: "Azure" },
-        { src: "~assets/carousel/bootstrap.svg", alt: "Bootstrap" },
-        { src: "~assets/carousel/csharp.svg", alt: "C#" },
-        { src: "~assets/carousel/css.svg", alt: "CSS" },
-        { src: "~assets/carousel/docker.svg", alt: "Docker" },
-        { src: "~assets/carousel/figma.svg", alt: "Figma" },
-        { src: "src/assets/carousel/html5.svg", alt: "HTML5" },
-        { src: "src/assets/carousel/ionic.svg", alt: "Ionic" },
-        { src: "src/assets/carousel/java.svg", alt: "Java" },
-        { src: "src/assets/carousel/js.svg", alt: "JavaScript" },
-        { src: "src/assets/carousel/mongodb.svg", alt: "MongoDB" },
-        { src: "src/assets/carousel/mysql.svg", alt: "MySQL" },
-        { src: "src/assets/carousel/nodejs.svg", alt: "Node.js" },
-        { src: "src/assets/carousel/postgresql.svg", alt: "PostgreSQL" },
-        { src: "src/assets/carousel/pwa.svg", alt: "PWA" },
-        { src: "src/assets/carousel/python.svg", alt: "Python" },
-        { src: "src/assets/carousel/react.svg", alt: "React" },
-        { src: "src/assets/carousel/typescript.svg", alt: "TypeScript" },
-        // Keep the Vue entry as is, since it works
-        { src: "src/assets/carousel/vue.svg", alt: "Vue" },
+        { name: "android", alt: "Android" },
+        { name: "aws", alt: "AWS" },
+        { name: "azure", alt: "Azure" },
+        { name: "bootstrap", alt: "Bootstrap" },
+        { name: "csharp", alt: "C#" },
+        { name: "css", alt: "CSS" },
+        { name: "docker", alt: "Docker" },
+        { name: "figma", alt: "Figma" },
+        { name: "html5", alt: "HTML5" },
+        { name: "ionic", alt: "Ionic" },
+        { name: "java", alt: "Java" },
+        { name: "js", alt: "JavaScript" },
+        { name: "mongodb", alt: "MongoDB" },
+        { name: "mysql", alt: "MySQL" },
+        { name: "nodejs", alt: "Node.js" },
+        { name: "postgresql", alt: "PostgreSQL" },
+        { name: "pwa", alt: "PWA" },
+        { name: "python", alt: "Python" },
+        { name: "react", alt: "React" },
+        { name: "typescript", alt: "TypeScript" },
+        { name: "vue", alt: "Vue" },
       ],
     };
   },
+  methods: {
+    getIconPath(iconName) {
+      // Dynamically require the image
+      return require(`@/assets/carousel/${iconName}.svg`);
+    }
+  }
 });
 </script>
+
 
 <style scoped>
 .full-height {
