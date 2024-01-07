@@ -65,7 +65,7 @@
         gradient-length="30%"
       >
         <div class="q-px-md" v-for="icon in techIcons" :key="icon.alt">
-          <img :src="getIconPath(icon.name)" :alt="icon.alt" height="90" />    
+          <img :src="icon.src" :alt="icon.alt" height="90" />    
           <div class="custom-paragraph" style="font-weight: 500">
             {{ icon.alt }}
           </div>
@@ -314,33 +314,57 @@
 import { defineComponent } from "vue";
 import { Vue3Marquee } from "vue3-marquee";
 
+// Import SVG assets
+import androidSvg from "src/assets/carousel/android.svg";
+import awsSvg from "src/assets/carousel/aws.svg";
+import azureSvg from "src/assets/carousel/azure.svg";
+import bootstrapSvg from "src/assets/carousel/bootstrap.svg";
+import csharpSvg from "src/assets/carousel/csharp.svg";
+import cssSvg from "src/assets/carousel/css.svg";
+import dockerSvg from "src/assets/carousel/docker.svg";
+import figmaSvg from "src/assets/carousel/figma.svg";
+import html5Svg from "src/assets/carousel/html5.svg";
+import ionicSvg from "src/assets/carousel/ionic.svg";
+import javaSvg from "src/assets/carousel/java.svg";
+import jsSvg from "src/assets/carousel/js.svg";
+import mongodbSvg from "src/assets/carousel/mongodb.svg";
+import mysqlSvg from "src/assets/carousel/mysql.svg";
+import nodejsSvg from "src/assets/carousel/nodejs.svg";
+import postgresqlSvg from "src/assets/carousel/postgresql.svg";
+import pwaSvg from "src/assets/carousel/pwa.svg";
+import pythonSvg from "src/assets/carousel/python.svg";
+import reactSvg from "src/assets/carousel/react.svg";
+import typescriptSvg from "src/assets/carousel/typescript.svg";
+import vueSvg from "src/assets/carousel/vue.svg";
+
+
 export default defineComponent({
   name: "IndexPage",
   components: { Vue3Marquee },
   data() {
     return {
       techIcons: [
-        { name: "android", alt: "Android" },
-        { name: "aws", alt: "AWS" },
-        { name: "azure", alt: "Azure" },
-        { name: "bootstrap", alt: "Bootstrap" },
-        { name: "csharp", alt: "C#" },
-        { name: "css", alt: "CSS" },
-        { name: "docker", alt: "Docker" },
-        { name: "figma", alt: "Figma" },
-        { name: "html5", alt: "HTML5" },
-        { name: "ionic", alt: "Ionic" },
-        { name: "java", alt: "Java" },
-        { name: "js", alt: "JavaScript" },
-        { name: "mongodb", alt: "MongoDB" },
-        { name: "mysql", alt: "MySQL" },
-        { name: "nodejs", alt: "Node.js" },
-        { name: "postgresql", alt: "PostgreSQL" },
-        { name: "pwa", alt: "PWA" },
-        { name: "python", alt: "Python" },
-        { name: "react", alt: "React" },
-        { name: "typescript", alt: "TypeScript" },
-        { name: "vue", alt: "Vue" },
+        { src: androidSvg, alt: "Android" },
+        { src: awsSvg, alt: "AWS" },
+        { src: azureSvg, alt: "Azure" },
+        { src: bootstrapSvg, alt: "Bootstrap" },
+        { src: csharpSvg, alt: "C#" },
+        { src: cssSvg, alt: "CSS" },
+        { src: dockerSvg, alt: "Docker" },
+        { src: figmaSvg, alt: "Figma" },
+        { src: html5Svg, alt: "HTML5" },
+        { src: ionicSvg, alt: "Ionic" },
+        { src: javaSvg, alt: "Java" },
+        { src: jsSvg, alt: "JavaScript" },
+        { src: mongodbSvg, alt: "MongoDB" },
+        { src: mysqlSvg, alt: "MySQL" },
+        { src: nodejsSvg, alt: "Node.js" },
+        { src: postgresqlSvg, alt: "PostgreSQL" },
+        { src: pwaSvg, alt: "PWA" },
+        { src: pythonSvg, alt: "Python" },
+        { src: reactSvg, alt: "React" },
+        { src: typescriptSvg, alt: "TypeScript" },
+        { src: vueSvg, alt: "Vue" },
       ],
     };
   },
