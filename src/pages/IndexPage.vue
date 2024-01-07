@@ -320,8 +320,8 @@ export default defineComponent({
   data() {
     return {
       techIcons: [
-        { src: "~assets/carousel/android.svg", alt: "Android" },
-        { src: "~assets/carousel/aws.svg", alt: "AWS" },
+        { src: "~assets/android.svg", alt: "Android" },
+        { src: "@/assets/carousel/aws.svg", alt: "AWS" },
         { src: "~assets/carousel/azure.svg", alt: "Azure" },
         { src: "~assets/carousel/bootstrap.svg", alt: "Bootstrap" },
         { src: "~assets/carousel/csharp.svg", alt: "C#" },
