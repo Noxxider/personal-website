@@ -1,297 +1,301 @@
 <template class="layout">
-  <q-page class="flex">
+  <q-page class="flex flex-center">
     <!-- Header Section -->
-    <div class="resume-header responsive-padding">
-      <h3 class="q-mb-none text-weight-medium">Ravino Juwono</h3>
-      <div class="q-mt-md text-h6 text-weight-regular">
+    <div class="resume-header responsive-padding q-pt-xl" style="max-width: 1400px">
+      <div class="q-mb-none text-h3 text-center text-weight-medium">
+        Ravino Juwono
+      </div>
+      <div class="q-mt-sm custom-paragraph text-weight-regular">
         <a href="mailto:ravino.juwono@gmail.com">ravino.juwono@gmail.com</a> |
         250-863-2454 |
         <a href="https://www.linkedin.com/in/ravinojuwono" target="_blank"
           >LinkedIn Profile</a
-        > | <a href="http://www.ravinojuwono.com" target="_blank"
+        >
+        |
+        <a href="http://www.ravinojuwono.com" target="_blank"
           >Personal Website</a
         >
       </div>
     </div>
 
     <!-- Professional Experience Section -->
-    <div class="responsive-padding">
-      <div class="q-mt-xl q-mb-none text-h4 text-weight-medium">
+    <div class="responsive-padding" style="max-width: 1400px">
+      <div class="q-mt-lg q-mb-none text-h6 text-weight-medium">
         <u>Technical Experience</u>
       </div>
-      <div class="resume-job q-mt-none">
-        <h5 class="resume-job text-weight-medium q-mt-lg q-mb-none">
-          Project Developer, ZenuQR
-        </h5>
-        <h6 class="q-mt-none q-mb-sm text-weight-regular">
-          July 2023 - Present
-        </h6>
-        <ul>
-          <li>
-            <h6 class="q-mt-none text-weight-regular">
-              Leading a project to enhance restaurant QR menu code
-              analytics and customer engagement strategies utilizing Vue, Node,
-              and PostgreSQL.
-            </h6>
-          </li>
-        </ul>
-      </div>
 
       <div class="resume-job q-mt-none">
-        <h5 class="resume-job text-weight-medium q-mt-lg q-mb-none">
-          Freelance Developer, ParkBench
-        </h5>
-        <h6 class="q-mt-none q-mb-sm text-weight-regular">
-          July 2023 - September 2023
+        <h6 class="resume-job text-weight-medium q-mt-lg q-mb-none">
+          Web Developer, Personal Website
         </h6>
-        <ul>
-          <li>
-            <h6 class="q-mt-none text-weight-regular">
-              Consulted directly with CEO and Lead Developer to develop a web
-              application identifying top Instagram accounts in specified
-              locations, integrating a web scraper and Vue.js.
-            </h6>
-          </li>
-        </ul>
-      </div>
-
-      <div class="resume-job q-mt-none">
-        <h5 class="resume-job text-weight-medium q-mt-lg q-mb-none">
-          Software Developer/Co-Creator, Rangouts
-        </h5>
-        <h6 class="q-mt-none q-mb-sm text-weight-regular">
-          October 2020 to May 2023
-        </h6>
-        <ul>
-          <li>
-            <h6 class="q-my-none text-weight-regular">
-              Co-founded and developed a scalable SaaS web application, with
-              aspects ranging from front-end development (Vue.js, HTML5, CSS) to
-              backend integration (Node, PostgreSQL).
-            </h6>
-          </li>
-          <li>
-            <h6 class="q-my-none text-weight-regular">
-              Integrated PayPal Payment API, facilitating financial transactions
-              on the platform.
-            </h6>
-          </li>
-          <li>
-            <h6 class="q-mt-none text-weight-regular">
-              Utilized AWS through Docker on Linux for cloud computing and
-              deployment.
-            </h6>
-          </li>
-        </ul>
-      </div>
-
-      <div class="resume-job q-mt-none">
-        <h5 class="resume-job text-weight-medium q-mt-lg q-mb-none">
-          Full Stack Developer Intern, Maybank Indonesia
-        </h5>
-        <h6 class="q-mt-none q-mb-sm text-weight-regular">
-          Jakarta, Indonesia – July 2020 to October 2020
-        </h6>
-        <ul>
-          <li>
-            <h6 class="q-my-none text-weight-regular">
-              Developed a news feature for the MyNET HR app, enhancing
-              communication for over 8000 employees during the COVID pandemic.
-            </h6>
-          </li>
-          <li>
-            <h6 class="q-my-none text-weight-regular">
-              Developed new SQL queries and C# .NET endpoints, utilizing
-              Microsoft Azure DevOps for version control and deployment.
-            </h6>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Academic Projects Section -->
-    <div class="responsive-padding">
-      <div class="q-mt-xl q-mb-none text-h4 text-weight-medium">
-        <u>Academic Projects</u>
-      </div>
-      <div class="resume-project q-mt-none">
-        <h5 class="resume-job text-weight-medium q-mt-lg q-mb-none">
-          Course Project, Stellar Astrophysics Models using Python
-        </h5>
-        <h6 class="q-mt-none q-mb-sm text-weight-regular">
-          PHYS 321 Course, December 2021
-        </h6>
-        <ul>
-          <li>
-            <h6 class="q-my-none text-weight-regular">
-              Created a Python simulation model of a star, honing technical
-              design skills.
-            </h6>
-          </li>
-          <li>
-            <h6 class="q-my-none text-weight-regular">
-              Authored an academic paper highlighting the project findings and
-              methodology.
-            </h6>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Certifications Section -->
-    <div class="responsive-padding">
-      <div class="q-mt-xl q-mb-none text-h4 text-weight-medium">
-        <u>Certifications</u>
-      </div>
-      <div class="q-mt-md q-mb-none text-h6 text-weight-regular">
         <a
-          href="https://www.freecodecamp.org/certification/Noxxider/javascript-algorithms-and-data-structures"
+          class="custom-paragraph q-mt-none q-mb-sm text-weight-regular"
+          href="https://ravinojuwono.com"
           target="_blank"
-          >JavaScript Algorithms and Data Structures Certification
+        >
+          www.ravinojuwono.com
         </a>
-        - FreeCodeCamp
-      </div>
-    </div>
+        <div class="q-mt-none q-mb-sm custom-paragraph text-weight-regular">
+          September 2023
+        </div>
 
-    <!-- Education Section -->
-    <div class="responsive-padding">
-      <div class="q-mt-xl q-mb-none text-h4 text-weight-medium">
-        <u>Education</u>
+        <div class="q-mt-none custom-paragraph text-weight-regular">
+          Developed a personal web application using Vue, focusing on user
+          experience and interactive design. Ensured cross-browser and mobile
+          compatibility, aligning with modern web standards. Currently expanding
+          the site with a body weight tracker web app.
+        </div>
       </div>
-      <div class="resume-education q-mt-none">
-        <h5 class="resume-job text-weight-medium q-mt-lg q-mb-none">
-          BSc, Physics, University of British Columbia
-        </h5>
-        <h6 class="q-mt-none q-mb-sm text-weight-regular">
-          September 2019 – May 2023
-        </h6>
-        <ul>
-          <li>
-            <h6 class="q-my-none text-weight-regular">
-              Acquired a strong foundation in software development through
-              courses in Java, SQL, Python, and data structures.
-            </h6>
-          </li>
-          <li>
-            <h6 class="q-my-none text-weight-regular">
-              Developed analytical skills through studies in probability theory
-              and statistics.
-            </h6>
-          </li>
-        </ul>
-      </div>
-    </div>
 
-    <!-- Volunteer Section -->
-    <div class="responsive-padding">
-      <div class="q-mt-xl q-mb-none text-h4 text-weight-medium">
-        <u>Volunteer</u>
-      </div>
-      <div class="resume-volunteer q-mt-none">
-        <h5 class="resume-job text-weight-medium q-mt-lg q-mb-none">
-          Breast Cancer Canada - Kelowna PRO Representative
-        </h5>
-        <h6 class="q-my-none q-mb-sm text-weight-regular">
-          August 2023 – Present
-        </h6>
-      </div>
-    </div>
-
-    <!-- Tourist Information Concierge Section -->
-    <div class="responsive-padding">
-      <div class="q-mt-xl q-mb-none text-h4 text-weight-medium">
-        <u>Customer Service Experience</u>
-      </div>
       <div class="resume-job q-mt-none">
-        <h5 class="resume-job text-weight-medium q-mt-lg q-mb-none">
-          Tourist Information Concierge, Downtown Kelowna Association - Kelowna,
-          British Columbia
-        </h5>
-        <h6 class="q-mt-none q-mb-sm text-weight-regular">
-          June 2022 – September 2022
+        <h6 class="resume-job text-weight-medium q-mt-lg q-mb-none">
+          Project Developer, ZenuQR
         </h6>
-        <ul>
-          <li>
-            <h6 class="q-my-none text-weight-regular">
-              Delivered exceptional guest experiences in a dynamic, high-volume
-              tourist information center, effectively resolving inquiries from
-              multicultural tourists.
-            </h6>
-          </li>
-          <li>
-            <h6 class="q-my-none text-weight-regular">
-              Ensured a warm, friendly environment as the primary point of
-              contact, setting the tone for guests' visits.
-            </h6>
-          </li>
-        </ul>
+        <div class="q-mt-none q-mb-sm custom-paragraph text-weight-regular">
+          July 2023 - October 2023
+        </div>
+
+        <div class="q-mt-none custom-paragraph text-weight-regular">
+          Led a project to enhance restaurant QR code traffic analysis using
+          Vue, Node.js, and PostgreSQL. Project is on pause.
+        </div>
+      </div>
+
+      <div class="resume-job q-mt-none">
+        <div class="resume-job text-h6 text-weight-medium q-mt-lg q-mb-none">
+          Freelance Developer, ParkBench
+        </div>
+        <div class="q-mt-none custom-paragraph q-mb-sm text-weight-regular">
+          July 2023 - September 2023
+        </div>
+
+        <div class="q-mt-none text-weight-regular custom-paragraph">
+          Consulted directly with CEO and Lead Developer to develop a
+          location-based Instagram analytics web app. Implemented front-end
+          features using HTML5, CSS3, JavaScript (Vue), Python, Bootstrap and a
+          web scraper for data aggregation.
+        </div>
+      </div>
+
+      <div class="resume-job q-mt-none">
+        <h6 class="resume-job text-weight-medium q-mt-lg q-mb-none">
+          Software Developer/Co-Creator, Rangouts
+        </h6>
+        <a
+          class="custom-paragraph q-mt-none q-mb-sm text-weight-regular"
+          href="https://rangouts.com/signin"
+          target="_blank"
+        >
+          www.rangouts.com/signin
+        </a>
+
+        <div class="custom-paragraph q-mt-none q-mb-sm text-weight-regular">
+          October 2020 to May 2023
+        </div>
+
+        <div class="custom-paragraph q-my-none text-weight-regular">
+          Cofounded and developed a SaaS platform, focusing on front-end
+          development using Vue (Quasar/JavaScript), HTML5, and CSS3. Managed
+          SQL databases and AWS cloud infrastructure and used Docker for
+          deployment. Ensured cross-browser compatibility and optimized web app
+          performance. Coded HTML emails. Integrated PayPal Payment API,
+          facilitating financial transactions on the platform.
+        </div>
+      </div>
+
+      <div class="resume-job q-mt-none">
+        <h6 class="resume-job text-weight-medium q-mt-lg q-mb-none">
+          Full Stack Developer Intern, Maybank Indonesia
+        </h6>
+        <div class="custom-paragraph q-mt-none q-mb-sm text-weight-regular">
+          Jakarta, Indonesia – July 2020 to October 2020
+        </div>
+
+        <div class="custom-paragraph q-my-none text-weight-regular">
+          Developed a 'news' feature for an internal HR app, focusing on
+          front-end development with JavaScript, HTML5, CSS3. Integrated
+          server-side code using C# .NET for API endpoints.
+        </div>
       </div>
     </div>
 
-    <div class="responsive-padding q-mx-auto">
-      <div class="q-mt-xl q-mb-none text-h4 text-weight-medium">
-        <q-btn
-          label="Download As PDF"
-          type="primary"
-          class="full-width shadow-1"
-          style="max-width: 400px"
-          no-caps
-          @click="downloadResume()"
-          padding="md xl"
-          color="accent"
-          unelevated
-        />
+    <div style="max-width: 1400px">
+      <!-- Academic Projects Section -->
+      <div class="responsive-padding">
+        <div class="q-mt-lg q-mb-none text-h6 text-weight-medium">
+          <u>Academic Projects</u>
+        </div>
+        <div class="resume-project q-mt-none">
+          <h6 class="resume-job text-weight-medium q-mt-lg q-mb-none">
+            Course Project, Stellar Astrophysics Models using Python
+          </h6>
+          <div class="q-mt-none custom-paragraph q-mb-sm text-weight-regular">
+            PHYS 321 Course, December 2021
+          </div>
+
+          <div class="custom-paragraph q-my-none text-weight-regular">
+            Created a Python simulation model of a star, honing technical design
+            skills and authored an academic paper highlighting the project
+            findings and methodology.
+          </div>
+        </div>
       </div>
 
-      <div class="q-mt-xl q-mb-xl text-h4 text-weight-medium">
-        <q-btn
-          label="Download Reference Letter"
-          type="primary"
-          class="full-width shadow-1"
-          style="max-width: 400px"
-          no-caps
-          @click="downloadReference()"
-          padding="md xl"
-          color="accent"
-          unelevated
-        />
+      <!-- Certifications Section -->
+      <div class="responsive-padding">
+        <div class="q-mt-lg q-mb-none text-h6 text-weight-medium">
+          <u>Certifications</u>
+        </div>
+        <div class="q-mt-md q-mb-none custom-paragraph text-weight-regular">
+          <a
+            href="https://www.freecodecamp.org/certification/Noxxider/javascript-algorithms-and-data-structures"
+            target="_blank"
+            >JavaScript Algorithms and Data Structures Certification
+          </a>
+          - FreeCodeCamp
+        </div>
+      </div>
+
+      <!-- Education Section -->
+      <div class="responsive-padding">
+        <div class="q-mt-lg q-mb-none text-h6 text-weight-medium">
+          <u>Education</u>
+        </div>
+        <div class="resume-education q-mt-none">
+          <h6 class="resume-job text-weight-medium q-mt-lg q-mb-none">
+            BSc, Physics, University of British Columbia
+          </h6>
+          <div class="q-mt-none custom-paragraph q-mb-sm text-weight-regular">
+            September 2019 – May 2023
+          </div>
+          <ul>
+            <li>
+              <div class="q-my-none custom-paragraph text-weight-regular">
+                Acquired a strong foundation in software development through
+                courses in Java, SQL, Python, and data structures.
+              </div>
+            </li>
+            <li>
+              <div class="q-my-none custom-paragraph text-weight-regular">
+                Developed analytical skills through studies in probability
+                theory and statistics.
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Volunteer Section -->
+      <div class="responsive-padding">
+        <div class="q-mt-lg q-mb-none text-h6 text-weight-medium">
+          <u>Volunteer</u>
+        </div>
+        <div class="resume-volunteer q-mt-none">
+          <h6 class="resume-job text-weight-medium q-mt-lg q-mb-none">
+            Breast Cancer Canada - Kelowna PRO Representative
+          </h6>
+          <div class="q-my-none q-mb-sm custom-paragraph text-weight-regular">
+            August 2023 – Present
+          </div>
+        </div>
+      </div>
+
+      <!-- Tourist Information Concierge Section -->
+      <div class="responsive-padding">
+        <div class="q-mt-lg q-mb-none text-h6 text-weight-medium">
+          <u>Customer Service Experience</u>
+        </div>
+        <div class="resume-job q-mt-none">
+          <h6 class="resume-job text-weight-medium q-mt-lg q-mb-none">
+            Tourist Information Concierge, Downtown Kelowna Association -
+            Kelowna, British Columbia
+          </h6>
+          <div class="q-mt-none custom-paragraph q-mb-sm text-weight-regular">
+            June 2022 – September 2022
+          </div>
+          <ul>
+            <li>
+              <div class="q-my-none custom-paragraph text-weight-regular">
+                Delivered exceptional guest experiences in a dynamic,
+                high-volume tourist information center, effectively resolving
+                inquiries from multicultural tourists.
+              </div>
+            </li>
+            <li>
+              <div class="q-my-none custom-paragraph text-weight-regular">
+                Ensured a warm, friendly environment as the primary point of
+                contact, setting the tone for guests' visits.
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="responsive-padding q-mx-auto">
+        <div class="q-mt-xl q-mb-none custom-paragraph text-weight-medium">
+          <a
+            label="Download As PDF"
+            type="primary"
+            class="full-width shadow-1"
+            style="max-width: 400px"
+            no-caps
+            padding="md xl"
+            color="accent"
+            unelevated
+            >Download as PDF</a
+          >
+        </div>
+
+        <div class="q-mt-lg q-mb-xl custom-paragraph">
+          <a
+            label="Download Reference Letter"
+            type="primary"
+            class="full-width shadow-1"
+            style="max-width: 400px"
+            no-caps
+            padding="md xl"
+            color="accent"
+            unelevated
+            >Download Reference Letter</a
+          >
+        </div>
       </div>
     </div>
 
     <!-- Start of footer section -->
-    <div class="footer-section flex text-white">
-      <!-- Logo and company contact information -->
-      <div class="footer-item q-pa-md responsive-margin-footer full-width">
-        <div class="text-h5 text-weight-medium">Ravino Juwono</div>
-        <div class="text-h6 text-weight-light q-mt-lg">
-          <b>Email: </b>
-          <a href="mailto:ravino.juwono@gmail.com" style="color: white"
-            >ravino.juwono@gmail.com</a
-          >
+    <div class="footer-background full-width">
+      <div class="footer-section flex text-white">
+        <div class="footer-item q-px-md q-py-xl q-my-auto">
+          <div class="custom-paragraph text-weight-medium">Ravino Juwono</div>
+          <div class="custom-paragraph text-weight-light q-mt-sm">
+            <a href="mailto:ravino.juwono@gmail.com" style="color: white"
+              >ravino.juwono@gmail.com</a
+            >
+          </div>
+
+          <div class="custom-paragraph text-weight-light q-mt-sm">
+            250-863-2454
+          </div>
         </div>
 
-        <div class="text-h6 text-weight-light q-mt-sm">
-          <b>Phone:</b> 250-863-2454
-        </div>
-      </div>
+        <div class="footer-item q-px-md q-py-xl q-my-auto">
+          <div class="custom-paragraph text-weight-medium">Links</div>
+          <div class="custom-paragraph text-weight-light q-mt-sm">
+            <a href="/resume" class="text-white">Resume</a> <br />
+          </div>
 
-      <!-- Company Column -->
-      <div class="footer-item q-pa-md responsive-margin-footer full-width">
-        <div class="text-h5 text-weight-medium">Links</div>
-        <div class="text-h6 text-weight-light q-mt-lg">
-          <a href="/resume" class="text-white">Resume</a> <br />
-        </div>
-
-        <div class="text-h6 text-weight-light q-mt-sm">
-          <a
-            href="https://www.linkedin.com/in/ravinojuwono"
-            target="_blank"
-            class="text-white"
-            >Linkedin</a
-          >
+          <div class="custom-paragraph text-weight-light q-mt-sm">
+            <a
+              href="https://www.linkedin.com/in/ravinojuwono"
+              target="_blank"
+              class="text-white"
+              >Linkedin</a
+            >
+          </div>
         </div>
       </div>
     </div>
+    <!-- End of footer section -->
   </q-page>
 </template>
 
