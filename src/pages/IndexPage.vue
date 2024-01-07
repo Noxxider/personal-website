@@ -40,7 +40,7 @@
 
     <!-- Section 2: About Me -->
     <div
-      class="text-weight-regular flex justify-center text-center items-center responsive-padding q-mt-md"
+      class="text-weight-regular flex justify-center text-center items-center responsive-padding q-mt-xl"
       style="
         max-width: 1400px;
         width: 100%;
