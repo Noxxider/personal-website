@@ -2,109 +2,100 @@
   <!-- Main page container -->
   <q-page class="flex flex-center">
     <!-- Container for the first section with full width and specific height -->
-    <div
-      class="q-pa-md row justify-center full-width responsive-landing-div-height"
-    >
-      <!-- Start of first column (text and button) -->
+    <!-- Section 1: Introduction with image and text -->
+    <div class="full-width landingFirst flex flex-center">
       <div
-        class="my-section col-xs-12 col-sm-6 q-pa-md responsive-padding text-left"
+        class="q-pa-md row justify-center responsive-landing-div-height"
+        style="max-width: 1400px"
       >
-        <!-- Heading for the first section -->
-        <div class="text-h3 text-weight-bold">Hello!</div>
-        <!-- Subheading for the first section -->
-        <div class="text-h4 q-my-md">
-          I’m Vino, a physics grad turned software developer
+        <div
+          class="my-section col-xs-12 col-sm-6 q-pa-md responsive-padding text-left"
+        >
+          <div class="text-h2 text-weight-medium">Hello!</div>
+          <div class="text-h5 q-my-md">
+            I’m Vino, a physics grad turned software developer
+          </div>
+          <q-btn
+            label="My Resume"
+            type="primary"
+            class="full-width q-mt-md shadow-1"
+            style="max-width: 400px"
+            no-caps
+            padding="md xl"
+            to="resume"
+            color="accent"
+            unelevated
+          />
         </div>
-        <!-- Button for the first section -->
-        <q-btn
-          label="My Resume"
-          type="primary"
-          class="full-width q-mt-xl shadow-1"
-          style="max-width: 400px"
-          no-caps
-          padding="md xl"
-          to="resume"
-          color="accent"
-          unelevated
-        />
+        <div class="my-section col-xs-12 col-sm-6 flex flex-center">
+          <img
+            class="responsive-image"
+            alt="Quasar logo"
+            src="~assets/landing-one.jpg"
+            fit="contain"
+          />
+        </div>
       </div>
-      <!-- End of first column -->
-      <!-- Start of second column (image) -->
-      <div class="my-section col-xs-12 col-sm-6 flex flex-center">
-        <!-- Logo image -->
-        <img
-          class="responsive-image"
-          alt="Quasar logo"
-          src="~assets/landing-one.jpg"
-          fit="contain"
-        />
-      </div>
-      <!-- End of second column -->
     </div>
-    <!-- End of first section -->
 
-    <!-- Start of second section (What We Do) -->
+    <!-- Section 2: About Me -->
     <div
-      class="full-width text-weight-medium second-section flex justify-center text-left items-center text-h4 text-standard responsive-padding"
-      style="min-height: 20vh"
+      class="text-weight-regular flex justify-center text-center items-center responsive-padding q-mt-md"
+      style="
+        max-width: 1400px;
+        width: 100%;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 140%;
+        font-family: Polysans, Arial, Helvetica, sans-serif;
+      "
     >
-      About Me
+      Languages and Frameworks
     </div>
 
-    <!-- Full-width container for third section -->
-    <div class="no-flex responsive-padding q-mx-auto">
-      <!-- Container for third section content -->
-      <div class="q-py-xl flex-column text-center" style="max-width: 700px">
-        <!-- Heading for the third section -->
-        <div class="text-h5 text-weight-medium">
-          Blending Scientific Insight with Innovative Software Development
+    <!-- Section 3: Skills and Languages -->
+    <div
+      class="responsive-padding q-mx-auto q-mt-sm q-pb-xl flex-column text-center"
+      style="width: 100%; max-width: 1400px"
+    >
+      <Vue3Marquee
+        :duration="22"
+        :gradient="true"
+        :gradient-color="FDFEFF"
+        gradient-length="30%"
+      >
+        <div class="q-px-md" v-for="icon in techIcons" :key="icon.alt">
+          <img :src="icon.src" :alt="icon.alt" height="90" />
+          <div class="custom-paragraph" style="font-weight: 500">
+            {{ icon.alt }}
+          </div>
         </div>
-        <!-- Description for the third section -->
-        <div class="text-h6 q-my-md text-weight-regular">
-          From delving into physics to crafting innovative web
-          solutions, my journey has been nothing short of exciting.<br /><br />With
-          a knack for software development, I've honed my skills in Vue,
-          Node, and more, leading projects and creating impactful
-          digital solutions.
-        </div>
-      </div>
+      </Vue3Marquee>
     </div>
-    <!-- End of third section -->
 
-    <div class="q-px-md q-pb-md row justify-center full-width">
-      <!-- Start of first column (text and button) -->
+    <!-- Section 4: Skills and Languages -->
+    <div class="q-px-md q-pb-md row justify-center" style="max-width: 1400px">
       <div
         class="q-my-auto col-xs-12 col-sm-6 q-pa-md responsive-padding text-left"
       >
-        <!-- Heading for the first section -->
-        <div class="text-h5 text-weight-medium">Software Development</div>
-        <!-- Subheading for the first section -->
-        <div class="text-h6 q-mt-md text-weight-regular">
-          <ul>
-            <li>
-              <b>Proficient in:</b> HTML, JavaScript, CSS, Java, Python, C# and
-              SQL
-            </li>
-          </ul>
-          <ul>
-            <li>
-              <b>Experienced in:</b> Vue, Node, .NET, Bootstrap and Android
-              Development
-            </li>
-          </ul>
+        <div class="text-h6 text-weight-medium">
+          Coming Soon: Body Weight Tracker App
+        </div>
+        <div class="custom-paragraph q-mt-md text-weight-regular">
+          <p>
+            Just paste a string of numbers or upload your data on this site to
+            see your weight trend graph and key stats.
+          </p>
         </div>
 
-        <div class="text-h5 text-weight-medium">Languages</div>
-        <!-- Subheading for the first section -->
-        <div class="text-h6 q-mt-md text-weight-regular">
+        <div class="text-h6 text-weight-medium">Spoken Languages</div>
+        <div class="custom-paragraph q-mt-md text-weight-regular">
           <ul>
-            <li>
-              English and Indonesian (Fluent), German (Proficient), French and
-              Spanish (Intermediate)
-            </li>
+            <li>English and Indonesian (Fluent)</li>
+            <li>German (Proficient)</li>
+            <li>French and Spanish (Intermediate)</li>
           </ul>
         </div>
-        <!-- Button for the first section -->
         <q-btn
           label="My Resume"
           type="primary"
@@ -117,58 +108,51 @@
           unelevated
         />
       </div>
-      <!-- End of first column -->
-      <!-- Start of second column (image) -->
-      <div class="col-xs-12 col-sm-6 flex flex-center" >
-        <!-- Logo image -->
+
+      <div class="col-xs-12 col-sm-6 flex flex-center">
         <img
           class="responsive-image"
           alt="Quasar logo"
-          src="~assets/landing-two.png"
+          src="~assets/sample.png"
           fit="contain"
           style="max-height: 700px"
         />
       </div>
-      <!-- End of second column -->
     </div>
 
-    <!-- Start of fourth section -->
     <div
-      class="full-width no-flex responsive-padding q-mt-xl"
-      ref="transformExperience"
-      style="padding-top: 50px; margin-top: -50px"
+      class="row justify-center responsive-padding"
+      style="width: 100%; max-width: 1400px; margin: auto"
     >
-      <!-- Container for fourth section content -->
-      <div class="q-py-xl flex-column text-left">
-        <!-- Heading for the fourth section -->
+      <div class="col responsive-padding-gallery">
         <div class="text-h4 text-weight-medium">Portfolio Snapshot</div>
-        <!-- Description for the fourth section -->
-        <div class="text-h6 q-mt-sm text-weight-regular">
-          From developing scalable SaaS applications to enhancing customer
-          engagement strategies, my portfolio shows my dedication and skills in
-          the web development domain.
+        <div class="custom-paragraph q-mt-sm text-weight-regular">
+          From SaaS applications to an Instagram web scraper, I have extensively
+          explored the web development domain.
         </div>
       </div>
     </div>
-    <!-- End of fourth section -->
 
-    <!-- Start of row with 3 columns -->
-    <div class="row justify-center responsive-padding same-height">
+    <!-- Section 6: Row of 3 Columns for Project Display -->
+    <div
+      class="row justify-center responsive-padding same-height"
+      style="max-width: 1400px; margin-left: auto; margin-right: auto"
+    >
       <!-- Start of first column -->
       <div class="my-section-three col-12 col-md-4 responsive-padding-gallery">
         <!-- Image for the first column -->
         <q-img
-          class="q-mt-lg q-mb-md"
+          class="q-mt-md"
           src="~assets/project-one.png"
           fit="contain"
           height="40vh"
         />
         <!-- Headline for the first column -->
-        <div class="section-headline text-h5 text-left text-weight-medium">
+        <div class="section-headline text-h6 text-left text-weight-medium">
           Rangouts
         </div>
         <!-- Content for the first column -->
-        <div class="section-content text-h6 text-weight-regular">
+        <div class="section-content custom-paragraph text-weight-regular">
           Revolutionizing communication with a scalable SaaS web application.<br /><br />Rangouts
           has a feed, a live map and ticket system for local event discovery.
         </div>
@@ -179,17 +163,17 @@
       <div class="my-section-three col-12 col-md-4 responsive-padding-gallery">
         <!-- Image for the second column -->
         <q-img
-          class="q-mt-lg q-mb-md"
+          class="q-mt-md"
           src="~assets/project-two.png"
           fit="contain"
           height="40vh"
         />
         <!-- Headline for the second column -->
-        <div class="section-headline text-h5 text-left text-weight-medium">
+        <div class="section-headline text-h6 text-left text-weight-medium">
           Freelance at Parkbench
         </div>
         <!-- Content for the second column -->
-        <div class="section-content text-h6 text-weight-regular">
+        <div class="section-content custom-paragraph text-weight-regular">
           Developed a web application to identify top Instagram accounts in
           specified locations.<br /><br />My work is Parkbench property now so I
           can’t show the code.
@@ -201,80 +185,71 @@
       <div class="my-section-three col-12 col-md-4 responsive-padding-gallery">
         <!-- Image for the third column -->
         <q-img
-          class="q-mt-lg q-mb-md"
+          class="q-mt-md"
           height="40vh"
           src="~assets/project-three.png"
           fit="contain"
         />
         <!-- Headline for the third column -->
-        <div class="section-headline text-h5 text-left text-weight-medium">
+        <div class="section-headline text-h6 text-left text-weight-medium">
           ZenuQR
         </div>
         <!-- Content for the third column -->
-        <div class="section-content text-h6 text-weight-regular">
+        <div class="section-content custom-paragraph text-weight-regular">
           Enhancing restaurant QR menu code analytics, customer engagement
           strategies and menu design.
         </div>
       </div>
       <!-- End of third column -->
     </div>
-    <!-- End of row with 3 columns -->
-
-    <!-- Start of section for right aligned button -->
-    <div class="flex justify-end full-width">
-      <q-btn
-        label="My Resume"
-        type="primary"
-        class="q-my-xl shadow-1 responsive-margin-button"
-        style="max-width: 350px; padding-left: 56px; padding-right: 56px"
-        no-caps
-        to="/resume"
-        padding="md xl"
-        color="accent"
-        unelevated
-      />
-    </div>
-    <!-- End of section for right aligned button -->
 
     <!-- Start of picture background div -->
-    <div
-      class="full-width flex justify-end items-center landingSinging"
-    >
-      <!-- Start of white box -->
-      <div
-        class="q-pa-lg responsive-margin"
-        style="
-          background-color: white;
-          max-width: 600px;
-          align-self: center;
-          border-radius: 16px;
-        "
-      >
-        <!-- Headline -->
-        <div class="text-h4 text-weight-medium text-center">
-          Personal Interests
+    <div class="full-width landingMusic flex justifyCenter q-py-xl q-mt-xl">
+      <div class="q-mx-auto flex justify-center" style="max-width: 1400px">
+        <!-- Start of first column (text and button) -->
+        <div
+          class="col-xs-12 col-sm-6 responsive-padding text-center"
+          style="min-height: 15vh"
+        >
+          <!-- Flex container for vertical centering -->
+          <div
+            class="flex flex-center column justify-center"
+            style="height: 100%"
+          >
+            <!-- Heading for the first section -->
+            <div class="text-h4 text-weight-medium text-wh">
+              Besides codes and algorithms,
+            </div>
+            <!-- Subheading for the first section -->
+            <div class="custom-paragraph q-mb-xl q-mt-xs">
+              I'm also a singer, having sang acapella internationally. Music is
+              a passion that resonates deeply with me.
+            </div>
+          </div>
         </div>
-        <!-- Subheadline -->
-        <div class="text-h6 q-my-md text-weight-regular">
-          I'm not just about codes and algorithms; I'm also a singer, having
-          sang acapella internationally. Music is a passion that resonates
-          deeply with me.
+        <!-- End of first column -->
+        <!-- Start of second column (image) -->
+        <div class="flex flex-center q-mb-xl">
+          <!-- Logo image -->
+          <img
+            style="max-width: 100%"
+            alt="Quasar logo"
+            src="~assets/acapella.png"
+            fit="contain"
+          />
         </div>
+        <!-- End of second column -->
       </div>
-      <!-- End of white box -->
+      <!-- End of picture background div -->
     </div>
-    <!-- End of picture background div -->
 
-    <!-- Start of final section -->
-    <div class="full-width no-flex responsive-padding q-my-lg">
-      <!-- Container for final section content -->
-      <div class="q-py-xl flex-column text-left" style="max-width: 1000px">
-        <!-- Heading for the final section -->
-        <div class="text-h4 text-weight-medium">
+    <!-- Section 7: Contact and Resume Info -->
+    <div class="row responsive-padding q-my-lg" style="max-width: 1400px">
+      <div class="q-py-xl text-center" style="max-width: 1000px">
+        <div class="text-h5 text-weight-medium">
           I would love to join your team
         </div>
-        <!-- Improved subheadline for the final section -->
-        <div class="text-h6 text-weight-regular q-my-md">
+        <div class="custom-paragraph text-weight-regular q-my-md">
           Don't hesitate to reach out via
           <a
             href="mailto:ravino.juwono@gmail.com?subject=Inquiry%20from%20a%20Potential%20Collaborator%20or%20Employer"
@@ -286,7 +261,7 @@
         <q-btn
           label="Resume"
           type="primary"
-          class="q-mt-lg shadow-1"
+          class="q-mt-sm shadow-1"
           style="max-width: 350px; padding-left: 56px; padding-right: 56px"
           no-caps
           to="/resume"
@@ -299,48 +274,77 @@
     <!-- End of final section -->
 
     <!-- Start of footer section -->
-    <div class="footer-section flex text-white">
-      <!-- Logo and company contact information -->
-      <div class="footer-item q-pa-md responsive-margin-footer full-width">
-        <div class="text-h5 text-weight-medium">Ravino Juwono</div>
-        <div class="text-h6 text-weight-light q-mt-lg">
-          <b>Email: </b>
-          <a href="mailto:ravino.juwono@gmail.com" style="color: white"
-            >ravino.juwono@gmail.com</a
-          >
+    <div class="footer-background full-width">
+      <div class="footer-section flex text-white">
+        <div class="footer-item q-px-md q-py-xl q-my-auto">
+          <div class="custom-paragraph text-weight-medium">Ravino Juwono</div>
+          <div class="custom-paragraph text-weight-light q-mt-sm">
+            <a href="mailto:ravino.juwono@gmail.com" style="color: white"
+              >ravino.juwono@gmail.com</a
+            >
+          </div>
+
+          <div class="custom-paragraph text-weight-light q-mt-sm">
+            250-863-2454
+          </div>
         </div>
 
-        <div class="text-h6 text-weight-light q-mt-sm">
-          <b>Phone:</b> 250-863-2454
+        <div class="footer-item q-px-md q-py-xl q-my-auto">
+          <div class="custom-paragraph text-weight-medium">Links</div>
+          <div class="custom-paragraph text-weight-light q-mt-sm">
+            <a href="/resume" class="text-white">Resume</a> <br />
+          </div>
+
+          <div class="custom-paragraph text-weight-light q-mt-sm">
+            <a
+              href="https://www.linkedin.com/in/ravinojuwono"
+              target="_blank"
+              class="text-white"
+              >Linkedin</a
+            >
+          </div>
         </div>
       </div>
-
-      <!-- Company Column -->
-      <div class="footer-item q-pa-md responsive-margin-footer full-width">
-        <div class="text-h5 text-weight-medium">Links</div>
-        <div class="text-h6 text-weight-light q-mt-lg">
-          <a href="/resume" class="text-white">Resume</a> <br />
-        </div>
-
-        <div class="text-h6 text-weight-light q-mt-sm">
-          <a
-            href="https://www.linkedin.com/in/ravinojuwono"
-            target="_blank"
-            class="text-white"
-            >Linkedin</a
-          >
-        </div>
-      </div>
+      <!-- End of footer section -->
     </div>
-    <!-- End of footer section -->
   </q-page>
 </template>
 
 <script>
 import { defineComponent } from "vue";
+import { Vue3Marquee } from "vue3-marquee";
 
 export default defineComponent({
   name: "IndexPage",
+  components: { Vue3Marquee },
+  data() {
+    return {
+      techIcons: [
+        { src: "src/assets/carousel/android.svg", alt: "Android" },
+        { src: "src/assets/carousel/aws.svg", alt: "AWS" },
+        { src: "src/assets/carousel/azure.svg", alt: "Azure" },
+        { src: "src/assets/carousel/bootstrap.svg", alt: "Bootstrap" },
+        { src: "src/assets/carousel/csharp.svg", alt: "C#" },
+        { src: "src/assets/carousel/css.svg", alt: "CSS" },
+        { src: "src/assets/carousel/docker.svg", alt: "Docker" },
+        { src: "src/assets/carousel/figma.svg", alt: "Figma" },
+        { src: "src/assets/carousel/html5.svg", alt: "HTML5" },
+        { src: "src/assets/carousel/ionic.svg", alt: "Ionic" },
+        { src: "src/assets/carousel/java.svg", alt: "Java" },
+        { src: "src/assets/carousel/js.svg", alt: "JavaScript" },
+        { src: "src/assets/carousel/mongodb.svg", alt: "MongoDB" },
+        { src: "src/assets/carousel/mysql.svg", alt: "MySQL" },
+        { src: "src/assets/carousel/nodejs.svg", alt: "Node.js" },
+        { src: "src/assets/carousel/postgresql.svg", alt: "PostgreSQL" },
+        { src: "src/assets/carousel/pwa.svg", alt: "PWA" },
+        { src: "src/assets/carousel/python.svg", alt: "Python" },
+        { src: "src/assets/carousel/react.svg", alt: "React" },
+        { src: "src/assets/carousel/typescript.svg", alt: "TypeScript" },
+        // Keep the Vue entry as is, since it works
+        { src: "src/assets/carousel/vue.svg", alt: "Vue" },
+      ],
+    };
+  },
 });
 </script>
 
@@ -351,9 +355,6 @@ export default defineComponent({
 
 .text-standard {
   color: #f7f7f7;
-}
-.second-section {
-  background-color: #202030;
 }
 
 @media screen and (min-width: 600px) {
@@ -441,11 +442,6 @@ export default defineComponent({
 .section-headline {
   margin-top: 24px;
   margin-bottom: 8px;
-  width: 100%;
-  word-wrap: break-word;
-}
-
-.section-content {
   width: 100%;
   word-wrap: break-word;
 }

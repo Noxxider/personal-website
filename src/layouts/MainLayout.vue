@@ -1,61 +1,57 @@
 <template>
   <q-layout class="layout" view="lHh Lpr lFf">
     <q-header>
-      <q-toolbar
-        style="
-          display: grid;
-          grid-template-columns: 1fr 1fr 1fr;
-          align-items: center;
-        "
-      >
-        <div style="display: flex; align-items: center" class="q-pr-md">
+      <q-toolbar style="align-items: center;">
+        <div
+          style="display: flex; align-items: center"
+          class="q-ml-auto"
+        >
           <q-btn
             flat
             no-caps
             dense
             round
             icon="menu"
-            color="secondary"
             aria-label="Menu"
             @click="toggleLeftDrawer"
             class="small-screen-only"
           />
 
           <q-btn
-            flat
-            no-caps
-            round
-            dense
-            size="18px"
             to="/"
-            color="secondary"
-            label="Home"
             class="large-screen-only q-ml-md"
-            padding="md"
-          />
-
-          <q-btn
             flat
+          >
+            <img
+              src="~src\assets\header.svg"
+              class="q-my-auto"
+              style="height: 24px; padding: 0px"
+            />
+          </q-btn>
+        </div>
+        <div class="" style="display: flex; align-items: center">
+          <q-btn
+            class="large-screen-only q-px-xl q-mx-xl"
             no-caps
-            round
-            dense
-            size="18px"
-            to="/contact"
-            color="secondary"
+            to="/events"
+            text-color="dark"
+            label="Home"
+            style="padding: 8px 12px"
+            unelevated
+          />
+          <q-btn
+            class="large-screen-only q-px-xl"
+            no-caps
+            to="/settings"
+            text-color="dark"
             label="Contact"
-            class="large-screen-only q-ml-md"
-            padding="md"
+            style="padding: 8px 12px"
+            unelevated
           />
         </div>
 
-        <img
-          class="q-py-sm q-mx-auto"
-          src="~src\assets\header.svg"
-          style="height: 48px"
-        />
-
         <div
-          class="q-pr-md"
+          class="q-pr-md q-mr-auto q-ml-xl"
           style="display: flex; justify-content: flex-end; align-items: center"
         >
           <q-btn
@@ -63,7 +59,7 @@
             no-caps
             to="/resume"
             color="accent"
-            label="My Resume"
+            label="Resume"
             style="padding: 8px 16px"
             unelevated
           />
