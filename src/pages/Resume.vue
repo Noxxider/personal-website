@@ -118,9 +118,9 @@
         </div>
       </div>
     </div>
-
+    
+    <!-- Academic Projects Section -->
     <div style="max-width: 1400px">
-      <!-- Academic Projects Section -->
       <div class="responsive-padding">
         <div class="q-mt-lg q-mb-none text-h6 text-weight-medium">
           <u>Academic Projects</u>
@@ -323,34 +323,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.full-height {
-  height: calc(100vh - 56px);
-}
-
-.text-standard {
-  color: #f7f7f7;
-}
-
-@media screen and (min-width: 600px) {
-  .responsive-image {
-    height: auto;
-    max-width: 55%;
-    width: auto;
-    margin-top: 48px;
-    margin-bottom: 48px;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .responsive-image {
-    height: auto;
-    width: 80%;
-    padding-left: 8px;
-    padding-right: 8px;
-    padding-top: 16px;
-    padding-bottom: 16px;
-  }
-}
 
 @media screen and (max-width: 1000px) {
   .responsive-padding {
@@ -359,90 +331,4 @@ export default defineComponent({
   }
 }
 
-@media screen and (min-width: 950px) {
-  .responsive-padding-gallery {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-}
-
-@media screen and (max-width: 1000px) {
-  .responsive-margin-landing {
-    margin-top: 64px;
-  }
-}
-
-.responsive-margin {
-  margin-left: 96px;
-  margin-right: 96px;
-}
-
-@media screen and (max-width: 1000px) {
-  .responsive-margin {
-    margin-left: 16px;
-    margin-right: 16px;
-  }
-}
-
-.responsive-margin-button {
-  margin-left: 96px;
-  margin-right: 96px;
-}
-
-@media screen and (max-width: 1000px) {
-  .responsive-margin-button {
-    margin-left: 32px;
-    margin-right: 32px;
-  }
-}
-
-.responsive-landing-div-height {
-  height: 95vh;
-}
-
-@media screen and (max-width: 800px) {
-  .responsive-landing-div-height {
-    height: auto;
-  }
-}
-
-.my-section-three {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-}
-
-.section-headline {
-  margin-top: 24px;
-  margin-bottom: 8px;
-  width: 100%;
-  word-wrap: break-word;
-}
-
-.section-content {
-  width: 100%;
-  word-wrap: break-word;
-}
-
-.section-image {
-  height: 100%;
-}
-
-.same-height > div {
-  display: flex;
-  flex-direction: column;
-}
-
-.same-height .section-image {
-  flex-grow: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.same-height .section-image q-img {
-  max-height: 100%;
-  object-fit: contain;
-}
 </style>

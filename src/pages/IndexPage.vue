@@ -5,8 +5,7 @@
     <!-- Section 1: Introduction with image and text -->
     <div class="full-width landingFirst flex flex-center">
       <div
-        class="q-pa-md row justify-center responsive-landing-div-height"
-        style="max-width: 1400px"
+        class="q-pa-md row justify-center responsive-landing-div-height wrapper-width"
       >
         <div
           class="my-section col-xs-12 col-sm-6 q-pa-md responsive-padding text-left"
@@ -40,9 +39,8 @@
 
     <!-- Section 2: About Me -->
     <div
-      class="text-weight-regular flex justify-center text-center items-center responsive-padding q-mt-xl"
+      class="text-weight-regular flex justify-center text-center items-center responsive-padding q-mt-xl wrapper-width"
       style="
-        max-width: 1400px;
         width: 100%;
         font-weight: 500;
         font-size: 24px;
@@ -55,8 +53,8 @@
 
     <!-- Section 3: Skills and Languages -->
     <div
-      class="responsive-padding q-mx-auto q-mt-sm q-pb-xl flex-column text-center"
-      style="width: 100%; max-width: 1400px"
+      class="responsive-padding q-mx-auto q-mt-sm q-pb-xl flex-column text-center wrapper-width"
+      style="width: 100%;"
     >
       <Vue3Marquee
         :duration="22"
@@ -65,7 +63,7 @@
         gradient-length="30%"
       >
         <div class="q-px-md" v-for="icon in techIcons" :key="icon.alt">
-          <img :src="icon.src" :alt="icon.alt" height="90" />    
+          <img :src="icon.src" :alt="icon.alt" height="90" />
           <div class="custom-paragraph" style="font-weight: 500">
             {{ icon.alt }}
           </div>
@@ -74,7 +72,7 @@
     </div>
 
     <!-- Section 4: Skills and Languages -->
-    <div class="q-px-md q-pb-md row justify-center" style="max-width: 1400px">
+    <div class="q-px-md q-pb-md row justify-center wrapper-width">
       <div
         class="q-my-auto col-xs-12 col-sm-6 q-pa-md responsive-padding text-left"
       >
@@ -121,8 +119,8 @@
     </div>
 
     <div
-      class="row justify-center responsive-padding"
-      style="width: 100%; max-width: 1400px; margin: auto"
+      class="row justify-center responsive-padding wrapper-width"
+      style="width: 100%; margin: auto"
     >
       <div class="col responsive-padding-gallery">
         <div class="text-h4 text-weight-medium">Portfolio Snapshot</div>
@@ -135,8 +133,8 @@
 
     <!-- Section 6: Row of 3 Columns for Project Display -->
     <div
-      class="row justify-center responsive-padding same-height"
-      style="max-width: 1400px; margin-left: auto; margin-right: auto"
+      class="row justify-center responsive-padding same-height wrapper-width"
+      style="margin-left: auto; margin-right: auto"
     >
       <!-- Start of first column -->
       <div class="my-section-three col-12 col-md-4 responsive-padding-gallery">
@@ -205,7 +203,7 @@
 
     <!-- Start of picture background div -->
     <div class="full-width landingMusic flex justifyCenter q-py-xl q-mt-xl">
-      <div class="q-mx-auto flex justify-center" style="max-width: 1400px">
+      <div class="q-mx-auto flex justify-center wrapper-width">
         <!-- Start of first column (text and button) -->
         <div
           class="col-xs-12 col-sm-6 responsive-padding text-center"
@@ -244,32 +242,30 @@
     </div>
 
     <!-- Section 7: Contact and Resume Info -->
-    <div class="row responsive-padding q-my-lg" style="max-width: 1400px">
-      <div class="q-py-xl text-center" style="max-width: 1000px">
-        <div class="text-h5 text-weight-medium">
-          I would love to join your team
-        </div>
-        <div class="custom-paragraph text-weight-regular q-my-md">
-          Don't hesitate to reach out via
-          <a
-            href="mailto:ravino.juwono@gmail.com?subject=Inquiry%20from%20a%20Potential%20Collaborator%20or%20Employer"
-            >email</a
-          >
-          or text. You can view my resume by clicking the button below
-        </div>
-        <!-- Button for the final section -->
-        <q-btn
-          label="Resume"
-          type="primary"
-          class="q-mt-sm shadow-1"
-          style="max-width: 350px; padding-left: 56px; padding-right: 56px"
-          no-caps
-          to="/resume"
-          padding="md xl"
-          color="accent"
-          unelevated
-        />
+    <div class="row responsive-padding q-my-lg wrapper-width text-center q-py-lg" style="flex-direction: column">
+      <div class="text-h5 text-weight-medium">
+        I would love to join your team
       </div>
+      <div class="custom-paragraph text-weight-regular q-my-md">
+        Don't hesitate to reach out via
+        <a
+          href="mailto:ravino.juwono@gmail.com?subject=Inquiry%20from%20a%20Potential%20Collaborator%20or%20Employer"
+          >email</a
+        >
+        or text. You can view my resume by clicking the button below
+      </div>
+      <!-- Button for the final section -->
+      <q-btn
+        label="Resume"
+        type="primary"
+        class="q-mt-sm shadow-1 q-mx-auto"
+        style="max-width: 350px; padding-left: 56px; padding-right: 56px"
+        no-caps
+        to="/resume"
+        padding="md xl"
+        color="accent"
+        unelevated
+      />
     </div>
     <!-- End of final section -->
 
@@ -337,7 +333,6 @@ import reactSvg from "src/assets/carousel/react.svg";
 import typescriptSvg from "src/assets/carousel/typescript.svg";
 import vueSvg from "src/assets/carousel/vue.svg";
 
-
 export default defineComponent({
   name: "IndexPage",
   components: { Vue3Marquee },
@@ -372,19 +367,15 @@ export default defineComponent({
     getIconPath(iconName) {
       // Dynamically require the image
       return require(`@/assets/carousel/${iconName}.svg`);
-    }
-  }
+    },
+  },
 });
 </script>
 
 
 <style scoped>
-.full-height {
-  height: calc(100vh - 56px);
-}
-
-.text-standard {
-  color: #f7f7f7;
+.wrapper-width {
+  max-width: 1400px;
 }
 
 @media screen and (min-width: 600px) {
@@ -422,36 +413,6 @@ export default defineComponent({
   }
 }
 
-@media screen and (max-width: 1000px) {
-  .responsive-margin-landing {
-    margin-top: 64px;
-  }
-}
-
-.responsive-margin {
-  margin-left: 96px;
-  margin-right: 96px;
-}
-
-@media screen and (max-width: 1000px) {
-  .responsive-margin {
-    margin-left: 16px;
-    margin-right: 16px;
-  }
-}
-
-.responsive-margin-button {
-  margin-left: 96px;
-  margin-right: 96px;
-}
-
-@media screen and (max-width: 1000px) {
-  .responsive-margin-button {
-    margin-left: 32px;
-    margin-right: 32px;
-  }
-}
-
 .responsive-landing-div-height {
   height: 95vh;
 }
@@ -476,24 +437,10 @@ export default defineComponent({
   word-wrap: break-word;
 }
 
-.section-image {
-  height: 100%;
-}
-
-.same-height > div {
-  display: flex;
-  flex-direction: column;
-}
-
-.same-height .section-image {
+.same-height {
   flex-grow: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.same-height .section-image q-img {
-  max-height: 100%;
-  object-fit: contain;
 }
 </style>
