@@ -1,27 +1,19 @@
 <template>
   <q-layout class="layout" view="lHh Lpr lFf">
     <q-header>
-      <q-toolbar style="align-items: center;">
-        <div
-          style="display: flex; align-items: center"
-          class="q-ml-auto"
-        >
-          <q-btn
-            flat
-            no-caps
-            dense
-            round
-            icon="menu"
-            aria-label="Menu"
-            @click="toggleLeftDrawer"
-            class="small-screen-only"
-          />
+      <q-toolbar style="align-items: center">
+        <q-btn
+          flat
+          no-caps
+          icon="menu"
+          style="color: #262626"
+          aria-label="Menu"
+          @click="toggleLeftDrawer"
+          class="small-screen-only"
+        />
 
-          <q-btn
-            to="/"
-            class="large-screen-only q-ml-md"
-            flat
-          >
+        <div style="display: flex; align-items: center" class="q-ml-auto">
+          <q-btn to="/" class="large-screen-only q-ml-md" flat>
             <img
               src="~src\assets\header.svg"
               class="q-my-auto"
@@ -29,6 +21,15 @@
             />
           </q-btn>
         </div>
+
+        <div class="small-screen-only q-mx-auto">
+          <img
+            src="~assets/header.svg"
+            class="q-my-auto"
+            style="height: 24px; padding: 0px"
+          />
+        </div>
+
         <div class="" style="display: flex; align-items: center">
           <q-btn
             class="large-screen-only q-px-xl q-mx-xl"
