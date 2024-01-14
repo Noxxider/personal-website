@@ -55,7 +55,7 @@
             unelevated
           />
           <q-btn
-            class="large-screen-only"
+            class="large-screen-only q-ml-xl"
             no-caps
             to="/resume"
             color="accent"
