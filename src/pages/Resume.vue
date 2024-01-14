@@ -1,7 +1,10 @@
 <template class="layout">
   <q-page class="flex flex-center">
     <!-- Header Section -->
-    <div class="resume-header responsive-padding q-pt-xl" style="max-width: 1400px">
+    <div
+      class="resume-header responsive-padding q-pt-xl"
+      style="max-width: 1400px"
+    >
       <div class="q-mb-none text-h3 text-center text-weight-medium">
         Ravino Juwono
       </div>
@@ -118,7 +121,7 @@
         </div>
       </div>
     </div>
-    
+
     <!-- Academic Projects Section -->
     <div style="max-width: 1400px">
       <div class="responsive-padding">
@@ -231,33 +234,31 @@
         </div>
       </div>
 
-      <div class="responsive-padding q-mx-auto">
-        <div class="q-mt-xl q-mb-none custom-paragraph text-weight-medium">
-          <a
-            label="Download As PDF"
+      <div class="q-px-md" style="max-width: 420px">
+        <div class="q-mt-xl full-width q-mb-none text-weight-medium">
+          <q-btn
+            label="Download as PDF"
             type="primary"
-            class="full-width shadow-1"
-            style="max-width: 400px"
+            class="shadow-1  full-width"
             no-caps
             padding="md xl"
             color="accent"
             unelevated
-            >Download as PDF</a
-          >
+            @click="downloadResume()"
+          />
         </div>
 
-        <div class="q-mt-lg q-mb-xl custom-paragraph">
-          <a
+        <div class="q-mt-lg full-width q-mb-xl">
+          <q-btn
             label="Download Reference Letter"
             type="primary"
-            class="full-width shadow-1"
-            style="max-width: 400px"
+            class="shadow-1 full-width"
             no-caps
             padding="md xl"
             color="accent"
             unelevated
-            >Download Reference Letter</a
-          >
+            @click="downloadReference()"
+          />
         </div>
       </div>
     </div>
@@ -302,19 +303,22 @@
 <script>
 import { defineComponent } from "vue";
 
+const resumeLink = "https://drive.google.com/file/d/1qW9WN4NMBqNsrp9a5qxbhJMJPxOQZPoX/view?usp=sharing"
+const referenceLink = "https://drive.google.com/file/d/1aupWxI4s_NtjlNCAweqo_avFuOI1JrfB/view?usp=sharing"
+
 export default defineComponent({
   name: "ResumePage",
   methods: {
     downloadResume() {
       window.open(
-        "https://drive.google.com/file/d/10kKQPFusBYLFAh9QDlL94NIhKf4xbF0X/view?usp=sharing",
+        resumeLink,
         "_blank"
       );
     },
 
     downloadReference() {
       window.open(
-        "https://drive.google.com/file/d/1aupWxI4s_NtjlNCAweqo_avFuOI1JrfB/view?usp=sharing",
+        referenceLink,
         "_blank"
       );
     },
@@ -323,12 +327,10 @@ export default defineComponent({
 </script>
 
 <style scoped>
-
 @media screen and (max-width: 1000px) {
   .responsive-padding {
-    padding-left: 24px;
-    padding-right: 24px;
+    padding-left: 16px;
+    padding-right: 16px;
   }
 }
-
 </style>
