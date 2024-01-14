@@ -2,17 +2,33 @@
   <q-layout class="layout" view="lHh Lpr lFf">
     <q-header>
       <q-toolbar style="align-items: center">
-        <q-btn
-          flat
-          no-caps
-          icon="menu"
-          style="color: #262626"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-          class="small-screen-only"
-        />
+        <div class="small-screen-only q-mx-auto full-width">
+          <div class="flex justify-between">
+            <q-btn to="/" flat>
+              <img
+                src="~assets/header.svg"
+                class="q-my-auto"
+                style="height: 24px; padding: 0px"
+              />
+            </q-btn>
 
-        <div style="display: flex; align-items: center" class="q-ml-auto">
+            <q-btn
+              flat
+              no-caps
+              dense
+              icon="menu"
+              style="color: #262626"
+              aria-label="Menu"
+              @click="toggleLeftDrawer"
+              class="small-screen-only q-my-auto"
+            />
+          </div>
+        </div>
+
+        <div
+          class="large-screen-only"
+          style="display: flex; align-items: center"
+        >
           <q-btn to="/" class="large-screen-only q-ml-md" flat>
             <img
               src="~src\assets\header.svg"
@@ -20,17 +36,6 @@
               style="height: 24px; padding: 0px"
             />
           </q-btn>
-        </div>
-
-        <div class="small-screen-only q-mx-auto">
-          <img
-            src="~assets/header.svg"
-            class="q-my-auto"
-            style="height: 24px; padding: 0px"
-          />
-        </div>
-
-        <div class="" style="display: flex; align-items: center">
           <q-btn
             class="large-screen-only q-px-xl q-mx-xl"
             no-caps
@@ -49,12 +54,6 @@
             style="padding: 8px 12px"
             unelevated
           />
-        </div>
-
-        <div
-          class="q-pr-md q-mr-auto q-ml-xl"
-          style="display: flex; justify-content: flex-end; align-items: center"
-        >
           <q-btn
             class="large-screen-only"
             no-caps
@@ -68,11 +67,17 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" show-if-above bordered behavior="mobile">
+    <q-drawer
+      v-model="leftDrawerOpen"
+      :width="200"
+      bordered
+      behavior="mobile"
+    >
       <q-list>
-        <q-item-label header> Pages </q-item-label>
-
+        <div class="text-h6 q-pa-md" header>Pages</div>
+        <q-separator />
         <EssentialLink
+          class="q-mt-sm"
           v-for="link in essentialLinks"
           :key="link.title"
           v-bind="link"
