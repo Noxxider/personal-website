@@ -46,6 +46,15 @@
             unelevated
           />
           <q-btn
+            class="large-screen-only q-px-xl q-mr-xl"
+            no-caps
+            to="/weighttracker"
+            text-color="dark"
+            label="Weight Tracker"
+            style="padding: 8px 12px"
+            unelevated
+          />
+          <q-btn
             class="large-screen-only q-px-xl"
             no-caps
             to="/contact"
@@ -100,6 +109,11 @@ const linksList = [
     title: "Home",
     icon: "home",
     link: "https://ravinojuwono.com",
+  },
+    {
+    title: "Weight Tracker",
+    icon: "fitness_center",
+    link: "/weighttracker",
   },
   {
     title: "Resume",

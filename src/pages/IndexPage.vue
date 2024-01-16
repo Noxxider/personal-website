@@ -54,7 +54,7 @@
     <!-- Section 3: Skills and Languages -->
     <div
       class="responsive-padding q-mx-auto q-mt-sm q-pb-xl flex-column text-center wrapper-width"
-      style="width: 100%;"
+      style="width: 100%"
     >
       <Vue3Marquee
         :duration="22"
@@ -77,7 +77,7 @@
         class="q-my-auto col-xs-12 col-sm-6 q-pa-md responsive-padding text-left"
       >
         <div class="text-h6 text-weight-medium">
-          Coming Soon: Body Weight Tracker App
+          Project: Body Weight Tracker App
         </div>
         <div class="custom-paragraph q-mt-md text-weight-regular">
           <p>
@@ -85,8 +85,19 @@
             see your weight trend graph and key stats.
           </p>
         </div>
-
-        <div class="text-h6 text-weight-medium">Spoken Languages</div>
+        <q-btn
+          label="Launch App"
+          type="primary"
+          outline
+          class="full-width q-mt-none q-mb-md shadow-1"
+          style="max-width: 400px"
+          no-caps
+          to="/weighttracker"
+          padding="md xl"
+          color="accent"
+          unelevated
+        />
+        <div class="text-h6 text-weight-medium q-mt-md">Spoken Languages</div>
         <div class="custom-paragraph q-mt-md text-weight-regular">
           <ul>
             <li>English and Indonesian (Fluent)</li>
@@ -94,17 +105,6 @@
             <li>French and Spanish (Intermediate)</li>
           </ul>
         </div>
-        <q-btn
-          label="My Resume"
-          type="primary"
-          class="full-width q-mt-lg q-mb-md shadow-1"
-          style="max-width: 400px"
-          no-caps
-          to="/resume"
-          padding="md xl"
-          color="accent"
-          unelevated
-        />
       </div>
 
       <div class="col-xs-12 col-sm-6 flex flex-center">
@@ -242,7 +242,10 @@
     </div>
 
     <!-- Section 7: Contact and Resume Info -->
-    <div class="row responsive-padding q-my-lg wrapper-width text-center q-py-lg" style="flex-direction: column">
+    <div
+      class="row responsive-padding q-my-lg wrapper-width text-center q-py-lg"
+      style="flex-direction: column"
+    >
       <div class="text-h5 text-weight-medium">
         I would love to join your team
       </div>
