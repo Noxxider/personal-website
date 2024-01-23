@@ -273,45 +273,16 @@
     <!-- End of final section -->
 
     <!-- Start of footer section -->
-    <div class="footer-background full-width">
-      <div class="footer-section flex text-white">
-        <div class="footer-item q-px-md q-py-xl q-my-auto">
-          <div class="custom-paragraph text-weight-medium">Ravino Juwono</div>
-          <div class="custom-paragraph text-weight-light q-mt-sm">
-            <a href="mailto:ravino.juwono@gmail.com" style="color: white"
-              >ravino.juwono@gmail.com</a
-            >
-          </div>
-
-          <div class="custom-paragraph text-weight-light q-mt-sm">
-            250-863-2454
-          </div>
-        </div>
-
-        <div class="footer-item q-px-md q-py-xl q-my-auto">
-          <div class="custom-paragraph text-weight-medium">Links</div>
-          <div class="custom-paragraph text-weight-light q-mt-sm">
-            <a href="/resume" class="text-white">Resume</a> <br />
-          </div>
-
-          <div class="custom-paragraph text-weight-light q-mt-sm">
-            <a
-              href="https://www.linkedin.com/in/ravinojuwono"
-              target="_blank"
-              class="text-white"
-              >Linkedin</a
-            >
-          </div>
-        </div>
-      </div>
-      <!-- End of footer section -->
-    </div>
+    <Footer/>
   </q-page>
 </template>
 
 <script>
 import { defineComponent } from "vue";
 import { Vue3Marquee } from "vue3-marquee";
+
+// Import footer
+import Footer from "src/components/Footer.vue"
 
 // Import SVG assets
 import androidSvg from "src/assets/carousel/android.svg";
@@ -338,7 +309,7 @@ import vueSvg from "src/assets/carousel/vue.svg";
 
 export default defineComponent({
   name: "IndexPage",
-  components: { Vue3Marquee },
+  components: { Vue3Marquee, Footer },
   data() {
     return {
       techIcons: [

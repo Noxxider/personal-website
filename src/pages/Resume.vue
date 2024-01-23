@@ -264,50 +264,22 @@
     </div>
 
     <!-- Start of footer section -->
-    <div class="footer-background full-width">
-      <div class="footer-section flex text-white">
-        <div class="footer-item q-px-md q-py-xl q-my-auto">
-          <div class="custom-paragraph text-weight-medium">Ravino Juwono</div>
-          <div class="custom-paragraph text-weight-light q-mt-sm">
-            <a href="mailto:ravino.juwono@gmail.com" style="color: white"
-              >ravino.juwono@gmail.com</a
-            >
-          </div>
-
-          <div class="custom-paragraph text-weight-light q-mt-sm">
-            250-863-2454
-          </div>
-        </div>
-
-        <div class="footer-item q-px-md q-py-xl q-my-auto">
-          <div class="custom-paragraph text-weight-medium">Links</div>
-          <div class="custom-paragraph text-weight-light q-mt-sm">
-            <a href="/resume" class="text-white">Resume</a> <br />
-          </div>
-
-          <div class="custom-paragraph text-weight-light q-mt-sm">
-            <a
-              href="https://www.linkedin.com/in/ravinojuwono"
-              target="_blank"
-              class="text-white"
-              >Linkedin</a
-            >
-          </div>
-        </div>
-      </div>
-    </div>
+    <Footer/>
     <!-- End of footer section -->
   </q-page>
 </template>
 
 <script>
 import { defineComponent } from "vue";
+// Import footer
+import Footer from "src/components/Footer.vue"
 
 const resumeLink = "https://drive.google.com/file/d/1qW9WN4NMBqNsrp9a5qxbhJMJPxOQZPoX/view?usp=sharing"
 const referenceLink = "https://drive.google.com/file/d/1aupWxI4s_NtjlNCAweqo_avFuOI1JrfB/view?usp=sharing"
 
 export default defineComponent({
   name: "ResumePage",
+  components: {Footer},
   methods: {
     downloadResume() {
       window.open(

@@ -25,6 +25,19 @@ export default route(function (/* { store, ssrContext } */) {
     // quasar.conf.js -> build -> publicPath
     history: createHistory(process.env.VUE_ROUTER_BASE)
   })
+  
+  // Function to track page views
+  function gtagPageView() {
+    if (window.gtag) {
+      window.gtag('config', 'G-1NQ0WY7B97', {
+        'page_path': Router.currentRoute.value.fullPath
+      });
+    }
+  }
 
+  // Track page views on each route change
+  Router.afterEach(() => {
+    gtagPageView();
+  });
   return Router
 })

@@ -2,6 +2,16 @@
 <html>
   <head>
     <title><%= productName %></title>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1NQ0WY7B97"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-1NQ0WY7B97');
+    </script>
+    <!-- End Google Analytics -->
 
     <meta charset="utf-8">
     <meta name="description" content="<%= productDescription %>">
