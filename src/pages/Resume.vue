@@ -10,7 +10,7 @@
       </div>
       <div class="q-mt-sm custom-paragraph text-weight-regular">
         <a href="mailto:ravino.juwono@gmail.com">ravino.juwono@gmail.com</a> |
-        250-863-2454 |
+        
         <a href="https://www.linkedin.com/in/ravinojuwono" target="_blank"
           >LinkedIn Profile</a
         >

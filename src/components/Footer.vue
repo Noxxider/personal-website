@@ -10,9 +10,7 @@
             >
           </div>
 
-          <div class="custom-paragraph text-weight-light q-mt-sm">
-            250-863-2454
-          </div>
+
         </div>
 
         <div class="footer-item q-px-md q-py-xl q-my-auto">
