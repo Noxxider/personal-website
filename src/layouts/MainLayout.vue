@@ -54,6 +54,17 @@
             style="padding: 8px 12px"
             unelevated
           />
+          
+          <q-btn
+            class="large-screen-only q-px-xl q-mr-xl"
+            no-caps
+            href="https://github.com/Noxxider/bodyweight-tracker-app"
+            target="_blank"
+            text-color="dark"
+            label="GitHub"
+            style="padding: 8px 12px"
+            unelevated
+          />
           <q-btn
             class="large-screen-only q-px-xl"
             no-caps
@@ -76,12 +87,7 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      :width="200"
-      bordered
-      behavior="mobile"
-    >
+    <q-drawer v-model="leftDrawerOpen" :width="200" bordered behavior="mobile">
       <q-list>
         <div class="text-h6 q-pa-md" header>Pages</div>
         <q-separator />
@@ -110,7 +116,7 @@ const linksList = [
     icon: "home",
     link: "https://ravinojuwono.com",
   },
-    {
+  {
     title: "Weight Tracker",
     icon: "fitness_center",
     link: "/weighttracker",
@@ -119,6 +125,11 @@ const linksList = [
     title: "Resume",
     icon: "menu_book",
     link: "/resume",
+  },
+  {
+    title: "GitHub",
+    icon: "code",
+    link: "https://github.com/Noxxider/bodyweight-tracker-app",
   },
   {
     title: "LinkedIn",
