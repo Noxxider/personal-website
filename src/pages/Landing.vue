@@ -76,9 +76,8 @@
       <div
         class="q-my-auto col-xs-12 col-sm-6 q-pa-md responsive-padding text-left"
       >
-        <div class="text-h6 text-weight-medium">
-          Project: Body Weight Tracker App
-        </div>
+        <div class="text-h5 text-weight-medium q-mb-md" style="text-decoration: underline">Projects</div>
+        <div class="text-h6 text-weight-medium">Body Weight Tracker App</div>
         <div class="custom-paragraph q-mt-md text-weight-regular">
           <p>
             Just paste a string of numbers or upload your data on this site to
@@ -86,7 +85,7 @@
           </p>
         </div>
         <q-btn
-          label="Launch App"
+          label="Launch Tracker"
           type="primary"
           outline
           class="full-width q-mt-none q-mb-md shadow-1"
@@ -97,14 +96,26 @@
           color="accent"
           unelevated
         />
-        <div class="text-h6 text-weight-medium q-mt-md">Spoken Languages</div>
+
+        <div class="text-h6 text-weight-medium q-mt-md">Beats/Minute Counter App</div>
         <div class="custom-paragraph q-mt-md text-weight-regular">
-          <ul>
-            <li>English and Indonesian (Fluent)</li>
-            <li>German (Proficient)</li>
-            <li>French and Spanish (Intermediate)</li>
-          </ul>
+          <p>
+            Tap the button to calculate a beat. Useful for checking your pulse and music!
+          </p>
         </div>
+        <q-btn
+          label="Launch Counter"
+          type="primary"
+          outline
+          class="full-width q-mt-none q-mb-md shadow-1"
+          style="max-width: 400px"
+          no-caps
+          to="/tapbpm"
+          padding="md xl"
+          color="accent"
+          unelevated
+        />
+ 
       </div>
 
       <div class="col-xs-12 col-sm-6 flex flex-center">
@@ -273,7 +284,7 @@
     <!-- End of final section -->
 
     <!-- Start of footer section -->
-    <Footer/>
+    <Footer />
   </q-page>
 </template>
 
@@ -282,7 +293,7 @@ import { defineComponent } from "vue";
 import { Vue3Marquee } from "vue3-marquee";
 
 // Import footer
-import Footer from "src/components/Footer.vue"
+import Footer from "src/components/Footer.vue";
 
 // Import SVG assets
 import androidSvg from "src/assets/carousel/android.svg";
@@ -308,7 +319,7 @@ import typescriptSvg from "src/assets/carousel/typescript.svg";
 import vueSvg from "src/assets/carousel/vue.svg";
 
 export default defineComponent({
-  name: "IndexPage",
+  name: "Landing",
   components: { Vue3Marquee, Footer },
   data() {
     return {

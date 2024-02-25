@@ -37,7 +37,7 @@
             />
           </q-btn>
           <q-btn
-            class="large-screen-only q-px-xl q-mx-xl"
+            class="large-screen-only q-px-xl q-mx-lg"
             no-caps
             to="/"
             text-color="dark"
@@ -46,7 +46,7 @@
             unelevated
           />
           <q-btn
-            class="large-screen-only q-px-xl q-mr-xl"
+            class="large-screen-only q-px-xl q-mr-lg"
             no-caps
             to="/weighttracker"
             text-color="dark"
@@ -55,8 +55,18 @@
             unelevated
           />
           
+               <q-btn
+            class="large-screen-only q-px-xl q-mr-lg"
+            no-caps
+            to="/tapbpm"
+            text-color="dark"
+            label="BPM Counter"
+            style="padding: 8px 12px"
+            unelevated
+          />
+
           <q-btn
-            class="large-screen-only q-px-xl q-mr-xl"
+            class="large-screen-only q-px-xl q-mr-lg"
             no-caps
             href="https://github.com/Noxxider/bodyweight-tracker-app"
             target="_blank"
@@ -66,7 +76,7 @@
             unelevated
           />
           <q-btn
-            class="large-screen-only q-px-xl"
+            class="large-screen-only q-px-xl "
             no-caps
             to="/contact"
             text-color="dark"
@@ -75,7 +85,7 @@
             unelevated
           />
           <q-btn
-            class="large-screen-only q-ml-xl"
+            class="large-screen-only q-ml-lg"
             no-caps
             to="/resume"
             color="accent"
@@ -120,6 +130,11 @@ const linksList = [
     title: "Weight Tracker",
     icon: "fitness_center",
     link: "/weighttracker",
+  },
+   {
+    title: "BPM Tracker",
+    icon: "favorite",
+    link: "/tapbpm",
   },
   {
     title: "Resume",
