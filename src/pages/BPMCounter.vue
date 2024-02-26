@@ -1,9 +1,10 @@
 <template>
   <q-page class="flex flex-center">
-    <div class="q-pa-md" style="max-width: 400px">
+    <div class="q-py-md q-px-xl" style="max-width: 400px;  border: 1px solid #CCCCCC; border-radius: 8px">
       <div class="text-h6 text-center">Tap to count BPM</div>
       <div v-if="displayBPM != ''" class="text-h3 text-weight-medium text-center q-mt-md">{{displayBPM}}</div>
-      <q-btn @click="calculateBPM" color="accent" label="Tap" no-caps class="q-my-md q-py-md full-width" />
+      <div v-if="displayBPM != ''" class="text-h7 text-weight-medium text-center q-mt-xs">Beats/Minute</div>
+      <q-btn @click="calculateBPM" color="accent" label="Tap" no-caps class="q-mt-md q-py-md q-mb-sm full-width" />
     </div>
   </q-page>
 </template>

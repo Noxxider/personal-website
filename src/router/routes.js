@@ -5,7 +5,7 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', component: () => import('pages/Landing.vue') },
-      { path: '/resume', component: () => import('pages/Resume.vue') },
+      { path: '/resume', component: () => import('pages/ResumePDF.vue') },
       { path: '/contact', component: () => import('pages/Contact.vue')},
       { path: '/surprise', component: () => import('pages/Surprise.vue')},
       { path: '/weighttracker', component: () => import('pages/BodyweightTracker.vue')},

@@ -66,16 +66,6 @@
           />
 
           <q-btn
-            class="large-screen-only q-px-xl q-mr-lg"
-            no-caps
-            href="https://github.com/Noxxider/bodyweight-tracker-app"
-            target="_blank"
-            text-color="dark"
-            label="GitHub"
-            style="padding: 8px 12px"
-            unelevated
-          />
-          <q-btn
             class="large-screen-only q-px-xl "
             no-caps
             to="/contact"
@@ -144,12 +134,7 @@ const linksList = [
   {
     title: "GitHub",
     icon: "code",
-    link: "https://github.com/Noxxider/bodyweight-tracker-app",
-  },
-  {
-    title: "LinkedIn",
-    icon: "person",
-    link: "https://linkedin.com/in/ravinojuwono",
+    link: "https://github.com/Noxxider",
   },
 
   {

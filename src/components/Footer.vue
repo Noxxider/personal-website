@@ -27,6 +27,15 @@
               >Linkedin</a
             >
           </div>
+
+             <div class="custom-paragraph text-weight-light q-mt-sm">
+            <a
+              href="https://github.com/Noxxider"
+              target="_blank"
+              class="text-white"
+              >GitHub</a
+            >
+          </div>
         </div>
       </div>
       <!-- End of footer section -->
