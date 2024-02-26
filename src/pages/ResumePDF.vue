@@ -24,7 +24,7 @@ export default defineComponent({
   },
   data() {
     return {
-      url: "src/assets/Ravino Juwono Software General Resume.pdf",
+      url: "~assets/Ravino Juwono Software General Resume.pdf",
     };
   },
 });
