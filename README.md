@@ -12,7 +12,7 @@ There are two apps on the website:
 2. [**Beats/Minute Tap App**](https://ravinojuwono.com/tapbpm)
 
    
-## How to Install this website Locally?
+## How to Install this Website Locally?
 
 ### Clone the Repository, and Then Install the Dependencies Using
 ```bash
