@@ -41,6 +41,7 @@
             no-caps
             to="/"
             text-color="dark"
+            :ripple="false"
             label="Home"
             style="padding: 8px 12px"
             unelevated
@@ -50,6 +51,7 @@
             no-caps
             to="/weighttracker"
             text-color="dark"
+            :ripple="false"
             label="Weight Tracker"
             style="padding: 8px 12px"
             unelevated
@@ -59,6 +61,7 @@
             class="large-screen-only q-px-xl q-mr-lg"
             no-caps
             to="/tapbpm"
+            :ripple="false"
             text-color="dark"
             label="BPM Counter"
             style="padding: 8px 12px"
@@ -69,6 +72,7 @@
             class="large-screen-only q-px-xl "
             no-caps
             to="/contact"
+            :ripple="false"
             text-color="dark"
             label="Contact"
             style="padding: 8px 12px"
