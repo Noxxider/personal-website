@@ -5,7 +5,7 @@
     </div>
     
     <div class="full-width">
-      <q-pdfviewer class="q-px-sm q-mb-xl q-mx-auto" type="html5" :src="url" style="height: 800px; max-width: 1000px" />
+      <q-pdfviewer class="q-px-sm q-mb-xl q-mx-auto" type="pdfjs" :src="url" style="height: 90vh; max-width: 1000px" />
     </div>
     <!-- Start of footer section -->
     <Footer />
@@ -17,6 +17,7 @@
 import { defineComponent, ref } from "vue";
 
 import Footer from "src/components/Footer.vue";
+import pdf from 'assets/Ravino Juwono Software General Resume.pdf'
 
 export default defineComponent({
   components: {
@@ -24,7 +25,7 @@ export default defineComponent({
   },
   data() {
     return {
-      url: "~assets/Ravino Juwono Software General Resume.pdf",
+      url: pdf,
     };
   },
 });
