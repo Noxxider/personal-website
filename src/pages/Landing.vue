@@ -14,17 +14,36 @@
           <div class="text-h5 q-my-md">
             I’m Vino, a physics grad turned software developer
           </div>
-          <q-btn
-            label="My Resume"
-            type="primary"
-            class="full-width q-mt-md shadow-1"
-            style="max-width: 400px"
-            no-caps
-            padding="md xl"
-            to="resume"
-            color="accent"
-            unelevated
-          />
+          <div class="flex">
+            <q-btn
+              label="My Resume"
+              type="primary"
+              class="q-mt-md q-mr-sm shadow-1"
+              style="max-width: 400px; flex: 1"
+              no-caps
+              padding="md xl"
+              to="resume"
+              color="accent"
+              unelevated
+            />
+            <q-btn
+              type="primary"
+              class="q-mt-md q-ml-sm text-center justify-center"
+              style="flex: 1"
+              no-caps
+              outline
+              rounded
+              padding="md xl"
+              href="https://github.com/Noxxider"
+              target="_blank"
+              color="accent"
+            >
+              <div class="flex">
+                <q-icon name="code" class="q-mr-xs" />
+                <div class="text-center q-ml-xs">GitHub</div>
+              </div>
+            </q-btn>
+          </div>
         </div>
         <div class="my-section col-xs-12 col-sm-6 flex flex-center">
           <img
@@ -76,7 +95,12 @@
       <div
         class="q-my-auto col-xs-12 col-sm-6 q-pa-md responsive-padding text-left"
       >
-        <div class="text-h5 text-weight-medium q-mb-md" style="text-decoration: underline">Projects</div>
+        <div
+          class="text-h5 text-weight-medium q-mb-md"
+          style="text-decoration: underline"
+        >
+          Projects
+        </div>
         <div class="text-h6 text-weight-medium">Body Weight Tracker App</div>
         <div class="custom-paragraph q-mt-md text-weight-regular">
           <p>
@@ -88,7 +112,7 @@
           label="Launch Tracker"
           type="primary"
           outline
-          class="full-width q-mt-none q-mb-md shadow-1"
+          class="full-width q-mt-none q-mb-md"
           style="max-width: 400px"
           no-caps
           to="/weighttracker"
@@ -97,17 +121,20 @@
           unelevated
         />
 
-        <div class="text-h6 text-weight-medium q-mt-md">Beats/Minute Counter App</div>
+        <div class="text-h6 text-weight-medium q-mt-md">
+          Beats/Minute Counter App
+        </div>
         <div class="custom-paragraph q-mt-md text-weight-regular">
           <p>
-            Tap the button to calculate a beat. Useful for checking your pulse and music!
+            Tap the button to calculate a beat. Useful for checking your pulse
+            and music!
           </p>
         </div>
         <q-btn
           label="Launch Counter"
           type="primary"
           outline
-          class="full-width q-mt-none q-mb-md shadow-1"
+          class="full-width q-mt-none q-mb-md"
           style="max-width: 400px"
           no-caps
           to="/tapbpm"
@@ -115,7 +142,6 @@
           color="accent"
           unelevated
         />
- 
       </div>
 
       <div class="col-xs-12 col-sm-6 flex flex-center">
