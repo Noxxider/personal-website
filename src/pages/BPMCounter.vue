@@ -1,6 +1,6 @@
 <template>
   <q-page class="flex flex-center">
-    <div class="q-py-md q-px-xl" style="max-width: 400px;  border: 1px solid #CCCCCC; border-radius: 8px">
+    <div class="q-py-md q-px-xl disable-tap-zoom" style="max-width: 400px;  border: 1px solid #CCCCCC; border-radius: 8px">
       <div class="text-h6 text-center">Tap to count BPM</div>
       <div v-if="displayBPM != ''" class="text-h3 text-weight-medium text-center q-mt-md">{{displayBPM}}</div>
       <div v-if="displayBPM != ''" class="text-h7 text-weight-medium text-center q-mt-xs">Beats/Minute</div>
@@ -44,3 +44,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.disable-tap-zoom {
+  touch-action: manipulation;
+}
+</style>
