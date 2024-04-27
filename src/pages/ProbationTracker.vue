@@ -2,8 +2,8 @@
   <q-page class="flex flex-center">
     <!-- Main box containing contents -->
     <div
-      class="q-py-md q-px-md"
-      style="border: 1px solid #cccccc; border-radius: 8px; min-width: 400px"
+      class="q-py-md q-px-md q-mx-sm"
+      style="border: 1px solid #cccccc; border-radius: 8px; min-width: 350px; max-width: 400px"
     >
       <!-- Title -->
       <div class="text-h5 text-center">Probation Tracker</div>
