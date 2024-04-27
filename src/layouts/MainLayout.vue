@@ -1,7 +1,7 @@
 <template>
   <q-layout class="layout" view="lHh Lpr lFf">
     <q-header>
-      <q-toolbar style="align-items: center">
+      <q-toolbar style="align-items: center" class="bg-secondary">
         <div class="small-screen-only q-mx-auto full-width">
           <div class="flex justify-between">
             <q-btn to="/" flat>
