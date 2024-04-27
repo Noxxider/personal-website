@@ -11,6 +11,7 @@ const routes = [
       { path: '/weighttracker', component: () => import('pages/BodyweightTracker.vue')},
       { path: '/tapbpm', component: () => import('pages/BPMCounter.vue')},
       { path: '/dentaltechnician', component: () => import('pages/DentalAnatomy.vue')},
+      { path: '/jobprobation', component: () => import('pages/ProbationTracker.vue')},
     ]
   },
 
@@ -23,3 +24,4 @@ const routes = [
 ]
 
 export default routes
+
