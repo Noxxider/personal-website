@@ -17,8 +17,13 @@
 
         <!-- Detail of number of work days completed -->
         <div class="text-h7 text-weight-medium text-center q-mt-sm">
-          {{ numWorkDays }} out of {{ numWorkDaysToComplete }} work days
+          {{ numWorkDays }}/{{ numWorkDaysToComplete }} work days
           completed
+        </div>
+
+        <!-- Detail of number of work days completed -->
+        <div class="text-body1 text-weight-medium text-center q-mt-md">
+          Last probation day: {{ lastProbationDate }}
         </div>
 
         <!-- Progress bar -->
@@ -81,7 +86,7 @@
   </q-page>
 </template>
 
-<script> 
+<script>
 export default {
   /*
   Data that the web app needs to run
@@ -97,6 +102,7 @@ export default {
       progress: 0, // % of progress
       numWorkDays: 0, // Num of Work Days completed
       numWorkDaysToComplete: 0, // Number of work days to complete
+      lastProbationDate: "",
 
       // **Data Storage Key** //
       localStorageKey: "probationTrackerParameters", // Key for local storage
@@ -186,7 +192,7 @@ export default {
     Error Handling: Invalid dates inputted
     Testing: Test with various dates
     */
-    countWorkDays(startDate, endDate) {
+    countWorkDays(startDate, endDate, countProbationDate) {
       let count = 0;
       let currentDate = new Date(startDate);
       const finalDate = new Date(endDate);
@@ -195,6 +201,13 @@ export default {
         const dayOfWeek = currentDate.getDay();
         if (dayOfWeek >= 1 && dayOfWeek <= 5) {
           // Monday to Friday
+
+          // If counting last probation date
+          if (countProbationDate) {
+            this.lastProbationDate = currentDate.toDateString();
+          }
+
+          // Increase work day count if day is a weekday
           count++;
         }
         currentDate.setDate(currentDate.getDate() + 1);
@@ -213,8 +226,8 @@ export default {
       const start = new Date(startDate);
       const end = new Date(start);
       end.setDate(start.getDate() + numDays);
-
-      return this.countWorkDays(startDate, end);
+      var count = this.countWorkDays(startDate, end, true);
+      return count;
     },
 
     /* 
@@ -226,7 +239,7 @@ export default {
     */
     workDaysCompleted(startDate) {
       const today = new Date();
-      return this.countWorkDays(startDate, today);
+      return this.countWorkDays(startDate, today, false);
     },
 
     /* 
