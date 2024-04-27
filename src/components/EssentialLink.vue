@@ -1,5 +1,5 @@
 <template>
-  <q-item clickable tag="a" target="_blank" :href="link">
+  <q-item clickable tag="a" :href="link">
     <div class="q-my-auto" v-if="icon" avatar style="height: 24px">
       <q-icon size="24px" :name="icon" />
     </div>
