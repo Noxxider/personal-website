@@ -322,27 +322,27 @@ import { Vue3Marquee } from "vue3-marquee";
 import Footer from "src/components/Footer.vue";
 
 // Import SVG assets
-import androidSvg from "src/assets/carousel/android.svg";
-import awsSvg from "src/assets/carousel/aws.svg";
-import azureSvg from "src/assets/carousel/azure.svg";
-import bootstrapSvg from "src/assets/carousel/bootstrap.svg";
-import csharpSvg from "src/assets/carousel/csharp.svg";
-import cssSvg from "src/assets/carousel/css.svg";
-import dockerSvg from "src/assets/carousel/docker.svg";
-import figmaSvg from "src/assets/carousel/figma.svg";
-import html5Svg from "src/assets/carousel/html5.svg";
-import ionicSvg from "src/assets/carousel/ionic.svg";
-import javaSvg from "src/assets/carousel/java.svg";
-import jsSvg from "src/assets/carousel/js.svg";
-import mongodbSvg from "src/assets/carousel/mongodb.svg";
-import mysqlSvg from "src/assets/carousel/mysql.svg";
-import nodejsSvg from "src/assets/carousel/nodejs.svg";
-import postgresqlSvg from "src/assets/carousel/postgresql.svg";
-import pwaSvg from "src/assets/carousel/pwa.svg";
-import pythonSvg from "src/assets/carousel/python.svg";
-import reactSvg from "src/assets/carousel/react.svg";
-import typescriptSvg from "src/assets/carousel/typescript.svg";
-import vueSvg from "src/assets/carousel/vue.svg";
+import androidSvg from "src/assets/carousel/android.png";
+import awsSvg from "src/assets/carousel/aws.png";
+import azureSvg from "src/assets/carousel/azure.png";
+import bootstrapSvg from "src/assets/carousel/bootstrap.png";
+import csharpSvg from "src/assets/carousel/csharp.png";
+import cssSvg from "src/assets/carousel/css.png";
+import dockerSvg from "src/assets/carousel/docker.png";
+import figmaSvg from "src/assets/carousel/figma.png";
+import html5Svg from "src/assets/carousel/html5.png";
+import ionicSvg from "src/assets/carousel/ionic.png";
+import javaSvg from "src/assets/carousel/java.png";
+import jsSvg from "src/assets/carousel/js.png";
+import mongodbSvg from "src/assets/carousel/mongodb.png";
+import mysqlSvg from "src/assets/carousel/mysql.png";
+import nodejsSvg from "src/assets/carousel/nodejs.png";
+import postgresqlSvg from "src/assets/carousel/postgresql.png";
+import pwaSvg from "src/assets/carousel/pwa.png";
+import pythonSvg from "src/assets/carousel/python.png";
+import reactSvg from "src/assets/carousel/react.png";
+import typescriptSvg from "src/assets/carousel/typescript.png";
+import vueSvg from "src/assets/carousel/vue.png";
 
 export default defineComponent({
   name: "Landing",

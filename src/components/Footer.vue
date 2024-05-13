@@ -14,7 +14,6 @@
         </div>
 
         <div class="footer-item q-px-md q-py-xl q-my-auto">
-          <div class="custom-paragraph text-weight-medium">Links</div>
           <div class="custom-paragraph text-weight-light q-mt-sm">
             <a href="/resume" class="text-white">Resume</a> <br />
           </div>
