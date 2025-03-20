@@ -192,7 +192,7 @@
         <!-- Content for the first column -->
         <div class="section-content custom-paragraph text-weight-regular">
           Rangouts
-          has a feed, a live map and ticket system for local event discovery. It is not inactive.
+          has a feed, a live map and ticket system for local event discovery. It is now inactive.
         </div>
       </div>
       <!-- End of first column -->
