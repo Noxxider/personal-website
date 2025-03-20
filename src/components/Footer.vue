@@ -14,10 +14,14 @@
         </div>
 
         <div class="footer-item q-px-md q-py-xl q-my-auto">
-          <div class="custom-paragraph text-weight-light q-mt-sm">
+          
+          <!--
+           <div class="custom-paragraph text-weight-light q-mt-sm">
             <a href="/resume" class="text-white">Resume</a> <br />
           </div>
 
+          -->
+         
           <div class="custom-paragraph text-weight-light q-mt-sm">
             <a
               href="https://www.linkedin.com/in/ravinojuwono"
@@ -26,15 +30,17 @@
               >Linkedin</a
             >
           </div>
-
-             <div class="custom-paragraph text-weight-light q-mt-sm">
+<!--
+   <div class="custom-paragraph text-weight-light q-mt-sm">
             <a
               href="https://github.com/Noxxider"
               target="_blank"
               class="text-white"
               >GitHub</a
             >
-          </div>
+          </div>          
+-->
+          
         </div>
       </div>
       <!-- End of footer section -->

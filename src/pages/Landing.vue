@@ -15,7 +15,9 @@
             I’m Vino, a physics grad turned software developer
           </div>
           <div class="flex">
-            <q-btn
+
+            <!--
+                     <q-btn
               label="My Resume"
               type="primary"
               class="q-mt-md q-mr-sm shadow-1"
@@ -43,6 +45,8 @@
                 <div class="text-center q-ml-xs">GitHub</div>
               </div>
             </q-btn>
+            -->
+   
           </div>
         </div>
         <div class="my-section col-xs-12 col-sm-6 flex flex-center">
@@ -162,8 +166,7 @@
       <div class="col responsive-padding-gallery">
         <div class="text-h4 text-weight-medium">Portfolio Snapshot</div>
         <div class="custom-paragraph q-mt-sm text-weight-regular">
-          From SaaS applications to an Instagram web scraper, I have extensively
-          explored the web development domain.
+          Here are some fun projects I have done.
         </div>
       </div>
     </div>
@@ -188,32 +191,30 @@
         </div>
         <!-- Content for the first column -->
         <div class="section-content custom-paragraph text-weight-regular">
-          Revolutionizing communication with a scalable SaaS web application.<br /><br />Rangouts
-          has a feed, a live map and ticket system for local event discovery.
+          Rangouts
+          has a feed, a live map and ticket system for local event discovery. It is not inactive.
         </div>
       </div>
       <!-- End of first column -->
 
-      <!-- Start of second column -->
-      <div class="my-section-three col-12 col-md-4 responsive-padding-gallery">
-        <!-- Image for the second column -->
+        <!--
+       <div class="my-section-three col-12 col-md-4 responsive-padding-gallery">
         <q-img
           class="q-mt-md"
           src="~assets/project-two.png"
           fit="contain"
           height="40vh"
         />
-        <!-- Headline for the second column -->
         <div class="section-headline text-h6 text-left text-weight-medium">
-          Freelance at Parkbench
+          Instagram Webscraper
         </div>
-        <!-- Content for the second column -->
         <div class="section-content custom-paragraph text-weight-regular">
           Developed a web application to identify top Instagram accounts in
           specified locations.<br /><br />My work is Parkbench property now so I
           can’t show the code.
         </div>
-      </div>
+      </div>-->
+     
       <!-- End of second column -->
 
       <!-- Start of third column -->
@@ -231,8 +232,7 @@
         </div>
         <!-- Content for the third column -->
         <div class="section-content custom-paragraph text-weight-regular">
-          Enhancing restaurant QR menu code analytics, customer engagement
-          strategies and menu design.
+          I thought what if QR-code menus had analytics?
         </div>
       </div>
       <!-- End of third column -->
@@ -257,8 +257,7 @@
             </div>
             <!-- Subheading for the first section -->
             <div class="custom-paragraph q-mb-xl q-mt-xs">
-              I'm also a singer, having sang acapella internationally. Music is
-              a passion that resonates deeply with me.
+              I also love singing. I joined an acapella club during university.
             </div>
           </div>
         </div>
@@ -279,7 +278,8 @@
     </div>
 
     <!-- Section 7: Contact and Resume Info -->
-    <div
+     <!--
+       <div
       class="row responsive-padding q-my-lg wrapper-width text-center q-py-lg"
       style="flex-direction: column"
     >
@@ -292,9 +292,8 @@
           href="mailto:ravino.juwono@gmail.com?subject=Inquiry%20from%20a%20Potential%20Collaborator%20or%20Employer"
           >email</a
         >
-        or text. You can view my resume by clicking the button below
+        or text.
       </div>
-      <!-- Button for the final section -->
       <q-btn
         label="Resume"
         type="primary"
@@ -307,6 +306,9 @@
         unelevated
       />
     </div>
+    
+     -->
+ 
     <!-- End of final section -->
 
     <!-- Start of footer section -->

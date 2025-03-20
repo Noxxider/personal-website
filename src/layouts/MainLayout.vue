@@ -67,7 +67,7 @@
             style="padding: 8px 12px"
             unelevated
           />
-
+ <!--
           <q-btn
             class="large-screen-only q-px-xl "
             no-caps
@@ -78,7 +78,8 @@
             style="padding: 8px 12px"
             unelevated
           />
-          <q-btn
+         
+                 <q-btn
             class="large-screen-only q-ml-lg"
             no-caps
             to="/resume"
@@ -87,6 +88,8 @@
             style="padding: 8px 16px"
             unelevated
           />
+          -->
+   
         </div>
       </q-toolbar>
     </q-header>
@@ -130,22 +133,24 @@ const linksList = [
     icon: "favorite",
     link: "/tapbpm",
   },
-  {
+  /*
+   {
     title: "Resume",
     icon: "menu_book",
     link: "/resume",
   },
+ 
   {
     title: "GitHub",
     icon: "code",
     link: "https://github.com/Noxxider",
   },
-
   {
     title: "Contact",
     icon: "phone",
     link: "/contact",
   },
+  */
 ];
 
 export default defineComponent({
