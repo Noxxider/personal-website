@@ -10,8 +10,7 @@
         style="max-width: 550px"
         ref="email"
       >
-        Need a website or custom software? Let's connect — I'm always open to
-        projects and employment opportunities!
+        Need a website or custom software? Let's connect — I'm always open to opportunities!
       </div>
       <!-- Email -->
       <div class="flex q-mt-sm" style="max-width: 550px">

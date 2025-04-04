@@ -12,7 +12,7 @@
         >
           <div class="text-h2 text-weight-medium">Hello!</div>
           <div class="text-h5 q-my-md">
-            I’m Vino, a physics grad turned software developer
+            I’m Vino, a physics grad, now in IT.
           </div>
           <div class="flex">
 
