@@ -12,6 +12,7 @@ const routes = [
       { path: '/tapbpm', component: () => import('pages/BPMCounter.vue')},
       { path: '/dentaltechnician', component: () => import('pages/DentalAnatomy.vue')},
       { path: '/jobprobation', component: () => import('pages/ProbationTracker.vue')},
+      { path: '/pr', component: () => import('pages/PRCountdown.vue') },
     ]
   },
 
