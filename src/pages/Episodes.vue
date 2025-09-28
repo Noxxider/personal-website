@@ -32,7 +32,7 @@
       </div>
     </div>
 
-    <q-banner v-if="!episodes.length" rounded class="bg-grey-10 text-grey-2 q-pa-md q-mb-lg">
+    <q-banner v-if="!episodes.length" rounded class="bg-grey-1 text-grey-9 q-pa-md q-mb-lg">
       <div class="row items-center q-col-gutter-md">
         <div class="col-auto"><q-icon name="info" size="md"/></div>
         <div class="col">
@@ -46,7 +46,7 @@
       <!-- LEFT: Filters & Mapping -->
       <template #before>
         <div class="q-pa-sm scroll column q-gutter-sm">
-          <q-expansion-item dense default-opened icon="tune" label="Filters" class="bg-dark-panel" header-class="text-grey-2">
+          <q-expansion-item dense default-opened icon="tune" label="Filters" class="bg-dark-panel" header-class="text-grey-9">
             <div class="q-pa-sm column q-gutter-sm">
               <q-input dense v-model="filter.dateFrom" label="From (YYYY-MM-DD)" type="date"/>
               <q-input dense v-model="filter.dateTo" label="To (YYYY-MM-DD)" type="date"/>
@@ -66,7 +66,7 @@
             </div>
           </q-expansion-item>
 
-          <q-expansion-item dense icon="view_list" label="Column Mapping" class="bg-dark-panel" header-class="text-grey-2" :default-opened="episodes.length === 0">
+          <q-expansion-item dense icon="view_list" label="Column Mapping" class="bg-dark-panel" header-class="text-grey-9" :default-opened="episodes.length === 0">
             <div class="q-pa-sm column q-gutter-xs">
               <div class="text-caption text-grey-5">If headers in your sheet differ, map them here.</div>
               <div v-for="(target, key) in mapping" :key="key" class="row items-center">
@@ -84,12 +84,12 @@
                   />
                 </div>
               </div>
-              <q-separator dark spaced/>
+              <q-separator spaced/>
               <q-btn dense color="primary" label="Re-parse with mapping" @click="reparseWithMapping" :disable="!workbook"/>
             </div>
           </q-expansion-item>
 
-          <q-expansion-item dense icon="list_alt" label="Diet Keywords" class="bg-dark-panel" header-class="text-grey-2">
+          <q-expansion-item dense icon="list_alt" label="Diet Keywords" class="bg-dark-panel" header-class="text-grey-9">
             <div class="q-pa-sm">
               <q-select
                 v-model="dietKeywords"
@@ -106,14 +106,14 @@
             </div>
           </q-expansion-item>
 
-          <q-expansion-item dense icon="help" label="Doctor Questions (editable)" class="bg-dark-panel" header-class="text-grey-2">
+          <q-expansion-item dense icon="help" label="Doctor Questions (editable)" class="bg-dark-panel" header-class="text-grey-9">
             <div class="q-pa-sm column q-gutter-xs">
               <q-input dense autogrow v-model="doctorQuestions" type="textarea"/>
               <div class="text-caption text-grey-5">These print at the end of the handout.</div>
             </div>
           </q-expansion-item>
 
-          <q-expansion-item dense icon="info" label="Notes" class="bg-dark-panel" header-class="text-grey-2">
+          <q-expansion-item dense icon="info" label="Notes" class="bg-dark-panel" header-class="text-grey-9">
             <div class="q-pa-sm text-caption text-grey-5">
               <ul class="q-pl-md">
                 <li>All calculations are descriptive and run locally. Not medical advice.</li>
@@ -148,7 +148,7 @@
                 <div class="col"><div class="text-subtitle1">Episodes over time</div></div>
                 <div class="col-auto"><q-toggle v-model="showMedsOnTimeline" dense label="Show meds"/></div>
               </q-card-section>
-              <q-separator dark/>
+              <q-separator/>
               <q-card-section>
                 <apexchart type="line" height="250" :options="charts.timeline.options" :series="charts.timeline.series"/>
               </q-card-section>
@@ -162,7 +162,7 @@
                     <div class="col-auto"><q-icon name="schedule"/></div>
                     <div class="col"><div class="text-subtitle1">Hour of onset</div></div>
                   </q-card-section>
-                  <q-separator dark/>
+                  <q-separator/>
                   <q-card-section>
                     <apexchart type="bar" height="240" :options="charts.hour.options" :series="charts.hour.series"/>
                   </q-card-section>
@@ -174,7 +174,7 @@
                     <div class="col-auto"><q-icon name="event"/></div>
                     <div class="col"><div class="text-subtitle1">Weekday distribution</div></div>
                   </q-card-section>
-                  <q-separator dark/>
+                  <q-separator/>
                   <q-card-section>
                     <apexchart type="bar" height="240" :options="charts.weekday.options" :series="charts.weekday.series"/>
                   </q-card-section>
@@ -188,7 +188,7 @@
                 <div class="col-auto"><q-icon name="insights"/></div>
                 <div class="col"><div class="text-subtitle1">Associations with severity (Spearman ρ)</div></div>
               </q-card-section>
-              <q-separator dark/>
+              <q-separator/>
               <q-card-section>
                 <apexchart type="bar" height="240" :options="charts.corr.options" :series="charts.corr.series"/>
                 <div class="text-caption text-grey-5 q-mt-xs">Only episodes with severity & the given factor recorded are included. Not causal.</div>
@@ -201,7 +201,7 @@
                 <div class="col-auto"><q-icon name="grid_on"/></div>
                 <div class="col"><div class="text-subtitle1">Trigger matrix — mean severity by factor</div></div>
               </q-card-section>
-              <q-separator dark/>
+              <q-separator/>
               <q-card-section>
                 <apexchart type="heatmap" height="320" :options="charts.heatmap.options" :series="charts.heatmap.series"/>
               </q-card-section>
@@ -213,7 +213,7 @@
                 <div class="col-auto"><q-icon name="restaurant"/></div>
                 <div class="col"><div class="text-subtitle1">Diet/Notes keywords</div></div>
               </q-card-section>
-              <q-separator dark/>
+              <q-separator/>
               <q-card-section>
                 <apexchart type="bar" height="240" :options="charts.keywords.options" :series="charts.keywords.series"/>
                 <div class="text-caption text-grey-5 q-mt-xs">Bars show frequency; label shows mean severity when keyword present.</div>
@@ -227,7 +227,7 @@
                 <div class="col"><div class="text-subtitle1">Occurrence model (logistic) — next 14 days risk</div></div>
                 <div class="col-auto"><q-btn dense flat icon="refresh" label="Re-fit" @click="fitOccurrenceModel"/></div>
               </q-card-section>
-              <q-separator dark/>
+              <q-separator/>
               <q-card-section>
                 <div v-if="occurrenceModel.fitted" class="row q-col-gutter-sm">
                   <div class="col-12 col-md-7">
@@ -248,7 +248,7 @@
                 <div class="col-auto"><q-icon name="rule"/></div>
                 <div class="col"><div class="text-subtitle1">Data quality checks</div></div>
               </q-card-section>
-              <q-separator dark/>
+              <q-separator/>
               <q-card-section>
                 <ul class="text-body2 q-pl-md q-mb-none">
                   <li v-for="q in dataQuality.issues" :key="q.msg">{{ q.msg }}</li>
@@ -642,12 +642,12 @@ export default {
 
       this.charts.timeline = {
         options: {
-          chart: { foreColor: '#e0e0e0', toolbar: { show: false } },
+          chart: { foreColor: '#333', toolbar: { show: false } },
           xaxis: { type: 'datetime' },
           yaxis: { min: 0, forceNiceScale: true },
           stroke: { width: 2 },
           dataLabels: { enabled: false },
-          grid: { borderColor: '#444' },
+          grid: { borderColor: '#e0e0e0' },
           annotations
         },
         series: [{ name: 'Episodes', data: series }]
@@ -659,9 +659,9 @@ export default {
       for (const e of this.filteredEpisodes) bins[e.startHour]++
       this.charts.hour = {
         options: {
-          chart: { foreColor: '#e0e0e0', toolbar: { show: false } },
+          chart: { foreColor: '#333', toolbar: { show: false } },
           xaxis: { categories: [...Array(24).keys()].map(h => String(h).padStart(2,'0')) },
-          grid: { borderColor: '#444' },
+          grid: { borderColor: '#e0e0e0' },
           dataLabels: { enabled: false }
         },
         series: [{ name: 'Count', data: bins }]
@@ -673,9 +673,9 @@ export default {
       for (const e of this.filteredEpisodes) bins[e.weekday]++
       this.charts.weekday = {
         options: {
-          chart: { foreColor: '#e0e0e0', toolbar: { show: false } },
+          chart: { foreColor: '#333', toolbar: { show: false } },
           xaxis: { categories: WEEKDAY_LABELS },
-          grid: { borderColor: '#444' },
+          grid: { borderColor: '#e0e0e0' },
           dataLabels: { enabled: false }
         },
         series: [{ name: 'Count', data: bins }]
@@ -699,11 +699,11 @@ export default {
       rows.sort((a,b) => Math.abs(b.rho) - Math.abs(a.rho))
       this.charts.corr = {
         options: {
-          chart: { foreColor: '#e0e0e0', toolbar: { show: false } },
+          chart: { foreColor: '#333', toolbar: { show: false } },
           xaxis: { categories: rows.map(r => r.label) },
           plotOptions: { bar: { distributed: true } },
           dataLabels: { enabled: true, formatter: (v) => v.toFixed(2) },
-          grid: { borderColor: '#444' }
+          grid: { borderColor: '#e0e0e0' }
         },
         series: [{ name: 'Spearman ρ', data: rows.map(r => r.rho) }]
       }
@@ -729,7 +729,7 @@ export default {
 
       this.charts.heatmap = {
         options: {
-          chart: { foreColor: '#e0e0e0', toolbar: { show: false } },
+          chart: { foreColor: '#333', toolbar: { show: false } },
           plotOptions: { heatmap: { colorScale: { ranges: [
             { from: 0, to: 2, color: '#004d40' },
             { from: 2, to: 4, color: '#00695c' },
@@ -739,7 +739,7 @@ export default {
           ] } } },
           dataLabels: { enabled: true },
           xaxis: { labels: { rotate: 0 } },
-          grid: { borderColor: '#444' }
+          grid: { borderColor: '#e0e0e0' }
         },
         series
       }
@@ -764,14 +764,14 @@ export default {
       counts.sort((a,b) => b.n - a.n)
       this.charts.keywords = {
         options: {
-          chart: { foreColor: '#e0e0e0', toolbar: { show: false } },
+          chart: { foreColor: '#333', toolbar: { show: false } },
           xaxis: { categories: counts.map(c => c.kw) },
           dataLabels: { enabled: true, formatter: (v, opts) => {
             const kw = counts[opts.dataPointIndex].kw
             const m = sevByKey.get(kw)
             return m == null ? '' : `avg sev ${m.toFixed(1)}`
           } },
-          grid: { borderColor: '#444' }
+          grid: { borderColor: '#e0e0e0' }
         },
         series: [{ name: 'Mentions', data: counts.map(c => c.n) }]
       }
@@ -905,22 +905,22 @@ export default {
       // Charts for forecast & weights
       this.charts.riskForecast = {
         options: {
-          chart: { foreColor: '#e0e0e0', toolbar: { show: false } },
+          chart: { foreColor: '#333', toolbar: { show: false } },
           xaxis: { type: 'datetime' },
           yaxis: { min: 0, max: 100, labels: { formatter: (v) => v + '%' } },
           dataLabels: { enabled: false },
           stroke: { width: 2 },
-          grid: { borderColor: '#444' }
+          grid: { borderColor: '#e0e0e0' }
         },
         series: [{ name: 'Predicted risk', data: forecast }]
       }
 
       this.charts.riskWeights = {
         options: {
-          chart: { foreColor: '#e0e0e0', toolbar: { show: false } },
+          chart: { foreColor: '#333', toolbar: { show: false } },
           xaxis: { categories: ['sinDOW','cosDOW','daysSinceLast','rolling7'] },
           dataLabels: { enabled: true, formatter: v => v.toFixed(2) },
-          grid: { borderColor: '#444' }
+          grid: { borderColor: '#e0e0e0' }
         },
         series: [{ name: 'Weight', data: this.occurrenceModel.weights.map(o => o.w) }]
       }
@@ -972,15 +972,15 @@ export default {
 </script>
 
 <style scoped>
-.analytics-page { background: #121212; color: #e0e0e0; }
-.bg-dark-panel { background: #1c1c1e; border-radius: 12px; }
-.panel-card { background: #1a1a1a; border-radius: 16px; }
-.kpi-card { background: #151515; border-radius: 16px; }
+.analytics-page { background: #ffffff; color: #1f2937; }
+.bg-dark-panel { background: #ffffff; border-radius: 12px; border: 1px solid #e5e7eb; }
+.panel-card { background: #ffffff; border-radius: 16px; }
+.kpi-card { background: #ffffff; border-radius: 16px; }
 .no-print-hide { display: none; }
 
 @media print {
   .analytics-page { background: #ffffff; color: #000; }
-  .q-header, .q-footer, .q-drawer, .q-toolbar, .q-file, .q-btn, .q-banner, .q-splitter, .bg-dark-panel, .panel-card { display: none !important; }
+  .q-header, .q-footer, .q-drawer, .q-toolbar, .q-file, .q-btn, .q-banner, .q-splitter { display: none !important; }
   .no-print-hide { display: block; }
   .print-footer { page-break-before: always; }
 }
