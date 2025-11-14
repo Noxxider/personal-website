@@ -13,6 +13,7 @@ const routes = [
       { path: '/dentaltechnician', component: () => import('pages/DentalAnatomy.vue')},
       { path: '/jobprobation', component: () => import('pages/ProbationTracker.vue')},
       { path: '/pr', component: () => import('pages/PRCountdown.vue') },
+      { path: '/aor', component: () => import('pages/AorForecast.vue') },
       { path: '/episodes', component: () => import('pages/Episodes.vue') },
     ]
   },

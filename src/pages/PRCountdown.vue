@@ -137,11 +137,13 @@ export default {
       const d = this.ecoprDateObj;
       if (!d) return 'Invalid date';
 
-      return d.toLocaleDateString('en-CA', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric'
-      });
+      // Render in UTC so our YYYY-MM-DD (stored as UTC) doesn't shift back a day in local time
+        return d.toLocaleDateString('en-CA', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+          timeZone: 'UTC'
+        });
     },
 
     workDays() {
@@ -272,7 +274,8 @@ export default {
       const d = this.parseDate(dateStr);
       return d.toLocaleDateString('en-CA', {
         month: 'short',
-        day: 'numeric'
+        day: 'numeric',
+          timeZone: 'UTC'
       });
     },
 
