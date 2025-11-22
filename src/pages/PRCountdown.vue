@@ -164,7 +164,13 @@ export default {
         const isHoliday = this.isHoliday(dateStr);
         const isVacation = this.isVacation(dateStr);
 
-        if (!isWeekend && !isHoliday && !isVacation) {
+        const isToday = dateStr === this.todayDateStr;
+        const isPastEndOfWorkToday =
+          isToday &&
+          this.currentHourPst !== null &&
+          this.currentHourPst >= 16; // 4pm+ PST means today's work is "done"
+
+        if (!isWeekend && !isHoliday && !isVacation && !isPastEndOfWorkToday) {
           const isOffice = weekday === 2 || weekday === 4; // Tue / Thu
           days.push({
             date: dateStr,
