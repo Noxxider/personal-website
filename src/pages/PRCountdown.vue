@@ -4,7 +4,7 @@
       <div>
         <div class="text-h5">Work Days to eCOPR</div>
         <div class="text-caption">
-          Today (PST): <strong>{{ todayDateStr }}</strong>
+          Today (PST): <strong>{{ prettyTodayDate  }}</strong>
         </div>
       </div>
       <div class="target-date">
@@ -22,8 +22,8 @@
     <div class="q-mt-md summary-row">
       <q-card flat bordered class="summary-card">
         <q-card-section>
-          <div class="text-caption text-grey-7">Work days remaining</div>
-          <div class="text-h5">{{ totalWorkDays }}</div>
+          <div class="text-caption text-grey-7">Work from Home Days Remaining</div>
+          <div class="text-h5">{{ totalWfhDays }}</div>
         </q-card-section>
       </q-card>
 
@@ -146,6 +146,20 @@ export default {
         });
     },
 
+    prettyTodayDate() {
+      if (!this.todayDateStr) return '';
+      const d = this.parseDate(this.todayDateStr);
+      // Example: "26 jan 2026"
+      return d
+        .toLocaleDateString('en-GB', {
+          day: 'numeric',
+          month: 'short',
+          year: 'numeric',
+          timeZone: 'UTC'
+        })
+        .toLowerCase();
+    },
+
     workDays() {
       if (!this.ecoprInput || !this.todayDateStr) return [];
 
@@ -190,6 +204,10 @@ export default {
 
     totalOfficeDays() {
       return this.workDays.filter(d => d.isOffice).length;
+    },
+
+    totalWfhDays() {
+      return Math.max(0, this.totalWorkDays - this.totalOfficeDays);
     },
 
     isWorkHoursNow() {
