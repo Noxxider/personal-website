@@ -9,7 +9,6 @@ export const site = {
   role: "Clinical Informatics Analyst",
   employer: "Interior Health Authority",
   location: "Kelowna, British Columbia",
-  email: "ravino.juwono@gmail.com",
   url: "https://www.ravinojuwono.com",
   /** Public GA4 measurement id, carried over from the previous site. */
   gaMeasurementId: "G-1NQ0WY7B97",

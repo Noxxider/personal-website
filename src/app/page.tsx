@@ -5,6 +5,7 @@ import { Reveal } from "@/components/reveal";
 import { WorkCard } from "@/components/work-card";
 import { Prose } from "@/components/prose";
 import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { capabilities, projects, roles } from "@/content/work";
 import { site } from "@/content/site";
 
@@ -140,12 +141,13 @@ export default function HomePage() {
             Happy to talk about healthcare systems, web performance, or anything
             you are building.
           </h2>
-          <a
-            href={`mailto:${site.email}`}
-            className="link-underline mt-8 inline-block font-display text-2xl text-ink sm:text-3xl"
+          <Link
+            href="/contact"
+            className={cn(buttonVariants({ variant: "solid" }), "mt-8")}
           >
-            {site.email}
-          </a>
+            Get in touch
+            <ArrowRightIcon aria-hidden className="size-4" />
+          </Link>
         </Reveal>
       </Section>
     </>

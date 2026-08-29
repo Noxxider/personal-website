@@ -79,7 +79,6 @@ const personJsonLd = {
   name: site.name,
   alternateName: site.shortName,
   url: site.url,
-  email: `mailto:${site.email}`,
   jobTitle: site.role,
   worksFor: { "@type": "Organization", name: site.employer },
   address: {

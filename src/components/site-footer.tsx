@@ -11,12 +11,12 @@ export function SiteFooter() {
             <p className="mt-2 text-sm text-ink-muted">
               {site.role}, {site.location}
             </p>
-            <a
-              href={`mailto:${site.email}`}
+            <Link
+              href="/contact"
               className="link-underline mt-4 inline-block text-sm text-ink"
             >
-              {site.email}
-            </a>
+              Get in touch
+            </Link>
           </div>
 
           <div className="flex gap-14">

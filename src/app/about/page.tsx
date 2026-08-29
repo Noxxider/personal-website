@@ -95,14 +95,7 @@ export default function AboutPage() {
                     </a>
                   </li>
                 ))}
-                <li>
-                  <a
-                    href={`mailto:${site.email}`}
-                    className="link-underline text-[0.9375rem] text-ink"
-                  >
-                    Email
-                  </a>
-                </li>
+
               </ul>
             </div>
           </Reveal>
