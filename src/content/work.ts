@@ -47,7 +47,7 @@ export const projects: Project[] = [
     slug: "site",
     title: "This site",
     blurb:
-      "Statically exported Next.js, no client-side data fetching, no component library styling out of the box.",
+      "Statically exported Next.js. Every route is real HTML at build time, with no server runtime.",
     description:
       "Rebuilt from a 2023 Quasar single page app into a statically exported Next.js site. Every route is prerendered to HTML at build time, so there is no server runtime and no loading spinner on navigation. The type scale, colour tokens and layout primitives are hand-built on top of Tailwind, with a small number of shadcn/ui primitives used where accessibility behaviour is worth not reinventing.",
     year: "2026",

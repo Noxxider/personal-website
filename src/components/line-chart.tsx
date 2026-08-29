@@ -1,8 +1,11 @@
+"use client";
+
+import * as React from "react";
+
 export type Point = { t: number; v: number };
 
-const W = 720;
-const H = 300;
 const PAD = { top: 18, right: 18, bottom: 34, left: 46 };
+const FALLBACK_WIDTH = 720;
 
 function ticksFor(min: number, max: number, step: number): number[] {
   const start = Math.ceil(min / step) * step;
@@ -57,8 +60,11 @@ const dateFmt = new Intl.DateTimeFormat("en-CA", {
 });
 
 /**
- * Small, dependency free line chart. Rendered as a single inline SVG so there
- * is no charting library in the bundle and no layout shift while it mounts.
+ * Small, dependency free line chart.
+ *
+ * The SVG is drawn at the container's real pixel size rather than at a fixed
+ * viewBox that gets scaled by CSS, so the axis labels stay the same physical
+ * size on a phone as they are on a desktop.
  */
 export function LineChart({
   points,
@@ -69,6 +75,23 @@ export function LineChart({
   unit: string;
   label: string;
 }) {
+  const hostRef = React.useRef<HTMLDivElement>(null);
+  const [width, setWidth] = React.useState(FALLBACK_WIDTH);
+
+  React.useEffect(() => {
+    const node = hostRef.current;
+    if (!node) return;
+    const observer = new ResizeObserver(([entry]) => {
+      const next = Math.round(entry?.contentRect.width ?? 0);
+      if (next > 0) setWidth(next);
+    });
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  const W = Math.max(280, width);
+  const H = Math.round(Math.min(320, Math.max(210, W * 0.42)));
+
   const values = points.map((p) => p.v);
   const vMin = Math.min(...values);
   const vMax = Math.max(...values);
@@ -89,85 +112,101 @@ export function LineChart({
   const line = smoothPath(coords);
   const area = `${line} L ${coords[coords.length - 1]![0].toFixed(2)} ${H - PAD.bottom} L ${coords[0]![0].toFixed(2)} ${H - PAD.bottom} Z`;
 
-  const yTicks = niceTicks(yLo, yHi);
-  const xTickIdx = [
-    0,
-    Math.floor((points.length - 1) / 2),
-    points.length - 1,
-  ].filter((v, i, a) => a.indexOf(v) === i);
+  const yTicks = niceTicks(yLo, yHi, W < 420 ? 3 : 4);
+  // A narrow chart only has room for the endpoints.
+  const xTickIdx = (
+    W < 420 ? [0, points.length - 1] : [0, Math.floor((points.length - 1) / 2), points.length - 1]
+  ).filter((v, i, a) => a.indexOf(v) === i);
 
   const last = points[points.length - 1]!;
 
   return (
-    <svg
-      viewBox={`0 0 ${W} ${H}`}
-      className="h-auto w-full"
-      role="img"
-      aria-label={`${label}. ${points.length} readings from ${dateFmt.format(tMin)} to ${dateFmt.format(tMax)}, ranging from ${vMin} to ${vMax} ${unit}.`}
-    >
-      <defs>
-        <linearGradient id="lc-fill" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="var(--color-signal)" stopOpacity="0.14" />
-          <stop offset="100%" stopColor="var(--color-signal)" stopOpacity="0" />
-        </linearGradient>
-      </defs>
+    <div ref={hostRef} className="w-full">
+      <svg
+        viewBox={`0 0 ${W} ${H}`}
+        width={W}
+        height={H}
+        className="block h-auto w-full"
+        role="img"
+        aria-label={`${label}. ${points.length} readings from ${dateFmt.format(tMin)} to ${dateFmt.format(tMax)}, ranging from ${vMin} to ${vMax} ${unit}.`}
+      >
+        <defs>
+          <linearGradient id="lc-fill" x1="0" y1="0" x2="0" y2="1">
+            <stop
+              offset="0%"
+              stopColor="var(--color-signal)"
+              stopOpacity="0.14"
+            />
+            <stop
+              offset="100%"
+              stopColor="var(--color-signal)"
+              stopOpacity="0"
+            />
+          </linearGradient>
+        </defs>
 
-      {yTicks.map((t) => (
-        <g key={t}>
-          <line
-            x1={PAD.left}
-            x2={W - PAD.right}
-            y1={y(t)}
-            y2={y(t)}
-            stroke="var(--color-line)"
-            strokeWidth="1"
-          />
+        {yTicks.map((t) => (
+          <g key={t}>
+            <line
+              x1={PAD.left}
+              x2={W - PAD.right}
+              y1={y(t)}
+              y2={y(t)}
+              stroke="var(--color-line)"
+              strokeWidth="1"
+            />
+            <text
+              x={PAD.left - 10}
+              y={y(t)}
+              textAnchor="end"
+              dominantBaseline="middle"
+              fill="var(--color-ink-faint)"
+              fontSize="11"
+              fontFamily="var(--font-mono)"
+            >
+              {t}
+            </text>
+          </g>
+        ))}
+
+        <path d={area} fill="url(#lc-fill)" />
+        <path
+          d={line}
+          fill="none"
+          stroke="var(--color-signal)"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+
+        <circle
+          cx={x(last.t)}
+          cy={y(last.v)}
+          r="4"
+          fill="var(--color-signal)"
+          stroke="var(--color-paper-raised)"
+          strokeWidth="2"
+        />
+
+        {xTickIdx.map((i) => (
           <text
-            x={PAD.left - 10}
-            y={y(t)}
-            textAnchor="end"
-            dominantBaseline="middle"
+            key={i}
+            x={Math.min(
+              Math.max(x(points[i]!.t), PAD.left),
+              W - PAD.right,
+            )}
+            y={H - 10}
+            textAnchor={
+              i === 0 ? "start" : i === points.length - 1 ? "end" : "middle"
+            }
             fill="var(--color-ink-faint)"
             fontSize="11"
             fontFamily="var(--font-mono)"
           >
-            {t}
+            {dateFmt.format(points[i]!.t)}
           </text>
-        </g>
-      ))}
-
-      <path d={area} fill="url(#lc-fill)" />
-      <path
-        d={line}
-        fill="none"
-        stroke="var(--color-signal)"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-
-      <circle
-        cx={x(last.t)}
-        cy={y(last.v)}
-        r="4"
-        fill="var(--color-signal)"
-        stroke="var(--color-paper)"
-        strokeWidth="2"
-      />
-
-      {xTickIdx.map((i) => (
-        <text
-          key={i}
-          x={Math.min(Math.max(x(points[i]!.t), PAD.left + 14), W - PAD.right - 14)}
-          y={H - 10}
-          textAnchor={i === 0 ? "start" : i === points.length - 1 ? "end" : "middle"}
-          fill="var(--color-ink-faint)"
-          fontSize="11"
-          fontFamily="var(--font-mono)"
-        >
-          {dateFmt.format(points[i]!.t)}
-        </text>
-      ))}
-    </svg>
+        ))}
+      </svg>
+    </div>
   );
 }
