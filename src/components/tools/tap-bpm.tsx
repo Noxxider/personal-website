@@ -143,7 +143,7 @@ export function TapBpm() {
             )}
           >
             {stability === null
-              ? "not yet"
+              ? "Waiting"
               : stability < 0.04
                 ? "Very steady"
                 : stability < 0.09
@@ -154,7 +154,7 @@ export function TapBpm() {
         <div className="border-t border-line py-4">
           <dt className="eyebrow">Exact</dt>
           <dd className="tabular mt-1.5 font-mono text-lg text-ink">
-            {bpm ? bpm.toFixed(1) : "not yet"}
+            {bpm ? bpm.toFixed(1) : "Waiting"}
           </dd>
         </div>
       </dl>

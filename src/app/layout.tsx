@@ -46,15 +46,24 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: site.name,
+    locale: "en_CA",
     title: `${site.name}, software developer in Kelowna`,
     description,
-    url: site.url,
-    locale: "en_CA",
+    url: "/",
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: `${site.name}, ${site.role}`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${site.name}, software developer in Kelowna`,
     description,
+    images: ["/og.png"],
   },
   robots: {
     index: true,

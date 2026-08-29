@@ -27,10 +27,10 @@ export function Section({
   ...props
 }: SectionProps) {
   return (
-    <section className={cn("py-20 sm:py-28", className)} {...props}>
+    <section className={cn("py-16 sm:py-24", className)} {...props}>
       <Container>
         {(index || eyebrow) && (
-          <div className="mb-10 flex items-baseline gap-5 border-t border-line pt-5 sm:mb-14">
+          <div className="mb-8 flex items-baseline gap-5 border-t border-line pt-5 sm:mb-12">
             {index && <span className="eyebrow tabular">{index}</span>}
             {eyebrow && <span className="eyebrow">{eyebrow}</span>}
           </div>

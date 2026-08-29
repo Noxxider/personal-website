@@ -4,17 +4,32 @@ const W = 720;
 const H = 300;
 const PAD = { top: 18, right: 18, bottom: 34, left: 46 };
 
-function niceTicks(min: number, max: number, count = 4): number[] {
-  if (min === max) return [min];
-  const raw = (max - min) / count;
-  const mag = 10 ** Math.floor(Math.log10(raw));
-  const step = [1, 2, 2.5, 5, 10].find((m) => m * mag >= raw)! * mag;
+function ticksFor(min: number, max: number, step: number): number[] {
   const start = Math.ceil(min / step) * step;
-  const ticks: number[] = [];
-  for (let v = start; v <= max + step * 0.001; v += step) {
-    ticks.push(Number(v.toFixed(6)));
+  const out: number[] = [];
+  for (let v = start; v <= max + step * 1e-6; v += step) {
+    out.push(Number(v.toFixed(6)));
   }
-  return ticks;
+  return out;
+}
+
+function niceTicks(min: number, max: number, target = 4): number[] {
+  if (!(max > min)) return [min];
+  const mag = 10 ** Math.floor(Math.log10((max - min) / target));
+  let best: number[] = [];
+  let bestScore = Infinity;
+  for (const scale of [0.1, 1, 10]) {
+    for (const m of [1, 2, 2.5, 5]) {
+      const candidate = ticksFor(min, max, m * mag * scale);
+      if (candidate.length < 2 || candidate.length > 8) continue;
+      const score = Math.abs(candidate.length - target);
+      if (score < bestScore) {
+        bestScore = score;
+        best = candidate;
+      }
+    }
+  }
+  return best.length > 0 ? best : ticksFor(min, max, (max - min) / target);
 }
 
 /** Catmull-Rom through the points, converted to cubic beziers. */

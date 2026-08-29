@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { Container, Section } from "@/components/section";
 import { Reveal } from "@/components/reveal";
 import { Prose } from "@/components/prose";
 import { site } from "@/content/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "About",
   description:
     "Physics graduate turned software developer, now working in clinical informatics in Kelowna, British Columbia. How I got here and how I like to build.",
-  alternates: { canonical: "/about" },
-};
+  path: "/about/",
+});
 
 export default function AboutPage() {
   return (

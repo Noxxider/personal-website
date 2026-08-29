@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { Container, Section } from "@/components/section";
 import { Reveal } from "@/components/reveal";
 import { WorkCard } from "@/components/work-card";
 import { Prose } from "@/components/prose";
 import { education, projects, roles } from "@/content/work";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Work",
   description:
     "Tools I have built and shipped, the roles behind them, and where I studied. Bodyweight Tracker, Tap BPM, clinical scheduling systems and earlier product work.",
-  alternates: { canonical: "/work" },
-};
+  path: "/work/",
+});
 
 export default function WorkPage() {
   return (

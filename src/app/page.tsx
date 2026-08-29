@@ -21,7 +21,7 @@ export default function HomePage() {
     <>
       {/* ---------------------------------------------------------------- Hero */}
       <Container>
-        <div className="pt-16 pb-20 sm:pt-24 sm:pb-28">
+        <div className="pt-14 pb-10 sm:pt-20 sm:pb-14">
           <Reveal>
             <p className="eyebrow">{site.location}</p>
             <h1 className="mt-6 max-w-[15ch] font-display text-display">
@@ -118,7 +118,7 @@ export default function HomePage() {
 
       {/* ------------------------------------------------------- Capabilities */}
       <Section index="03" eyebrow="What I work with">
-        <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-x-8 gap-y-12 lg:grid-cols-4">
           {capabilities.map((group, i) => (
             <Reveal
               key={group.group}

@@ -28,7 +28,7 @@ export const projects: Project[] = [
     status: "Live",
     href: "/weighttracker",
     repo: "https://github.com/Noxxider/bodyweight-tracker-app",
-    stack: ["Next.js", "TypeScript", "SVG chart", "Client-side only"],
+    stack: ["Next.js", "TypeScript", "No-dependency SVG chart"],
   },
   {
     slug: "tapbpm",
@@ -54,7 +54,7 @@ export const projects: Project[] = [
     status: "Live",
     href: "https://github.com/Noxxider/personal-website",
     repo: "https://github.com/Noxxider/personal-website",
-    stack: ["Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui", "Netlify"],
+    stack: ["Next.js", "Tailwind CSS", "Static export"],
   },
 ];
 
