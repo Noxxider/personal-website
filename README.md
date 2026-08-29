@@ -86,9 +86,9 @@ visible without JavaScript.
 
 ## Content decisions
 
-**Kept and rewritten.** The name, location, LinkedIn, GitHub, the skills that
-used to be a logo marquee (now a typographic list), the physics degree, the
-employment history, the acapella detail, and the GA4 property.
+**Kept and rewritten.** The name, LinkedIn, GitHub, the skills that used to be a
+logo marquee (now a typographic list), the physics degree, the employment
+history, the acapella detail, and the GA4 property.
 
 **Rebuilt as first-class pages.** Bodyweight Tracker and Tap BPM were ported
 from Quasar to React and keep their original URLs, because the GitHub
@@ -112,22 +112,20 @@ described in the past tense with no business framing.
 
 ## Things to review
 
-1. **The domain expires on 19 September 2026.** Renewal comes before anything
-   else. See below.
-2. **The private tools replaced two obsolete ones.** The eCOPR countdown and the
+1. **The private tools replaced two obsolete ones.** The eCOPR countdown and the
    AOR forecast are gone, since both events have happened. Their data, including
    the office schedule and booked leave, was deleted rather than carried over.
-3. **Trips are stored per browser.** `localStorage`, seeded from
+2. **Trips are stored per browser.** `localStorage`, seeded from
    `knownAbsences` in `src/private/schedule.ts`. Add trips to that file to make
    them permanent across devices; anything added through the dialog lives only
    in the browser that added it. If cross-device sync matters, a free Neon or
    Upstash store through the Vercel marketplace is about an hour of work, but it
    needs you to click through the integration.
-4. **The citizenship figure is an estimate.** It implements the 1,095 day rule
+3. **The citizenship figure is an estimate.** It implements the 1,095 day rule
    with the half-day pre-PR credit capped at 365, and counts departure and
    return days as days in Canada, which is IRCC's convention. `npm test` covers
    the maths. The official number is whatever IRCC's own calculator says.
-5. **Analytics.** Remove the two `<Script>` tags in `src/app/layout.tsx` if you
+4. **Analytics.** Remove the two `<Script>` tags in `src/app/layout.tsx` if you
    no longer want GA4.
 
 ## Deployment
@@ -148,30 +146,17 @@ production, preview and development. Rotate the password with
 **`main` still holds the Quasar site**, so a push to `main` before merging this
 branch will fail the Vercel build. Harmless, but expect the email.
 
-### Moving the domain
+### Domain
 
-The site is still served from Netlify. Nothing about the live site has changed.
-Order matters here because of the expiry date:
+Registered with Cloudflare, on Cloudflare nameservers, serving from Vercel.
+The apex 308s to `www`, which is the canonical host the metadata assumes.
+Expires 19 September 2027; the registrar transfer added the extra year.
+WHOIS is redacted, which Cloudflare includes at no cost.
 
-1. **Renew at GoDaddy first.** The domain expires 19 September 2026 and the
-   transfer lock is on. A registrar transfer takes up to five days to settle,
-   which is uncomfortably close. Renewing first removes the risk, and the year
-   you pay for carries over to Cloudflare.
-2. **Point DNS at Cloudflare.** Add the site in Cloudflare, let it import the
-   existing records, then change the nameservers at GoDaddy from
-   `ns49/ns50.domaincontrol.com` to the pair Cloudflare gives you. Cloudflare
-   Registrar requires the domain to be on its nameservers before it will accept
-   a transfer.
-3. **Transfer the registrar.** Unlock the domain at GoDaddy, get the EPP
-   authorisation code, then start the transfer from Cloudflare. Their pricing is
-   at cost and WHOIS redaction is included, so your name, address, phone number
-   and email come off the public record. That was the other half of removing
-   personal contact details.
-4. **Attach the domain in Vercel** and follow the DNS records it asks for. Keep
-   `www.ravinojuwono.com` as the primary with the apex redirecting to it, which
-   is what the canonical tags and `robots.txt` already assume.
-5. **Then, and only then, delete the Netlify site.** While both exist you can
-   roll back by pointing DNS back.
+Netlify is out of the picture. If a browser still lands on it, that is a stale
+DNS cache on that machine rather than anything server side: flush it with
+`ipconfig /flushdns` on Windows, or confirm the real answer with
+`curl -sI --resolve ravinojuwono.com:443:216.150.1.193 https://ravinojuwono.com`.
 
 ## Verified
 
