@@ -1,153 +1,183 @@
 # ravinojuwono.com
 
 Personal site for Ravino Juwono. Next.js App Router, TypeScript, Tailwind CSS v4,
-exported as static HTML and published on Netlify.
+deployed on Vercel. A public site, plus a password-gated private area at
+`/private` for personal tools.
 
 ```bash
 npm install
-npm run dev        # http://localhost:3000
-npm run check      # typecheck + lint + build
-npm run serve:out  # serve the production export on :4173
+npm run dev     # http://localhost:3000
+npm run check   # typecheck + lint + test + build
+npm test        # the citizenship presence maths
+```
+
+`/private` needs two variables locally. Put them in `.env.local`:
+
+```
+PRIVATE_USER=vino
+PRIVATE_PASSWORD=something-long
 ```
 
 ## Architecture
 
 | Concern | Choice |
 | --- | --- |
-| Framework | Next.js 16, App Router, `output: "export"` |
-| Rendering | Every route prerendered to HTML at build time. No server runtime, no serverless functions, no API routes. |
-| Styling | Tailwind v4 with design tokens declared in `@theme` inside `src/app/globals.css`. No config file. |
-| Components | A few shadcn/ui primitives (`button`, `input`, `label`, `sheet`) sitting on Radix, with the rest composed by hand. |
+| Framework | Next.js 16, App Router |
+| Rendering | Public routes prerendered to HTML at build time. Only `/private` is server rendered per request. |
+| Auth | HTTP Basic Auth in `src/middleware.ts`, credentials from environment variables |
+| Styling | Tailwind v4 with tokens in `@theme` inside `src/app/globals.css`. No config file. |
+| Components | shadcn/ui primitives (`button`, `input`, `label`, `sheet`, `dialog`) on Radix, everything else composed by hand |
 | Icons | Seven inline SVGs in `src/components/icons.tsx`. No icon package. |
-| Charts | Hand-drawn SVG in `src/components/line-chart.tsx`. No charting library. |
+| Charts | Hand-drawn SVG and CSS. No charting library. |
+| Spreadsheets | `read-excel-file`, loaded on demand. The npm `xlsx` package is stuck on a release with known CVEs. |
 | Analytics | The existing GA4 property, loaded `afterInteractive`. Nothing else. |
-| Deployment | Netlify, config in `netlify.toml`. Build `npm run build`, publish `out`. |
+| Deployment | Vercel, project `noxxiders-projects/ravinojuwono` |
 
-Runtime dependencies are `next`, `react`, `react-dom`, `@radix-ui/react-dialog`
-(mobile navigation, for focus trapping and escape handling), and the
-`clsx` / `tailwind-merge` / `class-variance-authority` trio that shadcn uses.
-
-### Layout of the source
+Runtime dependencies: `next`, `react`, `react-dom`, `@radix-ui/react-dialog`,
+`read-excel-file`, `server-only`, and the `clsx` / `tailwind-merge` /
+`class-variance-authority` trio shadcn uses.
 
 ```
 src/
-  app/                 routes, one directory per page
-  components/          layout shell, page primitives, the two tools
+  app/                 public routes
+  app/private/         gated routes, never prerendered or cached
+  components/          layout shell and page primitives
+  components/private/  the personal tools
   components/ui/       shadcn primitives, restyled to the token set
-  content/             all copy and structured data (site.ts, work.ts)
-  lib/                 cn() helper and the page metadata builder
-scripts/               post-build fixup, see below
+  content/             public copy and data (site.ts, work.ts)
+  private/             personal data and logic, server-only where it matters
+  middleware.ts        the Basic Auth gate
 legacy-quasar/         the previous Quasar site, kept for reference
 ```
 
-Copy lives in `src/content`, not in the components. Editing the site means
-editing two files.
+## How the private area stays private
 
-### The post-build script
+Three things have to hold, and all three are checked in the build:
 
-`scripts/flatten-segment-prefetch.mjs` works around a Next 16 export bug. The
-router requests segment prefetch payloads at flat paths such as
-`/work/__next.work.__PAGE__.txt`, but the exporter writes them as nested
-directories (`out/work/__next.work/__PAGE__.txt`). Without the fix, every
-prefetch 404s on a static host and navigation falls back to a full page load.
-The script copies each payload to the flat name and is a no-op once Next emits
-those files itself, so it is safe to leave in place.
+1. **The route is gated.** Middleware matches `/private` and `/private/:path*`,
+   which covers the HTML, the RSC payloads and any prefetch. It fails closed: a
+   missing `PRIVATE_USER` or `PRIVATE_PASSWORD` returns 401 rather than opening
+   the area up.
+2. **The data never reaches a public chunk.** `src/private/schedule.ts` imports
+   `server-only`, so the build fails if a client component ever imports it. The
+   dates are read in a server component and passed as props, which puts them in
+   the RSC payload for a gated route rather than in a JavaScript bundle that
+   anyone can fetch.
+3. **Nothing is indexed.** `noindex, nofollow` on the layout and as a response
+   header, and `robots.txt` deliberately does not mention `/private`, since
+   listing it would advertise the path to anyone reading the file.
+
+Verified after each build: no personal date, name or clinical note appears
+anywhere under `.next/static`, and every private path returns 401 without
+credentials.
 
 ## Design
 
 Warm paper ground, near-black ink, one signal colour (a deep rust) used
 sparingly for links on hover, live markers, focus rings and errors. Instrument
 Serif for display type, Inter Tight for everything else, and the system
-monospace stack for metadata labels. Both webfonts are self-hosted by
-`next/font`, so the page makes no third-party font request.
+monospace stack for metadata. Both webfonts are self-hosted by `next/font`, so
+the page makes no third-party font request.
 
-There is one committed light theme and no toggle. Dark mode was removed from the
-previous site deliberately and adding it back would mean maintaining a second
-palette for no clear gain.
-
-Motion is limited to a short fade-and-rise on scroll, and it never applies above
-the fold: hero content renders at full opacity in the initial HTML so it is not
-waiting on hydration. `prefers-reduced-motion` disables it, and a `<noscript>`
-style keeps everything visible without JavaScript.
+One committed light theme, no toggle. Motion is a short fade-and-rise on scroll
+that never applies above the fold, so hero content is not waiting on hydration.
+`prefers-reduced-motion` disables it and a `<noscript>` style keeps everything
+visible without JavaScript.
 
 ## Content decisions
 
-**Kept and rewritten.** The name, the location, the email, LinkedIn, GitHub, the
-skills previously shown as a logo marquee (now a typographic list), the physics
-degree, the employment history from the resume, the acapella detail, and the GA4
-property.
+**Kept and rewritten.** The name, location, LinkedIn, GitHub, the skills that
+used to be a logo marquee (now a typographic list), the physics degree, the
+employment history, the acapella detail, and the GA4 property.
 
-**Rebuilt as first-class pages.** The Bodyweight Tracker and Tap BPM apps were
-ported from Quasar to React. Both keep their original URLs (`/weighttracker`,
-`/tapbpm`) because the GitHub repositories link to them. The tracker gained unit
-switching, sample data, real validation and a dependency-free chart; the old
-version used ApexCharts and `alert()` for errors.
+**Rebuilt as first-class pages.** Bodyweight Tracker and Tap BPM were ported
+from Quasar to React and keep their original URLs, because the GitHub
+repositories link to them.
 
-**Dropped.** The logo marquee, the stock hero illustration, the geometric
-background pattern, and the resume PDF viewer (which pulled in a 15 MB vendored
-copy of pdf.js for a page that was commented out anyway).
+**Removed from the public site.** The email address, the logo marquee, the stock
+hero illustration, the background pattern, and the resume PDF viewer with its
+15 MB vendored copy of pdf.js.
 
 **Rangouts** is listed under experience as "Software Developer" rather than
 "Software Developer (Cofounder)" as on the resume. It shut down in 2023 and is
-described in the past tense with no product-status or business framing. See the
-note below if you would rather it came off entirely.
+described in the past tense with no business framing.
 
-## Things to review before merging
+## Things to review
 
-1. **Private pages from the old site are gone, on purpose.** `/pr`, `/aor`,
-   `/jobprobation`, `/episodes` and `/surprise` were publicly reachable on
-   production. Between them they exposed immigration status and filing dates, an
-   employment probation tracker, a named individual's health data, a personal
-   message, and your in-office versus work-from-home schedule. None of it
-   belongs on a public professional site and none of it was carried over. The
-   pages still exist on `main` if you want them; host them somewhere private.
-   After cutover those URLs will 404, which is the correct signal for search
-   engines to drop them.
-2. **The resume PDF is not published.** It contains a phone number and the
-   cofounder title. Add it back deliberately if you want it, ideally with the
-   phone number removed. `/resume` currently 301s to `/about`.
-3. **ZenuQR is not mentioned.** The old site described it in one line with no
-   link and the domain no longer resolves. It was excluded because it was not
-   clear whether it is dormant or ongoing. Say the word and it can go into the
-   work list.
-4. **Dead links audited.** `rangouts.com`, `instatixapp.com` and `zenuqr.com` all
-   fail to resolve. None of them are linked anywhere on the new site.
-5. **Copy accuracy.** The home page says the scheduling system serves "about a
-   million people" and the work page says "roughly a million", both taken from
-   your resume. Check you are comfortable with that phrasing being public.
-6. **Analytics.** The GA4 measurement id was carried over unchanged. Remove the
-   two `<Script>` tags in `src/app/layout.tsx` if you no longer want it.
+1. **The domain expires on 19 September 2026.** Renewal comes before anything
+   else. See below.
+2. **The private tools replaced two obsolete ones.** The eCOPR countdown and the
+   AOR forecast are gone, since both events have happened. Their data, including
+   the office schedule and booked leave, was deleted rather than carried over.
+3. **Trips are stored per browser.** `localStorage`, seeded from
+   `knownAbsences` in `src/private/schedule.ts`. Add trips to that file to make
+   them permanent across devices; anything added through the dialog lives only
+   in the browser that added it. If cross-device sync matters, a free Neon or
+   Upstash store through the Vercel marketplace is about an hour of work, but it
+   needs you to click through the integration.
+4. **The citizenship figure is an estimate.** It implements the 1,095 day rule
+   with the half-day pre-PR credit capped at 365, and counts departure and
+   return days as days in Canada, which is IRCC's convention. `npm test` covers
+   the maths. The official number is whatever IRCC's own calculator says.
+5. **Analytics.** Remove the two `<Script>` tags in `src/app/layout.tsx` if you
+   no longer want GA4.
 
 ## Deployment
 
-Netlify already serves `www.ravinojuwono.com` from this repository, with the
-apex domain redirecting to `www`. The build settings previously lived in the
-Netlify UI; they now live in `netlify.toml`, which takes precedence.
+Vercel project `ravinojuwono`, connected to this GitHub repository. Pushes to
+`main` deploy to production; other branches get previews.
 
-Cutover:
+```bash
+npm run check        # must pass first
+npx vercel deploy    # preview
+npx vercel deploy --prod
+```
 
-1. Push the `rebuild/nextjs` branch and let Netlify build a deploy preview.
-2. Check the preview, especially `/weighttracker` and `/tapbpm`.
-3. Merge to `main`. Netlify builds and publishes.
+Environment variables `PRIVATE_USER` and `PRIVATE_PASSWORD` are set for
+production, preview and development. Rotate the password with
+`npx vercel env rm PRIVATE_PASSWORD production` then `env add`.
 
-Rollback is a Netlify "publish deploy" on the last Quasar build, or
-`git revert` of the merge. `main` is untouched until you merge, and the old
-implementation stays in `legacy-quasar/` either way. Delete that directory once
-you are confident the replacement is doing its job.
+**`main` still holds the Quasar site**, so a push to `main` before merging this
+branch will fail the Vercel build. Harmless, but expect the email.
+
+### Moving the domain
+
+The site is still served from Netlify. Nothing about the live site has changed.
+Order matters here because of the expiry date:
+
+1. **Renew at GoDaddy first.** The domain expires 19 September 2026 and the
+   transfer lock is on. A registrar transfer takes up to five days to settle,
+   which is uncomfortably close. Renewing first removes the risk, and the year
+   you pay for carries over to Cloudflare.
+2. **Point DNS at Cloudflare.** Add the site in Cloudflare, let it import the
+   existing records, then change the nameservers at GoDaddy from
+   `ns49/ns50.domaincontrol.com` to the pair Cloudflare gives you. Cloudflare
+   Registrar requires the domain to be on its nameservers before it will accept
+   a transfer.
+3. **Transfer the registrar.** Unlock the domain at GoDaddy, get the EPP
+   authorisation code, then start the transfer from Cloudflare. Their pricing is
+   at cost and WHOIS redaction is included, so your name, address, phone number
+   and email come off the public record. That was the other half of removing
+   personal contact details.
+4. **Attach the domain in Vercel** and follow the DNS records it asks for. Keep
+   `www.ravinojuwono.com` as the primary with the apex redirecting to it, which
+   is what the canonical tags and `robots.txt` already assume.
+5. **Then, and only then, delete the Netlify site.** While both exist you can
+   roll back by pointing DNS back.
 
 ## Verified
 
-`npm run check` passes: no type errors, no lint errors, clean build.
-`npm audit` reports zero vulnerabilities.
+`npm run check` passes: no type errors, no lint errors, 9 tests passing, clean
+build. `npm audit` reports zero vulnerabilities.
 
-Measured locally against the production export at 1440x900 and 390x844:
+Measured against the production build at 1440x900 and 390x844:
 
-- LCP equals FCP on every page (32 to 52 ms), because nothing above the fold
-  waits on JavaScript.
+- LCP equals FCP on every public page (32 to 52 ms).
 - Cumulative layout shift is 0.
-- Roughly 111 KB transferred on first load, most of it the two webfonts.
-- No horizontal overflow at 390 px, no console errors, no failed requests.
-- Every text colour clears WCAG AA against the background: 17.3:1 for body ink,
-  6.8:1 for muted text, 4.8:1 for the faint metadata labels.
-- Keyboard: skip link, visible focus rings throughout, mobile menu traps focus,
-  closes on Escape and returns focus to its trigger.
+- Around 111 KB transferred on first load, most of it the two webfonts.
+- No horizontal overflow at 390 px, no console errors or warnings.
+- Every text colour clears WCAG AA: 17.3:1 body, 6.8:1 muted, 4.8:1 metadata.
+- Keyboard: skip link, visible focus rings, mobile menu and dialog both trap
+  focus, close on Escape and restore focus to their trigger.
+- Live on Vercel: every public route 200s, every private route 401s without
+  credentials and 200s with them.
