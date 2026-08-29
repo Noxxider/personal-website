@@ -132,16 +132,14 @@ described in the past tense with no business framing.
    the maths. The official number is whatever IRCC's own calculator says.
 4. **Analytics.** Remove the two `<Script>` tags in `src/app/layout.tsx` if you
    no longer want GA4.
-5. **The contact form needs a Resend key.** Everything else is wired and
-   tested. Create a key at resend.com, then:
-   `npx vercel env add RESEND_API_KEY production` and redeploy. Without it the
-   form validates normally and then tells the sender to use LinkedIn instead,
-   rather than failing silently. `CONTACT_TO` is already set.
+5. **The contact form sends from Resend's shared sender.** `CONTACT_FROM` is
+   unset, so messages go out as `onboarding@resend.dev`. That costs nothing and
+   needs no domain verification, but it will only deliver to the address that
+   owns the Resend account. Verified working end to end.
 
-   By default it sends from `onboarding@resend.dev`, which Resend allows
-   without domain verification but only delivers to your own account address.
-   To send from your own domain, verify `ravinojuwono.com` in Resend, add the
-   DNS records in Cloudflare, then set `CONTACT_FROM`.
+   The catch: if `CONTACT_TO` is ever changed to a different address, delivery
+   stops until `CONTACT_FROM` points at a domain verified in Resend. Set it as
+   an environment variable, not in the repo.
 
 ## Deployment
 
