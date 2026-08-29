@@ -266,7 +266,7 @@ export function WeightTracker() {
             <dl className="mt-8 grid grid-cols-2 gap-x-8 sm:grid-cols-3">
               {stats.map((stat) => (
                 <div key={stat.label} className="border-t border-line py-4">
-                  <dt className="eyebrow">{stat.label}</dt>
+                  <dt className="label">{stat.label}</dt>
                   <dd className="tabular mt-1.5 font-mono text-lg text-ink">
                     {stat.value}
                   </dd>

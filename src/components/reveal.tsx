@@ -10,7 +10,13 @@ type RevealProps = React.ComponentProps<"div"> & {
 };
 
 /**
- * Reveals its children on first scroll into view.
+ * Reveals its children once they scroll into view.
+ *
+ * This checks position on scroll rather than using IntersectionObserver. The
+ * observer only fires when a threshold is crossed, so jumping straight from the
+ * top of the page to the bottom never triggers the sections in between and they
+ * stay blank for the rest of the visit. A rect check has no such gap.
+ *
  * Content is visible without JavaScript (see the noscript style in the root
  * layout) and the transition is disabled under prefers-reduced-motion.
  */
@@ -23,34 +29,44 @@ export function Reveal({
   ...props
 }: RevealProps) {
   const ref = React.useRef<HTMLElement>(null);
-  const Component = Tag as React.ElementType;
   const [visible, setVisible] = React.useState(false);
+  const Component = Tag as React.ElementType;
 
   React.useEffect(() => {
     const node = ref.current;
     if (!node) return;
 
-    if (typeof IntersectionObserver === "undefined") {
-      // Very old browser: reveal immediately by touching the DOM directly,
-      // which keeps this effect free of synchronous state updates.
-      node.dataset["visible"] = "true";
-      return;
+    let frame = 0;
+
+    const stop = () => {
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      if (frame) cancelAnimationFrame(frame);
+      frame = 0;
+    };
+
+    const check = () => {
+      frame = 0;
+      const rect = node.getBoundingClientRect();
+      const entered = rect.top < window.innerHeight * 0.92;
+      const scrolledPast = rect.bottom < 0;
+      if (entered || scrolledPast) {
+        setVisible(true);
+        stop();
+      }
+    };
+
+    function schedule() {
+      if (!frame) frame = requestAnimationFrame(check);
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setVisible(true);
-            observer.disconnect();
-          }
-        }
-      },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.05 },
-    );
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    // Deferred by a frame rather than run inline, so the first paint is not
+    // blocked and the effect body stays free of synchronous state updates.
+    schedule();
 
-    observer.observe(node);
-    return () => observer.disconnect();
+    return stop;
   }, []);
 
   return (

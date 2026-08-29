@@ -19,7 +19,7 @@ export function SiteFooter() {
 
           <div className="flex gap-14">
             <nav aria-label="Footer">
-              <p className="eyebrow">Site</p>
+              <p className="label">Site</p>
               <ul className="mt-4 space-y-2.5">
                 <li>
                   <Link
@@ -43,7 +43,7 @@ export function SiteFooter() {
             </nav>
 
             <div>
-              <p className="eyebrow">Elsewhere</p>
+              <p className="label">Elsewhere</p>
               <ul className="mt-4 space-y-2.5">
                 {site.socials.map((s) => (
                   <li key={s.href}>
@@ -62,7 +62,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <p className="eyebrow mt-14">
+        <p className="label mt-14">
           &copy; {new Date().getFullYear()} {site.name}
         </p>
       </div>

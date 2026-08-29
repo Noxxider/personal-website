@@ -41,6 +41,14 @@ export function SiteHeader() {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8 lg:px-12">
         <Link
           href="/"
+          onClick={(event) => {
+            // Next does not scroll for a navigation to the route you are
+            // already on, so the logo would appear to do nothing.
+            if (pathname === "/") {
+              event.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          }}
           className="group flex items-baseline gap-2.5 rounded-sm"
           aria-label={`${site.name}, home`}
         >
@@ -79,7 +87,7 @@ export function SiteHeader() {
             <MenuIcon className="size-5" />
           </SheetTrigger>
           <SheetContent aria-describedby={undefined}>
-            <SheetTitle className="eyebrow">Menu</SheetTitle>
+            <SheetTitle className="label">Menu</SheetTitle>
             <nav className="mt-10 flex flex-col" aria-label="Mobile">
               {[{ label: "Home", href: "/" } as const, ...nav].map((item) => (
                 <SheetClose asChild key={item.href}>

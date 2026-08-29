@@ -19,7 +19,7 @@ export default function WorkPage() {
       <Container>
         <div className="pt-16 pb-6 sm:pt-24">
           <div>
-            <p className="eyebrow">Work</p>
+            <p className="label">Work</p>
             <h1 className="mt-6 max-w-[18ch] font-display text-display">
               Things I have built and kept running.
             </h1>
@@ -34,7 +34,7 @@ export default function WorkPage() {
         </div>
       </Container>
 
-      <Section index="01" eyebrow="Projects">
+      <Section title="Projects">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
           {projects.map((project, i) => (
             <Reveal key={project.slug} delay={i * 90} className="flex">
@@ -44,7 +44,7 @@ export default function WorkPage() {
         </div>
       </Section>
 
-      <Section index="02" eyebrow="Experience">
+      <Section title="Experience">
         <ol className="grid gap-0">
           {roles.map((role, i) => (
             <Reveal
@@ -77,7 +77,7 @@ export default function WorkPage() {
         </ol>
       </Section>
 
-      <Section index="03" eyebrow="Education and certification">
+      <Section title="Education and certification">
         <ol>
           {education.map((item, i) => (
             <Reveal

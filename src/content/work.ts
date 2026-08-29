@@ -10,6 +10,8 @@ export type Project = {
   href: string;
   repo?: string;
   stack: string[];
+  /** Screenshot of the real thing, captured from the running tool. */
+  image?: { src: string; width: number; height: number; alt: string };
 };
 
 /**
@@ -29,6 +31,12 @@ export const projects: Project[] = [
     href: "/weighttracker",
     repo: "https://github.com/Noxxider/bodyweight-tracker-app",
     stack: ["Next.js", "TypeScript", "No-dependency SVG chart"],
+    image: {
+      src: "/work/weighttracker.png",
+      width: 1057,
+      height: 510,
+      alt: "The tracker showing a downward weight trend and its summary statistics",
+    },
   },
   {
     slug: "tapbpm",
@@ -42,19 +50,31 @@ export const projects: Project[] = [
     href: "/tapbpm",
     repo: "https://github.com/Noxxider/tap-bpm",
     stack: ["Next.js", "TypeScript", "Keyboard and touch input"],
+    image: {
+      src: "/work/tapbpm.png",
+      width: 1057,
+      height: 439,
+      alt: "The tap pad reading 124 beats per minute",
+    },
   },
   {
     slug: "site",
     title: "This site",
     blurb:
-      "Statically exported Next.js. Every route is real HTML at build time, with no server runtime.",
+      "Next.js on Vercel. Public pages are real HTML at build time, and the type and colour system is hand-built.",
     description:
-      "Rebuilt from a 2023 Quasar single page app into a statically exported Next.js site. Every route is prerendered to HTML at build time, so there is no server runtime and no loading spinner on navigation. The type scale, colour tokens and layout primitives are hand-built on top of Tailwind, with a small number of shadcn/ui primitives used where accessibility behaviour is worth not reinventing.",
+      "Rebuilt from a 2023 Quasar single page app. Public pages are prerendered to HTML at build time, so there is no loading spinner on navigation and nothing waits on JavaScript to paint. The type scale, colour tokens and layout primitives are hand-built on top of Tailwind, with a small number of shadcn/ui primitives used where accessibility behaviour is worth not reinventing, and the charts are drawn by hand rather than pulled from a library.",
     year: "2026",
     status: "Live",
     href: "https://github.com/Noxxider/personal-website",
     repo: "https://github.com/Noxxider/personal-website",
-    stack: ["Next.js", "Tailwind CSS", "Static export"],
+    stack: ["Next.js", "TypeScript", "Tailwind CSS"],
+    image: {
+      src: "/work/site.png",
+      width: 1056,
+      height: 615,
+      alt: "The front page of this site",
+    },
   },
 ];
 
@@ -75,7 +95,7 @@ export const roles: Role[] = [
     period: "2024 to present",
     current: true,
     summary:
-      "I maintain and extend the Community Wide Scheduling module in Meditech, the system used to book patient appointments across a health region serving roughly a million people. The work sits between software and operations: configuration, debugging, release testing, and direct support for the clinical staff who depend on it every day.",
+      "I maintain and extend the scheduling systems used to book patient appointments across a health region serving roughly a million people. The work sits between software and operations: configuration, debugging, release testing, and direct support for the clinical staff who depend on it every day.",
   },
   {
     title: "Web Developer",

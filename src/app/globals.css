@@ -48,8 +48,8 @@
 
   html {
     -webkit-text-size-adjust: 100%;
-    scroll-behavior: smooth;
-    /* Offset for the sticky header when jumping to an anchor. */
+    /* No smooth scrolling: it animates the router's scroll-to-top on
+       navigation and leaves the new page stranded partway down. */
     scroll-padding-top: 6rem;
   }
 
@@ -79,10 +79,6 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-
     *,
     *::before,
     *::after {
@@ -94,12 +90,10 @@
 }
 
 @layer components {
-  /* Small uppercase mono label used for section eyebrows and metadata. */
-  .eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.6875rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
+  /* Quiet label for metadata: field names, column headings, card meta. */
+  .label {
+    font-size: 0.8125rem;
+    line-height: 1.4;
     color: var(--color-ink-faint);
   }
 

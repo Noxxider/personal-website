@@ -12,7 +12,7 @@ export default function NotFound() {
   return (
     <Container>
       <div className="flex min-h-[60vh] flex-col justify-center py-24">
-        <p className="eyebrow tabular">404</p>
+        <p className="label tabular">404</p>
         <h1 className="mt-6 max-w-[16ch] font-display text-display">
           That page is not here.
         </h1>

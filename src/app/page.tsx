@@ -41,14 +41,14 @@ export default function HomePage() {
           <div className="mt-10 flex flex-wrap gap-3">
             <Link
               href="/work"
-              className={buttonVariants({ variant: "solid" })}
+              className={buttonVariants({ variant: "solid", size: "lg" })}
             >
               See the work
               <ArrowRightIcon aria-hidden className="size-4" />
             </Link>
             <Link
               href="/contact"
-              className={buttonVariants({ variant: "outline" })}
+              className={buttonVariants({ variant: "outline", size: "lg" })}
             >
               Get in touch
             </Link>
@@ -57,7 +57,7 @@ export default function HomePage() {
           <div className="mt-16 grid gap-px border-t border-line pt-6 sm:grid-cols-3 sm:gap-8">
             {heroFacts.map((fact) => (
               <div key={fact.label} className="py-2">
-                <p className="eyebrow">{fact.label}</p>
+                <p className="label">{fact.label}</p>
                 <p className="mt-2 text-[0.9375rem] text-ink">{fact.value}</p>
               </div>
             ))}
@@ -66,12 +66,12 @@ export default function HomePage() {
       </Container>
 
       {/* ----------------------------------------------------------------- Now */}
-      <Section index="01" eyebrow="What I do now">
+      <Section title="What I do now">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.35fr] lg:gap-16">
           <Reveal>
-            <h2 className="font-display text-title text-balance">
+            <h3 className="font-display text-[1.75rem] leading-tight tracking-tight text-balance sm:text-[2rem]">
               {current.title}
-            </h2>
+            </h3>
             <p className="mt-4 font-mono text-[0.8125rem] text-ink-faint">
               {current.organisation}
               <span className="mx-2 text-line-strong">/</span>
@@ -84,7 +84,7 @@ export default function HomePage() {
               <p>
                 It is a good place to learn what software looks like when the
                 stakes are real: people notice immediately when a clinic cannot
-                book a patient. That habit carries into everything else I build.
+                book a patient. That habit carries into everything else I do.
               </p>
             </Prose>
           </Reveal>
@@ -92,7 +92,7 @@ export default function HomePage() {
       </Section>
 
       {/* -------------------------------------------------------------- Work */}
-      <Section index="02" eyebrow="Selected work">
+      <Section title="Selected work">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
           {projects.map((project, i) => (
             <Reveal key={project.slug} delay={i * 90} className="flex">
@@ -112,7 +112,7 @@ export default function HomePage() {
       </Section>
 
       {/* ------------------------------------------------------- Capabilities */}
-      <Section index="03" eyebrow="What I work with">
+      <Section title="What I work with">
         <div className="grid grid-cols-2 gap-x-8 gap-y-12 lg:grid-cols-4">
           {capabilities.map((group, i) => (
             <Reveal
@@ -120,7 +120,7 @@ export default function HomePage() {
               delay={i * 70}
               className="border-t border-line pt-5"
             >
-              <h3 className="eyebrow">{group.group}</h3>
+              <h3 className="label">{group.group}</h3>
               <ul className="mt-4 space-y-2">
                 {group.items.map((item) => (
                   <li key={item} className="text-[0.9375rem] text-ink-muted">
@@ -134,8 +134,8 @@ export default function HomePage() {
       </Section>
 
       {/* ----------------------------------------------------------- Contact */}
-      <Section index="04" eyebrow="Say hello">
-        <Reveal className="max-w-3xl">
+      <Section>
+        <Reveal className="max-w-3xl border-t border-line pt-8">
           <h2 className="font-display text-title text-balance">
             Happy to talk about healthcare systems, web performance, or anything
             you are building.

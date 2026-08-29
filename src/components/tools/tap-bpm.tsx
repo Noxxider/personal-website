@@ -84,14 +84,14 @@ export function TapBpm() {
               <span className="tabular font-display text-[clamp(4rem,14vw,8rem)] leading-none text-ink">
                 {Math.round(bpm)}
               </span>
-              <span className="eyebrow mt-3">Beats per minute</span>
+              <span className="label mt-3">Beats per minute</span>
             </>
           ) : (
             <>
               <span className="font-display text-[clamp(2rem,5vw,3rem)] leading-none text-ink-faint">
                 Tap in time
               </span>
-              <span className="eyebrow mt-4">
+              <span className="label mt-4">
                 Click, tap, or press space
               </span>
             </>
@@ -119,19 +119,19 @@ export function TapBpm() {
 
       <dl className="grid grid-cols-2 gap-x-8 self-start lg:grid-cols-1">
         <div className="border-t border-line py-4">
-          <dt className="eyebrow">Taps counted</dt>
+          <dt className="label">Taps counted</dt>
           <dd className="tabular mt-1.5 font-mono text-lg text-ink">
             {taps.length}
           </dd>
         </div>
         <div className="border-t border-line py-4">
-          <dt className="eyebrow">Averaged over</dt>
+          <dt className="label">Averaged over</dt>
           <dd className="tabular mt-1.5 font-mono text-lg text-ink">
             {intervals.length} {intervals.length === 1 ? "interval" : "intervals"}
           </dd>
         </div>
         <div className="border-t border-line py-4">
-          <dt className="eyebrow">Steadiness</dt>
+          <dt className="label">Steadiness</dt>
           <dd
             className={cn(
               "mt-1.5 font-mono text-lg",
@@ -152,7 +152,7 @@ export function TapBpm() {
           </dd>
         </div>
         <div className="border-t border-line py-4">
-          <dt className="eyebrow">Exact</dt>
+          <dt className="label">Exact</dt>
           <dd className="tabular mt-1.5 font-mono text-lg text-ink">
             {bpm ? bpm.toFixed(1) : "Waiting"}
           </dd>

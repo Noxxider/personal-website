@@ -21,7 +21,7 @@ export default function PrivateLayout({
       <div className="py-10 sm:py-14">
         <div className="flex flex-wrap items-baseline justify-between gap-4 border-b border-line pb-5">
           <div>
-            <p className="eyebrow">Private</p>
+            <p className="label">Private</p>
             <p className="mt-1.5 text-[0.9375rem] text-ink-muted">
               Not linked, not indexed, password only.
             </p>

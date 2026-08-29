@@ -4,6 +4,7 @@ import { ArrowUpRightIcon } from "@/components/icons";
 import { Container, Section } from "@/components/section";
 import { Reveal } from "@/components/reveal";
 import { Prose } from "@/components/prose";
+import { ContactForm } from "@/components/contact-form";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = pageMetadata({
@@ -19,21 +20,27 @@ export default function ContactPage() {
       <Container>
         <div className="pt-14 pb-6 sm:pt-20">
           <div>
-            <p className="eyebrow">Contact</p>
+            <p className="label">Contact</p>
             <h1 className="mt-6 max-w-[14ch] font-display text-display">
               Say hello.
             </h1>
             <Prose className="mt-8 text-lead">
               <p>
-                LinkedIn is the best way to reach me, and I read everything that
-                comes through it. GitHub works too if the question is about code.
+                Send a message and it lands in my inbox. I read everything.
+                LinkedIn works too if you would rather keep it on a network.
               </p>
             </Prose>
           </div>
         </div>
       </Container>
 
-      <Section index="01" eyebrow="Where to find me">
+      <Section title="Send a message">
+        <Reveal>
+          <ContactForm />
+        </Reveal>
+      </Section>
+
+      <Section title="Elsewhere">
         <div className="grid gap-0 sm:grid-cols-2 sm:gap-x-12">
           {site.socials.map((s, i) => (
             <Reveal key={s.href} delay={i * 80}>
@@ -44,7 +51,7 @@ export default function ContactPage() {
                 className="group flex items-center justify-between gap-6 border-t border-line py-6 transition-colors duration-300 hover:border-ink"
               >
                 <span>
-                  <span className="eyebrow">{s.label}</span>
+                  <span className="label">{s.label}</span>
                   <span className="mt-2 block font-display text-2xl text-ink">
                     {s.href.replace(/^https:\/\/(www\.)?/, "").replace(/\/$/, "")}
                   </span>

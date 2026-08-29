@@ -201,7 +201,7 @@ export function EpisodesAnalytics({ questions }: { questions: string[] }) {
         <>
           {/* --------------------------------------------------- Column mapping */}
           <details className="mt-10 border-t border-line pt-5 print:hidden">
-            <summary className="eyebrow cursor-pointer select-none">
+            <summary className="label cursor-pointer select-none">
               Column mapping
             </summary>
             <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -236,7 +236,7 @@ export function EpisodesAnalytics({ questions }: { questions: string[] }) {
 
           {/* --------------------------------------------------------- Filters */}
           <details className="mt-6 border-t border-line pt-5 print:hidden">
-            <summary className="eyebrow cursor-pointer select-none">
+            <summary className="label cursor-pointer select-none">
               Filters
             </summary>
             <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -323,7 +323,7 @@ export function EpisodesAnalytics({ questions }: { questions: string[] }) {
             </div>
 
             <fieldset className="mt-5">
-              <legend className="eyebrow">Weekdays</legend>
+              <legend className="label">Weekdays</legend>
               <div className="mt-3 flex flex-wrap gap-1.5">
                 {WEEKDAYS.map((label, index) => {
                   const on = filters.weekdays.includes(index);
@@ -483,7 +483,7 @@ export function EpisodesAnalytics({ questions }: { questions: string[] }) {
                           </th>
                           {row.cells.map((cell) => (
                             <td key={cell.level} className="py-3 pr-6">
-                              <span className="eyebrow block">{cell.level}</span>
+                              <span className="label block">{cell.level}</span>
                               <span
                                 className="tabular mt-1 block rounded px-2 py-1 font-mono text-[0.8125rem]"
                                 style={
@@ -579,7 +579,7 @@ function Panel({
 }) {
   return (
     <section className={cn(flush ? "" : "mt-10", "border-t border-line pt-5")}>
-      <h2 className="eyebrow">{title}</h2>
+      <h2 className="label">{title}</h2>
       <div className="mt-5">{children}</div>
     </section>
   );

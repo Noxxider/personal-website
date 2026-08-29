@@ -17,14 +17,14 @@ export default function AboutPage() {
     <>
       <Container>
         <div className="pt-16 pb-6 sm:pt-24">
-          <p className="eyebrow">About</p>
+          <p className="label">About</p>
           <h1 className="mt-6 max-w-[16ch] font-display text-display">
             Physics first, then software.
           </h1>
         </div>
       </Container>
 
-      <Section index="01" eyebrow="The short version">
+      <Section title="The short version">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr] lg:gap-20">
           <Reveal>
             <Prose>
@@ -59,7 +59,7 @@ export default function AboutPage() {
 
           <Reveal delay={120} className="space-y-10">
             <div className="border-t border-line pt-5">
-              <h2 className="eyebrow">How I like to build</h2>
+              <h3 className="label">How I like to build</h3>
               <ul className="mt-4 space-y-3.5 text-[0.9375rem] leading-relaxed text-ink-muted">
                 <li>
                   Ship the smallest honest version, then make it good under real
@@ -81,7 +81,7 @@ export default function AboutPage() {
             </div>
 
             <div className="border-t border-line pt-5">
-              <h2 className="eyebrow">Elsewhere</h2>
+              <h3 className="label">Elsewhere</h3>
               <ul className="mt-4 space-y-3">
                 {site.socials.map((s) => (
                   <li key={s.href}>

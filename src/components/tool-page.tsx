@@ -32,14 +32,14 @@ export function ToolPage({
 
         <div className="mt-20 grid gap-10 border-t border-line pt-10 lg:grid-cols-[1.4fr_1fr] lg:gap-20">
           <div>
-            <h2 className="eyebrow">Notes</h2>
+            <h2 className="label">Notes</h2>
             <Prose className="mt-5">
               <p>{project.description}</p>
             </Prose>
           </div>
           <div className="space-y-10">
             <div>
-              <h2 className="eyebrow">Built with</h2>
+              <h2 className="label">Built with</h2>
               <ul className="mt-4 space-y-2">
                 {project.stack.map((tech) => (
                   <li key={tech} className="text-[0.9375rem] text-ink-muted">
@@ -50,7 +50,7 @@ export function ToolPage({
             </div>
             {project.repo && (
               <div>
-                <h2 className="eyebrow">Source</h2>
+                <h2 className="label">Source</h2>
                 <a
                   href={project.repo}
                   target="_blank"

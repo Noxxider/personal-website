@@ -103,7 +103,7 @@ export function PrStatus({
     <div>
       {/* ------------------------------------------------------ Celebration */}
       <div className="rounded-2xl border border-line bg-paper-raised p-6 sm:p-10">
-        <p className="eyebrow flex items-center gap-2">
+        <p className="label flex items-center gap-2">
           <span aria-hidden className="size-1.5 rounded-full bg-signal" />
           Complete
         </p>
@@ -119,7 +119,7 @@ export function PrStatus({
 
       {/* --------------------------------------------------------- Timeline */}
       <section className="mt-12 border-t border-line pt-5">
-        <h2 className="eyebrow">How it went</h2>
+        <h2 className="label">How it went</h2>
         <ol className="mt-6">
           {milestones.map((milestone, i) => {
             const previous = milestones[i - 1];
@@ -158,7 +158,7 @@ export function PrStatus({
       {/* ------------------------------------------------------ Citizenship */}
       <section className="mt-14 border-t border-line pt-5">
         <div className="flex flex-wrap items-baseline justify-between gap-4">
-          <h2 className="eyebrow">Toward citizenship</h2>
+          <h2 className="label">Toward citizenship</h2>
           <p className="text-[0.8125rem] text-ink-faint">
             {REQUIRED_DAYS} days of presence in the five years before applying
           </p>
@@ -255,7 +255,7 @@ export function PrStatus({
       {/* --------------------------------------------------------- Absences */}
       <section className="mt-14 border-t border-line pt-5">
         <div className="flex flex-wrap items-center justify-between gap-4">
-          <h2 className="eyebrow">Time outside Canada</h2>
+          <h2 className="label">Time outside Canada</h2>
           <button
             type="button"
             onClick={() => {

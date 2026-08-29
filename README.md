@@ -11,11 +11,15 @@ npm run check   # typecheck + lint + test + build
 npm test        # the citizenship presence maths
 ```
 
-`/private` needs two variables locally. Put them in `.env.local`:
+Environment variables, in `.env.local` locally and in the Vercel project for
+deploys:
 
 ```
-PRIVATE_USER=vino
+PRIVATE_USER=vino              # the /private gate
 PRIVATE_PASSWORD=something-long
+RESEND_API_KEY=re_...          # the contact form
+CONTACT_TO=you@example.com     # where messages land
+CONTACT_FROM=noreply@your-domain   # optional, see below
 ```
 
 ## Architecture
@@ -30,6 +34,7 @@ PRIVATE_PASSWORD=something-long
 | Icons | Seven inline SVGs in `src/components/icons.tsx`. No icon package. |
 | Charts | Hand-drawn SVG and CSS. No charting library. |
 | Spreadsheets | `read-excel-file`, loaded on demand. The npm `xlsx` package is stuck on a release with known CVEs. |
+| Contact | Server Action posting to the Resend API. The address and key stay server side. |
 | Analytics | The existing GA4 property, loaded `afterInteractive`. Nothing else. |
 | Deployment | Vercel, project `noxxiders-projects/ravinojuwono` |
 
@@ -127,6 +132,16 @@ described in the past tense with no business framing.
    the maths. The official number is whatever IRCC's own calculator says.
 4. **Analytics.** Remove the two `<Script>` tags in `src/app/layout.tsx` if you
    no longer want GA4.
+5. **The contact form needs a Resend key.** Everything else is wired and
+   tested. Create a key at resend.com, then:
+   `npx vercel env add RESEND_API_KEY production` and redeploy. Without it the
+   form validates normally and then tells the sender to use LinkedIn instead,
+   rather than failing silently. `CONTACT_TO` is already set.
+
+   By default it sends from `onboarding@resend.dev`, which Resend allows
+   without domain verification but only delivers to your own account address.
+   To send from your own domain, verify `ravinojuwono.com` in Resend, add the
+   DNS records in Cloudflare, then set `CONTACT_FROM`.
 
 ## Deployment
 
