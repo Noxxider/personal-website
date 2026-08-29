@@ -150,7 +150,7 @@ export const capabilities = [
 export const education = [
   {
     title: "BSc, Physics",
-    organisation: "University of British Columbia Okanagan",
+    organisation: "University of British Columbia",
     period: "2019 to 2023",
   },
   {

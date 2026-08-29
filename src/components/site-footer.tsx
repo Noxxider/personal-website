@@ -8,9 +8,7 @@ export function SiteFooter() {
         <div className="flex flex-col gap-10 sm:flex-row sm:justify-between">
           <div>
             <p className="font-display text-2xl">{site.name}</p>
-            <p className="mt-2 text-sm text-ink-muted">
-              {site.role}, {site.location}
-            </p>
+            <p className="mt-2 text-sm text-ink-muted">{site.role}</p>
             <Link
               href="/contact"
               className="link-underline mt-4 inline-block text-sm text-ink"

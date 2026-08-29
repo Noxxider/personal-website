@@ -12,9 +12,9 @@ import { site } from "@/content/site";
 const current = roles.find((r) => r.current)!;
 
 const heroFacts = [
-  { label: "Based", value: "Kelowna, BC" },
   { label: "Currently", value: site.employer },
   { label: "Focus", value: "Healthcare systems, web" },
+  { label: "Mostly", value: "TypeScript, React, .NET" },
 ];
 
 export default function HomePage() {
@@ -23,7 +23,6 @@ export default function HomePage() {
       {/* ---------------------------------------------------------------- Hero */}
       <Container>
         <div className="pt-14 pb-10 sm:pt-20 sm:pb-14">
-          <p className="eyebrow">{site.location}</p>
           <h1 className="mt-6 max-w-[15ch] font-display text-display">
             {site.name}
           </h1>

@@ -94,9 +94,17 @@ employment history, the acapella detail, and the GA4 property.
 from Quasar to React and keep their original URLs, because the GitHub
 repositories link to them.
 
-**Removed from the public site.** The email address, the logo marquee, the stock
-hero illustration, the background pattern, and the resume PDF viewer with its
-15 MB vendored copy of pdf.js.
+**Removed from the public site.** The email address, the location, the logo
+marquee, the stock hero illustration, the background pattern, and the resume
+PDF viewer with its 15 MB vendored copy of pdf.js.
+
+**Location.** No city or region appears anywhere: not in the copy, the titles,
+the descriptions, the social image or the JSON-LD, which no longer carries a
+postal address. The degree is credited to "University of British Columbia"
+rather than naming the Okanagan campus, which is accurate and does not point at
+a particular city. Two things still narrow it down and were kept because they
+carry the professional positioning: the employer, and the health region it
+serves. Say the word if either should go.
 
 **Rangouts** is listed under experience as "Software Developer" rather than
 "Software Developer (Cofounder)" as on the resume. It shut down in 2023 and is

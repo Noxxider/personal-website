@@ -8,7 +8,7 @@ import { site } from "@/content/site";
 export const metadata: Metadata = pageMetadata({
   title: "About",
   description:
-    "Physics graduate turned software developer, now working in clinical informatics in Kelowna, British Columbia. How I got here and how I like to build.",
+    "Physics graduate turned software developer, now working in clinical informatics. How I got here and how I like to build.",
   path: "/about/",
 });
 
@@ -29,7 +29,7 @@ export default function AboutPage() {
           <Reveal>
             <Prose>
               <p>
-                I studied physics at UBC Okanagan, which mostly taught me how to
+                I studied physics at UBC, which mostly taught me how to
                 sit with a problem I do not understand yet. The programming
                 started as a way to get through problem sets, then took over.
               </p>

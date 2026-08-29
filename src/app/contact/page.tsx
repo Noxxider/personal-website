@@ -9,7 +9,7 @@ import { site } from "@/content/site";
 export const metadata: Metadata = pageMetadata({
   title: "Contact",
   description:
-    "Reach Ravino Juwono on LinkedIn. Clinical informatics analyst and software developer based in Kelowna, British Columbia.",
+    "Reach Ravino Juwono on LinkedIn. Clinical informatics analyst and software developer.",
   path: "/contact/",
 });
 
@@ -57,14 +57,6 @@ export default function ContactPage() {
             </Reveal>
           ))}
         </div>
-
-        <Reveal delay={200} className="mt-14 border-t border-line pt-5">
-          <p className="eyebrow">Where</p>
-          <p className="mt-3 font-display text-title">{site.location}</p>
-          <p className="mt-2 text-[0.9375rem] text-ink-muted">
-            Pacific time, give or take a daylight saving change.
-          </p>
-        </Reveal>
       </Section>
     </>
   );

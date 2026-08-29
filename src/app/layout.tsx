@@ -23,12 +23,12 @@ const instrumentSerif = Instrument_Serif({
 });
 
 const description =
-  "Ravino Juwono is a clinical informatics analyst in Kelowna, British Columbia. He keeps hospital scheduling software running for a health region of about a million people, and builds fast, accessible tools for the web.";
+  "Ravino Juwono is a clinical informatics analyst. He keeps hospital scheduling software running for a health region of about a million people, and builds fast, accessible tools for the web.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name}, software developer in Kelowna`,
+    default: `${site.name}, software developer`,
     template: `%s · ${site.name}`,
   },
   description,
@@ -39,7 +39,6 @@ export const metadata: Metadata = {
     "Ravino Juwono",
     "clinical informatics",
     "software developer",
-    "Kelowna",
     "Next.js",
     "TypeScript",
   ],
@@ -48,7 +47,7 @@ export const metadata: Metadata = {
     type: "website",
     siteName: site.name,
     locale: "en_CA",
-    title: `${site.name}, software developer in Kelowna`,
+    title: `${site.name}, software developer`,
     description,
     url: "/",
     images: [
@@ -62,7 +61,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name}, software developer in Kelowna`,
+    title: `${site.name}, software developer`,
     description,
     images: ["/og.png"],
   },
@@ -81,15 +80,9 @@ const personJsonLd = {
   url: site.url,
   jobTitle: site.role,
   worksFor: { "@type": "Organization", name: site.employer },
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Kelowna",
-    addressRegion: "BC",
-    addressCountry: "CA",
-  },
   alumniOf: {
     "@type": "CollegeOrUniversity",
-    name: "University of British Columbia Okanagan",
+    name: "University of British Columbia",
   },
   sameAs: site.socials.map((s) => s.href),
 };
