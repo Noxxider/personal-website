@@ -6,9 +6,10 @@ import { SiteFooter } from "@/components/site-footer";
 import { site } from "@/content/site";
 import "./globals.css";
 
+// No `weight`: Inter Tight is variable, so this ships one file covering the
+// whole range instead of a static instance per weight.
 const interTight = Inter_Tight({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
   variable: "--font-inter-tight",
   display: "swap",
 });
