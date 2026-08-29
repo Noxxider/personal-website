@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/metadata";
-import { ArrowUpRightIcon } from "lucide-react";
+import { ArrowUpRightIcon } from "@/components/icons";
 import { Container, Section } from "@/components/section";
 import { Reveal } from "@/components/reveal";
 import { Prose } from "@/components/prose";
@@ -19,7 +19,7 @@ export default function ContactPage() {
     <>
       <Container>
         <div className="pt-16 pb-6 sm:pt-24">
-          <Reveal>
+          <div>
             <p className="eyebrow">Contact</p>
             <h1 className="mt-6 max-w-[14ch] font-display text-display">
               Say hello.
@@ -30,7 +30,7 @@ export default function ContactPage() {
                 you would rather keep it on a network, LinkedIn works too.
               </p>
             </Prose>
-          </Reveal>
+          </div>
         </div>
       </Container>
 

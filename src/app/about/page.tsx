@@ -17,12 +17,10 @@ export default function AboutPage() {
     <>
       <Container>
         <div className="pt-16 pb-6 sm:pt-24">
-          <Reveal>
-            <p className="eyebrow">About</p>
-            <h1 className="mt-6 max-w-[16ch] font-display text-display">
-              Physics first, then software.
-            </h1>
-          </Reveal>
+          <p className="eyebrow">About</p>
+          <h1 className="mt-6 max-w-[16ch] font-display text-display">
+            Physics first, then software.
+          </h1>
         </div>
       </Container>
 

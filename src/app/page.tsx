@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRightIcon } from "lucide-react";
+import { ArrowRightIcon } from "@/components/icons";
 import { Container, Section } from "@/components/section";
 import { Reveal } from "@/components/reveal";
 import { WorkCard } from "@/components/work-card";
@@ -22,14 +22,12 @@ export default function HomePage() {
       {/* ---------------------------------------------------------------- Hero */}
       <Container>
         <div className="pt-14 pb-10 sm:pt-20 sm:pb-14">
-          <Reveal>
-            <p className="eyebrow">{site.location}</p>
-            <h1 className="mt-6 max-w-[15ch] font-display text-display">
-              {site.name}
-            </h1>
-          </Reveal>
+          <p className="eyebrow">{site.location}</p>
+          <h1 className="mt-6 max-w-[15ch] font-display text-display">
+            {site.name}
+          </h1>
 
-          <Reveal delay={90}>
+          <div>
             <Prose className="mt-8 text-lead sm:mt-10">
               <p>
                 Clinical informatics analyst at {site.employer}. I keep the
@@ -38,9 +36,9 @@ export default function HomePage() {
                 and I build fast, accessible tools for the web.
               </p>
             </Prose>
-          </Reveal>
+          </div>
 
-          <Reveal delay={160} className="mt-10 flex flex-wrap gap-3">
+          <div className="mt-10 flex flex-wrap gap-3">
             <Link
               href="/work"
               className={buttonVariants({ variant: "solid" })}
@@ -54,19 +52,16 @@ export default function HomePage() {
             >
               Get in touch
             </Link>
-          </Reveal>
+          </div>
 
-          <Reveal
-            delay={230}
-            className="mt-16 grid gap-px border-t border-line pt-6 sm:grid-cols-3 sm:gap-8"
-          >
+          <div className="mt-16 grid gap-px border-t border-line pt-6 sm:grid-cols-3 sm:gap-8">
             {heroFacts.map((fact) => (
               <div key={fact.label} className="py-2">
                 <p className="eyebrow">{fact.label}</p>
                 <p className="mt-2 text-[0.9375rem] text-ink">{fact.value}</p>
               </div>
             ))}
-          </Reveal>
+          </div>
         </div>
       </Container>
 

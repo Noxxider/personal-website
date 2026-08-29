@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as SheetPrimitive from "@radix-ui/react-dialog";
-import { XIcon } from "lucide-react";
+import { CloseIcon } from "@/components/icons";
 import { cn } from "@/lib/utils";
 
 const Sheet = SheetPrimitive.Root;
@@ -28,7 +28,7 @@ function SheetContent({
       >
         {children}
         <SheetPrimitive.Close className="absolute top-6 right-6 rounded-full p-2 text-ink-muted transition-colors hover:bg-paper-sunken hover:text-ink">
-          <XIcon className="size-5" />
+          <CloseIcon className="size-5" />
           <span className="sr-only">Close menu</span>
         </SheetPrimitive.Close>
       </SheetPrimitive.Content>

@@ -18,7 +18,7 @@ export default function WorkPage() {
     <>
       <Container>
         <div className="pt-16 pb-6 sm:pt-24">
-          <Reveal>
+          <div>
             <p className="eyebrow">Work</p>
             <h1 className="mt-6 max-w-[18ch] font-display text-display">
               Things I have built and kept running.
@@ -30,7 +30,7 @@ export default function WorkPage() {
                 the habits.
               </p>
             </Prose>
-          </Reveal>
+          </div>
         </div>
       </Container>
 

@@ -7,17 +7,12 @@
 [build.environment]
   NODE_VERSION = "22"
 
-# Legacy Quasar SPA routes that no longer exist. Redirected rather than 404ed
-# so anything already linked keeps landing somewhere sensible.
+# The old site linked a resume page. Everything else that used to exist is
+# either preserved at the same path (/weighttracker, /tapbpm) or intentionally
+# gone, and a 404 is the right answer for those so search engines drop them.
 [[redirects]]
   from = "/resume"
   to = "/about/"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/dentaltechnician"
-  to = "/"
   status = 301
   force = true
 

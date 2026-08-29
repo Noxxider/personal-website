@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowLeftIcon, ArrowUpRightIcon } from "lucide-react";
+import { ArrowLeftIcon, ArrowUpRightIcon } from "@/components/icons";
 import { Container } from "@/components/section";
 import { Prose } from "@/components/prose";
 import type { Project } from "@/content/work";

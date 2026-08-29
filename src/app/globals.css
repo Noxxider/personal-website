@@ -11,8 +11,9 @@
   --color-paper-sunken: #f4f2ee;
 
   --color-ink: #16161a;
-  --color-ink-muted: #66625c;
-  --color-ink-faint: #928d85;
+  /* Both pass WCAG AA against --color-paper: 6.8:1 and 4.8:1. */
+  --color-ink-muted: #5c5850;
+  --color-ink-faint: #746f66;
 
   --color-line: #e7e3db;
   --color-line-strong: #d5cfc4;
