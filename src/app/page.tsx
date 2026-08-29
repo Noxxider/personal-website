@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRightIcon } from "@/components/icons";
 import { Container, Section } from "@/components/section";
+import { ScheduleField } from "@/components/schedule-field";
 import { Reveal } from "@/components/reveal";
 import { WorkCard } from "@/components/work-card";
 import { Prose } from "@/components/prose";
@@ -23,35 +24,39 @@ export default function HomePage() {
       {/* ---------------------------------------------------------------- Hero */}
       <Container>
         <div className="pt-14 pb-10 sm:pt-20 sm:pb-14">
-          <h1 className="mt-6 max-w-[15ch] font-display text-display">
-            {site.name}
-          </h1>
+          <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
+            <div>
+              <h1 className="max-w-[15ch] font-display text-display">
+                {site.name}
+              </h1>
 
-          <div>
-            <Prose className="mt-8 text-lead sm:mt-10">
-              <p>
-                Clinical informatics analyst at {site.employer}. I keep the
-                scheduling software a health region of{" "}
-                <em>about a million people</em> books its appointments through,
-                and I build fast, accessible tools for the web.
-              </p>
-            </Prose>
-          </div>
+              <Prose className="mt-8 text-lead">
+                <p>
+                  Clinical informatics analyst at {site.employer}. I keep the
+                  scheduling software a health region of{" "}
+                  <em>about a million people</em> books its appointments
+                  through.
+                </p>
+              </Prose>
 
-          <div className="mt-10 flex flex-wrap gap-3">
-            <Link
-              href="/work"
-              className={buttonVariants({ variant: "solid", size: "lg" })}
-            >
-              See the work
-              <ArrowRightIcon aria-hidden className="size-4" />
-            </Link>
-            <Link
-              href="/contact"
-              className={buttonVariants({ variant: "outline", size: "lg" })}
-            >
-              Get in touch
-            </Link>
+              <div className="mt-10 flex flex-wrap gap-3">
+                <Link
+                  href="/work"
+                  className={buttonVariants({ variant: "solid", size: "lg" })}
+                >
+                  See the work
+                  <ArrowRightIcon aria-hidden className="size-4" />
+                </Link>
+                <Link
+                  href="/contact"
+                  className={buttonVariants({ variant: "outline", size: "lg" })}
+                >
+                  Get in touch
+                </Link>
+              </div>
+            </div>
+
+            <ScheduleField className="aspect-[5/4] w-full sm:aspect-[3/2] lg:aspect-[4/5]" />
           </div>
 
           <div className="mt-16 grid gap-px border-t border-line pt-6 sm:grid-cols-3 sm:gap-8">
@@ -137,8 +142,8 @@ export default function HomePage() {
       <Section>
         <Reveal className="max-w-3xl border-t border-line pt-8">
           <h2 className="font-display text-title text-balance">
-            Happy to talk about healthcare systems, web performance, or anything
-            you are building.
+            Always happy to talk about healthcare systems, web performance, or
+            how something you are working on is put together.
           </h2>
           <Link
             href="/contact"

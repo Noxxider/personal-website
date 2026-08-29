@@ -21,13 +21,13 @@ export default function WorkPage() {
           <div>
             <p className="label">Work</p>
             <h1 className="mt-6 max-w-[18ch] font-display text-display">
-              Things I have built and kept running.
+              A few things I have built.
             </h1>
             <Prose className="mt-8 text-lead">
               <p>
-                Two of these are live on this site, so you can use them rather
-                than read about them. The rest is the employment history behind
-                the habits.
+                Two of them are on this site, so you can use them rather than
+                read about them. The rest is the employment history behind
+                them.
               </p>
             </Prose>
           </div>
