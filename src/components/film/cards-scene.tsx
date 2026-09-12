@@ -32,7 +32,7 @@ function Card({
     const g = group.current;
     if (!g) return;
     const t = clock.elapsedTime + index * 1.7;
-    const enter = ease((progress.web.enter - 0.55 - index * 0.06) / 0.4);
+    const enter = ease((progress.web.enter - 0.84 - index * 0.04) / 0.16);
     g.position.set(offset[0], offset[1] + Math.sin(t * 0.9) * 0.02 - (1 - enter) * 0.5, offset[2]);
     g.rotation.set(Math.sin(t * 0.7) * 0.02, -0.1 + index * -0.02, 0);
     g.scale.setScalar((0.85 + 0.15 * enter) * (index === 0 ? 1 : index === 1 ? 0.85 : 0.72));
@@ -77,8 +77,8 @@ export function CardsScene() {
 
     const leave = ease(progress.web.exit) * 0.35;
     const base = narrow
-      ? { x: 0, y: -0.62, s: 0.72 }
-      : { x: Math.min(0.35, halfW - 1.6), y: 0.36, s: 1.45 };
+      ? { x: 0, y: -0.7, s: 0.72 }
+      : { x: Math.min(0.55, halfW - 1.45), y: 0.2, s: 1.45 };
     g.position.set(base.x, base.y + leave * 1.2, 0);
     g.scale.setScalar(Math.max(0.0001, base.s * (1 - leave)));
     g.rotation.set(-smooth.current.ty * 0.18, smooth.current.tx * 0.28, 0);

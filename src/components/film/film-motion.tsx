@@ -87,7 +87,7 @@ export function FilmMotion({ children }: { children: React.ReactNode }) {
               scrollTrigger: {
                 trigger: chapter,
                 start: "top bottom",
-                end: "top 40%",
+                end: "top 30%",
                 scrub: 0.6,
               },
             },

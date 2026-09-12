@@ -51,7 +51,7 @@ const slots: Slot[] = (() => {
   for (let i = 0; i < COUNT; i++) {
     const booked = random() < 0.58;
     out.push({
-      height: booked ? 0.08 + random() * 0.26 : 0.012,
+      height: booked ? 0.07 + random() * 0.15 : 0.012,
       booked,
       order: random(),
     });
@@ -62,7 +62,7 @@ const slots: Slot[] = (() => {
 /** The booking that moves, and where it goes. */
 const FROM = 3 * ROWS + 5;
 const TO = 5 * ROWS + 8;
-slots[FROM] = { height: 0.3, booked: true, order: 0.3 };
+slots[FROM] = { height: 0.22, booked: true, order: 0.3 };
 slots[TO] = { height: 0.012, booked: false, order: 0.9 };
 
 const dummy = new THREE.Object3D();
@@ -110,10 +110,10 @@ export function ScheduleScene() {
       let color: THREE.Color = slot.booked ? tealColor : emptyColor;
 
       if (i === FROM) {
-        height = 0.012 + (0.3 - 0.012) * local * (1 - ease(reflow));
+        height = 0.012 + (0.22 - 0.012) * local * (1 - ease(reflow));
         color = scratch.copy(tealColor).lerp(amberColor, ease(reflow * 2));
       } else if (i === TO) {
-        height = 0.012 + (0.3 - 0.012) * ease((reflow - 0.4) / 0.6);
+        height = 0.012 + (0.22 - 0.012) * ease((reflow - 0.4) / 0.6);
         color = reflow > 0.4 ? amberColor : emptyColor;
       }
 
@@ -132,15 +132,15 @@ export function ScheduleScene() {
 
     // Placement: right half on wide screens, upper half on phones. Slides
     // up and shrinks away as the chapter leaves.
-    const leave = ease(p.exit / 0.55);
+    const leave = ease(p.exit / 0.4);
     const base = narrow
       ? { x: 0, y: -0.66, s: 0.36 }
-      : { x: Math.min(0.9, halfW - 0.95), y: 0.05, s: 0.78 };
+      : { x: Math.min(0.95, halfW - 0.95), y: 0.0, s: 0.72 };
     g.position.set(base.x, base.y + leave * 1.1, 0);
     // Holds back until the Earth has mostly left, then grows in.
-    const arrive = ease((p.enter - 0.3) / 0.5);
+    const arrive = ease((p.enter - 0.8) / 0.2);
     g.scale.setScalar(Math.max(0.0001, base.s * (1 - leave * 0.4) * (0.7 + 0.3 * arrive) * arrive * (1 - leave)));
-    g.rotation.set(-0.62 + leave * 0.3, Math.sin(p.pin * Math.PI) * 0.06 - 0.06, 0);
+    g.rotation.set(-0.46 + leave * 0.3, Math.sin(p.pin * Math.PI) * 0.04, 0);
     if (caption.current) {
       const material = caption.current.material as THREE.MeshBasicMaterial;
       material.opacity = ease((reflow - 0.35) / 0.3) * (1 - leave);
@@ -155,11 +155,11 @@ export function ScheduleScene() {
       </mesh>
       {/* Day names along the far edge, hours down the left, both lying flat. */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.002, -(ROWS * (CELL + GAP)) / 2 - 0.2]}>
-        <planeGeometry args={[COLUMNS * (CELL + GAP), 0.16]} />
+        <planeGeometry args={[COLUMNS * (CELL + GAP), 0.2]} />
         <meshBasicMaterial map={dayLabels} transparent depthWrite={false} />
       </mesh>
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[-(COLUMNS * (CELL + GAP)) / 2 - 0.2, 0.002, 0]}>
-        <planeGeometry args={[0.16, ROWS * (CELL + GAP)]} />
+        <planeGeometry args={[0.2, ROWS * (CELL + GAP)]} />
         <meshBasicMaterial map={hourLabels} transparent depthWrite={false} />
       </mesh>
       <mesh

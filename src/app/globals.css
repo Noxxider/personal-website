@@ -193,7 +193,7 @@
   /* The next chapter starts sliding over while this one is still pinned,
      so its text is on screen the moment the previous text has gone. */
   .chapter + .chapter {
-    margin-top: -45svh;
+    margin-top: -30svh;
   }
 
   /* Phones: shorter chapters and less overlap, so a frame is never mostly void. */

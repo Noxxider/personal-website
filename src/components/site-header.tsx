@@ -50,8 +50,9 @@ export function SiteHeader() {
         filled += Math.min(1, p.enter) + p.pin;
       }
       const past = progress.web.exit >= 0.98;
-      // Over the bright Arctic the mask is not enough; go solid for the zoom.
-      const overIce = progress.canada.pin > 0.1 && progress.systems.enter < 0.7;
+      // Only the hero gets the soft mask; from the Canada zoom on the header
+      // is solid so nothing on the canvas ever draws through the chrome.
+      const overIce = progress.canada.enter > 0.6;
       const index = past ? chapterIds.length : chapterIds.indexOf(current);
       const key = `${index}:${past}:${overIce}`;
       if (key !== last) {

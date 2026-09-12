@@ -1,5 +1,4 @@
 import Link from "next/link";
-import type { Route } from "next";
 import { ArrowRightIcon, ArrowUpRightIcon } from "@/components/icons";
 import { Chapter } from "@/components/film/chapter";
 import { FilmMotion } from "@/components/film/film-motion";
@@ -7,7 +6,7 @@ import { FilmHero } from "@/components/film/film-hero";
 import { Container } from "@/components/section";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { listedProjects, roles } from "@/content/work";
+import { roles } from "@/content/work";
 import { site } from "@/content/site";
 
 const current = roles.find((r) => r.current)!;
@@ -90,11 +89,12 @@ export default function HomePage() {
           index="02"
           label="Systems"
           length={0.9}
+          align="center"
         >
-          <h2 id="systems-title" className={cn(chapterTitle, "mt-6 sm:mt-0")} data-line>
+          <h2 id="systems-title" className={cn(chapterTitle, "sm:max-w-[16ch]")} data-line>
             {current.title} at {current.organisation}.
           </h2>
-          <div className={chapterBody}>
+          <div className={cn(chapterBody, "sm:max-w-[42ch]")}>
             <p data-line>
               I keep the scheduling software a health region of{" "}
               <em className="font-display text-[1.15em] text-ink not-italic">
@@ -105,19 +105,28 @@ export default function HomePage() {
               it every day.
             </p>
             <p data-line className="hidden sm:block">
-              It is a good place to learn what software looks like when the
-              stakes are real. People notice immediately when a clinic cannot
-              book a patient.
+              People notice immediately when a clinic cannot book a patient.
             </p>
           </div>
+          <p className="label mt-6 max-w-[40ch]" data-line>
+            One week, Monday to Sunday, 06:00 to 18:00. Teal is booked. The
+            amber slot is a conflict, moved.
+          </p>
         </Chapter>
 
         {/* -------------------------------------------------- 03, physics */}
-        <Chapter id="physics" index="03" label="Physics" length={0.7}>
-          <h2 id="physics-title" className={chapterTitle} data-line>
+        <Chapter
+          id="physics"
+          index="03"
+          label="Physics"
+          length={0.7}
+          align="center"
+          panelClassName="sm:pl-[52%]"
+        >
+          <h2 id="physics-title" className={cn(chapterTitle, "sm:max-w-[18ch]")} data-line>
             I studied physics. It left me with one habit: measure, then decide.
           </h2>
-          <div className={chapterBody}>
+          <div className={cn(chapterBody, "sm:max-w-[42ch]")}>
             <p data-line>
               The degree taught me to sit with a problem I did not understand
               yet. The programming started as a way through problem sets and
@@ -128,35 +137,23 @@ export default function HomePage() {
         </Chapter>
 
         {/* ------------------------------------------------------ 04, web */}
-        <Chapter id="web" index="04" label="Web" length={0.45} hold>
+        <Chapter id="web" index="04" label="Web" length={0.3} hold>
           <h2 id="web-title" className={chapterTitle} data-line>
             Small, fast pages that are real HTML before any JavaScript runs.
           </h2>
-          <ul className="mt-6 grid max-w-3xl grid-cols-2 gap-x-6 gap-y-3 sm:mt-8 lg:grid-cols-4">
-            {listedProjects.slice(0, 4).map((project) => (
-              <li
-                key={project.slug}
-                className="border-t border-line pt-3 pr-4 sm:pt-4"
-                data-line
-              >
-                <Link
-                  href={
-                    (project.href.startsWith("/") ? project.href : "/work") as Route
-                  }
-                  className="group inline-flex items-center gap-1.5 font-display text-xl text-ink hover:text-signal sm:text-2xl"
-                >
-                  {project.title}
-                  <ArrowUpRightIcon
-                    aria-hidden
-                    className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                  />
-                </Link>
-                <p className="mt-1.5 hidden text-sm leading-relaxed text-ink-muted sm:block">
-                  {project.blurb}
-                </p>
-              </li>
-            ))}
-          </ul>
+          <p className={chapterBody} data-line>
+            Four small programs live on this site: an orbital mechanics lab, a
+            double pendulum, a shift scheduler, and a globe you can leave a
+            light on.
+          </p>
+          <Link
+            href="/work"
+            className="link-underline mt-6 inline-flex items-center gap-2 text-sm font-medium text-ink hover:text-signal"
+            data-line
+          >
+            See all four
+            <ArrowRightIcon aria-hidden className="size-4" />
+          </Link>
         </Chapter>
 
       </FilmMotion>

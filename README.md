@@ -36,7 +36,7 @@ DATABASE_URL=postgres://...    # optional: Neon, for /work/hello only
 | Components | shadcn/ui primitives (`button`, `input`, `label`, `sheet`, `dialog`) on Radix, everything else composed by hand |
 | 3D | `three`, `@react-three/fiber`, `@react-three/drei`. One canvas on the front page, one per app that needs it. |
 | Scroll | Lenis for smooth scroll, GSAP ScrollTrigger for the timelines. One engine, wired once in `ScrollProvider`. |
-| Icons | Inline SVGs in `src/components/icons.tsx`, and the two brand paths in the film. No icon package. |
+| Icons | Inline SVGs in `src/components/icons.tsx`. No icon package. |
 | Data | Neon Postgres over HTTP (`@neondatabase/serverless`) for one table, `hellos`. Absent, the app runs in preview mode. |
 | Contact | Server Action posting to the Resend API. The address and key stay server side. |
 | Analytics | The existing GA4 property, loaded `afterInteractive`. Nothing else. |
@@ -63,7 +63,7 @@ legacy-quasar/         the previous Quasar site, kept for reference
 
 ## The front page
 
-The home page is a film. Six pinned chapters, then a static offer:
+The home page is a film. Five pinned chapters, then a static offer:
 
 | # | Chapter | On the canvas |
 | --- | --- | --- |
@@ -71,9 +71,8 @@ The home page is a film. Six pinned chapters, then a static offer:
 | 01 | Canada | The sun comes round, the Earth turns and pushes in until Canada fills the frame, outline drawn on |
 | 02 | Systems | A week of appointment slots rising as bars; one turns amber and is re-flowed |
 | 03 | Physics | A velocity Verlet N-body with trails; the pointer tugs the bodies |
-| 04 | Web | Screenshot cards of the apps, fanned in depth, tilting toward the pointer |
-| 05 | Elsewhere | Matte tiles carrying the LinkedIn and GitHub marks, above the real links |
-| 06 | The offer | Static. Three things I build and a button to `/build` |
+| 04 | Web | Screenshot cards of the apps, stacked in depth, tilting toward the pointer |
+| 05 | The offer | Static. Three things I build, a button to `/build`, and the LinkedIn and GitHub links |
 
 How it is put together:
 
@@ -89,8 +88,11 @@ How it is put together:
   server-rendered poster (`public/poster-earth.jpg`, plus a phone crop). A loading
   screen covers the page while the Earth's maps arrive and lifts on the first
   drawn frame, or after eight seconds, whichever comes first.
-- The header reads the current chapter from the same store and fills a hairline
-  as the film plays.
+- The header reads the current chapter from the same store and lights a
+  five-segment rail as the film plays; over the bright Arctic zoom it goes solid.
+- On phones each chapter's text is pinned to the top of its stage, the edge that
+  enters the viewport first, with the visual in the lower half, so no frame is
+  ever picture-only.
 
 **Reduced motion and no WebGL.** Nothing 3D mounts. The chapters collapse to a
 plain stacked page with every line visible, the poster stands in for the Earth,

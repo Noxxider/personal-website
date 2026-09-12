@@ -210,7 +210,7 @@ export function Earth() {
     const zoomTarget = 0.5 * canada.enter + 0.5 * canada.pin;
     smooth.current.zoom = damp(smooth.current.zoom, zoomTarget, 7, dt);
     smooth.current.recede = damp(smooth.current.recede, progress.systems.enter, 7, dt);
-    smooth.current.gone = damp(smooth.current.gone, progress.systems.enter, 7, dt);
+    smooth.current.gone = damp(smooth.current.gone, Math.min(1, progress.systems.enter / 0.7), 7, dt);
     const { zoom, recede, gone } = smooth.current;
 
     g.visible = gone < 0.999;
@@ -237,7 +237,7 @@ export function Earth() {
     if (clouds.current) clouds.current.rotation.y += dt * 0.008;
 
     const arrival: Pose = narrow
-      ? { x: 0.28, y: -0.55, s: 0.78 }
+      ? { x: 0.22, y: -0.82, s: 0.72 }
       : { x: Math.min(1.05, halfW - 0.7), y: -0.02, s: 1.18 };
     const needed = aspect >= 1 ? 0.95 : 0.95 / aspect;
     const zoomed: Pose = {

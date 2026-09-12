@@ -17,6 +17,8 @@ type ChapterProps = Omit<React.ComponentProps<"section">, "title"> & {
   visual?: React.ReactNode;
   /** Where the text panel sits on the stage. */
   align?: "start" | "end" | "center";
+  /** Extra classes for the text panel, for per-chapter composition. */
+  panelClassName?: string;
 };
 
 /**
@@ -37,6 +39,7 @@ export function Chapter({
   hold,
   visual,
   align = "end",
+  panelClassName,
   className,
   children,
   style,
@@ -68,6 +71,7 @@ export function Chapter({
             align === "start" && "sm:pt-28",
             align === "center" && "sm:self-center sm:pt-0",
             align === "end" && "sm:self-end sm:pt-0 sm:pb-20",
+            panelClassName,
           )}
         >
           <p className="label mb-6" data-line>
