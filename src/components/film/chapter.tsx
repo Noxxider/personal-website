@@ -62,9 +62,12 @@ export function Chapter({
         <div
           className={cn(
             "chapter-panel mx-auto w-full max-w-6xl px-5 sm:px-8 lg:px-12",
-            align === "start" && "self-start pt-28",
-            align === "center" && "self-center",
-            align === "end" && "self-end pb-14 sm:pb-20",
+            // Phones: text at the top of the stage, which is the edge that
+            // enters the viewport first, so a frame is never picture-only.
+            "self-start pt-24 pb-6",
+            align === "start" && "sm:pt-28",
+            align === "center" && "sm:self-center sm:pt-0",
+            align === "end" && "sm:self-end sm:pt-0 sm:pb-20",
           )}
         >
           <p className="label mb-6" data-line>

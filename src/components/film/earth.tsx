@@ -176,7 +176,7 @@ export function Earth() {
   const lineMaterial = React.useRef<THREE.LineBasicMaterial>(null);
   const { aspect, narrow, halfW } = useStage();
 
-  const sun = React.useMemo(() => new THREE.Vector3(-0.6, 0.5, 0.66).normalize(), []);
+  const sun = React.useMemo(() => new THREE.Vector3(-0.42, 0.42, 0.8).normalize(), []);
   const uniforms = React.useMemo(
     () => ({
       uDay: { value: maps.day },
@@ -198,7 +198,7 @@ export function Earth() {
 
   const smooth = React.useRef({ zoom: 0, recede: 0, gone: 0 });
   const idle = React.useRef(0.2);
-  const sunFrom = React.useMemo(() => new THREE.Vector3(-0.6, 0.5, 0.66).normalize(), []);
+  const sunFrom = React.useMemo(() => new THREE.Vector3(-0.42, 0.42, 0.8).normalize(), []);
   const sunTo = React.useMemo(() => new THREE.Vector3(-0.55, 0.5, 0.75).normalize(), []);
 
   useFrame((_, delta) => {
@@ -237,12 +237,12 @@ export function Earth() {
     if (clouds.current) clouds.current.rotation.y += dt * 0.008;
 
     const arrival: Pose = narrow
-      ? { x: 0.32, y: 0.62, s: 0.8 }
-      : { x: Math.min(1.05, halfW - 0.7), y: -0.05, s: 1.18 };
+      ? { x: 0.28, y: -0.55, s: 0.78 }
+      : { x: Math.min(1.05, halfW - 0.7), y: -0.02, s: 1.18 };
     const needed = aspect >= 1 ? 0.95 : 0.95 / aspect;
     const zoomed: Pose = {
       x: 0,
-      y: narrow ? 0.3 : 0.05,
+      y: narrow ? -0.55 : 0.05,
       s: (2 * HALF_HEIGHT) / (2 * Math.tan((FOV / 2) * DEG) + needed),
     };
     // Where it heads as it leaves: up and back, shrinking to nothing.

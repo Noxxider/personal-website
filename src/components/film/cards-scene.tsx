@@ -10,7 +10,8 @@ import { SURFACE_2, damp, ease, useStage } from "./scene-utils";
 /**
  * The web chapter: three cards, each a real screenshot of a real page on a
  * plane with a dark frame, fanned in space, tilting toward the pointer and
- * breathing a little. They rise in with the text and lift away with it.
+ * breathing a little. They rise in with the text and lift away with it,
+ * the last thing on the canvas before the offer.
  */
 
 const SHOTS = ["/work/orbits.png", "/work/pendulum.png", "/work/shift.png"];
@@ -74,9 +75,9 @@ export function CardsScene() {
     smooth.current.tx = damp(smooth.current.tx, aim.x, 4, dt);
     smooth.current.ty = damp(smooth.current.ty, aim.y, 4, dt);
 
-    const leave = ease(progress.web.exit / 0.5);
+    const leave = ease(progress.web.exit) * 0.35;
     const base = narrow
-      ? { x: 0, y: 0.88, s: 0.72 }
+      ? { x: 0, y: -0.62, s: 0.72 }
       : { x: Math.min(0.35, halfW - 1.6), y: 0.36, s: 1.45 };
     g.position.set(base.x, base.y + leave * 1.2, 0);
     g.scale.setScalar(Math.max(0.0001, base.s * (1 - leave)));

@@ -49,7 +49,7 @@ export function SiteHeader() {
         if (p.enter > 0.5 && p.exit < 0.5) current = id;
         filled += Math.min(1, p.enter) + p.pin;
       }
-      const past = progress.elsewhere.exit >= 0.98;
+      const past = progress.web.exit >= 0.98;
       // Over the bright Arctic the mask is not enough; go solid for the zoom.
       const overIce = progress.canada.pin > 0.1 && progress.systems.enter < 0.7;
       const index = past ? chapterIds.length : chapterIds.indexOf(current);

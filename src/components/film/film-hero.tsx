@@ -92,7 +92,7 @@ export function FilmHero() {
               role="status"
               aria-live="polite"
               className={cn(
-                "fixed inset-0 z-50 grid place-items-center bg-ground transition-opacity duration-700 ease-out",
+                "fixed inset-0 z-50 grid place-items-center bg-ground/72 backdrop-blur-sm transition-opacity duration-700 ease-out",
                 loading.done ? "opacity-0" : "opacity-100",
               )}
             >

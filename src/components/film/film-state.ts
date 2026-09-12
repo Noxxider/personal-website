@@ -22,7 +22,6 @@ export const chapterIds = [
   "systems",
   "physics",
   "web",
-  "elsewhere",
 ] as const;
 
 export type ChapterId = (typeof chapterIds)[number];

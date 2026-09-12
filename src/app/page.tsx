@@ -45,6 +45,7 @@ export default function HomePage() {
           length={0.5}
           intro
           align="center"
+          className="[&_.chapter-panel]:sm:-translate-y-[6svh]"
           visual={<FilmHero />}
         >
           <h1
@@ -103,7 +104,7 @@ export default function HomePage() {
               testing, and direct support for the clinical staff who depend on
               it every day.
             </p>
-            <p data-line>
+            <p data-line className="hidden sm:block">
               It is a good place to learn what software looks like when the
               stakes are real. People notice immediately when a clinic cannot
               book a patient.
@@ -127,7 +128,7 @@ export default function HomePage() {
         </Chapter>
 
         {/* ------------------------------------------------------ 04, web */}
-        <Chapter id="web" index="04" label="Web" length={0.45}>
+        <Chapter id="web" index="04" label="Web" length={0.45} hold>
           <h2 id="web-title" className={chapterTitle} data-line>
             Small, fast pages that are real HTML before any JavaScript runs.
           </h2>
@@ -158,40 +159,9 @@ export default function HomePage() {
           </ul>
         </Chapter>
 
-        {/* -------------------------------------------------- 05, symbols */}
-        <Chapter
-          id="elsewhere"
-          index="05"
-          label="Elsewhere"
-          length={0.3}
-          align="center"
-        >
-          <h2 id="elsewhere-title" className="sr-only">
-            Elsewhere
-          </h2>
-          <ul className="grid grid-cols-2 gap-4 sm:gap-8">
-            {site.socials.map((s) => (
-              <li key={s.href} data-line className="flex flex-col items-center text-center">
-                <a
-                  href={s.href}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className="group inline-flex items-baseline gap-2 font-display text-[clamp(1.75rem,0.9rem+3vw,4rem)] leading-none text-ink transition-colors hover:text-signal"
-                >
-                  {s.label}
-                  <ArrowUpRightIcon
-                    aria-hidden
-                    className="size-5 translate-y-0.5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5 sm:size-7"
-                  />
-                </a>
-                <span className="label mt-3 max-w-[22ch]">{s.note}</span>
-              </li>
-            ))}
-          </ul>
-        </Chapter>
       </FilmMotion>
 
-      {/* ------------------------------------------------------ 06, the offer */}
+      {/* ------------------------------------------------------ 05, the offer */}
       <section
         aria-labelledby="offer-title"
         className="relative overflow-hidden border-t border-line bg-ground"
@@ -199,7 +169,7 @@ export default function HomePage() {
         <Container className="relative py-24 sm:py-32">
           <div className="grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-20">
             <div>
-              <p className="label">06 / The offer</p>
+              <p className="label">05 / The offer</p>
               <h2
                 id="offer-title"
                 className="mt-6 max-w-[14ch] font-display text-display text-ink"
@@ -217,6 +187,24 @@ export default function HomePage() {
                 Say what you need
                 <ArrowRightIcon aria-hidden className="size-4" />
               </Link>
+              <ul className="mt-10 flex flex-wrap gap-x-8 gap-y-2">
+                {site.socials.map((s) => (
+                  <li key={s.href}>
+                    <a
+                      href={s.href}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className="label group inline-flex items-center gap-1.5 text-ink-muted transition-colors hover:text-signal"
+                    >
+                      {s.label}
+                      <ArrowUpRightIcon
+                        aria-hidden
+                        className="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      />
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
             <ul className="grid gap-8">
               {offers.map((offer, i) => (

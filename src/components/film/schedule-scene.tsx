@@ -77,9 +77,9 @@ export function ScheduleScene() {
   const { narrow, halfW } = useStage();
   const smooth = React.useRef({ build: 0, reflow: 0, on: 0 });
   const caption = React.useRef<THREE.Mesh>(null);
-  const dayLabels = React.useMemo(() => makeText(DAYS, 1024, 96), []);
-  const hourLabels = React.useMemo(() => makeText(["18", "12", "06"], 96, 512, "right"), []);
-  const conflictLabel = React.useMemo(() => makeText(["conflict"], 512, 96, "left", "#f2a65a"), []);
+  const dayLabels = React.useMemo(() => makeText(DAYS, 1024, 80, "center", "#a3adbb"), []);
+  const hourLabels = React.useMemo(() => makeText(["18", "12", "06"], 80, 512, "right", "#a3adbb"), []);
+  const conflictLabel = React.useMemo(() => makeText(["conflict, moved"], 512, 72, "left", "#f2a65a"), []);
 
   useFrame((_, delta) => {
     const g = group.current;
@@ -134,13 +134,13 @@ export function ScheduleScene() {
     // up and shrinks away as the chapter leaves.
     const leave = ease(p.exit / 0.55);
     const base = narrow
-      ? { x: -0.08, y: 0.58, s: 0.5 }
-      : { x: Math.min(0.95, halfW - 0.85), y: -0.05, s: 0.9 };
+      ? { x: 0, y: -0.66, s: 0.36 }
+      : { x: Math.min(0.9, halfW - 0.95), y: 0.05, s: 0.78 };
     g.position.set(base.x, base.y + leave * 1.1, 0);
     // Holds back until the Earth has mostly left, then grows in.
     const arrive = ease((p.enter - 0.3) / 0.5);
     g.scale.setScalar(Math.max(0.0001, base.s * (1 - leave * 0.4) * (0.7 + 0.3 * arrive) * arrive * (1 - leave)));
-    g.rotation.set(-0.72 + leave * 0.3, -0.28 + Math.sin(p.pin * Math.PI) * 0.1, 0);
+    g.rotation.set(-0.62 + leave * 0.3, Math.sin(p.pin * Math.PI) * 0.06 - 0.06, 0);
     if (caption.current) {
       const material = caption.current.material as THREE.MeshBasicMaterial;
       material.opacity = ease((reflow - 0.35) / 0.3) * (1 - leave);
@@ -154,12 +154,12 @@ export function ScheduleScene() {
         <meshStandardMaterial color="#0c1117" roughness={0.9} metalness={0} />
       </mesh>
       {/* Day names along the far edge, hours down the left, both lying flat. */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.002, -(ROWS * (CELL + GAP)) / 2 - 0.16]}>
-        <planeGeometry args={[COLUMNS * (CELL + GAP), 0.11]} />
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.002, -(ROWS * (CELL + GAP)) / 2 - 0.2]}>
+        <planeGeometry args={[COLUMNS * (CELL + GAP), 0.16]} />
         <meshBasicMaterial map={dayLabels} transparent depthWrite={false} />
       </mesh>
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[-(COLUMNS * (CELL + GAP)) / 2 - 0.16, 0.002, 0]}>
-        <planeGeometry args={[0.11, ROWS * (CELL + GAP)]} />
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[-(COLUMNS * (CELL + GAP)) / 2 - 0.2, 0.002, 0]}>
+        <planeGeometry args={[0.16, ROWS * (CELL + GAP)]} />
         <meshBasicMaterial map={hourLabels} transparent depthWrite={false} />
       </mesh>
       <mesh
@@ -171,7 +171,7 @@ export function ScheduleScene() {
           -((ROWS * CELL + (ROWS - 1) * GAP) / 2) + 8 * (CELL + GAP) + CELL / 2,
         ]}
       >
-        <planeGeometry args={[0.6, 0.11]} />
+        <planeGeometry args={[0.9, 0.13]} />
         <meshBasicMaterial map={conflictLabel} transparent opacity={0} depthWrite={false} />
       </mesh>
       <instancedMesh ref={bars} args={[undefined, undefined, COUNT]}>

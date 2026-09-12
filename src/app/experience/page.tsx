@@ -66,7 +66,7 @@ export default function ExperiencePage() {
       <Section title="How I got here">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr] lg:gap-20">
           <Reveal>
-            <Prose>
+            <Prose className="text-ink/85">
               <p>
                 I studied physics at the University of British Columbia, which
                 mostly taught me how to sit with a problem I do not understand
