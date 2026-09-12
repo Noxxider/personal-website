@@ -138,10 +138,10 @@ export default function HomePage() {
 
         {/* ------------------------------------------------------ 04, web */}
         <Chapter id="web" index="04" label="Web" length={0.3} hold align="center">
-          <h2 id="web-title" className={chapterTitle} data-line>
+          <h2 id="web-title" className={cn(chapterTitle, "sm:max-w-[14ch]")} data-line>
             Small, fast pages that are real HTML before any JavaScript runs.
           </h2>
-          <p className={chapterBody} data-line>
+          <p className={cn(chapterBody, "sm:max-w-[26rem]")} data-line>
             Four small programs live on this site: an orbital mechanics lab, a
             double pendulum, a shift scheduler, and a globe you can leave a
             light on.
@@ -161,7 +161,7 @@ export default function HomePage() {
       {/* ------------------------------------------------------ 05, the offer */}
       <section
         aria-labelledby="offer-title"
-        className="relative overflow-hidden border-t border-line bg-ground"
+        className="relative border-t border-line bg-ground before:pointer-events-none before:absolute before:inset-x-0 before:-top-40 before:h-40 before:bg-gradient-to-b before:from-transparent before:to-ground"
       >
         <Container className="relative py-24 sm:py-32">
           <div className="grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-20">

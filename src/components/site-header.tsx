@@ -46,7 +46,7 @@ export function SiteHeader() {
       let filled = 0;
       for (const id of chapterIds) {
         const p = progress[id];
-        if (p.enter > 0.5 && p.exit < 0.5) current = id;
+        if (p.enter > 0.5) current = id;
         filled += Math.min(1, p.enter) + p.pin;
       }
       const past = progress.web.exit >= 0.98;
@@ -58,6 +58,7 @@ export function SiteHeader() {
       if (key !== last) {
         last = key;
         setInFilm(!past && !overIce);
+        if (rail.current) rail.current.style.opacity = past ? "0" : "1";
         rail.current?.querySelectorAll("i").forEach((segment, i) => {
           segment.style.opacity = i < index ? "0.45" : i === index ? "1" : "0.15";
         });
@@ -107,7 +108,7 @@ export function SiteHeader() {
           <span
             ref={rail}
             aria-hidden
-            className="pointer-events-none absolute left-1/2 hidden -translate-x-1/2 gap-1.5 md:flex"
+            className="pointer-events-none absolute left-1/2 hidden -translate-x-1/2 gap-1.5 transition-opacity duration-500 md:flex"
           >
             {chapterIds.map((id) => (
               <i

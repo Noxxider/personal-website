@@ -141,7 +141,7 @@ export function ScheduleScene() {
     const arrive = ease((p.enter - 0.7) / 0.3);
     const size = base.s * (1 - leave * 0.4) * (0.7 + 0.3 * arrive) * arrive * (1 - leave);
     g.scale.setScalar(Math.max(0.0001, size));
-    g.visible = size > 0.03;
+    g.visible = size > 0.12;
     g.rotation.set(-0.46 + leave * 0.3, Math.sin(p.pin * Math.PI) * 0.04, 0);
     if (caption.current) {
       const material = caption.current.material as THREE.MeshBasicMaterial;
