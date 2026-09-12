@@ -9,7 +9,6 @@ import { Earth } from "./earth";
 import { Stars } from "@react-three/drei";
 import { GalaxyScene } from "./galaxy-scene";
 import { OrbitsScene } from "./orbits-scene";
-import { CardsScene } from "./cards-scene";
 
 /** Mirrors three's default loading manager into the loader overlay. Wired
  * in an effect, so no React state changes during another component's
@@ -66,7 +65,6 @@ export default function FilmScene({ onReady }: { onReady: () => void }) {
         <Earth />
         <GalaxyScene />
         <OrbitsScene />
-        <CardsScene />
         <Ready onReady={onReady} />
       </React.Suspense>
     </Canvas>

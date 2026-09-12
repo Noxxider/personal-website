@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { pageMetadata } from "@/lib/metadata";
 import { ArrowRightIcon } from "@/components/icons";
-import { Container, Section } from "@/components/section";
+import { Section } from "@/components/section";
 import { Reveal } from "@/components/reveal";
-import { Prose } from "@/components/prose";
 import { ContactForm } from "@/components/contact-form";
+import { BuildHero } from "@/components/build/build-hero";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -38,21 +38,7 @@ const kinds = [
 export default function BuildPage() {
   return (
     <>
-      <Container>
-        <div className="pt-16 pb-6 sm:pt-24">
-          <p className="label">Build</p>
-          <h1 className="mt-6 max-w-[16ch] font-display text-display">
-            If you want something built, say so.
-          </h1>
-          <Prose className="mt-8 text-lead">
-            <p>
-              I build small, well-measured software for teams who are past
-              what a spreadsheet can do. Below: what I take on, how it goes,
-              and a form that lands in my inbox.
-            </p>
-          </Prose>
-        </div>
-      </Container>
+      <BuildHero />
 
       <Section title="What kinds of things">
         <ol className="rail-list grid gap-px sm:grid-cols-2">
@@ -61,7 +47,8 @@ export default function BuildPage() {
               key={kind.title}
               as="li"
               delay={i * 70}
-              className="border-t border-line py-7 sm:pr-10"
+              data-kind={i}
+              className="border-t border-line py-7 transition-colors duration-300 hover:border-signal/60 sm:pr-10"
             >
               <span className="label tabular">0{i + 1}</span>
               <h3 className="mt-3 font-display text-2xl text-ink">{kind.title}</h3>

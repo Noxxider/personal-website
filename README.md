@@ -71,7 +71,7 @@ The home page is a film. Five pinned chapters, then a static offer:
 | 01 | Canada | The sun comes round, the Earth turns and pushes in until Canada fills the frame, outline drawn on |
 | 02 | Systems | The Earth shrinks into the centre of a galaxy of about 700,000 points, one per person the system books for, turning on its own; a scattering are amber |
 | 03 | Physics | A velocity Verlet N-body with a glowing sun and fading trails; the pointer tugs the bodies |
-| 04 | Web | Screenshot cards of the apps, stacked in depth, tilting toward the pointer. A slow field of stars sits behind the whole film |
+| 04 | Web | The apps themselves, live: the double pendulum, the shift board and a compact orbits lab in a shallow 3D fan that leans toward the pointer. A slow field of stars sits behind the whole film |
 | 05 | The offer | Static. Three things I build, a button to `/build`, and the LinkedIn and GitHub links |
 
 How it is put together:

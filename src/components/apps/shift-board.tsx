@@ -55,7 +55,7 @@ const SEED: Shift[] = [
 let counter = 100;
 const nextId = () => `s${++counter}`;
 
-export function ShiftBoard() {
+export function ShiftBoard({ compact = false }: { compact?: boolean }) {
   const [shifts, setShifts] = React.useState<Shift[]>(SEED);
   const [person, setPerson] = React.useState("p1");
   const [draft, setDraft] = React.useState<Shift | null>(null);
@@ -124,7 +124,7 @@ export function ShiftBoard() {
   });
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[1fr_17rem]">
+    <div className={compact ? "" : "grid gap-6 lg:grid-cols-[1fr_17rem]"}>
       <div>
         <div className="mb-3 flex flex-wrap items-center gap-2">
           <span className="label mr-1">Laying shifts for</span>
@@ -145,8 +145,8 @@ export function ShiftBoard() {
           ))}
         </div>
 
-        <div className="overflow-x-auto rounded-2xl border border-line bg-surface">
-          <div className="min-w-[640px]">
+        <div className={compact ? "overflow-x-auto rounded-lg bg-ground" : "overflow-x-auto rounded-2xl border border-line bg-surface"}>
+          <div className={compact ? "min-w-[520px]" : "min-w-[640px]"}>
             <div className="grid grid-cols-[3rem_repeat(7,1fr)] border-b border-line">
               <div />
               {DAY_NAMES.map((d) => (
@@ -154,7 +154,7 @@ export function ShiftBoard() {
               ))}
             </div>
             <div className="grid grid-cols-[3rem_repeat(7,1fr)]">
-              <div className="relative" style={{ height: `${ROWS * 14}px` }}>
+              <div className="relative" style={{ height: `${ROWS * (compact ? 8 : 14)}px` }}>
                 {Array.from({ length: HOURS.end - HOURS.start + 1 }, (_, i) => (
                   <span
                     key={i}
@@ -168,7 +168,7 @@ export function ShiftBoard() {
               <div
                 ref={grid}
                 className="relative col-span-7 grid touch-none select-none grid-cols-7"
-                style={{ height: `${ROWS * 14}px` }}
+                style={{ height: `${ROWS * (compact ? 8 : 14)}px` }}
                 onPointerDown={onDown}
                 onPointerMove={onMove}
                 onPointerUp={onUp}
@@ -230,13 +230,13 @@ export function ShiftBoard() {
             </div>
           </div>
         </div>
-        <p className="label mt-3">
+        {!compact && <p className="label mt-3">
           Press and drag down a day to lay a shift. Click a shift to remove it. Shaded band is the
           cover window, {minutesLabel(DEFAULT_RULES.coverage.start)} to {minutesLabel(DEFAULT_RULES.coverage.end)}.
-        </p>
+        </p>}
       </div>
 
-      <aside className="space-y-5">
+      {!compact && <aside className="space-y-5">
         <div className="flex items-baseline justify-between border-b border-line pb-3">
           <h2 className="label">Issues</h2>
           <span className="font-mono text-sm text-ink tabular">{issues.length}</span>
@@ -288,7 +288,7 @@ export function ShiftBoard() {
             Reset
           </Button>
         </div>
-      </aside>
+      </aside>}
     </div>
   );
 }

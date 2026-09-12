@@ -4,7 +4,7 @@ import * as React from "react";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 import { pointer, presence, progress } from "./film-state";
-import { INK, damp, ease, makeRandom, useStage } from "./scene-utils";
+import { damp, ease, makeRandom, useStage } from "./scene-utils";
 
 /** A soft radial sprite for the glows. */
 function makeGlow() {
@@ -154,7 +154,9 @@ export function OrbitsScene() {
     if (!g.visible) return;
 
     // The pointer, in the scene's own frame, as a soft extra mass.
-    const usePull = pointer.active && !narrow;
+    // Only the left half pulls, so hovering the copy never drags the
+    // bodies into it.
+    const usePull = pointer.active && !narrow && pointer.x < -0.05;
     let pullVector: THREE.Vector3 | null = null;
     if (usePull) {
       const px = pointer.x * halfW - g.position.x;
@@ -213,7 +215,7 @@ export function OrbitsScene() {
     const leave = ease(p.exit / 0.3);
     const base = narrow
       ? { x: 0, y: -0.62, s: 0.46 }
-      : { x: -Math.min(0.75, halfW - 1.0), y: 0.15, s: 0.9 };
+      : { x: -Math.min(0.95, halfW - 0.85), y: 0.15, s: 0.8 };
     g.position.set(base.x, base.y + (1 - enter) * -0.6 + leave * 1.2, 0);
     const size = base.s * enter * (1 - leave);
     g.scale.setScalar(Math.max(0.0001, size));
@@ -226,7 +228,7 @@ export function OrbitsScene() {
     <group ref={group} visible={false}>
       <instancedMesh ref={bodies} args={[undefined, undefined, BODIES]}>
         <sphereGeometry args={[1, 24, 24]} />
-        <meshBasicMaterial color={INK} />
+        <meshBasicMaterial color="#fff1dc" />
       </instancedMesh>
       {/* Glows: a big soft one on the sun, small ones on the planets. */}
       <group ref={glows}>
@@ -234,7 +236,7 @@ export function OrbitsScene() {
           <sprite key={i} scale={i === 0 ? 0.9 : 0.16}>
             <spriteMaterial
               map={glowTexture}
-              color={i === 0 ? "#9fe6f2" : "#5fd3e6"}
+              color={i === 0 ? "#ffd7a1" : "#5fd3e6"}
               transparent
               opacity={i === 0 ? 0.85 : 0.6}
               blending={THREE.AdditiveBlending}

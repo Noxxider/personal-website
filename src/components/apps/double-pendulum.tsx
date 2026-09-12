@@ -41,7 +41,7 @@ function start(angle: number, offset: number): Run {
   };
 }
 
-export function DoublePendulum() {
+export function DoublePendulum({ compact = false }: { compact?: boolean }) {
   const canvas = React.useRef<HTMLCanvasElement>(null);
   const run = React.useRef<Run>(start(2.1, 0.001));
   const readout = React.useRef<HTMLSpanElement>(null);
@@ -173,8 +173,8 @@ export function DoublePendulum() {
   }, []);
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[1fr_18rem]">
-      <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-line bg-surface sm:aspect-[16/10]">
+    <div className={compact ? "h-full" : "grid gap-6 lg:grid-cols-[1fr_18rem]"}>
+      <div className={compact ? "relative h-full min-h-[16rem] overflow-hidden rounded-lg bg-ground" : "relative aspect-[4/3] overflow-hidden rounded-2xl border border-line bg-surface sm:aspect-[16/10]"}>
         <canvas ref={canvas} className="h-full w-full" aria-label="Two double pendulums swinging" />
         <div className="pointer-events-none absolute top-4 left-4 flex gap-4">
           <span className="label flex items-center gap-1.5">
@@ -186,7 +186,7 @@ export function DoublePendulum() {
         </div>
       </div>
 
-      <div className="space-y-6">
+      {!compact && <div className="space-y-6">
         <div>
           <Label htmlFor="angle">Release angle: {angle.toFixed(2)} rad</Label>
           <input
@@ -266,7 +266,7 @@ export function DoublePendulum() {
             Release again
           </Button>
         </div>
-      </div>
+      </div>}
     </div>
   );
 }

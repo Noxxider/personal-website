@@ -79,7 +79,7 @@ export const projects: Project[] = [
     blurb:
       "A scroll-driven film in React Three Fiber on a static Next.js shell, with a real Earth in it.",
     description:
-      "The front page is seven pinned chapters driven by Lenis and GSAP ScrollTrigger, with one WebGL canvas behind them: a textured Earth that turns and zooms to Canada and then shrinks into a galaxy of about a million points, an N-body simulation with a glowing sun, and screenshot cards, all in one field of stars. Everything is prerendered to HTML, the 3D is a lazy chunk behind a poster, and reduced motion collapses the whole thing to a plain page.",
+      "The front page is seven pinned chapters driven by Lenis and GSAP ScrollTrigger, with one WebGL canvas behind them: a textured Earth that turns and zooms to Canada and then shrinks into a galaxy of about a million points, an N-body simulation with a glowing sun, and the apps themselves running live in the last chapter, all in one field of stars. Everything is prerendered to HTML, the 3D is a lazy chunk behind a poster, and reduced motion collapses the whole thing to a plain page.",
     year: "2026",
     status: "Live",
     href: "https://github.com/Noxxider/personal-website",

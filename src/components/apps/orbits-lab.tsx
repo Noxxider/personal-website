@@ -193,7 +193,7 @@ function Scene({
   );
 }
 
-export function OrbitsLab() {
+export function OrbitsLab({ compact = false }: { compact?: boolean }) {
   const [integrator, setIntegrator] = React.useState<Integrator>("verlet");
   const [dt, setDt] = React.useState(0.004);
   const [centralMass, setCentralMass] = React.useState(1);
@@ -227,8 +227,8 @@ export function OrbitsLab() {
   }, []);
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[1fr_18rem]">
-      <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-line bg-surface sm:aspect-[16/10]">
+    <div className={compact ? "h-full" : "grid gap-6 lg:grid-cols-[1fr_18rem]"}>
+      <div className={compact ? "relative h-full min-h-[11rem] overflow-hidden rounded-lg bg-ground" : "relative aspect-[4/3] overflow-hidden rounded-2xl border border-line bg-surface sm:aspect-[16/10]"}>
         <Canvas
           camera={{ position: [0, -1.2, 3.4], fov: 40 }}
           dpr={[1, 1.75]}
@@ -246,7 +246,7 @@ export function OrbitsLab() {
         </p>
       </div>
 
-      <div className="space-y-6">
+      {!compact && <div className="space-y-6">
         <fieldset>
           <legend className="label">Integrator</legend>
           <div className="mt-2 grid grid-cols-2 gap-1 rounded-lg border border-line p-1">
@@ -338,7 +338,7 @@ export function OrbitsLab() {
             New system
           </Button>
         </div>
-      </div>
+      </div>}
     </div>
   );
 }

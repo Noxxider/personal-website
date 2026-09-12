@@ -3,6 +3,7 @@ import { ArrowRightIcon, ArrowUpRightIcon } from "@/components/icons";
 import { Chapter } from "@/components/film/chapter";
 import { FilmMotion } from "@/components/film/film-motion";
 import { FilmHero } from "@/components/film/film-hero";
+import { LiveApps } from "@/components/film/live-apps";
 import { Container } from "@/components/section";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -136,14 +137,22 @@ export default function HomePage() {
         </Chapter>
 
         {/* ------------------------------------------------------ 04, web */}
-        <Chapter id="web" index="04" label="Web" length={0.3} hold align="center">
+        <Chapter
+          id="web"
+          index="04"
+          label="Web"
+          length={0.4}
+          hold
+          align="center"
+          panelClassName="sm:grid sm:grid-cols-[1fr_1.7fr] sm:items-center sm:gap-x-10 lg:gap-x-14"
+        >
           <h2 id="web-title" className={cn(chapterTitle, "sm:max-w-[14ch]")} data-line>
             Small, fast pages that are real HTML before any JavaScript runs.
           </h2>
           <p className={cn(chapterBody, "sm:max-w-[26rem]")} data-line>
-            Four small programs live on this site: an orbital mechanics lab, a
-            double pendulum, a shift scheduler, and a globe you can leave a
-            light on.
+            Four small programs live on this site, and three of them are
+            running right here. Release the pendulum, lay a shift, tug an
+            orbit.
           </p>
           <Link
             href="/work"
@@ -153,6 +162,9 @@ export default function HomePage() {
             See all four
             <ArrowRightIcon aria-hidden className="size-4" />
           </Link>
+          <div className="mt-8 sm:col-start-2 sm:row-start-1 sm:row-span-4 sm:mt-0" data-line>
+            <LiveApps />
+          </div>
         </Chapter>
 
       </FilmMotion>
