@@ -174,8 +174,9 @@ export default function HomePage() {
                 Want something built?
               </h2>
               <p className="mt-6 max-w-[40ch] text-lead text-ink-muted">
-                Fixed price, agreed before any work starts. Delivered in weeks,
-                not quarters, with a month of support after.
+                A build price agreed before any work starts, then a monthly
+                retainer that keeps it running and growing. Delivered in weeks,
+                not quarters.
               </p>
               <Link
                 href="/build"

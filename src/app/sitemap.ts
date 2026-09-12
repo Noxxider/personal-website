@@ -13,6 +13,7 @@ const routes = [
   "/work/hello/",
   "/experience/",
   "/build/",
+  "/build/example/",
   "/contact/",
 ];
 

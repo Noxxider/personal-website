@@ -44,7 +44,7 @@ DATABASE_URL=postgres://...    # optional: Neon, for /work/hello only
 
 ```
 src/
-  app/                 public routes: /, /work, /work/*, /experience, /build, /contact
+  app/                 public routes: /, /work, /work/*, /experience, /build, /build/example, /contact
   app/private/         gated routes, never prerendered or cached
   components/film/     the front page film: scenes, motion, shared scroll state
   components/apps/     the four playground apps

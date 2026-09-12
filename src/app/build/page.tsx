@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { pageMetadata } from "@/lib/metadata";
+import { ArrowRightIcon } from "@/components/icons";
 import { Container, Section } from "@/components/section";
 import { Reveal } from "@/components/reveal";
 import { Prose } from "@/components/prose";
@@ -8,7 +10,7 @@ import { ContactForm } from "@/components/contact-form";
 export const metadata: Metadata = pageMetadata({
   title: "Build",
   description:
-    "Want something built? Workflows automated, internal tools, integrations and MCP servers, fast public sites. Fixed price agreed before work starts.",
+    "Want something built? Workflows automated, internal tools, integrations and MCP servers, fast public sites. A build price agreed up front, then a monthly retainer that keeps it running.",
   path: "/build/",
 });
 
@@ -37,16 +39,16 @@ const steps = [
     body: "You describe the problem in your words. I ask the questions that decide whether this is a week or a quarter.",
   },
   {
-    title: "A written scope, with a price",
-    body: "One page: what gets built, what does not, what it costs. Fixed price, agreed before any work starts.",
+    title: "A written scope, with two prices",
+    body: "One page: what gets built, what does not, what the build costs, and what the monthly retainer covers after. Both agreed before any work starts.",
   },
   {
     title: "Delivery in weeks",
     body: "Working software early, then iterations against real use. You see progress on a live URL, not in a status report.",
   },
   {
-    title: "A month of support",
-    body: "After handover, thirty days of fixes and answers included. Longer arrangements if you want them.",
+    title: "Kept running, on retainer",
+    body: "After handover it is hosted, watched and improved every month: fixes within days, a set number of changes, a quarterly review. A longer retainer brings the build price down.",
   },
 ];
 
@@ -104,9 +106,16 @@ export default function BuildPage() {
           ))}
         </ol>
         <p className="label mt-8 max-w-[60ch]">
-          No prices listed here on purpose: every scope is different, and the
-          number is agreed in writing before anything starts.
+          No prices listed here on purpose: every scope is different, and both
+          numbers are agreed in writing before anything starts.
         </p>
+        <Link
+          href="/build/example"
+          className="link-underline mt-6 inline-flex items-center gap-2 text-sm font-medium text-ink hover:text-signal"
+        >
+          Read a worked example, start to finish
+          <ArrowRightIcon aria-hidden className="size-4" />
+        </Link>
       </Section>
 
       <Section
