@@ -3,6 +3,7 @@
 import * as React from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { pointer, progress, type ChapterId } from "./film-state";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -32,6 +33,25 @@ export function FilmMotion({ children }: { children: React.ReactNode }) {
         const lines = gsap.utils.toArray<HTMLElement>("[data-line]", chapter);
         const intro = chapter.hasAttribute("data-intro");
         const hold = chapter.hasAttribute("data-hold");
+
+        // Three plain triggers feed the shared store the 3D scenes read from:
+        // sliding in, pinned, sliding out.
+        const id = chapter.id as ChapterId;
+        if (id in progress) {
+          const record = progress[id];
+          ScrollTrigger.create({
+            trigger: chapter, start: "top bottom", end: "top top",
+            onUpdate: (self) => { record.enter = self.progress; },
+          });
+          ScrollTrigger.create({
+            trigger: chapter, start: "top top", end: "bottom bottom",
+            onUpdate: (self) => { record.pin = self.progress; },
+          });
+          ScrollTrigger.create({
+            trigger: chapter, start: "bottom bottom", end: "bottom top",
+            onUpdate: (self) => { record.exit = self.progress; },
+          });
+        }
 
         const timeline = gsap.timeline({
           defaults: { ease: "none" },
@@ -87,7 +107,22 @@ export function FilmMotion({ children }: { children: React.ReactNode }) {
       document.fonts?.ready.then(() => ScrollTrigger.refresh());
     }, root);
 
-    return () => context.revert();
+    // The scenes tilt and drift toward the pointer; the canvas itself takes
+    // no pointer events, so the position is read at the window.
+    const onMove = (event: PointerEvent) => {
+      pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+      pointer.y = -((event.clientY / window.innerHeight) * 2 - 1);
+      pointer.active = true;
+    };
+    const onLeave = () => { pointer.active = false; };
+    window.addEventListener("pointermove", onMove, { passive: true });
+    document.addEventListener("pointerleave", onLeave);
+
+    return () => {
+      context.revert();
+      window.removeEventListener("pointermove", onMove);
+      document.removeEventListener("pointerleave", onLeave);
+    };
   }, []);
 
   return <div ref={ref}>{children}</div>;

@@ -3,8 +3,7 @@ import type { Route } from "next";
 import { ArrowRightIcon, ArrowUpRightIcon } from "@/components/icons";
 import { Chapter } from "@/components/film/chapter";
 import { FilmMotion } from "@/components/film/film-motion";
-import { GlobeHero } from "@/components/film/globe-hero";
-import { ScheduleField } from "@/components/schedule-field";
+import { FilmHero } from "@/components/film/film-hero";
 import { Container } from "@/components/section";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -46,7 +45,7 @@ export default function HomePage() {
           length={0.8}
           intro
           align="center"
-          visual={<GlobeHero />}
+          visual={<FilmHero />}
         >
           <h1
             id="arrival-title"
@@ -90,11 +89,6 @@ export default function HomePage() {
           index="02"
           label="Systems"
           length={1.3}
-          visual={
-            <div className="absolute inset-x-0 top-0 h-[42svh] opacity-70 sm:inset-x-auto sm:top-auto sm:right-0 sm:bottom-0 sm:h-[68svh] sm:w-[44vw]">
-              <ScheduleField className="h-full w-full px-5 pt-24 sm:px-0" />
-            </div>
-          }
         >
           <h2 id="systems-title" className={chapterTitle} data-line>
             {current.title} at {current.organisation}.
@@ -175,8 +169,8 @@ export default function HomePage() {
                 Hockey.
               </p>
               <p className="mt-4 max-w-[36ch] text-body text-ink-muted" data-line>
-                The one hour a week where nobody can reach me and the only
-                system that matters is the one on the ice.
+                From the stands, not the bench. The only system I follow
+                without wanting to fix it.
               </p>
             </div>
             <div>
@@ -184,8 +178,8 @@ export default function HomePage() {
                 Tower of God.
               </p>
               <p className="mt-4 max-w-[36ch] text-body text-ink-muted" data-line>
-                The thing I read. Still the story I would hand to someone who
-                thinks they do not like comics.
+                The thing I read. A tower, a boy, and a story I would hand to
+                anyone who thinks they do not like comics.
               </p>
             </div>
           </div>
