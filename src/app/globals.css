@@ -166,6 +166,19 @@
     background-image: linear-gradient(to bottom, rgb(10 13 18 / 0.85), rgb(10 13 18 / 0));
   }
 
+  /* Phones: numbered lists read as one rail down the left, not four sections. */
+  @media (max-width: 639px) {
+    .rail-list {
+      border-left: 1px solid rgb(95 211 230 / 0.35);
+      padding-left: 1.25rem;
+    }
+    .rail-list > li {
+      border-top: 0;
+      padding-top: 0.25rem;
+      padding-bottom: 1.75rem;
+    }
+  }
+
   /* The live dot next to the name in the header. */
   .pulse-dot {
     animation: pulse-dot 2.6s ease-in-out infinite;

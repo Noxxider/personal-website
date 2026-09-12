@@ -25,12 +25,12 @@ const before = [
 const build = [
   {
     title: "The week, as a board",
-    body: "Shifts are laid on a week by dragging. Overlaps, short rests, hours without cover and over-hours are flagged the moment they happen, not on Thursday. The board on this site is the sketch of it.",
+    body: "Shifts are laid on a week by dragging. Overlaps, short rests, hours without cover and over-hours are flagged the moment they happen, not on Thursday. Shift, on the Work page, is the working sketch of it.",
     href: "/work/shift" as const,
-    link: "Open the sketch",
+    link: "Try the board in Shift",
   },
   {
-    title: "Requests that approve themselves, or ask",
+    title: "Rule-checked swaps, one click",
     body: "A swap that breaks no rule goes through on one click and is logged. One that would leave a gap goes to the coordinator with the gap already highlighted.",
   },
   {
@@ -44,10 +44,17 @@ const build = [
 ];
 
 const after = [
-  "Conflicts are caught on entry, by the software, before anyone is inconvenienced.",
-  "There is exactly one current week, and everyone can see it from their own calendar.",
-  "Every change has a name, a time and a reason attached.",
+  "A bad swap is refused before it is saved. Nobody finds it at an empty desk.",
+  "One week exists. It is the one on everyone's calendar.",
+  "Every dispute ends in ten seconds: who approved it, when, and why.",
   "The coordinator's Thursday night is a Thursday night.",
+];
+
+const weekOne = [
+  { when: "Day 2", what: "A live URL with your real roster on it." },
+  { when: "Day 5", what: "The counter running against last month's spreadsheet." },
+  { when: "Week 2", what: "The team drags shifts. You watch what breaks, and it gets fixed that day." },
+  { when: "Week 3", what: "Calendars, sign-in, handover. The spreadsheet is switched off." },
 ];
 
 const retainer = [
@@ -75,10 +82,10 @@ export default function ExamplePage() {
           </h1>
           <Prose className="mt-8 text-lead">
             <p>
-              This is an illustration, not a client story. It follows one
-              common shape of problem, a roster kept in a spreadsheet and an
-              inbox, through what gets built, what changes, and how it is
-              paid for.
+              This is an illustration, not a client story. If your team runs a
+              roster, a queue or an approvals list out of a spreadsheet and an
+              inbox, the shape will be familiar. Here is what gets built, what
+              changes, and how it is paid for.
             </p>
           </Prose>
         </div>
@@ -88,7 +95,7 @@ export default function ExamplePage() {
         title="Before"
         lede="A team of a dozen, one coordinator, one very important spreadsheet."
       >
-        <ul className="grid gap-px sm:grid-cols-2">
+        <ul className="rail-list grid gap-px sm:grid-cols-2">
           {before.map((line, i) => (
             <Reveal key={line} as="li" delay={i * 60} className="border-t border-line py-6 sm:pr-10">
               <span className="label tabular">0{i + 1}</span>
@@ -102,7 +109,7 @@ export default function ExamplePage() {
         title="What gets built"
         lede="A small internal app. Two to three weeks from the first call to the team using it."
       >
-        <ol className="grid gap-10 lg:grid-cols-2 lg:gap-x-16">
+        <ol className="rail-list grid gap-10 lg:grid-cols-2 lg:gap-x-16">
           {build.map((step, i) => (
             <Reveal key={step.title} as="li" delay={i * 70} className="border-t border-line pt-5">
               <span className="label tabular">Step {i + 1}</span>
@@ -122,8 +129,22 @@ export default function ExamplePage() {
         </ol>
       </Section>
 
+      <Section
+        title="What you would have, and when"
+        lede="No case study can give you this part. A schedule you can hold me to."
+      >
+        <ol className="rail-list grid gap-px sm:grid-cols-2 lg:grid-cols-4">
+          {weekOne.map((item, i) => (
+            <Reveal key={item.when} as="li" delay={i * 60} className="border-t border-line py-6 sm:pr-8">
+              <span className="label tabular">{item.when}</span>
+              <p className="mt-3 max-w-[30ch] text-body text-ink-muted">{item.what}</p>
+            </Reveal>
+          ))}
+        </ol>
+      </Section>
+
       <Section title="After">
-        <ul className="grid gap-px sm:grid-cols-2">
+        <ul className="rail-list grid gap-px sm:grid-cols-2">
           {after.map((line, i) => (
             <Reveal key={line} as="li" delay={i * 60} className="border-t border-line py-6 sm:pr-10">
               <span className="label tabular">0{i + 1}</span>
@@ -159,11 +180,15 @@ export default function ExamplePage() {
                 </li>
               ))}
             </ul>
+            <p className="mt-5 max-w-[44ch] text-body text-ink">
+              Month one of the retainer starts the day the spreadsheet is
+              switched off, not the day the invoice is sent.
+            </p>
           </Reveal>
         </div>
         <p className="label mt-10 max-w-[60ch]">
-          No numbers here on purpose. Both figures depend on the scope, and
-          both are in writing before anything begins.
+          Both figures are fixed in writing before any work starts. The build
+          price drops with a longer retainer, twelve months or more.
         </p>
         <Link
           href="/build/#form"

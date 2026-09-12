@@ -6,6 +6,8 @@ import { Container, Section } from "@/components/section";
 import { Reveal } from "@/components/reveal";
 import { Prose } from "@/components/prose";
 import { ContactForm } from "@/components/contact-form";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = pageMetadata({
   title: "Build",
@@ -39,7 +41,7 @@ const steps = [
     body: "You describe the problem in your words. I ask the questions that decide whether this is a week or a quarter.",
   },
   {
-    title: "A written scope, with two prices",
+    title: "A scope, two prices",
     body: "One page: what gets built, what does not, what the build costs, and what the monthly retainer covers after. Both agreed before any work starts.",
   },
   {
@@ -63,16 +65,16 @@ export default function BuildPage() {
           </h1>
           <Prose className="mt-8 text-lead">
             <p>
-              TypeScript first, Python where it fits, and a habit of measuring
-              before deciding. Below is what I take on, how it goes, and a form
-              that lands in my inbox.
+              I build small, well-measured software for teams who are past
+              what a spreadsheet can do. Below: what I take on, how it goes,
+              and a form that lands in my inbox.
             </p>
           </Prose>
         </div>
       </Container>
 
       <Section title="What kinds of things">
-        <ol className="grid gap-px sm:grid-cols-2">
+        <ol className="rail-list grid gap-px sm:grid-cols-2">
           {kinds.map((kind, i) => (
             <Reveal
               key={kind.title}
@@ -89,7 +91,7 @@ export default function BuildPage() {
       </Section>
 
       <Section title="How it goes">
-        <ol className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <ol className="rail-list grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((step, i) => (
             <Reveal
               key={step.title}
@@ -105,17 +107,17 @@ export default function BuildPage() {
             </Reveal>
           ))}
         </ol>
-        <p className="label mt-8 max-w-[60ch]">
-          No prices listed here on purpose: every scope is different, and both
-          numbers are agreed in writing before anything starts.
-        </p>
         <Link
           href="/build/example"
-          className="link-underline mt-6 inline-flex items-center gap-2 text-sm font-medium text-ink hover:text-signal"
+          className={cn(buttonVariants({ variant: "outline", size: "lg" }), "mt-10")}
         >
           Read a worked example, start to finish
           <ArrowRightIcon aria-hidden className="size-4" />
         </Link>
+        <p className="label mt-6 max-w-[60ch]">
+          Both figures are fixed in writing before any work starts. The build
+          price drops with a longer retainer, twelve months or more.
+        </p>
       </Section>
 
       <Section
