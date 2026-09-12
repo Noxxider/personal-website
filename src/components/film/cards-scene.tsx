@@ -31,10 +31,10 @@ function Card({
     const g = group.current;
     if (!g) return;
     const t = clock.elapsedTime + index * 1.7;
-    const enter = ease((progress.web.enter - index * 0.12) / 0.7);
+    const enter = ease((progress.web.enter - 0.4 - index * 0.08) / 0.5);
     g.position.set(offset[0], offset[1] + Math.sin(t * 0.9) * 0.02 - (1 - enter) * 0.5, offset[2]);
-    g.rotation.set(Math.sin(t * 0.7) * 0.02, -0.42 + index * -0.05, 0);
-    g.scale.setScalar((0.85 + 0.15 * enter) * (1 - index * 0.12));
+    g.rotation.set(Math.sin(t * 0.7) * 0.02, -0.1 + index * -0.02, 0);
+    g.scale.setScalar((0.85 + 0.15 * enter) * (index === 0 ? 1 : index === 1 ? 0.85 : 0.72));
   });
   return (
     <group ref={group}>
@@ -74,23 +74,23 @@ export function CardsScene() {
     smooth.current.tx = damp(smooth.current.tx, aim.x, 4, dt);
     smooth.current.ty = damp(smooth.current.ty, aim.y, 4, dt);
 
-    const leave = ease(progress.web.exit);
+    const leave = ease(progress.web.exit / 0.5);
     const base = narrow
-      ? { x: 0.05, y: 0.98, s: 0.55 }
-      : { x: Math.min(0.55, halfW - 1.5), y: 0.32, s: 1.55 };
-    g.position.set(base.x, base.y + leave * 0.9, 0);
-    g.scale.setScalar(base.s * (1 - leave * 0.3));
+      ? { x: 0, y: 0.88, s: 0.72 }
+      : { x: Math.min(0.35, halfW - 1.6), y: 0.36, s: 1.45 };
+    g.position.set(base.x, base.y + leave * 1.2, 0);
+    g.scale.setScalar(Math.max(0.0001, base.s * (1 - leave)));
     g.rotation.set(-smooth.current.ty * 0.18, smooth.current.tx * 0.28, 0);
   });
 
   return (
     <group ref={group} visible={false}>
-      {textures.map((texture, i) => (
+      {textures.slice(0, narrow ? 1 : 3).map((texture, i) => (
         <Card
           key={SHOTS[i]}
           texture={texture}
           index={i}
-          offset={[i * (narrow ? 0.34 : 0.42), i * -0.09, i * -0.5]}
+          offset={[i * 0.3, i * -0.18, i * -0.35]}
         />
       ))}
     </group>

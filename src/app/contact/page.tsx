@@ -30,14 +30,14 @@ export default function ContactPage() {
         </div>
       </Container>
 
-      <Section title="Send a message">
+      <Section aria-label="Send a message">
         <div className="grid gap-12 lg:grid-cols-[7fr_5fr] lg:gap-20">
           <Reveal>
             <ContactForm />
           </Reveal>
 
           <Reveal delay={100} className="space-y-10">
-            <div className="border-t border-line pt-5">
+            <div className="border-t border-line pt-5 lg:border-t-0 lg:pt-0">
               <h3 className="label">What to expect</h3>
               <p className="mt-4 max-w-[40ch] text-body text-ink-muted">
                 A reply within a couple of days, to the address you give. If

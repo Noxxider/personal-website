@@ -8,7 +8,7 @@ export function SiteFooter() {
         <div className="flex flex-col gap-10 sm:flex-row sm:justify-between">
           <div>
             <p className="font-display text-3xl tracking-tight">{site.name}</p>
-            <p className="label mt-3">{site.role}</p>
+            <p className="label mt-3">Developer, clinical informatics</p>
             <Link
               href="/contact"
               className="link-underline mt-5 inline-block text-sm text-ink hover:text-signal"

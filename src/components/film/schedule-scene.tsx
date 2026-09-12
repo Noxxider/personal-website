@@ -6,6 +6,30 @@ import { useFrame } from "@react-three/fiber";
 import { presence, progress } from "./film-state";
 import { AMBER, TEAL, SURFACE_2, clamp01, damp, ease, makeRandom, useStage } from "./scene-utils";
 
+const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
+/** Mono text on a transparent canvas, in the page's own monospace. */
+function makeText(lines: string[], width: number, height: number, align: CanvasTextAlign = "center", color = "#7b8593") {
+  const canvas = document.createElement("canvas");
+  canvas.width = width;
+  canvas.height = height;
+  const context = canvas.getContext("2d")!;
+  const family = getComputedStyle(document.documentElement).getPropertyValue("--font-mono") || "monospace";
+  context.font = `500 ${Math.round(height * 0.62)}px ${family}`;
+  context.fillStyle = color;
+  context.textBaseline = "middle";
+  context.textAlign = align;
+  const step = width / lines.length;
+  lines.forEach((line, i) => {
+    const x = align === "center" ? step * (i + 0.5) : align === "left" ? 4 : width - 4;
+    context.fillText(line, x, height / 2);
+  });
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  texture.anisotropy = 8;
+  return texture;
+}
+
 /**
  * The systems chapter: a week of appointment slots as bars rising from a
  * tilted plane. Bookings fill in as the scene arrives. Partway through, one
@@ -52,6 +76,10 @@ export function ScheduleScene() {
   const bars = React.useRef<THREE.InstancedMesh>(null);
   const { narrow, halfW } = useStage();
   const smooth = React.useRef({ build: 0, reflow: 0, on: 0 });
+  const caption = React.useRef<THREE.Mesh>(null);
+  const dayLabels = React.useMemo(() => makeText(DAYS, 1024, 96), []);
+  const hourLabels = React.useMemo(() => makeText(["18", "12", "06"], 96, 512, "right"), []);
+  const conflictLabel = React.useMemo(() => makeText(["conflict"], 512, 96, "left", "#f2a65a"), []);
 
   useFrame((_, delta) => {
     const g = group.current;
@@ -112,19 +140,40 @@ export function ScheduleScene() {
     // Holds back until the Earth has mostly left, then grows in.
     const arrive = ease((p.enter - 0.3) / 0.5);
     g.scale.setScalar(Math.max(0.0001, base.s * (1 - leave * 0.4) * (0.7 + 0.3 * arrive) * arrive * (1 - leave)));
-    g.rotation.set(-0.95 + leave * 0.3, -0.35 + Math.sin(p.pin * Math.PI) * 0.12, 0);
+    g.rotation.set(-0.72 + leave * 0.3, -0.28 + Math.sin(p.pin * Math.PI) * 0.1, 0);
+    if (caption.current) {
+      const material = caption.current.material as THREE.MeshBasicMaterial;
+      material.opacity = ease((reflow - 0.35) / 0.3) * (1 - leave);
+    }
   });
 
   return (
     <group ref={group} visible={false}>
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.002, 0]}>
-        <planeGeometry args={[COLUMNS * (CELL + GAP) + 0.3, ROWS * (CELL + GAP) + 0.3]} />
+        <planeGeometry args={[COLUMNS * (CELL + GAP) + 0.16, ROWS * (CELL + GAP) + 0.16]} />
         <meshStandardMaterial color="#0c1117" roughness={0.9} metalness={0} />
       </mesh>
-      <gridHelper
-        args={[ROWS * (CELL + GAP) + 0.3, ROWS, "#1e2530", "#1a212c"]}
-        position={[0, 0.001, 0]}
-      />
+      {/* Day names along the far edge, hours down the left, both lying flat. */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.002, -(ROWS * (CELL + GAP)) / 2 - 0.16]}>
+        <planeGeometry args={[COLUMNS * (CELL + GAP), 0.11]} />
+        <meshBasicMaterial map={dayLabels} transparent depthWrite={false} />
+      </mesh>
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[-(COLUMNS * (CELL + GAP)) / 2 - 0.16, 0.002, 0]}>
+        <planeGeometry args={[0.11, ROWS * (CELL + GAP)]} />
+        <meshBasicMaterial map={hourLabels} transparent depthWrite={false} />
+      </mesh>
+      <mesh
+        ref={caption}
+        rotation={[-Math.PI / 2, 0, 0]}
+        position={[
+          -((COLUMNS * CELL + (COLUMNS - 1) * GAP) / 2) + 6 * (CELL + GAP) + 0.2,
+          0.003,
+          -((ROWS * CELL + (ROWS - 1) * GAP) / 2) + 8 * (CELL + GAP) + CELL / 2,
+        ]}
+      >
+        <planeGeometry args={[0.6, 0.11]} />
+        <meshBasicMaterial map={conflictLabel} transparent opacity={0} depthWrite={false} />
+      </mesh>
       <instancedMesh ref={bars} args={[undefined, undefined, COUNT]}>
         <boxGeometry args={[1, 1, 1]} />
         <meshStandardMaterial roughness={0.45} metalness={0.1} />

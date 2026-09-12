@@ -14,8 +14,16 @@ export const site = {
   tagline:
     "Software developer working in clinical informatics, building fast and accessible things for the web.",
   socials: [
-    { label: "LinkedIn", href: "https://www.linkedin.com/in/ravinojuwono" },
-    { label: "GitHub", href: "https://github.com/Noxxider" },
+    {
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/in/ravinojuwono",
+      note: "Work history, and the occasional note on scheduling systems",
+    },
+    {
+      label: "GitHub",
+      href: "https://github.com/Noxxider",
+      note: "Source for everything on this page",
+    },
   ],
 } as const;
 

@@ -163,7 +163,7 @@ export default function HomePage() {
           id="elsewhere"
           index="05"
           label="Elsewhere"
-          length={0.4}
+          length={0.3}
           align="center"
         >
           <h2 id="elsewhere-title" className="sr-only">
@@ -171,19 +171,20 @@ export default function HomePage() {
           </h2>
           <ul className="grid grid-cols-2 gap-4 sm:gap-8">
             {site.socials.map((s) => (
-              <li key={s.href} data-line className="flex justify-center">
+              <li key={s.href} data-line className="flex flex-col items-center text-center">
                 <a
                   href={s.href}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="group inline-flex items-baseline gap-2 font-display text-[clamp(2rem,1rem+4vw,4.5rem)] leading-none text-ink transition-colors hover:text-signal sm:gap-3"
+                  className="group inline-flex items-baseline gap-2 font-display text-[clamp(1.75rem,0.9rem+3vw,4rem)] leading-none text-ink transition-colors hover:text-signal"
                 >
                   {s.label}
                   <ArrowUpRightIcon
                     aria-hidden
-                    className="size-6 translate-y-0.5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5 sm:size-8"
+                    className="size-5 translate-y-0.5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5 sm:size-7"
                   />
                 </a>
+                <span className="label mt-3 max-w-[22ch]">{s.note}</span>
               </li>
             ))}
           </ul>

@@ -28,10 +28,10 @@ export function Section({
   ...props
 }: SectionProps) {
   return (
-    <section className={cn("py-16 sm:py-24", className)} {...props}>
+    <section className={cn("py-14 sm:py-20", className)} {...props}>
       <Container>
         {title && (
-          <div className="mb-10 border-t border-line pt-8 sm:mb-14">
+          <div className="mb-10 border-t border-line pt-8 sm:mb-12">
             <h2 className="font-display text-title text-balance">{title}</h2>
             {lede && (
               <p className="mt-3 max-w-[52ch] text-[1.0625rem] leading-relaxed text-ink-muted">

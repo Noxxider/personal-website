@@ -96,7 +96,7 @@ export default function BuildPage() {
               className="relative border-t border-line pt-5"
             >
               <span className="label tabular">Step {i + 1}</span>
-              <h3 className="mt-3 font-display text-xl text-ink">{step.title}</h3>
+              <h3 className="mt-3 min-h-[3.5rem] font-display text-xl text-ink">{step.title}</h3>
               <p className="mt-2 text-[0.9375rem] leading-relaxed text-ink-muted">
                 {step.body}
               </p>

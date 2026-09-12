@@ -64,7 +64,7 @@ function Tile({ label, index, spread }: { label: string; index: number; spread: 
     const dt = Math.min(delta, 0.05);
     const t = clock.elapsedTime + index * 2.1;
     const side = index === 0 ? -1 : 1;
-    const enter = ease((progress.elsewhere.enter - 0.45 - index * 0.12) / 0.45);
+    const enter = ease((progress.elsewhere.enter - 0.55 - index * 0.05) / 0.35);
     const leave = ease(progress.elsewhere.exit);
 
     const aimX = pointer.active ? pointer.x * 0.24 : 0;
@@ -111,14 +111,14 @@ export function MarksScene() {
     smooth.current.on = damp(smooth.current.on, on, 8, dt);
     g.visible = smooth.current.on > 0.001;
     if (!g.visible) return;
-    g.position.set(0, narrow ? 0.5 : 0.5, 0);
-    g.scale.setScalar(narrow ? 0.62 : 1);
+    g.position.set(0, narrow ? 0.42 : 0.5, 0);
+    g.scale.setScalar(narrow ? 0.48 : 1);
   });
 
   return (
     <group ref={group} visible={false}>
       {Object.keys(MARKS).map((label, i) => (
-        <Tile key={label} label={label} index={i} spread={narrow ? 0.62 : 0.72} />
+        <Tile key={label} label={label} index={i} spread={narrow ? 0.42 : 0.72} />
       ))}
     </group>
   );

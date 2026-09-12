@@ -57,7 +57,7 @@ export const projects: Project[] = [
     year: "2026",
     status: "Playground",
     href: "/work/shift",
-    stack: ["TypeScript", "Constraint checks", "iCalendar export"],
+    stack: ["TypeScript", "Constraint checks", "iCal export"],
     image: { src: "/work/shift.png", width: 760, height: 540, alt: "The shift board: a week of shifts with issues listed beside it" },
   },
   {

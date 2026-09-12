@@ -16,8 +16,8 @@ import { nav, site } from "@/content/site";
 import { cn } from "@/lib/utils";
 
 /**
- * On the home page the header is part of the film: a mono chapter number
- * and a hairline that fills as the film plays, both read
+ * On the home page the header is part of the film: a six-segment chapter
+ * rail lights up as the film plays, read
  * straight from the shared scroll state on each frame. Nav links are
  * magnetic, leaning a few pixels toward the pointer.
  */
@@ -25,8 +25,8 @@ export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = React.useState(false);
   const [scrolled, setScrolled] = React.useState(false);
-  const readout = React.useRef<HTMLSpanElement>(null);
-  const bar = React.useRef<HTMLSpanElement>(null);
+  const rail = React.useRef<HTMLSpanElement>(null);
+  const [inFilm, setInFilm] = React.useState(false);
   const home = pathname === "/";
 
   React.useEffect(() => {
@@ -49,19 +49,17 @@ export function SiteHeader() {
         if (p.enter > 0.5 && p.exit < 0.5) current = id;
         filled += Math.min(1, p.enter) + p.pin;
       }
-      const past = progress.elsewhere.exit >= 0.5;
+      const past = progress.elsewhere.exit >= 0.98;
       const index = past ? chapterIds.length : chapterIds.indexOf(current);
-      const text = `0${index}`;
-      if (readout.current) {
-        readout.current.style.opacity = index === 0 ? "0" : "1";
-        if (text !== last) {
-          readout.current.textContent = text;
-          last = text;
-        }
+      const key = `${index}:${past}`;
+      if (key !== last) {
+        last = key;
+        setInFilm(!past);
+        rail.current?.querySelectorAll("i").forEach((segment, i) => {
+          segment.style.opacity = i < index ? "0.45" : i === index ? "1" : "0.15";
+        });
       }
-      if (bar.current) {
-        bar.current.style.transform = `scaleX(${Math.min(1, filled / (chapterIds.length * 2))})`;
-      }
+      void filled;
     };
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
@@ -73,10 +71,12 @@ export function SiteHeader() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-40 border-b transition-colors duration-300",
-        scrolled
-          ? "border-line bg-ground/75 backdrop-blur-md"
-          : "border-transparent bg-transparent",
+        "sticky top-0 z-40 transition-colors duration-300",
+        home && inFilm
+          ? "header-mask border-b border-transparent bg-transparent"
+          : scrolled
+            ? "border-b border-line bg-ground/75 backdrop-blur-md"
+            : "border-b border-transparent bg-transparent",
       )}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8 lg:px-12">
@@ -102,11 +102,17 @@ export function SiteHeader() {
 
         {home && (
           <span
-            ref={readout}
+            ref={rail}
             aria-hidden
-            className="label tabular pointer-events-none absolute left-1/2 hidden -translate-x-1/2 opacity-0 transition-opacity duration-500 md:block"
+            className="pointer-events-none absolute left-1/2 hidden -translate-x-1/2 gap-1.5 md:flex"
           >
-            00
+            {chapterIds.map((id) => (
+              <i
+                key={id}
+                className="block h-0.5 w-7 rounded-full bg-signal transition-opacity duration-500"
+                style={{ opacity: id === "arrival" ? 1 : 0.15 }}
+              />
+            ))}
           </span>
         )}
 
@@ -164,13 +170,6 @@ export function SiteHeader() {
         </Sheet>
       </div>
 
-      {home && (
-        <span
-          ref={bar}
-          aria-hidden
-          className="absolute inset-x-0 bottom-[-1px] block h-px origin-left scale-x-0 bg-signal"
-        />
-      )}
     </header>
   );
 }
