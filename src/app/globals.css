@@ -215,22 +215,6 @@
       padding-block: 6rem;
     }
   }
-
-  /* A thin ring that stands in for the globe until the 3D lands. It grows
-     with --progress, so the "zoom" chapter already reads as one. */
-  .globe-ring {
-    position: absolute;
-    right: -12vmin;
-    top: 50%;
-    width: 72vmin;
-    height: 72vmin;
-    border-radius: 9999px;
-    border: 1px solid rgb(95 211 230 / 0.35);
-    box-shadow:
-      inset 0 0 80px rgb(95 211 230 / 0.08),
-      0 0 120px rgb(95 211 230 / 0.06);
-    transform: translateY(-50%) scale(var(--ring-scale, 1));
-  }
 }
 
 /* --- Sheet (mobile navigation) enter and exit motion ---------------------- */

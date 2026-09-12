@@ -3,6 +3,7 @@ import type { Route } from "next";
 import { ArrowRightIcon, ArrowUpRightIcon } from "@/components/icons";
 import { Chapter } from "@/components/film/chapter";
 import { FilmMotion } from "@/components/film/film-motion";
+import { GlobeHero } from "@/components/film/globe-hero";
 import { ScheduleField } from "@/components/schedule-field";
 import { Container } from "@/components/section";
 import { buttonVariants } from "@/components/ui/button";
@@ -45,11 +46,7 @@ export default function HomePage() {
           length={0.8}
           intro
           align="center"
-          visual={
-            <div className="glow absolute inset-0">
-              <div className="globe-ring" />
-            </div>
-          }
+          visual={<GlobeHero />}
         >
           <h1
             id="arrival-title"
@@ -76,17 +73,6 @@ export default function HomePage() {
           index="01"
           label="Canada"
           length={1.2}
-          visual={
-            <div
-              className="absolute inset-0"
-              style={{
-                ["--ring-scale" as string]:
-                  "calc(1.05 + var(--progress) * 1.9)",
-              }}
-            >
-              <div className="globe-ring" />
-            </div>
-          }
         >
           <h2 id="canada-title" className={chapterTitle} data-line>
             Canada.
@@ -105,7 +91,7 @@ export default function HomePage() {
           label="Systems"
           length={1.3}
           visual={
-            <div className="absolute inset-x-0 top-0 h-[42svh] opacity-70 sm:inset-y-0 sm:right-0 sm:left-auto sm:h-auto sm:w-[46vw]">
+            <div className="absolute inset-x-0 top-0 h-[42svh] opacity-70 sm:inset-x-auto sm:top-auto sm:right-0 sm:bottom-0 sm:h-[68svh] sm:w-[44vw]">
               <ScheduleField className="h-full w-full px-5 pt-24 sm:px-0" />
             </div>
           }
@@ -239,7 +225,7 @@ export default function HomePage() {
       </FilmMotion>
 
       {/* ------------------------------------------------------ 07, the offer */}
-      <section aria-labelledby="offer-title" className="border-t border-line">
+      <section aria-labelledby="offer-title" className="relative border-t border-line bg-ground">
         <Container className="py-20 sm:py-28">
           <p className="label">07 / The offer</p>
           <h2

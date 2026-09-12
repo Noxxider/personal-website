@@ -28,9 +28,11 @@ export function Reveal({
   children,
   ...props
 }: RevealProps) {
-  const ref = React.useRef<HTMLElement>(null);
+  const ref = React.useRef<HTMLDivElement>(null);
   const [visible, setVisible] = React.useState(false);
-  const Component = Tag as React.ElementType;
+  // Narrowed to one intrinsic so the props type check; every allowed tag
+  // accepts the same attributes here.
+  const Component = Tag as "div";
 
   React.useEffect(() => {
     const node = ref.current;

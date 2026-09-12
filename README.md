@@ -92,6 +92,15 @@ the fold, so hero content is not waiting on hydration. `prefers-reduced-motion`
 disables it and a `<noscript>` style keeps everything visible without
 JavaScript.
 
+The home page is a scroll-driven film: pinned chapters driven by Lenis and
+GSAP ScrollTrigger, with a dot-matrix globe drawn in React Three Fiber behind
+the first three. The globe uses no textures; its land dots and the Canada
+outline come from Natural Earth 1:110m data (public domain), reduced to a
+48 kB JSON by `scripts/build-globe.mjs`. A server-rendered poster
+(`public/poster-earth.jpg`) is the first paint; the 3D chunk loads after
+hydration and takes over, and never loads at all under reduced motion or
+without WebGL.
+
 The redesign is being built in phases; see `docs/HANDOFF_redesign_2026-09-11.md`
 for the plan and the content rules it has to respect.
 
