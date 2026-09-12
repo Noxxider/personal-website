@@ -1,42 +1,58 @@
 @import "tailwindcss";
 
 /* ---------------------------------------------------------------------------
-   Design tokens.
-   Warm paper ground, near-black ink, one signal colour (rust) used sparingly.
-   Single committed light theme: no toggle, no dark variant to keep in sync.
+   Design tokens: "night flight".
+   Dark ground (not pure black, so glows can read), light ink, one signature
+   colour (atmosphere teal) for links, live markers and focus, and one warm
+   counter (rink amber) reserved for primary calls to action.
+   Single committed dark theme: no toggle, no light variant to keep in sync.
 --------------------------------------------------------------------------- */
 @theme {
-  --color-paper: #fbfaf8;
-  --color-paper-raised: #ffffff;
-  --color-paper-sunken: #f4f2ee;
+  --color-ground: #0a0d12;
+  --color-surface: #11161e;
+  --color-surface-2: #171d27;
 
-  --color-ink: #16161a;
-  /* Both pass WCAG AA against --color-paper: 6.8:1 and 4.8:1. */
-  --color-ink-muted: #5c5850;
-  --color-ink-faint: #746f66;
+  --color-ink: #e8ecf1;
+  /* Against --color-ground: 6.4:1 and 5.2:1. Faint still clears 4.5:1 on
+     --color-surface-2, the lightest thing it is ever set on. */
+  --color-ink-muted: #8b95a5;
+  --color-ink-faint: #7b8593;
 
-  --color-line: #e7e3db;
-  --color-line-strong: #d5cfc4;
+  --color-line: #1e2530;
+  --color-line-strong: #2b3442;
 
-  --color-signal: #a6432b;
-  --color-signal-soft: #f3e6e1;
+  /* Signature. 10.9:1 on the ground. */
+  --color-signal: #5fd3e6;
+  --color-signal-soft: rgb(95 211 230 / 0.12);
 
-  --font-sans: var(--font-inter-tight), ui-sans-serif, system-ui, -apple-system,
+  /* The one warm hue. Primary buttons only. 9.7:1 for ground text on it. */
+  --color-accent: #f2a65a;
+  --color-accent-soft: rgb(242 166 90 / 0.14);
+
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", Roboto, sans-serif;
-  --font-display: var(--font-instrument-serif), ui-serif, Georgia, serif;
-  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas,
-    "Liberation Mono", monospace;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", SFMono-Regular,
+    Menlo, Consolas, "Liberation Mono", monospace;
 
-  --text-display: clamp(2.75rem, 1.4rem + 5.2vw, 5.5rem);
-  --text-display--line-height: 0.98;
-  --text-display--letter-spacing: -0.02em;
+  /* 56px on a phone, 96px from about 1100px up. */
+  --text-display: clamp(3.5rem, 2rem + 5.8vw, 6rem);
+  --text-display--line-height: 1;
+  --text-display--letter-spacing: -0.025em;
 
-  --text-title: clamp(1.75rem, 1.1rem + 2.4vw, 2.75rem);
-  --text-title--line-height: 1.08;
-  --text-title--letter-spacing: -0.015em;
+  /* 30px on a phone, 40px on a laptop. */
+  --text-title: clamp(1.875rem, 1.5rem + 1.6vw, 2.5rem);
+  --text-title--line-height: 1.05;
+  --text-title--letter-spacing: -0.02em;
 
-  --text-lead: clamp(1.0625rem, 0.98rem + 0.45vw, 1.3125rem);
-  --text-lead--line-height: 1.6;
+  --text-lead: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+  --text-lead--line-height: 1.5;
+
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.65;
+
+  --text-caption: 0.8125rem;
+  --text-caption--line-height: 1.4;
 
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -48,13 +64,15 @@
 
   html {
     -webkit-text-size-adjust: 100%;
+    /* Native controls, scrollbars and the UA's form styling follow the theme. */
+    color-scheme: dark;
     /* No smooth scrolling: it animates the router's scroll-to-top on
        navigation and leaves the new page stranded partway down. */
     scroll-padding-top: 6rem;
   }
 
   body {
-    background-color: var(--color-paper);
+    background-color: var(--color-ground);
     color: var(--color-ink);
     font-family: var(--font-sans);
     font-synthesis-weight: none;
@@ -62,9 +80,15 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  /* Display type: Fraunces with the wonky alternates on. The optical size
+     axis is left to the browser, which picks it from the font size. */
+  .font-display {
+    font-variation-settings: "WONK" 1;
+  }
+
   ::selection {
     background-color: var(--color-signal);
-    color: var(--color-paper);
+    color: var(--color-ground);
   }
 
   :focus-visible {
@@ -92,8 +116,10 @@
 @layer components {
   /* Quiet label for metadata: field names, column headings, card meta. */
   .label {
-    font-size: 0.8125rem;
-    line-height: 1.4;
+    font-family: var(--font-mono);
+    font-size: var(--text-caption);
+    line-height: var(--text-caption--line-height);
+    letter-spacing: 0.02em;
     color: var(--color-ink-faint);
   }
 
@@ -135,6 +161,15 @@
   .link-underline:hover,
   .link-underline:focus-visible {
     background-size: 100% 1px;
+  }
+
+  /* A faint radial glow behind hero blocks, in the signature colour. */
+  .glow {
+    background-image: radial-gradient(
+      60% 55% at 70% 30%,
+      rgb(95 211 230 / 0.09),
+      transparent 70%
+    );
   }
 }
 

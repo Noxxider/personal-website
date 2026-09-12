@@ -220,7 +220,7 @@ export function EpisodesAnalytics({ questions }: { questions: string[] }) {
                         [field.key]: e.target.value || undefined,
                       })
                     }
-                    className="mt-2 h-11 w-full rounded-lg border border-line-strong bg-paper-raised px-3 text-[0.9375rem] text-ink"
+                    className="mt-2 h-11 w-full rounded-lg border border-line-strong bg-surface px-3 text-[0.9375rem] text-ink"
                   >
                     <option value="">Not mapped</option>
                     {loaded.headers.map((h) => (
@@ -310,7 +310,7 @@ export function EpisodesAnalytics({ questions }: { questions: string[] }) {
                       temperature: e.target.value || null,
                     })
                   }
-                  className="mt-2 h-11 w-full rounded-lg border border-line-strong bg-paper-raised px-3 text-[0.9375rem] text-ink"
+                  className="mt-2 h-11 w-full rounded-lg border border-line-strong bg-surface px-3 text-[0.9375rem] text-ink"
                 >
                   <option value="">Any</option>
                   {TEMPERATURES.map((t) => (
@@ -343,7 +343,7 @@ export function EpisodesAnalytics({ questions }: { questions: string[] }) {
                       className={cn(
                         "rounded-full px-3 py-1.5 font-mono text-[0.6875rem] transition-colors",
                         on
-                          ? "bg-ink text-paper"
+                          ? "bg-ink text-ground"
                           : "border border-line-strong text-ink-muted hover:border-ink",
                       )}
                     >
@@ -490,7 +490,7 @@ export function EpisodesAnalytics({ questions }: { questions: string[] }) {
                                   cell.mean == null
                                     ? undefined
                                     : {
-                                        backgroundColor: `color-mix(in oklab, var(--color-signal) ${Math.min(100, (cell.mean / 10) * 100)}%, var(--color-paper-sunken))`,
+                                        backgroundColor: `color-mix(in oklab, var(--color-signal) ${Math.min(100, (cell.mean / 10) * 100)}%, var(--color-surface-2))`,
                                       }
                                 }
                               >

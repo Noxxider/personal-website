@@ -102,7 +102,7 @@ export function PrStatus({
   return (
     <div>
       {/* ------------------------------------------------------ Celebration */}
-      <div className="rounded-2xl border border-line bg-paper-raised p-6 sm:p-10">
+      <div className="rounded-2xl border border-line bg-surface p-6 sm:p-10">
         <p className="label flex items-center gap-2">
           <span aria-hidden className="size-1.5 rounded-full bg-signal" />
           Complete
@@ -178,7 +178,7 @@ export function PrStatus({
               aria-valuemin={0}
               aria-valuemax={100}
               aria-label="Physical presence toward citizenship"
-              className="mt-6 h-2 w-full overflow-hidden rounded-full bg-paper-sunken"
+              className="mt-6 h-2 w-full overflow-hidden rounded-full bg-surface-2"
             >
               <div
                 className="h-full rounded-full bg-signal transition-[width] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
@@ -304,7 +304,7 @@ export function PrStatus({
                       className={cn(
                         "tabular shrink-0 rounded-full px-3 py-1 font-mono text-[0.75rem]",
                         days === 0
-                          ? "bg-paper-sunken text-ink-faint"
+                          ? "bg-surface-2 text-ink-faint"
                           : "bg-signal-soft text-signal",
                       )}
                     >

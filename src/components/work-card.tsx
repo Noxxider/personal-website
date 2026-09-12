@@ -22,14 +22,16 @@ export function WorkCard({
   return (
     <article className={cn("group relative flex flex-col", className)}>
       {project.image && (
-        <div className="mb-6 overflow-hidden rounded-xl border border-line bg-paper-raised">
+        <div className="mb-6 overflow-hidden rounded-xl border border-line bg-surface">
+          {/* The screenshots are of light pages; held back a little so they
+              do not glare against the dark ground until hovered. */}
           <Image
             src={project.image.src}
             alt={project.image.alt}
             width={project.image.width}
             height={project.image.height}
             sizes="(min-width: 1024px) 32vw, (min-width: 640px) 46vw, 90vw"
-            className="aspect-[16/10] w-full object-cover object-left-top transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.02]"
+            className="aspect-[16/10] w-full object-cover object-left-top brightness-[.85] transition-[transform,filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.02] group-hover:brightness-100"
           />
         </div>
       )}

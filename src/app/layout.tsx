@@ -1,26 +1,39 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import { Instrument_Serif, Inter_Tight } from "next/font/google";
+import { Fraunces, Geist, Geist_Mono } from "next/font/google";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { site } from "@/content/site";
 import "./globals.css";
 
-// No `weight`: Inter Tight is variable, so this ships one file covering the
-// whole range instead of a static instance per weight.
-const interTight = Inter_Tight({
+// All three are variable fonts and self-hosted by next/font, so the page makes
+// no third-party font request and ships one file per face, not one per weight.
+const geist = Geist({
   subsets: ["latin"],
-  variable: "--font-inter-tight",
+  variable: "--font-geist",
   display: "swap",
 });
 
-const instrumentSerif = Instrument_Serif({
+const geistMono = Geist_Mono({
   subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
-  variable: "--font-instrument-serif",
+  variable: "--font-geist-mono",
   display: "swap",
 });
+
+// Optical size and the "WONK" axis are the two Fraunces axes the display
+// styles use; the rest are left out to keep the file small.
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  axes: ["opsz", "WONK"],
+  variable: "--font-fraunces",
+  display: "swap",
+});
+
+export const viewport: Viewport = {
+  themeColor: "#0a0d12",
+  colorScheme: "dark",
+};
 
 const description =
   "Ravino Juwono is a clinical informatics analyst. He keeps hospital scheduling software running for a health region of about a million people, and builds fast, accessible tools for the web.";
@@ -91,7 +104,10 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${interTight.variable} ${instrumentSerif.variable}`}>
+    <html
+      lang="en"
+      className={`${geist.variable} ${geistMono.variable} ${fraunces.variable}`}
+    >
       <head>
         <noscript>
           {/* Scroll reveals default to hidden; without JavaScript they must not stay that way. */}
@@ -105,7 +121,7 @@ export default function RootLayout({
       <body className="flex min-h-dvh flex-col antialiased">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-full focus:bg-ink focus:px-5 focus:py-2.5 focus:text-sm focus:text-paper"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-full focus:bg-ink focus:px-5 focus:py-2.5 focus:text-sm focus:text-ground"
         >
           Skip to content
         </a>

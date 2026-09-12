@@ -166,7 +166,7 @@ export function WeightTracker() {
             aria-invalid={error ? true : undefined}
             aria-describedby={error ? `weights-hint ${errorId}` : "weights-hint"}
             className={cn(
-              "mt-2 w-full resize-y rounded-lg border bg-paper-raised px-3.5 py-2.5 font-mono text-[0.9375rem] leading-relaxed text-ink transition-colors",
+              "mt-2 w-full resize-y rounded-lg border bg-surface px-3.5 py-2.5 font-mono text-[0.9375rem] leading-relaxed text-ink transition-colors",
               "placeholder:text-ink-faint focus:outline-none",
               error
                 ? "border-signal focus:border-signal"
@@ -204,7 +204,7 @@ export function WeightTracker() {
                   className={cn(
                     "h-full rounded-md px-3 text-[0.8125rem] font-medium transition-colors",
                     unit === u
-                      ? "bg-ink text-paper"
+                      ? "bg-ink text-ground"
                       : "text-ink-muted hover:text-ink",
                   )}
                 >
@@ -256,7 +256,7 @@ export function WeightTracker() {
       <div className="min-w-0">
         {result ? (
           <div>
-            <div className="rounded-xl border border-line bg-paper-raised p-4 sm:p-6">
+            <div className="rounded-xl border border-line bg-surface p-4 sm:p-6">
               <LineChart
                 points={result.points}
                 unit={unit}

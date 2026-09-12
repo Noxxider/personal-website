@@ -32,7 +32,7 @@ export function PrivateNav() {
             className={cn(
               "rounded-full px-3.5 py-1.5 text-[0.8125rem] font-medium transition-colors",
               active
-                ? "bg-ink text-paper"
+                ? "bg-ink text-ground"
                 : "border border-line-strong text-ink-muted hover:border-ink hover:text-ink",
             )}
           >

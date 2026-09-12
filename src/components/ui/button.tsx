@@ -7,10 +7,11 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        solid: "bg-ink text-paper hover:bg-signal",
+        // The one place the warm accent appears: the primary call to action.
+        solid: "bg-accent text-ground hover:bg-ink",
         outline:
-          "border border-line-strong bg-transparent text-ink hover:border-ink hover:bg-paper-raised",
-        ghost: "text-ink-muted hover:bg-paper-sunken hover:text-ink",
+          "border border-line-strong bg-transparent text-ink hover:border-ink-muted hover:bg-surface",
+        ghost: "text-ink-muted hover:bg-surface-2 hover:text-ink",
       },
       size: {
         default: "h-11 px-6",

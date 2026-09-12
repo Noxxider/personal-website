@@ -69,7 +69,7 @@ export function TapBpm() {
           onKeyUp={(e) => {
             if (e.key === " " || e.key === "Enter") registerTap();
           }}
-          className="group relative flex aspect-[4/3] w-full touch-manipulation select-none flex-col items-center justify-center rounded-2xl border border-line bg-paper-raised transition-colors duration-150 hover:border-ink-faint active:bg-paper-sunken sm:aspect-[16/9]"
+          className="group relative flex aspect-[4/3] w-full touch-manipulation select-none flex-col items-center justify-center rounded-2xl border border-line bg-surface transition-colors duration-150 hover:border-ink-faint active:bg-surface-2 sm:aspect-[16/9]"
           aria-label="Tap to register a beat"
         >
           {pulse > 0 && (

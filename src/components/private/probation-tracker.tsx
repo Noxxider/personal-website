@@ -139,7 +139,7 @@ export function ProbationTracker() {
                 aria-valuemin={0}
                 aria-valuemax={100}
                 aria-label="Probation progress"
-                className="mt-6 h-2 w-full overflow-hidden rounded-full bg-paper-sunken"
+                className="mt-6 h-2 w-full overflow-hidden rounded-full bg-surface-2"
               >
                 <div
                   className="h-full rounded-full bg-signal transition-[width] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"

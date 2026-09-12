@@ -34,8 +34,8 @@ export function SiteHeader() {
       className={cn(
         "sticky top-0 z-40 border-b transition-colors duration-300",
         scrolled
-          ? "border-line bg-paper/85 backdrop-blur-md"
-          : "border-transparent bg-paper",
+          ? "border-line bg-ground/80 backdrop-blur-md"
+          : "border-transparent bg-transparent",
       )}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8 lg:px-12">
@@ -81,7 +81,7 @@ export function SiteHeader() {
 
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger
-            className="-mr-2 rounded-full p-2 text-ink transition-colors hover:bg-paper-sunken sm:hidden"
+            className="-mr-2 rounded-full p-2 text-ink transition-colors hover:bg-surface-2 sm:hidden"
             aria-label="Open menu"
           >
             <MenuIcon className="size-5" />
@@ -95,7 +95,7 @@ export function SiteHeader() {
                     href={item.href}
                     aria-current={isActive(item.href) ? "page" : undefined}
                     className={cn(
-                      "border-b border-line py-4 font-display text-3xl transition-colors",
+                      "border-b border-line py-4 font-display text-3xl tracking-tight transition-colors",
                       isActive(item.href) ? "text-signal" : "text-ink",
                     )}
                   >

@@ -17,7 +17,7 @@ export function ContactForm() {
 
   if (state.status === "sent") {
     return (
-      <div className="rounded-2xl border border-line bg-paper-raised p-8 sm:p-10">
+      <div className="rounded-2xl border border-line bg-surface p-8 sm:p-10">
         <p className="flex items-center gap-2.5 text-signal">
           <CheckIcon className="size-5" />
           <span className="font-display text-2xl">Message sent</span>
@@ -68,7 +68,7 @@ export function ContactForm() {
           aria-invalid={fieldError("message") ? true : undefined}
           aria-describedby={fieldError("message") ? "message-error" : undefined}
           className={cn(
-            "mt-2 w-full resize-y rounded-lg border bg-paper-raised px-3.5 py-2.5 text-[0.9375rem] leading-relaxed text-ink transition-colors",
+            "mt-2 w-full resize-y rounded-lg border bg-surface px-3.5 py-2.5 text-[0.9375rem] leading-relaxed text-ink transition-colors",
             "placeholder:text-ink-faint focus:outline-none",
             fieldError("message")
               ? "border-signal focus:border-signal"

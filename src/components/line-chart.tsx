@@ -184,7 +184,7 @@ export function LineChart({
           cy={y(last.v)}
           r="4"
           fill="var(--color-signal)"
-          stroke="var(--color-paper-raised)"
+          stroke="var(--color-surface)"
           strokeWidth="2"
         />
 

@@ -68,8 +68,8 @@ export function ScheduleField({ className }: { className?: string }) {
     /** Which slots are spoken for, so bookings never overlap. */
     let taken = new Uint8Array(COLUMNS * MAX_ROWS);
 
-    const line = readToken(canvas, "--color-line", "#e7e3db");
-    const signal = readToken(canvas, "--color-signal", "#a6432b");
+    const line = readToken(canvas, "--color-line", "#1e2530");
+    const signal = readToken(canvas, "--color-signal", "#5fd3e6");
 
     let width = 0;
     let height = 0;

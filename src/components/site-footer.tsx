@@ -3,15 +3,15 @@ import { nav, site } from "@/content/site";
 
 export function SiteFooter() {
   return (
-    <footer className="mt-20 border-t border-line">
+    <footer className="mt-20 border-t border-line bg-surface/40">
       <div className="mx-auto max-w-6xl px-5 py-14 sm:px-8 lg:px-12">
         <div className="flex flex-col gap-10 sm:flex-row sm:justify-between">
           <div>
-            <p className="font-display text-2xl">{site.name}</p>
-            <p className="mt-2 text-sm text-ink-muted">{site.role}</p>
+            <p className="font-display text-3xl tracking-tight">{site.name}</p>
+            <p className="label mt-3">{site.role}</p>
             <Link
               href="/contact"
-              className="link-underline mt-4 inline-block text-sm text-ink"
+              className="link-underline mt-5 inline-block text-sm text-ink hover:text-signal"
             >
               Get in touch
             </Link>

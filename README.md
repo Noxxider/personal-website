@@ -78,16 +78,22 @@ credentials.
 
 ## Design
 
-Warm paper ground, near-black ink, one signal colour (a deep rust) used
-sparingly for links on hover, live markers, focus rings and errors. Instrument
-Serif for display type, Inter Tight for everything else, and the system
-monospace stack for metadata. Both webfonts are self-hosted by `next/font`, so
-the page makes no third-party font request.
+"Night flight." A dark ground that is not quite black (`#0A0D12`), light ink,
+and one signature colour, an atmosphere teal (`#5FD3E6`), for links, live
+markers, focus rings and selection. One warm counter, a rink amber
+(`#F2A65A`), is reserved for primary buttons. No other hues outside the tools.
+Fraunces for display type (variable, with the `opsz` and `WONK` axes), Geist
+for text and interface, Geist Mono for metadata and numbers. All three are
+self-hosted by `next/font`, so the page makes no third-party font request.
 
-One committed light theme, no toggle. Motion is a short fade-and-rise on scroll
-that never applies above the fold, so hero content is not waiting on hydration.
-`prefers-reduced-motion` disables it and a `<noscript>` style keeps everything
-visible without JavaScript.
+One committed dark theme, no toggle, and `prefers-color-scheme: light` is not
+supported. Motion is a short fade-and-rise on scroll that never applies above
+the fold, so hero content is not waiting on hydration. `prefers-reduced-motion`
+disables it and a `<noscript>` style keeps everything visible without
+JavaScript.
+
+The redesign is being built in phases; see `docs/HANDOFF_redesign_2026-09-11.md`
+for the plan and the content rules it has to respect.
 
 ## Content decisions
 
@@ -182,7 +188,8 @@ Measured against the production build at 1440x900 and 390x844:
 - Cumulative layout shift is 0.
 - Around 111 KB transferred on first load, most of it the two webfonts.
 - No horizontal overflow at 390 px, no console errors or warnings.
-- Every text colour clears WCAG AA: 17.3:1 body, 6.8:1 muted, 4.8:1 metadata.
+- Every text colour clears WCAG AA on the ground: 16.4:1 body, 6.4:1 muted,
+  5.2:1 metadata, 11.1:1 teal, 9.6:1 for ground text on the amber button.
 - Keyboard: skip link, visible focus rings, mobile menu and dialog both trap
   focus, close on Escape and restore focus to their trigger.
 - Live on Vercel: every public route 200s, every private route 401s without
