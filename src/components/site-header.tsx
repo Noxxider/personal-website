@@ -50,11 +50,13 @@ export function SiteHeader() {
         filled += Math.min(1, p.enter) + p.pin;
       }
       const past = progress.elsewhere.exit >= 0.98;
+      // Over the bright Arctic the mask is not enough; go solid for the zoom.
+      const overIce = progress.canada.pin > 0.1 && progress.systems.enter < 0.7;
       const index = past ? chapterIds.length : chapterIds.indexOf(current);
-      const key = `${index}:${past}`;
+      const key = `${index}:${past}:${overIce}`;
       if (key !== last) {
         last = key;
-        setInFilm(!past);
+        setInFilm(!past && !overIce);
         rail.current?.querySelectorAll("i").forEach((segment, i) => {
           segment.style.opacity = i < index ? "0.45" : i === index ? "1" : "0.15";
         });

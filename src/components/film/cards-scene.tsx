@@ -31,7 +31,7 @@ function Card({
     const g = group.current;
     if (!g) return;
     const t = clock.elapsedTime + index * 1.7;
-    const enter = ease((progress.web.enter - 0.4 - index * 0.08) / 0.5);
+    const enter = ease((progress.web.enter - 0.55 - index * 0.06) / 0.4);
     g.position.set(offset[0], offset[1] + Math.sin(t * 0.9) * 0.02 - (1 - enter) * 0.5, offset[2]);
     g.rotation.set(Math.sin(t * 0.7) * 0.02, -0.1 + index * -0.02, 0);
     g.scale.setScalar((0.85 + 0.15 * enter) * (index === 0 ? 1 : index === 1 ? 0.85 : 0.72));

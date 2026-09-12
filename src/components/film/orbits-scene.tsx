@@ -172,7 +172,7 @@ export function OrbitsScene() {
 
     const p = progress.physics;
     const enter = ease((p.enter - 0.45) / 0.5);
-    const leave = ease(p.exit / 0.5);
+    const leave = ease(p.exit / 0.3);
     const base = narrow
       ? { x: 0.1, y: 0.8, s: 0.42 }
       : { x: Math.min(0.95, halfW - 0.85), y: 0.3, s: 0.68 };
