@@ -16,14 +16,6 @@ export const metadata: Metadata = pageMetadata({
   path: "/work/",
 });
 
-const accents: Record<string, string> = {
-  orbits: "from-signal/25",
-  pendulum: "from-accent/20",
-  shift: "from-signal/15",
-  hello: "from-signal/30",
-  site: "from-ink/10",
-};
-
 export default function WorkPage() {
   const [first, ...rest] = listedProjects;
   return (
@@ -71,9 +63,25 @@ function Card({
 }) {
   const external = !project.href.startsWith("/");
   const stretch = "after:absolute after:inset-0 after:content-['']";
-  const body = (
-    <>
-      <div className="flex items-center justify-between">
+  return (
+    <article className="group relative flex h-full flex-col rounded-2xl border border-line bg-surface p-5 transition-colors duration-300 hover:border-line-strong sm:p-6">
+      {project.image && (
+        <div className="overflow-hidden rounded-lg border border-ink/10 bg-ground">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={project.image.src}
+            alt={project.image.alt}
+            width={project.image.width}
+            height={project.image.height}
+            loading="lazy"
+            className={cn(
+              "w-full object-cover object-left-top opacity-85 transition-[opacity,transform] duration-500 group-hover:scale-[1.02] group-hover:opacity-100",
+              large ? "aspect-[16/8]" : "aspect-[16/10]",
+            )}
+          />
+        </div>
+      )}
+      <div className="mt-5 flex items-center justify-between">
         <span className="label tabular">{project.year}</span>
         <span className="label flex items-center gap-1.5">
           {project.status === "Live" && (
@@ -84,8 +92,8 @@ function Card({
       </div>
       <h2
         className={cn(
-          "mt-auto font-display text-ink",
-          large ? "pt-24 text-[2.5rem] leading-none sm:pt-40 sm:text-[3.25rem]" : "pt-16 text-3xl",
+          "mt-3 font-display text-ink",
+          large ? "text-[2.25rem] leading-none sm:text-[2.75rem]" : "text-[1.75rem] leading-tight",
         )}
       >
         {external ? (
@@ -98,10 +106,10 @@ function Card({
           </Link>
         )}
       </h2>
-      <p className="mt-3 max-w-[46ch] text-[0.9375rem] leading-relaxed text-ink-muted">
+      <p className="mt-2.5 max-w-[46ch] text-[0.9375rem] leading-relaxed text-ink-muted">
         {project.blurb}
       </p>
-      <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
+      <div className="mt-auto flex flex-wrap items-center justify-between gap-3 pt-5">
         <ul className="flex flex-wrap gap-x-2 gap-y-1.5">
           {project.stack.map((tech) => (
             <li
@@ -120,23 +128,6 @@ function Card({
           />
         </span>
       </div>
-    </>
-  );
-
-  return (
-    <article
-      className={cn(
-        "group relative flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface p-6 transition-colors duration-300 hover:border-line-strong sm:p-7",
-      )}
-    >
-      <div
-        aria-hidden
-        className={cn(
-          "pointer-events-none absolute inset-0 bg-gradient-to-br to-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-100",
-          accents[project.slug] ?? "from-signal/15",
-        )}
-      />
-      <div className="relative flex h-full flex-col">{body}</div>
     </article>
   );
 }

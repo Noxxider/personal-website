@@ -104,12 +104,14 @@ export function ScheduleScene() {
 
     // Placement: right half on wide screens, upper half on phones. Slides
     // up and shrinks away as the chapter leaves.
-    const leave = ease(p.exit);
+    const leave = ease(p.exit / 0.55);
     const base = narrow
       ? { x: -0.08, y: 0.58, s: 0.5 }
       : { x: Math.min(0.95, halfW - 0.85), y: -0.05, s: 0.9 };
-    g.position.set(base.x, base.y + leave * 0.8, 0);
-    g.scale.setScalar(base.s * (1 - leave * 0.4) * (0.85 + 0.15 * smooth.current.on));
+    g.position.set(base.x, base.y + leave * 1.1, 0);
+    // Holds back until the Earth has mostly left, then grows in.
+    const arrive = ease((p.enter - 0.3) / 0.5);
+    g.scale.setScalar(Math.max(0.0001, base.s * (1 - leave * 0.4) * (0.7 + 0.3 * arrive) * arrive * (1 - leave)));
     g.rotation.set(-0.95 + leave * 0.3, -0.35 + Math.sin(p.pin * Math.PI) * 0.12, 0);
   });
 

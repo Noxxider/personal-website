@@ -106,9 +106,7 @@ export function FilmHero() {
                     style={{ width: `${percent}%` }}
                   />
                 </div>
-                <p className="label mt-3 tabular">
-                  {loading.done ? "Ready" : `Loading ${percent}%`}
-                </p>
+                <p className="label mt-3">{loading.done ? "Ready" : "Loading"}</p>
               </div>
             </div>
           )}

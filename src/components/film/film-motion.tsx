@@ -87,7 +87,7 @@ export function FilmMotion({ children }: { children: React.ReactNode }) {
               scrollTrigger: {
                 trigger: chapter,
                 start: "top bottom",
-                end: "top 20%",
+                end: "top 40%",
                 scrub: 0.6,
               },
             },
@@ -97,8 +97,8 @@ export function FilmMotion({ children }: { children: React.ReactNode }) {
         if (!hold) {
           timeline.to(
             lines,
-            { autoAlpha: 0, y: -24, duration: 0.14, stagger: 0.02 },
-            0.84,
+            { autoAlpha: 0, y: -24, duration: 0.1, stagger: 0.015 },
+            0.9,
           );
         }
       });

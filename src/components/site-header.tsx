@@ -15,18 +15,9 @@ import { chapterIds, progress, type ChapterId } from "@/components/film/film-sta
 import { nav, site } from "@/content/site";
 import { cn } from "@/lib/utils";
 
-const chapterLabels: Record<ChapterId, string> = {
-  arrival: "Arrival",
-  canada: "Canada",
-  systems: "Systems",
-  physics: "Physics",
-  web: "Web",
-  elsewhere: "Elsewhere",
-};
-
 /**
- * On the home page the header is part of the film: a mono readout of the
- * current chapter and a hairline that fills as the film plays, both read
+ * On the home page the header is part of the film: a mono chapter number
+ * and a hairline that fills as the film plays, both read
  * straight from the shared scroll state on each frame. Nav links are
  * magnetic, leaning a few pixels toward the pointer.
  */
@@ -60,12 +51,13 @@ export function SiteHeader() {
       }
       const past = progress.elsewhere.exit >= 0.5;
       const index = past ? chapterIds.length : chapterIds.indexOf(current);
-      const text = past
-        ? `0${index} / The offer`
-        : `0${index} / ${chapterLabels[current]}`;
-      if (text !== last && readout.current) {
-        readout.current.textContent = text;
-        last = text;
+      const text = `0${index}`;
+      if (readout.current) {
+        readout.current.style.opacity = index === 0 ? "0" : "1";
+        if (text !== last) {
+          readout.current.textContent = text;
+          last = text;
+        }
       }
       if (bar.current) {
         bar.current.style.transform = `scaleX(${Math.min(1, filled / (chapterIds.length * 2))})`;
@@ -112,9 +104,9 @@ export function SiteHeader() {
           <span
             ref={readout}
             aria-hidden
-            className="label tabular pointer-events-none absolute left-1/2 hidden -translate-x-1/2 md:block"
+            className="label tabular pointer-events-none absolute left-1/2 hidden -translate-x-1/2 opacity-0 transition-opacity duration-500 md:block"
           >
-            00 / Arrival
+            00
           </span>
         )}
 

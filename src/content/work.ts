@@ -87,9 +87,9 @@ export const projects: Project[] = [
     stack: ["Next.js", "React Three Fiber", "GSAP"],
     image: {
       src: "/work/site.png",
-      width: 1056,
-      height: 615,
-      alt: "The front page of this site",
+      width: 1152,
+      height: 720,
+      alt: "The front page of this site: the Earth beside the name",
     },
   },
   {

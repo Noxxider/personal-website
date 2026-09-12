@@ -23,6 +23,7 @@ export function ScrollProvider({ children }: { children: React.ReactNode }) {
 
   React.useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    document.documentElement.classList.add("motion-ok");
 
     const lenis = new Lenis({ lerp: 0.1, anchors: true });
     lenis.on("scroll", ScrollTrigger.update);
@@ -34,6 +35,7 @@ export function ScrollProvider({ children }: { children: React.ReactNode }) {
     return () => {
       gsap.ticker.remove(tick);
       lenis.destroy();
+      document.documentElement.classList.remove("motion-ok");
     };
   }, []);
 

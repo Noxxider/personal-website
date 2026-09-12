@@ -125,25 +125,18 @@
 
   /* Scroll reveal. Starts hidden, is revealed by IntersectionObserver.
      Falls back to visible with reduced motion or without JavaScript. */
+  /* Visible by default. Only once the scroll provider has confirmed that
+     JavaScript is running and motion is welcome does a reveal start hidden. */
   .reveal {
-    opacity: 0;
-    transform: translateY(14px);
     transition:
-      opacity 0.7s var(--ease-out-soft),
-      transform 0.7s var(--ease-out-soft);
+      opacity 0.6s var(--ease-out-soft),
+      transform 0.6s var(--ease-out-soft);
     transition-delay: var(--reveal-delay, 0ms);
   }
 
-  .reveal[data-visible="true"] {
-    opacity: 1;
-    transform: none;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .reveal {
-      opacity: 1;
-      transform: none;
-    }
+  html.motion-ok .reveal:not([data-visible="true"]) {
+    opacity: 0;
+    transform: translateY(14px);
   }
 
   /* Underline that grows from the left on hover, instead of a colour swap. */
@@ -192,6 +185,12 @@
     --progress: 0;
   }
 
+  /* The next chapter starts sliding over while this one is still pinned,
+     so its text is on screen the moment the previous text has gone. */
+  .chapter + .chapter {
+    margin-top: -45svh;
+  }
+
   .chapter-stage {
     position: sticky;
     top: 0;
@@ -216,6 +215,9 @@
     .chapter {
       height: auto;
       --progress: 1;
+    }
+    .chapter + .chapter {
+      margin-top: 0;
     }
     .chapter-stage {
       position: static;

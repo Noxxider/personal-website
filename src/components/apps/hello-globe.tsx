@@ -57,32 +57,56 @@ function Lights({ hellos, mine }: { hellos: Hello[]; mine: string | null }) {
 }
 
 function Globe({ hellos, mine }: { hellos: Hello[]; mine: string | null }) {
-  const [day, night] = useTexture(["/earth/day.webp", "/earth/night.webp"], (loaded) => {
-    for (const t of Array.isArray(loaded) ? loaded : [loaded]) {
-      t.colorSpace = THREE.SRGBColorSpace;
-      t.anisotropy = 8;
-    }
-  });
+  const [day, night, clouds] = useTexture(
+    ["/earth/day.webp", "/earth/night.webp", "/earth/clouds.webp"],
+    (loaded) => {
+      (Array.isArray(loaded) ? loaded : [loaded]).forEach((t, i) => {
+        t.colorSpace = i < 2 ? THREE.SRGBColorSpace : THREE.NoColorSpace;
+        t.anisotropy = 8;
+      });
+    },
+  );
   const group = React.useRef<THREE.Group>(null);
+  const cloudLayer = React.useRef<THREE.Mesh>(null);
   useFrame((_, delta) => {
-    if (group.current) group.current.rotation.y += delta * 0.03;
+    if (group.current) group.current.rotation.y += delta * 0.02;
+    if (cloudLayer.current) cloudLayer.current.rotation.y += delta * 0.006;
   });
+  // Opens on Canada: longitude -97 faces the camera with the yaw below.
   return (
-    <group ref={group} rotation={[0.35, 2.2, 0]}>
+    <group ref={group} rotation={[0.55, -(90 - 97) * DEG, 0]}>
       <mesh>
         <sphereGeometry args={[1, 96, 96]} />
         <meshStandardMaterial
           map={day}
           emissiveMap={night}
           emissive="#f0c890"
-          emissiveIntensity={0.35}
-          roughness={0.9}
+          emissiveIntensity={0.25}
+          roughness={0.85}
           metalness={0}
         />
       </mesh>
-      <mesh scale={1.04}>
+      <mesh ref={cloudLayer} scale={1.012}>
+        <sphereGeometry args={[1, 64, 64]} />
+        <meshStandardMaterial
+          color="#eef3f8"
+          alphaMap={clouds}
+          transparent
+          opacity={0.55}
+          depthWrite={false}
+          roughness={1}
+        />
+      </mesh>
+      <mesh scale={1.06}>
         <sphereGeometry args={[1, 48, 48]} />
-        <meshBasicMaterial color="#5fd3e6" transparent opacity={0.06} side={THREE.BackSide} />
+        <meshBasicMaterial
+          color="#5fd3e6"
+          transparent
+          opacity={0.1}
+          side={THREE.BackSide}
+          blending={THREE.AdditiveBlending}
+          depthWrite={false}
+        />
       </mesh>
       <Lights hellos={hellos} mine={mine} />
     </group>
@@ -128,8 +152,8 @@ export function HelloGlobe({
     <div className="grid gap-6 lg:grid-cols-[1fr_18rem]">
       <div className="relative aspect-square overflow-hidden rounded-2xl border border-line bg-surface sm:aspect-[16/11]">
         <Canvas camera={{ position: [0, 0.4, 3.1], fov: 38 }} dpr={[1, 1.75]} gl={{ antialias: true, alpha: true }}>
-          <ambientLight intensity={1.1} />
-          <directionalLight position={[3, 2, 4]} intensity={1.6} />
+          <ambientLight intensity={0.45} />
+          <directionalLight position={[-3, 2.5, 4]} intensity={1.5} />
           <React.Suspense fallback={null}>
             <Globe hellos={hellos} mine={mine} />
           </React.Suspense>
@@ -148,11 +172,11 @@ export function HelloGlobe({
           {pending ? "Placing" : "Say hello from here"}
         </Button>
         <p role="status" aria-live="polite" className="text-sm text-ink-muted">
-          {note ??
-            (connected
-              ? "One press adds a light at your country. Only the country is read, and only a count is kept."
-              : "The database is not connected yet, so lights stay on your own screen for now.")}
+          {note ?? "One press adds a light at your country. Only the country is read, and only a count is kept."}
         </p>
+        {!connected && !note && (
+          <p className="label">Preview mode: lights stay on this screen.</p>
+        )}
         {hellos.length > 0 && (
           <ol className="max-h-64 space-y-1.5 overflow-y-auto border-t border-line pt-4 text-sm">
             {[...hellos]

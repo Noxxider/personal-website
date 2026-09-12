@@ -42,7 +42,7 @@ export default function HomePage() {
           id="arrival"
           index="00"
           label="Arrival"
-          length={0.8}
+          length={0.5}
           intro
           align="center"
           visual={<FilmHero />}
@@ -59,7 +59,7 @@ export default function HomePage() {
             data-line
           >
             I keep the scheduling systems a health region runs on, and I build
-            for the web.
+            small, fast tools.
           </p>
           <p className="label mt-14" data-line>
             Scroll
@@ -71,7 +71,7 @@ export default function HomePage() {
           id="canada"
           index="01"
           label="Canada"
-          length={1.2}
+          length={0.9}
         >
           <h2 id="canada-title" className={chapterTitle} data-line>
             Canada.
@@ -88,9 +88,9 @@ export default function HomePage() {
           id="systems"
           index="02"
           label="Systems"
-          length={1.3}
+          length={0.9}
         >
-          <h2 id="systems-title" className={chapterTitle} data-line>
+          <h2 id="systems-title" className={cn(chapterTitle, "mt-6 sm:mt-0")} data-line>
             {current.title} at {current.organisation}.
           </h2>
           <div className={chapterBody}>
@@ -112,7 +112,7 @@ export default function HomePage() {
         </Chapter>
 
         {/* -------------------------------------------------- 03, physics */}
-        <Chapter id="physics" index="03" label="Physics" length={1}>
+        <Chapter id="physics" index="03" label="Physics" length={0.7}>
           <h2 id="physics-title" className={chapterTitle} data-line>
             I studied physics. It left me with one habit: measure, then decide.
           </h2>
@@ -127,22 +127,22 @@ export default function HomePage() {
         </Chapter>
 
         {/* ------------------------------------------------------ 04, web */}
-        <Chapter id="web" index="04" label="Web" length={1}>
+        <Chapter id="web" index="04" label="Web" length={0.45}>
           <h2 id="web-title" className={chapterTitle} data-line>
             Small, fast pages that are real HTML before any JavaScript runs.
           </h2>
-          <ul className="mt-8 grid max-w-3xl gap-px sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-6 grid max-w-3xl grid-cols-2 gap-x-6 gap-y-3 sm:mt-8 lg:grid-cols-4">
             {listedProjects.slice(0, 4).map((project) => (
               <li
                 key={project.slug}
-                className="border-t border-line pt-4 pr-6"
+                className="border-t border-line pt-3 pr-4 sm:pt-4"
                 data-line
               >
                 <Link
                   href={
                     (project.href.startsWith("/") ? project.href : "/work") as Route
                   }
-                  className="group inline-flex items-center gap-1.5 font-display text-2xl text-ink hover:text-signal"
+                  className="group inline-flex items-center gap-1.5 font-display text-xl text-ink hover:text-signal sm:text-2xl"
                 >
                   {project.title}
                   <ArrowUpRightIcon
@@ -150,7 +150,7 @@ export default function HomePage() {
                     className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                   />
                 </Link>
-                <p className="mt-2 text-sm leading-relaxed text-ink-muted">
+                <p className="mt-1.5 hidden text-sm leading-relaxed text-ink-muted sm:block">
                   {project.blurb}
                 </p>
               </li>
@@ -163,25 +163,25 @@ export default function HomePage() {
           id="elsewhere"
           index="05"
           label="Elsewhere"
-          length={0.8}
+          length={0.4}
           align="center"
         >
           <h2 id="elsewhere-title" className="sr-only">
             Elsewhere
           </h2>
-          <ul className="flex flex-col gap-4 sm:flex-row sm:gap-16">
+          <ul className="grid grid-cols-2 gap-4 sm:gap-8">
             {site.socials.map((s) => (
-              <li key={s.href} data-line>
+              <li key={s.href} data-line className="flex justify-center">
                 <a
                   href={s.href}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="group inline-flex items-baseline gap-3 font-display text-display text-ink transition-colors hover:text-signal"
+                  className="group inline-flex items-baseline gap-2 font-display text-[clamp(2rem,1rem+4vw,4.5rem)] leading-none text-ink transition-colors hover:text-signal sm:gap-3"
                 >
                   {s.label}
                   <ArrowUpRightIcon
                     aria-hidden
-                    className="size-8 translate-y-1 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5 sm:size-10"
+                    className="size-6 translate-y-0.5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5 sm:size-8"
                   />
                 </a>
               </li>
@@ -195,7 +195,6 @@ export default function HomePage() {
         aria-labelledby="offer-title"
         className="relative overflow-hidden border-t border-line bg-ground"
       >
-        <div aria-hidden className="glow pointer-events-none absolute inset-0" />
         <Container className="relative py-24 sm:py-32">
           <div className="grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-20">
             <div>
@@ -218,11 +217,11 @@ export default function HomePage() {
                 <ArrowRightIcon aria-hidden className="size-4" />
               </Link>
             </div>
-            <ul className="grid gap-4">
+            <ul className="grid gap-8">
               {offers.map((offer, i) => (
                 <li
                   key={offer.title}
-                  className="group relative rounded-2xl border border-line bg-surface/70 p-6 backdrop-blur transition-colors duration-300 hover:border-line-strong sm:p-7"
+                  className="group relative border-t border-line pt-5"
                 >
                   <span className="label tabular">0{i + 1}</span>
                   <h3 className="mt-3 font-display text-2xl text-ink">{offer.title}</h3>

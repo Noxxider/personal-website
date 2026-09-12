@@ -171,15 +171,15 @@ export function OrbitsScene() {
     }
 
     const p = progress.physics;
-    const enter = ease(p.enter);
+    const enter = ease((p.enter - 0.45) / 0.5);
     const leave = ease(p.exit);
     const base = narrow
       ? { x: 0.1, y: 0.8, s: 0.42 }
       : { x: Math.min(0.95, halfW - 0.85), y: 0.3, s: 0.68 };
     g.position.set(base.x, base.y + (1 - enter) * -0.6 + leave * 0.8, 0);
-    g.scale.setScalar(base.s * (0.6 + 0.4 * enter) * (1 - leave * 0.5));
+    g.scale.setScalar(Math.max(0.0001, base.s * enter * (1 - leave * 0.5)));
     g.rotation.set(0.55, p.pin * 0.4 - 0.2, 0);
-    if (trailMaterial.current) trailMaterial.current.opacity = 0.55 * smooth.current.on;
+    if (trailMaterial.current) trailMaterial.current.opacity = 0.55 * smooth.current.on * enter;
   });
 
   return (

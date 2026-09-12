@@ -72,7 +72,9 @@ function Scene({
   const trailGeometry = React.useRef<THREE.BufferGeometry>(null);
   const scratch = React.useRef<Scratch | null>(null);
   if (scratch.current === null) scratch.current = makeScratch();
+  const glow = React.useRef<THREE.Mesh>(null);
   const segments = React.useMemo(() => new Float32Array(BODIES * (TRAIL - 1) * 6), []);
+  const trailColors = React.useMemo(() => new Float32Array(BODIES * (TRAIL - 1) * 6), []);
   const { pointer, camera, raycaster } = useThree();
 
   React.useEffect(() => {
@@ -125,21 +127,33 @@ function Scene({
       mesh.setMatrixAt(i, t.dummy.matrix);
     }
     mesh.instanceMatrix.needsUpdate = true;
+    if (glow.current) {
+      glow.current.position.set(s.pos[0]!, s.pos[1]!, s.pos[2]!);
+      glow.current.scale.setScalar((0.06 + 0.02 * s.mass[0]!) * 2.6);
+    }
 
     const geometry = trailGeometry.current;
     if (geometry) {
       const array = geometry.attributes.position!.array as Float32Array;
+      const colors = geometry.attributes.color!.array as Float32Array;
       let k = 0;
+      let c = 0;
       for (let i = 0; i < s.n; i++) {
         for (let j = 0; j < t.filled - 1; j++) {
           const a = (i * TRAIL + ((t.head + j) % TRAIL)) * 3;
           const b = (i * TRAIL + ((t.head + j + 1) % TRAIL)) * 3;
           array[k++] = t.trail[a]!; array[k++] = t.trail[a + 1]!; array[k++] = t.trail[a + 2]!;
           array[k++] = t.trail[b]!; array[k++] = t.trail[b + 1]!; array[k++] = t.trail[b + 2]!;
+          // Oldest samples fade toward the ground so every orbit has a direction.
+          const fade = 0.08 + 0.92 * (j / Math.max(1, t.filled - 2)) ** 1.6;
+          for (let v = 0; v < 2; v++) {
+            colors[c++] = 0.373 * fade; colors[c++] = 0.827 * fade; colors[c++] = 0.902 * fade;
+          }
         }
       }
       geometry.setDrawRange(0, k / 3);
       geometry.attributes.position!.needsUpdate = true;
+      geometry.attributes.color!.needsUpdate = true;
     }
 
     if (clock.elapsedTime - t.lastStats > 0.25) {
@@ -156,11 +170,23 @@ function Scene({
         <sphereGeometry args={[1, 24, 24]} />
         <meshBasicMaterial color="#e8ecf1" />
       </instancedMesh>
+      {/* A soft additive glow on the central mass, so it reads as the sun. */}
+      <mesh ref={glow}>
+        <sphereGeometry args={[1, 24, 24]} />
+        <meshBasicMaterial
+          color="#5fd3e6"
+          transparent
+          opacity={0.18}
+          blending={THREE.AdditiveBlending}
+          depthWrite={false}
+        />
+      </mesh>
       <lineSegments>
         <bufferGeometry ref={trailGeometry}>
           <bufferAttribute attach="attributes-position" args={[segments, 3]} usage={THREE.DynamicDrawUsage} />
+          <bufferAttribute attach="attributes-color" args={[trailColors, 3]} usage={THREE.DynamicDrawUsage} />
         </bufferGeometry>
-        <lineBasicMaterial color="#5fd3e6" transparent opacity={0.6} />
+        <lineBasicMaterial vertexColors transparent opacity={0.9} />
       </lineSegments>
       <gridHelper args={[6, 24, "#1e2530", "#161c26"]} rotation={[Math.PI / 2, 0, 0]} position={[0, 0, -0.02]} />
     </>

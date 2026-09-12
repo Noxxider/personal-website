@@ -93,7 +93,7 @@ export default function BuildPage() {
               key={step.title}
               as="li"
               delay={i * 70}
-              className="relative rounded-2xl border border-line bg-surface/60 p-6"
+              className="relative border-t border-line pt-5"
             >
               <span className="label tabular">Step {i + 1}</span>
               <h3 className="mt-3 font-display text-xl text-ink">{step.title}</h3>

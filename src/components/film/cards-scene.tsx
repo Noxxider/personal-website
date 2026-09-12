@@ -33,8 +33,8 @@ function Card({
     const t = clock.elapsedTime + index * 1.7;
     const enter = ease((progress.web.enter - index * 0.12) / 0.7);
     g.position.set(offset[0], offset[1] + Math.sin(t * 0.9) * 0.02 - (1 - enter) * 0.5, offset[2]);
-    g.rotation.set(Math.sin(t * 0.7) * 0.02, (index - 1) * -0.28, 0);
-    g.scale.setScalar(0.85 + 0.15 * enter);
+    g.rotation.set(Math.sin(t * 0.7) * 0.02, -0.42 + index * -0.05, 0);
+    g.scale.setScalar((0.85 + 0.15 * enter) * (1 - index * 0.12));
   });
   return (
     <group ref={group}>
@@ -76,8 +76,8 @@ export function CardsScene() {
 
     const leave = ease(progress.web.exit);
     const base = narrow
-      ? { x: 0, y: 0.78, s: 0.52 }
-      : { x: Math.min(0.75, halfW - 1.15), y: 0.28, s: 0.92 };
+      ? { x: 0.05, y: 0.98, s: 0.55 }
+      : { x: Math.min(0.55, halfW - 1.5), y: 0.32, s: 1.55 };
     g.position.set(base.x, base.y + leave * 0.9, 0);
     g.scale.setScalar(base.s * (1 - leave * 0.3));
     g.rotation.set(-smooth.current.ty * 0.18, smooth.current.tx * 0.28, 0);
@@ -90,7 +90,7 @@ export function CardsScene() {
           key={SHOTS[i]}
           texture={texture}
           index={i}
-          offset={[(i - 1) * (narrow ? 0.55 : 0.95), (1 - i) * 0.04, (i - 1) * -0.18]}
+          offset={[i * (narrow ? 0.34 : 0.42), i * -0.09, i * -0.5]}
         />
       ))}
     </group>

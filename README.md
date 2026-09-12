@@ -1,14 +1,16 @@
 # ravinojuwono.com
 
 Personal site for Ravino Juwono. Next.js App Router, TypeScript, Tailwind CSS v4,
-deployed on Vercel. A public site, plus a password-gated private area at
+React Three Fiber, deployed on Vercel. A public site with a scroll-driven 3D
+front page and four small apps, plus a password-gated private area at
 `/private` for personal tools.
 
 ```bash
 npm install
 npm run dev     # http://localhost:3000
 npm run check   # typecheck + lint + test + build
-npm test        # the citizenship presence maths
+npm test        # the simulations, the shift checks, the citizenship maths
+node scripts/build-globe.mjs   # regenerate the Earth outline and country data
 ```
 
 Environment variables, in `.env.local` locally and in the Vercel project for
@@ -17,9 +19,10 @@ deploys:
 ```
 PRIVATE_USER=vino              # the /private gate
 PRIVATE_PASSWORD=something-long
-RESEND_API_KEY=re_...          # the contact form
+RESEND_API_KEY=re_...          # the contact and build forms
 CONTACT_TO=you@example.com     # where messages land
 CONTACT_FROM=noreply@your-domain   # optional, see below
+DATABASE_URL=postgres://...    # optional: Neon, for /work/hello only
 ```
 
 ## Architecture
@@ -27,33 +30,119 @@ CONTACT_FROM=noreply@your-domain   # optional, see below
 | Concern | Choice |
 | --- | --- |
 | Framework | Next.js 16, App Router |
-| Rendering | Public routes prerendered to HTML at build time. Only `/private` is server rendered per request. |
+| Rendering | Public routes prerendered to HTML at build time. `/private` and `/work/hello` are server rendered per request. |
 | Auth | HTTP Basic Auth in `src/middleware.ts`, credentials from environment variables |
 | Styling | Tailwind v4 with tokens in `@theme` inside `src/app/globals.css`. No config file. |
 | Components | shadcn/ui primitives (`button`, `input`, `label`, `sheet`, `dialog`) on Radix, everything else composed by hand |
-| Icons | Seven inline SVGs in `src/components/icons.tsx`. No icon package. |
-| Charts | Hand-drawn SVG and CSS. No charting library. |
-| Spreadsheets | `read-excel-file`, loaded on demand. The npm `xlsx` package is stuck on a release with known CVEs. |
+| 3D | `three`, `@react-three/fiber`, `@react-three/drei`. One canvas on the front page, one per app that needs it. |
+| Scroll | Lenis for smooth scroll, GSAP ScrollTrigger for the timelines. One engine, wired once in `ScrollProvider`. |
+| Icons | Inline SVGs in `src/components/icons.tsx`, and the two brand paths in the film. No icon package. |
+| Data | Neon Postgres over HTTP (`@neondatabase/serverless`) for one table, `hellos`. Absent, the app runs in preview mode. |
 | Contact | Server Action posting to the Resend API. The address and key stay server side. |
 | Analytics | The existing GA4 property, loaded `afterInteractive`. Nothing else. |
 | Deployment | Vercel, project `noxxiders-projects/ravinojuwono` |
 
-Runtime dependencies: `next`, `react`, `react-dom`, `@radix-ui/react-dialog`,
-`read-excel-file`, `server-only`, and the `clsx` / `tailwind-merge` /
-`class-variance-authority` trio shadcn uses.
-
 ```
 src/
-  app/                 public routes
+  app/                 public routes: /, /work, /work/*, /experience, /build, /contact
   app/private/         gated routes, never prerendered or cached
+  components/film/     the front page film: scenes, motion, shared scroll state
+  components/apps/     the four playground apps
   components/          layout shell and page primitives
   components/private/  the personal tools
   components/ui/       shadcn primitives, restyled to the token set
-  content/             public copy and data (site.ts, work.ts)
+  content/             copy and data (site.ts, work.ts, globe.json, countries.json)
+  lib/sims/            the N-body and double pendulum integrators, with tests
+  lib/shift.ts         the shift scheduling checks and iCalendar export, with tests
   private/             personal data and logic, server-only where it matters
   middleware.ts        the Basic Auth gate
+scripts/build-globe.mjs  turns Natural Earth data into the outline and centroid files
+docs/                  the redesign handoff
 legacy-quasar/         the previous Quasar site, kept for reference
 ```
+
+## The front page
+
+The home page is a film. Six pinned chapters, then a static offer:
+
+| # | Chapter | On the canvas |
+| --- | --- | --- |
+| 00 | Arrival | A textured Earth, lit from the left, idling right of the name |
+| 01 | Canada | The sun comes round, the Earth turns and pushes in until Canada fills the frame, outline drawn on |
+| 02 | Systems | A week of appointment slots rising as bars; one turns amber and is re-flowed |
+| 03 | Physics | A velocity Verlet N-body with trails; the pointer tugs the bodies |
+| 04 | Web | Screenshot cards of the apps, fanned in depth, tilting toward the pointer |
+| 05 | Elsewhere | Matte tiles carrying the LinkedIn and GitHub marks, above the real links |
+| 06 | The offer | Static. Three things I build and a button to `/build` |
+
+How it is put together:
+
+- Each chapter is a `<section>` taller than the viewport with a `position: sticky`
+  stage inside. Scrolling through the section holds the stage still. Consecutive
+  chapters overlap by 45svh so the next stage slides over while the previous one
+  is still pinned, and there is never an empty frame.
+- `FilmMotion` creates one scrubbed GSAP timeline per chapter for the text and
+  three plain ScrollTriggers (enter, pin, exit) that write into a shared, mutable
+  store (`film-state.ts`). The 3D scenes read that store every frame and decide
+  for themselves whether they are on stage. Nothing re-renders on scroll.
+- One `<Canvas>`, fixed behind the film, loaded as a lazy chunk behind a
+  server-rendered poster (`public/poster-earth.jpg`, plus a phone crop). A loading
+  screen covers the page while the Earth's maps arrive and lifts on the first
+  drawn frame, or after eight seconds, whichever comes first.
+- The header reads the current chapter from the same store and fills a hairline
+  as the film plays.
+
+**Reduced motion and no WebGL.** Nothing 3D mounts. The chapters collapse to a
+plain stacked page with every line visible, the poster stands in for the Earth,
+and reveals elsewhere on the site are visible by default: they only start hidden
+once the scroll provider has confirmed that JavaScript is running and motion is
+welcome (`html.motion-ok`). Without JavaScript the whole site reads top to
+bottom.
+
+**The Earth.** Day map: NASA Blue Marble (public domain), resized to 4096x2048.
+Night lights, water mask and clouds: the NASA-derived 2K set that ships with the
+three.js examples (MIT), re-encoded as WebP. About 1.2 MB in all, fetched after
+first paint. The Canada outline and the country centroids come from Natural
+Earth 1:110m (public domain) through `scripts/build-globe.mjs`. The shader blends
+day and night by a sun direction that moves with scroll, adds a specular glint on
+water, and a teal rim; the atmosphere is a slightly larger sphere drawn on its
+back faces.
+
+## The apps
+
+Each is a real program at its own route, with notes on the page.
+
+- **Orbits** (`/work/orbits`): a gravitational N-body in the browser. Switch between
+  forward Euler and velocity Verlet and watch the energy drift readout. Press and
+  drag to add a passing mass. Integrators in `src/lib/sims/nbody.ts`; the tests
+  assert Verlet's drift stays bounded and Euler's does not.
+- **Double pendulum** (`/work/pendulum`): two pendulums released a chosen fraction of
+  a radian apart, fourth-order Runge–Kutta, a divergence readout and strip.
+- **Shift** (`/work/shift`): a week board. Lay shifts by dragging, and it flags
+  double-bookings, short rests, hours without cover and over-hours as you go,
+  then exports the week as an `.ics`. Checks and export in `src/lib/shift.ts`.
+- **Hello from** (`/work/hello`): a shared globe. One press adds a light at your
+  country. Only the country code from the edge (`x-vercel-ip-country`) is read,
+  and only a count per country is stored. Needs `DATABASE_URL`; without it the
+  page runs in preview mode and says so.
+
+The two 2024 tools, Bodyweight Tracker and Tap BPM, stay at `/weighttracker` and
+`/tapbpm` because their GitHub repositories link there, but they are no longer
+listed.
+
+## Design
+
+"Night flight." A dark ground that is not quite black (`#0A0D12`), light ink,
+and one signature colour, an atmosphere teal (`#5FD3E6`), for links, live
+markers, focus rings and selection. One warm counter, a rink amber
+(`#F2A65A`), is reserved for primary buttons and the one re-flowed booking. No
+other hues outside the apps. Fraunces for display type (variable, with the
+`opsz` and `WONK` axes), Geist for text and interface, Geist Mono for metadata
+and numbers. All three are self-hosted by `next/font`, so the page makes no
+third-party font request.
+
+One committed dark theme, no toggle; `prefers-color-scheme: light` is not
+supported.
 
 ## How the private area stays private
 
@@ -76,130 +165,55 @@ Verified after each build: no personal date, name or clinical note appears
 anywhere under `.next/static`, and every private path returns 401 without
 credentials.
 
-## Design
+## Content rules
 
-"Night flight." A dark ground that is not quite black (`#0A0D12`), light ink,
-and one signature colour, an atmosphere teal (`#5FD3E6`), for links, live
-markers, focus rings and selection. One warm counter, a rink amber
-(`#F2A65A`), is reserved for primary buttons. No other hues outside the tools.
-Fraunces for display type (variable, with the `opsz` and `WONK` axes), Geist
-for text and interface, Geist Mono for metadata and numbers. All three are
-self-hosted by `next/font`, so the page makes no third-party font request.
+These are deliberate and should survive future edits:
 
-One committed dark theme, no toggle, and `prefers-color-scheme: light` is not
-supported. Motion is a short fade-and-rise on scroll that never applies above
-the fold, so hero content is not waiting on hydration. `prefers-reduced-motion`
-disables it and a `<noscript>` style keeps everything visible without
-JavaScript.
-
-The home page is a scroll-driven film: pinned chapters driven by Lenis and
-GSAP ScrollTrigger, with a dot-matrix globe drawn in React Three Fiber behind
-the first three. The globe uses no textures; its land dots and the Canada
-outline come from Natural Earth 1:110m data (public domain), reduced to a
-48 kB JSON by `scripts/build-globe.mjs`. A server-rendered poster
-(`public/poster-earth.jpg`) is the first paint; the 3D chunk loads after
-hydration and takes over, and never loads at all under reduced motion or
-without WebGL.
-
-The redesign is being built in phases; see `docs/HANDOFF_redesign_2026-09-11.md`
-for the plan and the content rules it has to respect.
-
-## Content decisions
-
-**Kept and rewritten.** The name, LinkedIn, GitHub, the skills that used to be a
-logo marquee (now a typographic list), the physics degree, the employment
-history, the acapella detail, and the GA4 property.
-
-**Rebuilt as first-class pages.** Bodyweight Tracker and Tap BPM were ported
-from Quasar to React and keep their original URLs, because the GitHub
-repositories link to them.
-
-**Removed from the public site.** The email address, the location, the logo
-marquee, the stock hero illustration, the background pattern, and the resume
-PDF viewer with its 15 MB vendored copy of pdf.js.
-
-**Location.** No city or region appears anywhere: not in the copy, the titles,
-the descriptions, the social image or the JSON-LD, which no longer carries a
-postal address. The degree is credited to "University of British Columbia"
-rather than naming the Okanagan campus, which is accurate and does not point at
-a particular city. Two things still narrow it down and were kept because they
-carry the professional positioning: the employer, and the health region it
-serves. Say the word if either should go.
-
-**Rangouts** is listed under experience as "Software Developer" rather than
-"Software Developer (Cofounder)" as on the resume. It shut down in 2023 and is
-described in the past tense with no business framing.
+- **No photo** of the owner, anywhere.
+- **No location finer than Canada.** The Earth zoom stops at the country. No
+  city, no province, no postal address in the JSON-LD. The degree is credited to
+  "University of British Columbia" without a campus. The employer and the health
+  region it serves are kept because they carry the professional positioning.
+- **No email address in the DOM.** The forms are the contact path.
+- **Capabilities, not ventures.** The site describes what can be built for you.
+  It never names a company, product, client or revenue the owner has on the
+  side, and "Rangouts" is listed as a past developer role with no business
+  framing.
+- **Restraint.** No light theme, no toggle, no blog, testimonials, newsletter or
+  chatbot. No fandom artwork or team marks. Hockey and the rest of life stay
+  off the page.
 
 ## Things to review
 
-1. **The private tools replaced two obsolete ones.** The eCOPR countdown and the
-   AOR forecast are gone, since both events have happened. Their data, including
-   the office schedule and booked leave, was deleted rather than carried over.
-2. **Trips are stored per browser.** `localStorage`, seeded from
-   `knownAbsences` in `src/private/schedule.ts`. Add trips to that file to make
-   them permanent across devices; anything added through the dialog lives only
-   in the browser that added it. If cross-device sync matters, a free Neon or
-   Upstash store through the Vercel marketplace is about an hour of work, but it
-   needs you to click through the integration.
-3. **The citizenship figure is an estimate.** It implements the 1,095 day rule
-   with the half-day pre-PR credit capped at 365, and counts departure and
-   return days as days in Canada, which is IRCC's convention. `npm test` covers
-   the maths. The official number is whatever IRCC's own calculator says.
-4. **Analytics.** Remove the two `<Script>` tags in `src/app/layout.tsx` if you
-   no longer want GA4.
-5. **The contact form sends from Resend's shared sender.** `CONTACT_FROM` is
-   unset, so messages go out as `onboarding@resend.dev`. That costs nothing and
-   needs no domain verification, but it will only deliver to the address that
-   owns the Resend account. Verified working end to end.
-
-   The catch: if `CONTACT_TO` is ever changed to a different address, delivery
-   stops until `CONTACT_FROM` points at a domain verified in Resend. Set it as
-   an environment variable, not in the repo.
+1. **Neon.** `/work/hello` needs the Neon integration on the Vercel project so
+   `DATABASE_URL` is set for production, preview and development. Until then the
+   page runs in preview mode. The table is created on first use.
+2. **The contact and build forms send from Resend's shared sender.** `CONTACT_FROM`
+   is unset, so messages go out as `onboarding@resend.dev`. That delivers only to
+   the address that owns the Resend account. If `CONTACT_TO` ever changes,
+   delivery stops until `CONTACT_FROM` points at a domain verified in Resend.
+3. **The private tools** are unchanged from the previous version of this README's
+   notes: trips are stored per browser, the citizenship figure is an estimate,
+   and GA4 can be removed by deleting the two `<Script>` tags in the root layout.
+4. **The social image** (`public/og.png`) still shows the previous light design.
 
 ## Deployment
 
-Vercel project `ravinojuwono`, connected to this GitHub repository. Pushes to
-`main` deploy to production; other branches get previews.
+Vercel project `ravinojuwono`. The Next.js site lives on the `rebuild/nextjs`
+branch; `main` still holds the old Quasar site, so production is deployed from
+this directory with the CLI:
 
 ```bash
 npm run check        # must pass first
-npx vercel deploy    # preview
-npx vercel deploy --prod
+npx vercel --prod
 ```
 
-Environment variables `PRIVATE_USER` and `PRIVATE_PASSWORD` are set for
-production, preview and development. Rotate the password with
-`npx vercel env rm PRIVATE_PASSWORD production` then `env add`.
-
-**`main` still holds the Quasar site**, so a push to `main` before merging this
-branch will fail the Vercel build. Harmless, but expect the email.
+Environment variables are set for production, preview and development. Rotate
+the private password with `npx vercel env rm PRIVATE_PASSWORD production` then
+`env add`.
 
 ### Domain
 
 Registered with Cloudflare, on Cloudflare nameservers, serving from Vercel.
 The apex 308s to `www`, which is the canonical host the metadata assumes.
-Expires 19 September 2027; the registrar transfer added the extra year.
-WHOIS is redacted, which Cloudflare includes at no cost.
-
-Netlify is out of the picture. If a browser still lands on it, that is a stale
-DNS cache on that machine rather than anything server side: flush it with
-`ipconfig /flushdns` on Windows, or confirm the real answer with
-`curl -sI --resolve ravinojuwono.com:443:216.150.1.193 https://ravinojuwono.com`.
-
-## Verified
-
-`npm run check` passes: no type errors, no lint errors, 9 tests passing, clean
-build. `npm audit` reports zero vulnerabilities.
-
-Measured against the production build at 1440x900 and 390x844:
-
-- LCP equals FCP on every public page (32 to 52 ms).
-- Cumulative layout shift is 0.
-- Around 111 KB transferred on first load, most of it the two webfonts.
-- No horizontal overflow at 390 px, no console errors or warnings.
-- Every text colour clears WCAG AA on the ground: 16.4:1 body, 6.4:1 muted,
-  5.2:1 metadata, 11.1:1 teal, 9.6:1 for ground text on the amber button.
-- Keyboard: skip link, visible focus rings, mobile menu and dialog both trap
-  focus, close on Escape and restore focus to their trigger.
-- Live on Vercel: every public route 200s, every private route 401s without
-  credentials and 200s with them.
+Expires 19 September 2027. WHOIS is redacted.

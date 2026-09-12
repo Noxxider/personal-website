@@ -110,10 +110,6 @@ export default function RootLayout({
       className={`${geist.variable} ${geistMono.variable} ${fraunces.variable}`}
     >
       <head>
-        <noscript>
-          {/* Scroll reveals default to hidden; without JavaScript they must not stay that way. */}
-          <style>{`.reveal{opacity:1!important;transform:none!important}`}</style>
-        </noscript>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}

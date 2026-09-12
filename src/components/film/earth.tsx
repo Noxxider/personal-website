@@ -16,7 +16,7 @@ import { DEG, FOV, HALF_HEIGHT, damp, ease, span, useStage, TEAL } from "./scene
  * Scroll drives it in three moves, read from the shared chapter progress:
  *   arrival   lit from the left, terminator across it, idling right of the name
  *   canada    the sun comes round, the Earth turns and pushes in on Canada
- *   systems   recedes to a small disc top right; gone once physics arrives
+ *   systems   drifts up and shrinks away as the bookings grid arrives
  */
 
 const TAU = Math.PI * 2;
@@ -87,13 +87,13 @@ const surfaceShader = {
 
       vec3 day = texture2D(uDay, vUv).rgb * (0.22 + 1.05 * max(sun, 0.0));
       vec3 lights = texture2D(uNight, vUv).rgb;
-      vec3 night = vec3(0.02, 0.028, 0.045) + lights * vec3(1.0, 0.86, 0.62) * 2.1;
+      vec3 night = vec3(0.03, 0.04, 0.06) + lights * vec3(1.0, 0.86, 0.62) * 2.1;
       vec3 color = mix(night, day, daylight);
 
       float water = texture2D(uSpecular, vUv).r;
       vec3 halfway = normalize(uSun + view);
-      float glint = pow(max(dot(n, halfway), 0.0), 110.0) * water * daylight;
-      color += vec3(0.9, 0.95, 1.0) * glint * 0.22;
+      float glint = pow(max(dot(n, halfway), 0.0), 160.0) * water * daylight;
+      color += vec3(0.9, 0.95, 1.0) * glint * 0.1;
 
       float rim = pow(1.0 - max(dot(n, view), 0.0), 3.2);
       color += uTeal * rim * (0.1 + 0.28 * daylight);
@@ -176,7 +176,7 @@ export function Earth() {
   const lineMaterial = React.useRef<THREE.LineBasicMaterial>(null);
   const { aspect, narrow, halfW } = useStage();
 
-  const sun = React.useMemo(() => new THREE.Vector3(-0.85, 0.3, 0.42).normalize(), []);
+  const sun = React.useMemo(() => new THREE.Vector3(-0.6, 0.5, 0.66).normalize(), []);
   const uniforms = React.useMemo(
     () => ({
       uDay: { value: maps.day },
@@ -198,7 +198,7 @@ export function Earth() {
 
   const smooth = React.useRef({ zoom: 0, recede: 0, gone: 0 });
   const idle = React.useRef(0.2);
-  const sunFrom = React.useMemo(() => new THREE.Vector3(-0.85, 0.3, 0.42).normalize(), []);
+  const sunFrom = React.useMemo(() => new THREE.Vector3(-0.6, 0.5, 0.66).normalize(), []);
   const sunTo = React.useMemo(() => new THREE.Vector3(-0.55, 0.5, 0.75).normalize(), []);
 
   useFrame((_, delta) => {
@@ -210,7 +210,7 @@ export function Earth() {
     const zoomTarget = 0.5 * canada.enter + 0.5 * canada.pin;
     smooth.current.zoom = damp(smooth.current.zoom, zoomTarget, 7, dt);
     smooth.current.recede = damp(smooth.current.recede, progress.systems.enter, 7, dt);
-    smooth.current.gone = damp(smooth.current.gone, progress.physics.enter, 7, dt);
+    smooth.current.gone = damp(smooth.current.gone, progress.systems.enter, 7, dt);
     const { zoom, recede, gone } = smooth.current;
 
     g.visible = gone < 0.999;
@@ -245,11 +245,8 @@ export function Earth() {
       y: narrow ? 0.3 : 0.05,
       s: (2 * HALF_HEIGHT) / (2 * Math.tan((FOV / 2) * DEG) + needed),
     };
-    const corner: Pose = {
-      x: halfW - (narrow ? 0.24 : 0.5),
-      y: HALF_HEIGHT - (narrow ? 0.3 : 0.48),
-      s: narrow ? 0.11 : 0.2,
-    };
+    // Where it heads as it leaves: up and back, shrinking to nothing.
+    const corner: Pose = { x: narrow ? 0.2 : 0.6, y: HALF_HEIGHT + 0.6, s: 0.35 };
     const pose = mix(mix(arrival, zoomed, push), corner, ease(recede));
     const shrink = 1 - ease(gone);
     g.position.set(pose.x, pose.y, 0);
