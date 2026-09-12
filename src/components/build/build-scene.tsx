@@ -101,7 +101,20 @@ function Structure() {
   );
 }
 
-export function BuildScene() {
+export function BuildScene({ assembled = false }: { assembled?: boolean }) {
+  // Away from the Build page there is no bridge: assemble fully and lean
+  // toward the pointer on our own.
+  React.useEffect(() => {
+    if (!assembled) return;
+    buildState.scroll = 1;
+    buildState.filled = 0;
+    const onMove = (event: PointerEvent) => {
+      buildState.pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+      buildState.pointer.y = (event.clientY / window.innerHeight) * 2 - 1;
+    };
+    window.addEventListener("pointermove", onMove, { passive: true });
+    return () => window.removeEventListener("pointermove", onMove);
+  }, [assembled]);
   return (
     <Canvas
       camera={{ position: [0, 0.6, 5.2], fov: 32 }}

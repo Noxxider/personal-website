@@ -4,6 +4,7 @@ import { Chapter } from "@/components/film/chapter";
 import { FilmMotion } from "@/components/film/film-motion";
 import { FilmHero } from "@/components/film/film-hero";
 import { LiveApps } from "@/components/film/live-apps";
+import { OfferScene } from "@/components/build/offer-scene";
 import { Container } from "@/components/section";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -213,7 +214,9 @@ export default function HomePage() {
                 ))}
               </ul>
             </div>
-            <ul className="grid gap-8">
+            <div className="grid gap-10">
+              <OfferScene />
+              <ul className="grid gap-8">
               {offers.map((offer, i) => (
                 <li
                   key={offer.title}
@@ -226,7 +229,8 @@ export default function HomePage() {
                   </p>
                 </li>
               ))}
-            </ul>
+              </ul>
+            </div>
           </div>
         </Container>
       </section>

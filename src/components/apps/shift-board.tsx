@@ -21,9 +21,9 @@ import { cn } from "@/lib/utils";
  * and highlighted on it. Export writes an .ics the calendar app can open.
  */
 
-const HOURS = { start: 6, end: 24 };
 const SLOT = 30; // minutes per grid step
-const ROWS = ((HOURS.end - HOURS.start) * 60) / SLOT;
+const FULL = { start: 6, end: 24 };
+const SHORT = { start: 8, end: 20 };
 
 const PEOPLE: Person[] = [
   { id: "p1", name: "Ada" },
@@ -56,6 +56,8 @@ let counter = 100;
 const nextId = () => `s${++counter}`;
 
 export function ShiftBoard({ compact = false }: { compact?: boolean }) {
+  const HOURS = compact ? SHORT : FULL;
+  const ROWS = ((HOURS.end - HOURS.start) * 60) / SLOT;
   const [shifts, setShifts] = React.useState<Shift[]>(SEED);
   const [person, setPerson] = React.useState("p1");
   const [draft, setDraft] = React.useState<Shift | null>(null);
@@ -124,9 +126,9 @@ export function ShiftBoard({ compact = false }: { compact?: boolean }) {
   });
 
   return (
-    <div className={compact ? "" : "grid gap-6 lg:grid-cols-[1fr_17rem]"}>
-      <div>
-        <div className="mb-3 flex flex-wrap items-center gap-2">
+    <div className={compact ? "flex h-full flex-col" : "grid gap-6 lg:grid-cols-[1fr_17rem]"}>
+      <div className={compact ? "flex min-h-0 flex-1 flex-col" : ""}>
+        <div className={cn("flex flex-wrap items-center gap-2", compact ? "mb-2 gap-1.5" : "mb-3")}>
           <span className="label mr-1">Laying shifts for</span>
           {PEOPLE.map((p) => (
             <button
@@ -135,40 +137,43 @@ export function ShiftBoard({ compact = false }: { compact?: boolean }) {
               aria-pressed={person === p.id}
               onClick={() => setPerson(p.id)}
               className={cn(
-                "rounded-full border px-3 py-1 text-sm transition-colors",
+                "rounded-full border transition-colors",
+                compact ? "px-2 py-0.5 text-[0.75rem]" : "px-3 py-1 text-sm",
                 person === p.id ? "border-ink bg-ink text-ground" : "border-line text-ink-muted hover:text-ink",
               )}
             >
               {p.name}
-              <span className="label ml-2 tabular">{(total(p.id) / 60).toFixed(0)}h</span>
+              {!compact && <span className="label ml-2 tabular">{(total(p.id) / 60).toFixed(0)}h</span>}
             </button>
           ))}
         </div>
 
-        <div className={compact ? "overflow-x-auto rounded-lg bg-ground" : "overflow-x-auto rounded-2xl border border-line bg-surface"}>
-          <div className={compact ? "min-w-[520px]" : "min-w-[640px]"}>
-            <div className="grid grid-cols-[3rem_repeat(7,1fr)] border-b border-line">
+        <div className={compact ? "min-h-0 flex-1 overflow-hidden rounded-lg bg-ground" : "overflow-x-auto rounded-2xl border border-line bg-surface"}>
+          <div className={compact ? "flex h-full flex-col" : "min-w-[640px]"}>
+            <div className={cn("grid border-b border-line", compact ? "grid-cols-[2rem_repeat(7,1fr)]" : "grid-cols-[3rem_repeat(7,1fr)]")}>
               <div />
               {DAY_NAMES.map((d) => (
-                <div key={d} className="label py-2 text-center">{d}</div>
+                <div key={d} className={cn("label text-center", compact ? "py-1 text-[0.65rem]" : "py-2")}>{compact ? d[0] : d}</div>
               ))}
             </div>
-            <div className="grid grid-cols-[3rem_repeat(7,1fr)]">
-              <div className="relative" style={{ height: `${ROWS * (compact ? 8 : 14)}px` }}>
+            <div className={cn("grid", compact ? "min-h-0 flex-1 grid-cols-[2rem_repeat(7,1fr)]" : "grid-cols-[3rem_repeat(7,1fr)]")}>
+              <div className="relative" style={compact ? undefined : { height: `${ROWS * 14}px` }}>
                 {Array.from({ length: HOURS.end - HOURS.start + 1 }, (_, i) => (
-                  <span
-                    key={i}
-                    className="label absolute right-2 -translate-y-1/2 tabular"
-                    style={{ top: `${(i / (HOURS.end - HOURS.start)) * 100}%` }}
-                  >
-                    {String(HOURS.start + i).padStart(2, "0")}
-                  </span>
+                  (!compact || i % 3 === 0) && (
+                    <span
+                      key={i}
+                      className={cn("label absolute right-1.5 -translate-y-1/2 tabular", compact && "text-[0.6rem]")}
+                      style={{ top: `${(i / (HOURS.end - HOURS.start)) * 100}%` }}
+                    >
+                      {String(HOURS.start + i).padStart(2, "0")}
+                    </span>
+                  )
                 ))}
               </div>
               <div
                 ref={grid}
                 className="relative col-span-7 grid touch-none select-none grid-cols-7"
-                style={{ height: `${ROWS * (compact ? 8 : 14)}px` }}
+                style={compact ? undefined : { height: `${ROWS * 14}px` }}
                 onPointerDown={onDown}
                 onPointerMove={onMove}
                 onPointerUp={onUp}
@@ -177,7 +182,7 @@ export function ShiftBoard({ compact = false }: { compact?: boolean }) {
                 {DAY_NAMES.map((d, day) => (
                   <div
                     key={d}
-                    className="relative border-l border-line bg-[repeating-linear-gradient(to_bottom,transparent_0,transparent_27px,var(--color-line)_27px,var(--color-line)_28px)]"
+                    className={cn("relative border-l border-line", !compact && "bg-[repeating-linear-gradient(to_bottom,transparent_0,transparent_27px,var(--color-line)_27px,var(--color-line)_28px)]")}
                   >
                     {/* Coverage window shading */}
                     <div
@@ -219,9 +224,11 @@ export function ShiftBoard({ compact = false }: { compact?: boolean }) {
                           style={rowsForShift(s)}
                         >
                           <span className="font-medium">{PEOPLE.find((p) => p.id === s.personId)?.name}</span>
-                          <span className="label block tabular">
-                            {minutesLabel(s.start)}–{minutesLabel(s.end)}
-                          </span>
+                          {!compact && (
+                            <span className="label block tabular">
+                              {minutesLabel(s.start)}–{minutesLabel(s.end)}
+                            </span>
+                          )}
                         </button>
                       ))}
                   </div>

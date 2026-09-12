@@ -228,7 +228,7 @@ export function OrbitsLab({ compact = false }: { compact?: boolean }) {
 
   return (
     <div className={compact ? "h-full" : "grid gap-6 lg:grid-cols-[1fr_18rem]"}>
-      <div className={compact ? "relative h-full min-h-[11rem] overflow-hidden rounded-lg bg-ground" : "relative aspect-[4/3] overflow-hidden rounded-2xl border border-line bg-surface sm:aspect-[16/10]"}>
+      <div className={compact ? "relative h-full overflow-hidden rounded-lg bg-ground" : "relative aspect-[4/3] overflow-hidden rounded-2xl border border-line bg-surface sm:aspect-[16/10]"}>
         <Canvas
           camera={{ position: [0, -1.2, 3.4], fov: 40 }}
           dpr={[1, 1.75]}
@@ -241,9 +241,11 @@ export function OrbitsLab({ compact = false }: { compact?: boolean }) {
         >
           <Scene settingsRef={settings} labRef={lab as React.RefObject<Lab>} onStats={onStats} />
         </Canvas>
-        <p className="label pointer-events-none absolute bottom-3 left-4">
-          Press and drag to add a passing mass
-        </p>
+        {!compact && (
+          <p className="label pointer-events-none absolute bottom-3 left-4">
+            Press and drag to add a passing mass
+          </p>
+        )}
       </div>
 
       {!compact && <div className="space-y-6">
