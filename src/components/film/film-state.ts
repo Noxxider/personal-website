@@ -22,7 +22,6 @@ export const chapterIds = [
   "systems",
   "physics",
   "web",
-  "off-the-clock",
   "elsewhere",
 ] as const;
 

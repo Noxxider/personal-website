@@ -11,7 +11,22 @@ import { cn } from "@/lib/utils";
 
 const INITIAL: ContactState = { status: "idle" };
 
-export function ContactForm() {
+const KINDS = [
+  { value: "workflow", label: "A workflow automated" },
+  { value: "tool", label: "A tool for my team" },
+  { value: "site", label: "A public site" },
+  { value: "integration", label: "An integration or MCP server" },
+  { value: "not sure", label: "Not sure yet" },
+];
+
+export function ContactForm({
+  extended = false,
+  submitLabel = "Send message",
+}: {
+  /** Adds the two /build questions: what, and roughly when. */
+  extended?: boolean;
+  submitLabel?: string;
+}) {
   const [state, action, pending] = useActionState(sendMessage, INITIAL);
   const errorSummaryRef = React.useRef<HTMLParagraphElement>(null);
 
@@ -57,8 +72,40 @@ export function ContactForm() {
         />
       </div>
 
+      {extended && (
+        <div className="mt-5 grid gap-5 sm:grid-cols-2">
+          <div>
+            <Label htmlFor="kind">What would you like built?</Label>
+            <select
+              id="kind"
+              name="kind"
+              defaultValue="not sure"
+              className="mt-2 h-11 w-full rounded-lg border border-line-strong bg-surface px-3.5 text-[0.9375rem] text-ink transition-colors hover:border-ink-faint focus:border-ink focus:outline-none"
+            >
+              {KINDS.map((k) => (
+                <option key={k.value} value={k.value}>
+                  {k.label}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <Label htmlFor="timeline">Rough timeline</Label>
+            <Input
+              id="timeline"
+              name="timeline"
+              maxLength={120}
+              placeholder="This quarter, no rush, yesterday"
+              className="mt-2"
+            />
+          </div>
+        </div>
+      )}
+
       <div className="mt-5">
-        <Label htmlFor="message">Message</Label>
+        <Label htmlFor="message">
+          {extended ? "What is the problem, in your words?" : "Message"}
+        </Label>
         <textarea
           id="message"
           name="message"
@@ -99,7 +146,7 @@ export function ContactForm() {
         disabled={pending}
         className={cn(buttonVariants({ size: "lg" }), "mt-6")}
       >
-        {pending ? "Sending" : "Send message"}
+        {pending ? "Sending" : submitLabel}
         {!pending && <ArrowRightIcon aria-hidden className="size-4" />}
       </button>
     </form>

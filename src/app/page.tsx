@@ -7,7 +7,7 @@ import { FilmHero } from "@/components/film/film-hero";
 import { Container } from "@/components/section";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { projects, roles } from "@/content/work";
+import { listedProjects, roles } from "@/content/work";
 import { site } from "@/content/site";
 
 const current = roles.find((r) => r.current)!;
@@ -131,8 +131,8 @@ export default function HomePage() {
           <h2 id="web-title" className={chapterTitle} data-line>
             Small, fast pages that are real HTML before any JavaScript runs.
           </h2>
-          <ul className="mt-8 grid max-w-3xl gap-px sm:grid-cols-3">
-            {projects.map((project) => (
+          <ul className="mt-8 grid max-w-3xl gap-px sm:grid-cols-2 lg:grid-cols-4">
+            {listedProjects.slice(0, 4).map((project) => (
               <li
                 key={project.slug}
                 className="border-t border-line pt-4 pr-6"
@@ -158,40 +158,12 @@ export default function HomePage() {
           </ul>
         </Chapter>
 
-        {/* ------------------------------------------ 05, off the clock */}
-        <Chapter id="off-the-clock" index="05" label="Off the clock" length={0.9}>
-          <h2 id="off-the-clock-title" className="sr-only">
-            Off the clock
-          </h2>
-          <div className="grid gap-10 sm:grid-cols-2 sm:gap-16">
-            <div>
-              <p className="font-display text-title text-accent" data-line>
-                Hockey.
-              </p>
-              <p className="mt-4 max-w-[36ch] text-body text-ink-muted" data-line>
-                From the stands, not the bench. The only system I follow
-                without wanting to fix it.
-              </p>
-            </div>
-            <div>
-              <p className="font-display text-title text-ink" data-line>
-                Tower of God.
-              </p>
-              <p className="mt-4 max-w-[36ch] text-body text-ink-muted" data-line>
-                The thing I read. A tower, a boy, and a story I would hand to
-                anyone who thinks they do not like comics.
-              </p>
-            </div>
-          </div>
-        </Chapter>
-
-        {/* -------------------------------------------------- 06, symbols */}
+        {/* -------------------------------------------------- 05, symbols */}
         <Chapter
           id="elsewhere"
-          index="06"
+          index="05"
           label="Elsewhere"
-          length={0.6}
-          hold
+          length={0.8}
           align="center"
         >
           <h2 id="elsewhere-title" className="sr-only">
@@ -218,34 +190,49 @@ export default function HomePage() {
         </Chapter>
       </FilmMotion>
 
-      {/* ------------------------------------------------------ 07, the offer */}
-      <section aria-labelledby="offer-title" className="relative border-t border-line bg-ground">
-        <Container className="py-20 sm:py-28">
-          <p className="label">07 / The offer</p>
-          <h2
-            id="offer-title"
-            className="mt-6 max-w-[16ch] font-display text-display text-ink"
-          >
-            Want something built?
-          </h2>
-          <ul className="mt-14 grid gap-10 sm:grid-cols-3 sm:gap-8">
-            {offers.map((offer) => (
-              <li key={offer.title} className="border-t border-line pt-5">
-                <h3 className="font-display text-2xl text-ink">{offer.title}</h3>
-                <p className="mt-3 text-[0.9375rem] leading-relaxed text-ink-muted">
-                  {offer.body}
-                </p>
-              </li>
-            ))}
-          </ul>
-          {/* Points at the contact form until the /build page lands. */}
-          <Link
-            href="/contact"
-            className={cn(buttonVariants({ variant: "solid", size: "lg" }), "mt-14")}
-          >
-            Say what you need
-            <ArrowRightIcon aria-hidden className="size-4" />
-          </Link>
+      {/* ------------------------------------------------------ 06, the offer */}
+      <section
+        aria-labelledby="offer-title"
+        className="relative overflow-hidden border-t border-line bg-ground"
+      >
+        <div aria-hidden className="glow pointer-events-none absolute inset-0" />
+        <Container className="relative py-24 sm:py-32">
+          <div className="grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-20">
+            <div>
+              <p className="label">06 / The offer</p>
+              <h2
+                id="offer-title"
+                className="mt-6 max-w-[14ch] font-display text-display text-ink"
+              >
+                Want something built?
+              </h2>
+              <p className="mt-6 max-w-[40ch] text-lead text-ink-muted">
+                Fixed price, agreed before any work starts. Delivered in weeks,
+                not quarters, with a month of support after.
+              </p>
+              <Link
+                href="/build"
+                className={cn(buttonVariants({ variant: "solid", size: "lg" }), "mt-10")}
+              >
+                Say what you need
+                <ArrowRightIcon aria-hidden className="size-4" />
+              </Link>
+            </div>
+            <ul className="grid gap-4">
+              {offers.map((offer, i) => (
+                <li
+                  key={offer.title}
+                  className="group relative rounded-2xl border border-line bg-surface/70 p-6 backdrop-blur transition-colors duration-300 hover:border-line-strong sm:p-7"
+                >
+                  <span className="label tabular">0{i + 1}</span>
+                  <h3 className="mt-3 font-display text-2xl text-ink">{offer.title}</h3>
+                  <p className="mt-2 text-[0.9375rem] leading-relaxed text-ink-muted">
+                    {offer.body}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
         </Container>
       </section>
     </>

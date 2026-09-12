@@ -9,7 +9,6 @@ import { Earth } from "./earth";
 import { ScheduleScene } from "./schedule-scene";
 import { OrbitsScene } from "./orbits-scene";
 import { CardsScene } from "./cards-scene";
-import { OffClockScene } from "./offclock-scene";
 import { MarksScene } from "./marks-scene";
 
 /** Mirrors three's default loading manager into the loader overlay. Wired
@@ -66,7 +65,6 @@ export default function FilmScene({ onReady }: { onReady: () => void }) {
         <ScheduleScene />
         <OrbitsScene />
         <CardsScene />
-        <OffClockScene />
         <MarksScene />
         <Ready onReady={onReady} />
       </React.Suspense>

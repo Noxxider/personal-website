@@ -40,6 +40,12 @@ export async function sendMessage(
   const name = String(formData.get("name") ?? "").trim();
   const email = String(formData.get("email") ?? "").trim();
   const message = String(formData.get("message") ?? "").trim();
+  // The two optional fields the /build form adds. Free text is capped; the
+  // select is checked against its own options.
+  const kinds = ["workflow", "tool", "site", "integration", "not sure"];
+  const kindRaw = String(formData.get("kind") ?? "").trim();
+  const kind = kinds.includes(kindRaw) ? kindRaw : "";
+  const timeline = String(formData.get("timeline") ?? "").trim().slice(0, 120);
 
   const fieldErrors: ContactState["fieldErrors"] = {};
   if (!name) fieldErrors.name = "Please add your name.";
@@ -85,9 +91,13 @@ export async function sendMessage(
         from: `Website contact <${from}>`,
         to: [to],
         reply_to: email,
-        subject: `Message from ${name}`,
-        text: `${name} <${email}>\n\n${message}`,
-        html: `<p><strong>${escapeHtml(name)}</strong> &lt;${escapeHtml(email)}&gt;</p><p style="white-space:pre-wrap">${escapeHtml(message)}</p>`,
+        subject: kind ? `Build request (${kind}) from ${name}` : `Message from ${name}`,
+        text: `${name} <${email}>${kind ? `\nWants: ${kind}` : ""}${timeline ? `\nTimeline: ${timeline}` : ""}\n\n${message}`,
+        html: `<p><strong>${escapeHtml(name)}</strong> &lt;${escapeHtml(email)}&gt;</p>${
+          kind || timeline
+            ? `<p>${kind ? `Wants: ${escapeHtml(kind)}<br>` : ""}${timeline ? `Timeline: ${escapeHtml(timeline)}` : ""}</p>`
+            : ""
+        }<p style="white-space:pre-wrap">${escapeHtml(message)}</p>`,
       }),
       // Never let a hung API keep the form spinning.
       signal: AbortSignal.timeout(10_000),

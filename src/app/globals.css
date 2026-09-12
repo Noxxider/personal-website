@@ -163,6 +163,15 @@
     background-size: 100% 1px;
   }
 
+  /* The live dot next to the name in the header. */
+  .pulse-dot {
+    animation: pulse-dot 2.6s ease-in-out infinite;
+  }
+  @keyframes pulse-dot {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.6); opacity: 0.55; }
+  }
+
   /* A faint radial glow behind hero blocks, in the signature colour. */
   .glow {
     background-image: radial-gradient(

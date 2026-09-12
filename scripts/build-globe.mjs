@@ -97,6 +97,24 @@ for (const polygon of canada) {
 
 const json = JSON.stringify({ land, outline });
 await writeFile(OUT, json);
+
+// Country centroids for the "Hello from" globe: ISO 3166-1 alpha-2 to
+// [lat, lon], taken as the vertex mean of each country's largest ring.
+const centroids = {};
+for (const feature of geo.features) {
+  const props = feature.properties;
+  let code = props.ISO_A2_EH ?? props.ISO_A2;
+  if (!code || code === "-99") continue;
+  const geometry = feature.geometry;
+  const polygons = geometry.type === "Polygon" ? [geometry.coordinates] : geometry.coordinates;
+  let best = null;
+  for (const polygon of polygons) if (!best || polygon[0].length > best.length) best = polygon[0];
+  let lat = 0, lon = 0;
+  for (const [x, y] of best) { lon += x; lat += y; }
+  centroids[code] = [Math.round((lat / best.length) * 10) / 10, Math.round((lon / best.length) * 10) / 10];
+}
+await writeFile(new URL("../src/content/countries.json", import.meta.url), JSON.stringify(centroids));
+console.log(`countries: ${Object.keys(centroids).length}`);
 console.log(
   `land dots: ${land.length / 2}, outline rings: ${outline.length}, ${(json.length / 1024).toFixed(1)} kB`,
 );

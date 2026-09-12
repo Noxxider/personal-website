@@ -4,7 +4,17 @@ import { site } from "@/content/site";
 export const dynamic = "force-static";
 
 // Trailing slashes to match `trailingSlash: true` and the canonical tags.
-const routes = ["/", "/work/", "/about/", "/contact/", "/weighttracker/", "/tapbpm/"];
+const routes = [
+  "/",
+  "/work/",
+  "/work/orbits/",
+  "/work/pendulum/",
+  "/work/shift/",
+  "/work/hello/",
+  "/experience/",
+  "/build/",
+  "/contact/",
+];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();

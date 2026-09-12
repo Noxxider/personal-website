@@ -1,104 +1,142 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import type { Route } from "next";
 import { pageMetadata } from "@/lib/metadata";
+import { ArrowUpRightIcon } from "@/components/icons";
 import { Container, Section } from "@/components/section";
 import { Reveal } from "@/components/reveal";
-import { WorkCard } from "@/components/work-card";
 import { Prose } from "@/components/prose";
-import { education, projects, roles } from "@/content/work";
+import { listedProjects } from "@/content/work";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = pageMetadata({
   title: "Work",
   description:
-    "Tools I have built and shipped, the roles behind them, and where I studied. Bodyweight Tracker, Tap BPM, clinical scheduling systems and earlier product work.",
+    "Small real programs built to show range: an N-body lab, a double pendulum, a shift scheduler with conflict checks, a shared globe on Neon, and this site.",
   path: "/work/",
 });
 
+const accents: Record<string, string> = {
+  orbits: "from-signal/25",
+  pendulum: "from-accent/20",
+  shift: "from-signal/15",
+  hello: "from-signal/30",
+  site: "from-ink/10",
+};
+
 export default function WorkPage() {
+  const [first, ...rest] = listedProjects;
   return (
     <>
       <Container>
         <div className="pt-16 pb-6 sm:pt-24">
-          <div>
-            <p className="label">Work</p>
-            <h1 className="mt-6 max-w-[18ch] font-display text-display">
-              A few things I have built.
-            </h1>
-            <Prose className="mt-8 text-lead">
-              <p>
-                Two of them are on this site, so you can use them rather than
-                read about them. The rest is the employment history behind
-                them.
-              </p>
-            </Prose>
-          </div>
+          <p className="label">Work</p>
+          <h1 className="mt-6 max-w-[18ch] font-display text-display">
+            Things you can use, not just read about.
+          </h1>
+          <Prose className="mt-8 text-lead">
+            <p>
+              Each of these is a real program with its own page and notes on
+              how it is built. They are small on purpose and made to be poked
+              at.
+            </p>
+          </Prose>
         </div>
       </Container>
 
-      <Section title="Projects">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-          {projects.map((project, i) => (
-            <Reveal key={project.slug} delay={i * 90} className="flex">
-              <WorkCard project={project} className="w-full" />
+      <Section>
+        <div className="grid gap-5 lg:grid-cols-3">
+          {first && (
+            <Reveal className="lg:col-span-2">
+              <Card project={first} large />
+            </Reveal>
+          )}
+          {rest.map((project, i) => (
+            <Reveal key={project.slug} delay={(i + 1) * 70}>
+              <Card project={project} />
             </Reveal>
           ))}
         </div>
       </Section>
-
-      <Section title="Experience">
-        <ol className="grid gap-0">
-          {roles.map((role, i) => (
-            <Reveal
-              key={`${role.organisation}-${role.period}`}
-              as="li"
-              delay={i * 60}
-              className="grid gap-3 border-t border-line py-8 sm:grid-cols-[9rem_1fr] sm:gap-10"
-            >
-              <p className="font-mono text-[0.8125rem] text-ink-faint tabular">
-                {role.period}
-              </p>
-              <div>
-                <h3 className="text-lg font-medium text-ink">
-                  {role.title}
-                  <span className="text-ink-faint">, </span>
-                  <span className="text-ink-muted">{role.organisation}</span>
-                  {role.current && (
-                    <span className="ml-3 inline-flex translate-y-[-2px] items-center gap-1.5 rounded-full bg-signal-soft px-2.5 py-0.5 font-mono text-[0.625rem] tracking-wider text-signal uppercase">
-                      <span aria-hidden className="size-1.5 rounded-full bg-signal" />
-                      Current
-                    </span>
-                  )}
-                </h3>
-                <p className="mt-2.5 max-w-[62ch] text-[0.9375rem] leading-relaxed text-ink-muted">
-                  {role.summary}
-                </p>
-              </div>
-            </Reveal>
-          ))}
-        </ol>
-      </Section>
-
-      <Section title="Education and certification">
-        <ol>
-          {education.map((item, i) => (
-            <Reveal
-              key={item.title}
-              as="li"
-              delay={i * 60}
-              className="grid gap-3 border-t border-line py-8 sm:grid-cols-[9rem_1fr] sm:gap-10"
-            >
-              <p className="font-mono text-[0.8125rem] text-ink-faint tabular">
-                {item.period}
-              </p>
-              <div>
-                <h3 className="text-lg font-medium text-ink">{item.title}</h3>
-                <p className="mt-1.5 text-[0.9375rem] text-ink-muted">
-                  {item.organisation}
-                </p>
-              </div>
-            </Reveal>
-          ))}
-        </ol>
-      </Section>
     </>
+  );
+}
+
+function Card({
+  project,
+  large = false,
+}: {
+  project: (typeof listedProjects)[number];
+  large?: boolean;
+}) {
+  const external = !project.href.startsWith("/");
+  const stretch = "after:absolute after:inset-0 after:content-['']";
+  const body = (
+    <>
+      <div className="flex items-center justify-between">
+        <span className="label tabular">{project.year}</span>
+        <span className="label flex items-center gap-1.5">
+          {project.status === "Live" && (
+            <span aria-hidden className="size-1.5 rounded-full bg-signal" />
+          )}
+          {project.status}
+        </span>
+      </div>
+      <h2
+        className={cn(
+          "mt-auto font-display text-ink",
+          large ? "pt-24 text-[2.5rem] leading-none sm:pt-40 sm:text-[3.25rem]" : "pt-16 text-3xl",
+        )}
+      >
+        {external ? (
+          <a href={project.href} target="_blank" rel="noreferrer noopener" className={stretch}>
+            {project.title}
+          </a>
+        ) : (
+          <Link href={project.href as Route} className={stretch}>
+            {project.title}
+          </Link>
+        )}
+      </h2>
+      <p className="mt-3 max-w-[46ch] text-[0.9375rem] leading-relaxed text-ink-muted">
+        {project.blurb}
+      </p>
+      <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
+        <ul className="flex flex-wrap gap-x-2 gap-y-1.5">
+          {project.stack.map((tech) => (
+            <li
+              key={tech}
+              className="rounded-full border border-line px-2.5 py-1 text-[0.75rem] text-ink-faint"
+            >
+              {tech}
+            </li>
+          ))}
+        </ul>
+        <span className="inline-flex items-center gap-1.5 text-sm font-medium text-ink">
+          {external ? "Source" : "Open"}
+          <ArrowUpRightIcon
+            aria-hidden
+            className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+          />
+        </span>
+      </div>
+    </>
+  );
+
+  return (
+    <article
+      className={cn(
+        "group relative flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface p-6 transition-colors duration-300 hover:border-line-strong sm:p-7",
+      )}
+    >
+      <div
+        aria-hidden
+        className={cn(
+          "pointer-events-none absolute inset-0 bg-gradient-to-br to-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-100",
+          accents[project.slug] ?? "from-signal/15",
+        )}
+      />
+      <div className="relative flex h-full flex-col">{body}</div>
+    </article>
   );
 }

@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   typedRoutes: true,
+  async redirects() {
+    // The about page folded into experience in the 2026 redesign.
+    return [{ source: "/about", destination: "/experience", permanent: true }];
+  },
   async headers() {
     return [
       {

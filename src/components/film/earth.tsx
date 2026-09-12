@@ -14,7 +14,7 @@ import { DEG, FOV, HALF_HEIGHT, damp, ease, span, useStage, TEAL } from "./scene
  * the NASA-derived 2K set that ships with three.js, re-encoded as WebP.
  *
  * Scroll drives it in three moves, read from the shared chapter progress:
- *   arrival   night side to the viewer, idling, right of the name
+ *   arrival   lit from the left, terminator across it, idling right of the name
  *   canada    the sun comes round, the Earth turns and pushes in on Canada
  *   systems   recedes to a small disc top right; gone once physics arrives
  */
@@ -83,20 +83,20 @@ const surfaceShader = {
       vec3 n = normalize(vNormal);
       vec3 view = normalize(cameraPosition - vWorld);
       float sun = dot(n, uSun);
-      float daylight = smoothstep(-0.12, 0.28, sun);
+      float daylight = smoothstep(-0.08, 0.22, sun);
 
-      vec3 day = texture2D(uDay, vUv).rgb * (0.18 + 0.95 * max(sun, 0.0));
+      vec3 day = texture2D(uDay, vUv).rgb * (0.22 + 1.05 * max(sun, 0.0));
       vec3 lights = texture2D(uNight, vUv).rgb;
       vec3 night = vec3(0.02, 0.028, 0.045) + lights * vec3(1.0, 0.86, 0.62) * 2.1;
       vec3 color = mix(night, day, daylight);
 
       float water = texture2D(uSpecular, vUv).r;
       vec3 halfway = normalize(uSun + view);
-      float glint = pow(max(dot(n, halfway), 0.0), 48.0) * water * daylight;
-      color += vec3(0.9, 0.95, 1.0) * glint * 0.55;
+      float glint = pow(max(dot(n, halfway), 0.0), 110.0) * water * daylight;
+      color += vec3(0.9, 0.95, 1.0) * glint * 0.22;
 
       float rim = pow(1.0 - max(dot(n, view), 0.0), 3.2);
-      color += uTeal * rim * (0.22 + 0.5 * daylight);
+      color += uTeal * rim * (0.1 + 0.28 * daylight);
 
       gl_FragColor = vec4(color, 1.0);
     }
@@ -114,7 +114,7 @@ const cloudShader = {
       float density = texture2D(uClouds, vUv).r;
       float sun = dot(normalize(vNormal), uSun);
       float lit = 0.06 + 0.94 * smoothstep(-0.1, 0.35, sun);
-      gl_FragColor = vec4(vec3(0.92, 0.95, 1.0) * lit, density * 0.62);
+      gl_FragColor = vec4(vec3(0.92, 0.95, 1.0) * lit, density * 0.55);
     }
   `,
 };
@@ -141,7 +141,7 @@ const haloShader = {
     varying vec3 vWorldNormal;
     void main() {
       float facing = dot(normalize(vNormal), normalize(vView));
-      float rim = pow(clamp(-facing / 0.42, 0.0, 1.0), 1.6);
+      float rim = pow(clamp(-facing / 0.3, 0.0, 1.0), 1.4);
       float lit = 0.3 + 0.7 * smoothstep(-0.4, 0.4, dot(normalize(vWorldNormal), uSun));
       gl_FragColor = vec4(uColor, rim * lit * uIntensity);
     }
@@ -161,7 +161,7 @@ export function Earth() {
       // are colour; the other two are data and stay linear.
       const list = Array.isArray(loaded) ? loaded : Object.values(loaded);
       list.forEach((texture, i) => {
-        texture.anisotropy = 8;
+        texture.anisotropy = 16;
         texture.colorSpace = i < 2 ? THREE.SRGBColorSpace : THREE.NoColorSpace;
       });
     },
@@ -176,7 +176,7 @@ export function Earth() {
   const lineMaterial = React.useRef<THREE.LineBasicMaterial>(null);
   const { aspect, narrow, halfW } = useStage();
 
-  const sun = React.useMemo(() => new THREE.Vector3(0.35, 0.15, -1).normalize(), []);
+  const sun = React.useMemo(() => new THREE.Vector3(-0.85, 0.3, 0.42).normalize(), []);
   const uniforms = React.useMemo(
     () => ({
       uDay: { value: maps.day },
@@ -192,14 +192,14 @@ export function Earth() {
     [maps, sun],
   );
   const haloUniforms = React.useMemo(
-    () => ({ uColor: { value: new THREE.Color(TEAL) }, uSun: { value: sun }, uIntensity: { value: 0.6 } }),
+    () => ({ uColor: { value: new THREE.Color(TEAL) }, uSun: { value: sun }, uIntensity: { value: 0.38 } }),
     [sun],
   );
 
   const smooth = React.useRef({ zoom: 0, recede: 0, gone: 0 });
   const idle = React.useRef(0.2);
-  const sunFrom = React.useMemo(() => new THREE.Vector3(0.35, 0.15, -1).normalize(), []);
-  const sunTo = React.useMemo(() => new THREE.Vector3(-0.7, 0.42, 0.62).normalize(), []);
+  const sunFrom = React.useMemo(() => new THREE.Vector3(-0.85, 0.3, 0.42).normalize(), []);
+  const sunTo = React.useMemo(() => new THREE.Vector3(-0.55, 0.5, 0.75).normalize(), []);
 
   useFrame((_, delta) => {
     const g = group.current;
@@ -239,7 +239,7 @@ export function Earth() {
     const arrival: Pose = narrow
       ? { x: 0.32, y: 0.62, s: 0.8 }
       : { x: Math.min(1.05, halfW - 0.7), y: -0.05, s: 1.18 };
-    const needed = aspect >= 1 ? 0.8 : 0.8 / aspect;
+    const needed = aspect >= 1 ? 0.95 : 0.95 / aspect;
     const zoomed: Pose = {
       x: 0,
       y: narrow ? 0.3 : 0.05,
@@ -260,7 +260,7 @@ export function Earth() {
       outline.current.geometry.setDrawRange(0, Math.floor(count * draw));
     }
     if (lineMaterial.current) lineMaterial.current.opacity = 0.85 * (1 - recede);
-    if (halo.current) halo.current.uniforms.uIntensity!.value = 0.6 - 0.25 * recede;
+    if (halo.current) halo.current.uniforms.uIntensity!.value = 0.38 - 0.18 * recede;
   });
 
   return (
@@ -293,7 +293,7 @@ export function Earth() {
         />
       </lineSegments>
 
-      <mesh scale={1.09}>
+      <mesh scale={1.055}>
         <sphereGeometry args={[1, 64, 64]} />
         <shaderMaterial
           ref={halo}

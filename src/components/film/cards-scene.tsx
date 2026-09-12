@@ -13,7 +13,7 @@ import { SURFACE_2, damp, ease, useStage } from "./scene-utils";
  * breathing a little. They rise in with the text and lift away with it.
  */
 
-const SHOTS = ["/work/weighttracker.png", "/work/tapbpm.png", "/work/site.png"];
+const SHOTS = ["/work/orbits.png", "/work/pendulum.png", "/work/shift.png"];
 const WIDTH = 0.98;
 const HEIGHT = 0.5;
 
