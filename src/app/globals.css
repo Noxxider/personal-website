@@ -156,6 +156,11 @@
     background-size: 100% 1px;
   }
 
+  /* The film's canvas fades out under the header rather than being cut flat. */
+  .canvas-mask {
+    mask-image: linear-gradient(to bottom, transparent 0, black 72px);
+  }
+
   /* Over the film the header has no band: a soft top-down mask instead. */
   .header-mask {
     background-image: linear-gradient(to bottom, rgb(10 13 18 / 0.85), rgb(10 13 18 / 0));

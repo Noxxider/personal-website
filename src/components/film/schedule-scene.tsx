@@ -134,12 +134,14 @@ export function ScheduleScene() {
     // up and shrinks away as the chapter leaves.
     const leave = ease(p.exit / 0.4);
     const base = narrow
-      ? { x: 0, y: -0.66, s: 0.36 }
+      ? { x: 0, y: -0.72, s: 0.56 }
       : { x: Math.min(0.95, halfW - 0.95), y: 0.0, s: 0.72 };
     g.position.set(base.x, base.y + leave * 1.1, 0);
     // Holds back until the Earth has mostly left, then grows in.
-    const arrive = ease((p.enter - 0.8) / 0.2);
-    g.scale.setScalar(Math.max(0.0001, base.s * (1 - leave * 0.4) * (0.7 + 0.3 * arrive) * arrive * (1 - leave)));
+    const arrive = ease((p.enter - 0.7) / 0.3);
+    const size = base.s * (1 - leave * 0.4) * (0.7 + 0.3 * arrive) * arrive * (1 - leave);
+    g.scale.setScalar(Math.max(0.0001, size));
+    g.visible = size > 0.03;
     g.rotation.set(-0.46 + leave * 0.3, Math.sin(p.pin * Math.PI) * 0.04, 0);
     if (caption.current) {
       const material = caption.current.material as THREE.MeshBasicMaterial;

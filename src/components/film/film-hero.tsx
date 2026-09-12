@@ -83,7 +83,7 @@ export function FilmHero() {
 
       {mode === "canvas" && (
         <>
-          <div className="pointer-events-none fixed inset-0 z-0">
+          <div className="canvas-mask pointer-events-none fixed inset-0 z-0">
             <FilmScene onReady={() => setReady(true)} />
           </div>
 

@@ -174,10 +174,12 @@ export function OrbitsScene() {
     const enter = ease((p.enter - 0.82) / 0.18);
     const leave = ease(p.exit / 0.3);
     const base = narrow
-      ? { x: 0.05, y: -0.55, s: 0.4 }
+      ? { x: 0.05, y: -0.62, s: 0.55 }
       : { x: -Math.min(0.75, halfW - 1.0), y: 0.15, s: 0.8 };
     g.position.set(base.x, base.y + (1 - enter) * -0.6 + leave * 1.2, 0);
-    g.scale.setScalar(Math.max(0.0001, base.s * enter * (1 - leave)));
+    const size = base.s * enter * (1 - leave);
+    g.scale.setScalar(Math.max(0.0001, size));
+    g.visible = size > 0.03;
     g.rotation.set(0.55, p.pin * 0.4 - 0.2, 0);
     if (trailMaterial.current) trailMaterial.current.opacity = 0.45 * smooth.current.on * enter;
   });

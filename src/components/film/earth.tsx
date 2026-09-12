@@ -76,6 +76,7 @@ const surfaceShader = {
     uniform sampler2D uSpecular;
     uniform vec3 uSun;
     uniform vec3 uTeal;
+    uniform float uFade;
     varying vec2 vUv;
     varying vec3 vNormal;
     varying vec3 vWorld;
@@ -98,7 +99,7 @@ const surfaceShader = {
       float rim = pow(1.0 - max(dot(n, view), 0.0), 3.2);
       color += uTeal * rim * (0.1 + 0.28 * daylight);
 
-      gl_FragColor = vec4(color, 1.0);
+      gl_FragColor = vec4(color, uFade);
     }
   `,
 };
@@ -108,13 +109,14 @@ const cloudShader = {
   fragmentShader: /* glsl */ `
     uniform sampler2D uClouds;
     uniform vec3 uSun;
+    uniform float uFade;
     varying vec2 vUv;
     varying vec3 vNormal;
     void main() {
       float density = texture2D(uClouds, vUv).r;
       float sun = dot(normalize(vNormal), uSun);
       float lit = 0.06 + 0.94 * smoothstep(-0.1, 0.35, sun);
-      gl_FragColor = vec4(vec3(0.92, 0.95, 1.0) * lit, density * 0.55);
+      gl_FragColor = vec4(vec3(0.92, 0.95, 1.0) * lit, density * 0.55 * uFade);
     }
   `,
 };
@@ -136,6 +138,7 @@ const haloShader = {
     uniform vec3 uColor;
     uniform vec3 uSun;
     uniform float uIntensity;
+    uniform float uFade;
     varying vec3 vNormal;
     varying vec3 vView;
     varying vec3 vWorldNormal;
@@ -143,7 +146,7 @@ const haloShader = {
       float facing = dot(normalize(vNormal), normalize(vView));
       float rim = pow(clamp(-facing / 0.3, 0.0, 1.0), 1.4);
       float lit = 0.3 + 0.7 * smoothstep(-0.4, 0.4, dot(normalize(vWorldNormal), uSun));
-      gl_FragColor = vec4(uColor, rim * lit * uIntensity);
+      gl_FragColor = vec4(uColor, rim * lit * uIntensity * uFade);
     }
   `,
 };
@@ -184,15 +187,16 @@ export function Earth() {
       uSpecular: { value: maps.specular },
       uSun: { value: sun },
       uTeal: { value: new THREE.Color(TEAL) },
+      uFade: { value: 1 },
     }),
     [maps, sun],
   );
   const cloudUniforms = React.useMemo(
-    () => ({ uClouds: { value: maps.clouds }, uSun: { value: sun } }),
+    () => ({ uClouds: { value: maps.clouds }, uSun: { value: sun }, uFade: { value: 1 } }),
     [maps, sun],
   );
   const haloUniforms = React.useMemo(
-    () => ({ uColor: { value: new THREE.Color(TEAL) }, uSun: { value: sun }, uIntensity: { value: 0.38 } }),
+    () => ({ uColor: { value: new THREE.Color(TEAL) }, uSun: { value: sun }, uIntensity: { value: 0.38 }, uFade: { value: 1 } }),
     [sun],
   );
 
@@ -245,26 +249,29 @@ export function Earth() {
       y: narrow ? -0.55 : 0.05,
       s: (2 * HALF_HEIGHT) / (2 * Math.tan((FOV / 2) * DEG) + needed),
     };
-    // Where it heads as it leaves: up and back, shrinking to nothing.
-    const corner: Pose = { x: narrow ? 0.2 : 0.6, y: HALF_HEIGHT + 0.6, s: 0.35 };
+    // Where it heads as it leaves: a little up and back while it fades.
+    const corner: Pose = { x: narrow ? 0.25 : 0.7, y: narrow ? -0.9 : 0.55, s: 0.85 };
     const pose = mix(mix(arrival, zoomed, push), corner, ease(recede));
-    const shrink = 1 - ease(gone);
+    const fade = 1 - ease(gone);
     g.position.set(pose.x, pose.y, 0);
-    g.scale.setScalar(Math.max(0.0001, pose.s * shrink));
+    g.scale.setScalar(Math.max(0.0001, pose.s * (0.85 + 0.15 * fade)));
+    if (surface.current) surface.current.uniforms.uFade!.value = fade;
+    if (cloudMaterial.current) cloudMaterial.current.uniforms.uFade!.value = fade;
+    if (halo.current) halo.current.uniforms.uFade!.value = fade;
 
     if (outline.current) {
       const count = outlinePositions.length / 3;
       outline.current.geometry.setDrawRange(0, Math.floor(count * draw));
     }
-    if (lineMaterial.current) lineMaterial.current.opacity = 0.85 * (1 - recede);
-    if (halo.current) halo.current.uniforms.uIntensity!.value = 0.38 - 0.18 * recede;
+    if (lineMaterial.current) lineMaterial.current.opacity = 0.85 * (1 - recede) * fade;
+    if (halo.current) halo.current.uniforms.uIntensity!.value = 0.38 - 0.1 * recede;
   });
 
   return (
     <group ref={group}>
       <mesh>
         <sphereGeometry args={[1, 96, 96]} />
-        <shaderMaterial ref={surface} args={[{ ...surfaceShader, uniforms }]} />
+        <shaderMaterial ref={surface} args={[{ ...surfaceShader, uniforms }]} transparent />
       </mesh>
 
       <mesh ref={clouds}>

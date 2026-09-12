@@ -78,7 +78,7 @@ export function SiteHeader() {
         home && inFilm
           ? "header-mask border-b border-transparent bg-transparent"
           : scrolled
-            ? "border-b border-line bg-ground/75 backdrop-blur-md"
+            ? "border-b border-line bg-ground/95"
             : "border-b border-transparent bg-transparent",
       )}
     >

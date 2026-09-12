@@ -13,7 +13,7 @@ const current = roles.find((r) => r.current)!;
 
 /** Shared type for the one-line chapter headings. */
 const chapterTitle =
-  "font-display text-title max-w-[22ch] text-balance text-ink";
+  "font-display text-[clamp(2rem,1.2rem+2.2vw,2.75rem)] leading-[1.08] tracking-[-0.015em] max-w-[22ch] text-balance text-ink";
 const chapterBody =
   "mt-6 max-w-[52ch] text-body text-ink-muted [&>p+p]:mt-4";
 
@@ -121,7 +121,7 @@ export default function HomePage() {
           label="Physics"
           length={0.7}
           align="center"
-          panelClassName="sm:pl-[52%]"
+          panelClassName="sm:!pl-[50%] lg:!pl-[52%]"
         >
           <h2 id="physics-title" className={cn(chapterTitle, "sm:max-w-[18ch]")} data-line>
             I studied physics. It left me with one habit: measure, then decide.
@@ -137,7 +137,7 @@ export default function HomePage() {
         </Chapter>
 
         {/* ------------------------------------------------------ 04, web */}
-        <Chapter id="web" index="04" label="Web" length={0.3} hold>
+        <Chapter id="web" index="04" label="Web" length={0.3} hold align="center">
           <h2 id="web-title" className={chapterTitle} data-line>
             Small, fast pages that are real HTML before any JavaScript runs.
           </h2>

@@ -80,7 +80,9 @@ export function CardsScene() {
       ? { x: 0, y: -0.7, s: 0.72 }
       : { x: Math.min(0.55, halfW - 1.45), y: 0.2, s: 1.45 };
     g.position.set(base.x, base.y + leave * 1.2, 0);
-    g.scale.setScalar(Math.max(0.0001, base.s * (1 - leave)));
+    const size = base.s * (1 - leave);
+    g.scale.setScalar(Math.max(0.0001, size));
+    g.visible = size > 0.03 && progress.web.enter > 0.84;
     g.rotation.set(-smooth.current.ty * 0.18, smooth.current.tx * 0.28, 0);
   });
 
