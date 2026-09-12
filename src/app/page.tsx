@@ -108,9 +108,8 @@ export default function HomePage() {
               People notice immediately when a clinic cannot book a patient.
             </p>
           </div>
-          <p className="label mt-6 max-w-[40ch]" data-line>
-            One week, Monday to Sunday, 06:00 to 18:00. Teal is booked. The
-            amber slot is a conflict, moved.
+          <p className="label mt-6" data-line>
+            Every light here is a person the system books for.
           </p>
         </Chapter>
 
@@ -121,7 +120,7 @@ export default function HomePage() {
           label="Physics"
           length={0.7}
           align="center"
-          panelClassName="sm:!pl-[50%] lg:!pl-[52%]"
+          panelClassName="sm:grid sm:grid-cols-2 sm:gap-x-10 sm:[&>*]:col-start-2"
         >
           <h2 id="physics-title" className={cn(chapterTitle, "sm:max-w-[18ch]")} data-line>
             I studied physics. It left me with one habit: measure, then decide.
@@ -174,9 +173,7 @@ export default function HomePage() {
                 Want something built?
               </h2>
               <p className="mt-6 max-w-[40ch] text-lead text-ink-muted">
-                A build price agreed before any work starts, then a monthly
-                retainer that keeps it running and growing. Delivered in weeks,
-                not quarters.
+                Delivered in weeks, not quarters.
               </p>
               <Link
                 href="/build"

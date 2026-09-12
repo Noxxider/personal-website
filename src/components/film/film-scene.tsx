@@ -6,7 +6,8 @@ import * as THREE from "three";
 import { setLoading } from "./film-state";
 import { CAMERA_Z, FOV } from "./scene-utils";
 import { Earth } from "./earth";
-import { ScheduleScene } from "./schedule-scene";
+import { Stars } from "@react-three/drei";
+import { GalaxyScene } from "./galaxy-scene";
 import { OrbitsScene } from "./orbits-scene";
 import { CardsScene } from "./cards-scene";
 
@@ -59,9 +60,11 @@ export default function FilmScene({ onReady }: { onReady: () => void }) {
       <ambientLight intensity={0.5} />
       <directionalLight position={[2.5, 3, 4]} intensity={1.4} />
       <directionalLight position={[-3, -1, 2]} intensity={0.35} color="#5fd3e6" />
+      {/* A quiet field of stars behind the whole film, turning very slowly. */}
+      <Stars radius={28} depth={30} count={3500} factor={2.6} saturation={0} fade speed={0.35} />
       <React.Suspense fallback={null}>
         <Earth />
-        <ScheduleScene />
+        <GalaxyScene />
         <OrbitsScene />
         <CardsScene />
         <Ready onReady={onReady} />

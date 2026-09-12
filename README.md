@@ -69,9 +69,9 @@ The home page is a film. Five pinned chapters, then a static offer:
 | --- | --- | --- |
 | 00 | Arrival | A textured Earth, lit from the left, idling right of the name |
 | 01 | Canada | The sun comes round, the Earth turns and pushes in until Canada fills the frame, outline drawn on |
-| 02 | Systems | A week of appointment slots rising as bars; one turns amber and is re-flowed |
-| 03 | Physics | A velocity Verlet N-body with trails; the pointer tugs the bodies |
-| 04 | Web | Screenshot cards of the apps, stacked in depth, tilting toward the pointer |
+| 02 | Systems | The Earth shrinks into the centre of a galaxy of about 700,000 points, one per person the system books for, turning on its own; a scattering are amber |
+| 03 | Physics | A velocity Verlet N-body with a glowing sun and fading trails; the pointer tugs the bodies |
+| 04 | Web | Screenshot cards of the apps, stacked in depth, tilting toward the pointer. A slow field of stars sits behind the whole film |
 | 05 | The offer | Static. Three things I build, a button to `/build`, and the LinkedIn and GitHub links |
 
 How it is put together:
@@ -102,9 +102,10 @@ welcome (`html.motion-ok`). Without JavaScript the whole site reads top to
 bottom.
 
 **The Earth.** Day map: NASA Blue Marble (public domain), resized to 4096x2048.
-Night lights, water mask and clouds: the NASA-derived 2K set that ships with the
-three.js examples (MIT), re-encoded as WebP. About 1.2 MB in all, fetched after
-first paint. The Canada outline and the country centroids come from Natural
+Night lights and water mask: the NASA-derived 2K set that ships with the
+three.js examples (MIT). Clouds: NASA's 8K cloud map, resized to 4096x2048. All
+re-encoded as WebP, about 2.6 MB in all, fetched after first paint behind the
+loading screen. The Canada outline and the country centroids come from Natural
 Earth 1:110m (public domain) through `scripts/build-globe.mjs`. The shader blends
 day and night by a sun direction that moves with scroll, adds a specular glint on
 water, and a teal rim; the atmosphere is a slightly larger sphere drawn on its

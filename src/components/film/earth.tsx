@@ -214,7 +214,7 @@ export function Earth() {
     const zoomTarget = 0.5 * canada.enter + 0.5 * canada.pin;
     smooth.current.zoom = damp(smooth.current.zoom, zoomTarget, 7, dt);
     smooth.current.recede = damp(smooth.current.recede, progress.systems.enter, 7, dt);
-    smooth.current.gone = damp(smooth.current.gone, Math.min(1, progress.systems.enter / 0.7), 7, dt);
+    smooth.current.gone = damp(smooth.current.gone, Math.min(1, progress.systems.enter / 0.75), 7, dt);
     const { zoom, recede, gone } = smooth.current;
 
     g.visible = gone < 0.999;
@@ -249,12 +249,15 @@ export function Earth() {
       y: narrow ? -0.55 : 0.05,
       s: (2 * HALF_HEIGHT) / (2 * Math.tan((FOV / 2) * DEG) + needed),
     };
-    // Where it heads as it leaves: a little up and back while it fades.
-    const corner: Pose = { x: narrow ? 0.25 : 0.7, y: narrow ? -0.9 : 0.55, s: 0.85 };
+    // Where it heads as it leaves: into the centre of the galaxy that
+    // takes its place, shrinking to a point as it fades.
+    const corner: Pose = narrow
+      ? { x: 0, y: -0.62, s: 0.12 }
+      : { x: Math.min(1.15, halfW - 0.9), y: 0.05, s: 0.14 };
     const pose = mix(mix(arrival, zoomed, push), corner, ease(recede));
     const fade = 1 - ease(gone);
     g.position.set(pose.x, pose.y, 0);
-    g.scale.setScalar(Math.max(0.0001, pose.s * (0.85 + 0.15 * fade)));
+    g.scale.setScalar(Math.max(0.0001, pose.s));
     if (surface.current) surface.current.uniforms.uFade!.value = fade;
     if (cloudMaterial.current) cloudMaterial.current.uniforms.uFade!.value = fade;
     if (halo.current) halo.current.uniforms.uFade!.value = fade;

@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 export const metadata: Metadata = pageMetadata({
   title: "Build",
   description:
-    "Want something built? Workflows automated, internal tools, integrations and MCP servers, fast public sites. A build price agreed up front, then a monthly retainer that keeps it running.",
+    "Want something built? Workflows automated, internal tools, integrations and MCP servers, fast public sites. Say what you need.",
   path: "/build/",
 });
 
@@ -32,25 +32,6 @@ const kinds = [
   {
     title: "A fast public site",
     body: "Real HTML at build time, small pages, accessible by default, no loading spinner on navigation. Like this one, minus the planet if you prefer.",
-  },
-];
-
-const steps = [
-  {
-    title: "A twenty-minute call",
-    body: "You describe the problem in your words. I ask the questions that decide whether this is a week or a quarter.",
-  },
-  {
-    title: "A scope, two prices",
-    body: "One page: what gets built, what does not, what the build costs, and what the monthly retainer covers after. Both agreed before any work starts.",
-  },
-  {
-    title: "Delivery in weeks",
-    body: "Working software early, then iterations against real use. You see progress on a live URL, not in a status report.",
-  },
-  {
-    title: "Kept running, on retainer",
-    body: "After handover it is hosted, watched and improved every month: fixes within days, a set number of changes, a quarterly review. A longer retainer brings the build price down.",
   },
 ];
 
@@ -90,40 +71,20 @@ export default function BuildPage() {
         </ol>
       </Section>
 
-      <Section title="How it goes">
-        <ol className="rail-list grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {steps.map((step, i) => (
-            <Reveal
-              key={step.title}
-              as="li"
-              delay={i * 70}
-              className="relative border-t border-line pt-5"
-            >
-              <span className="label tabular">Step {i + 1}</span>
-              <h3 className="mt-3 min-h-[3.5rem] font-display text-xl text-ink">{step.title}</h3>
-              <p className="mt-2 text-[0.9375rem] leading-relaxed text-ink-muted">
-                {step.body}
-              </p>
-            </Reveal>
-          ))}
-        </ol>
+      <Section>
         <Link
           href="/build/example"
-          className={cn(buttonVariants({ variant: "outline", size: "lg" }), "mt-10")}
+          className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
         >
           Read a worked example, start to finish
           <ArrowRightIcon aria-hidden className="size-4" />
         </Link>
-        <p className="label mt-6 max-w-[60ch]">
-          Both figures are fixed in writing before any work starts. The build
-          price drops with a longer retainer, twelve months or more.
-        </p>
       </Section>
 
       <Section
         id="form"
         title="Tell me what you need"
-        lede="Three lines is enough. I read everything and reply to the address you give."
+        lede="Three lines is enough. I read everything and reply to the address you give, usually within a couple of days."
       >
         <Reveal>
           <ContactForm extended submitLabel="Send the request" />

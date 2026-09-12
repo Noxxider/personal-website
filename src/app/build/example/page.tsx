@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 export const metadata: Metadata = pageMetadata({
   title: "A worked example",
   description:
-    "What it looks like when a team's approvals live in a spreadsheet and an inbox, and what replaces them. An illustrative build, start to finish, with how it is priced.",
+    "What it looks like when a team's approvals live in a spreadsheet and an inbox, and what replaces them. An illustrative build, start to finish.",
   path: "/build/example/",
 });
 
@@ -57,13 +57,6 @@ const weekOne = [
   { when: "Week 3", what: "Calendars, sign-in, handover. The spreadsheet is switched off." },
 ];
 
-const retainer = [
-  "Hosting, monitoring and backups, so it stays up without anyone thinking about it.",
-  "Fixes within days, not the next budget cycle.",
-  "A set number of change requests a month: a new rule, a new report, a new export.",
-  "A quarterly look at the counter together, and a decision about what to build next.",
-];
-
 export default function ExamplePage() {
   return (
     <>
@@ -84,8 +77,8 @@ export default function ExamplePage() {
             <p>
               This is an illustration, not a client story. If your team runs a
               roster, a queue or an approvals list out of a spreadsheet and an
-              inbox, the shape will be familiar. Here is what gets built, what
-              changes, and how it is paid for.
+              inbox, the shape will be familiar. Here is what gets built and
+              what changes.
             </p>
           </Prose>
         </div>
@@ -152,47 +145,9 @@ export default function ExamplePage() {
             </Reveal>
           ))}
         </ul>
-      </Section>
-
-      <Section
-        title="How it is priced"
-        lede="Two parts: a build price to get it live, and a monthly retainer that keeps it running and growing."
-      >
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
-          <Reveal>
-            <h3 className="label">The build</h3>
-            <Prose className="mt-4">
-              <p>
-                One written scope, one price, agreed before any work starts.
-                It covers everything above through handover, and thirty days
-                of fixes after. The price comes down when it is paired with a
-                longer retainer, because the relationship is the point.
-              </p>
-            </Prose>
-          </Reveal>
-          <Reveal delay={100}>
-            <h3 className="label">The retainer</h3>
-            <ul className="mt-4 space-y-3.5">
-              {retainer.map((line) => (
-                <li key={line} className="flex gap-3 text-body text-ink-muted">
-                  <span aria-hidden className="mt-3 size-1.5 shrink-0 rounded-full bg-signal" />
-                  <span>{line}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="mt-5 max-w-[44ch] text-body text-ink">
-              Month one of the retainer starts the day the spreadsheet is
-              switched off, not the day the invoice is sent.
-            </p>
-          </Reveal>
-        </div>
-        <p className="label mt-10 max-w-[60ch]">
-          Both figures are fixed in writing before any work starts. The build
-          price drops with a longer retainer, twelve months or more.
-        </p>
         <Link
           href="/build/#form"
-          className={cn(buttonVariants({ variant: "solid", size: "lg" }), "mt-10")}
+          className={cn(buttonVariants({ variant: "solid", size: "lg" }), "mt-12")}
         >
           Describe your version of this
           <ArrowRightIcon aria-hidden className="size-4" />

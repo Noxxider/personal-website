@@ -4,7 +4,26 @@ import * as React from "react";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 import { pointer, presence, progress } from "./film-state";
-import { INK, TEAL, damp, ease, makeRandom, useStage } from "./scene-utils";
+import { INK, damp, ease, makeRandom, useStage } from "./scene-utils";
+
+/** A soft radial sprite for the glows. */
+function makeGlow() {
+  const size = 128;
+  const canvas = document.createElement("canvas");
+  canvas.width = size;
+  canvas.height = size;
+  const context = canvas.getContext("2d")!;
+  const g = context.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+  g.addColorStop(0, "rgba(255,255,255,1)");
+  g.addColorStop(0.25, "rgba(255,255,255,0.55)");
+  g.addColorStop(0.6, "rgba(255,255,255,0.12)");
+  g.addColorStop(1, "rgba(255,255,255,0)");
+  context.fillStyle = g;
+  context.fillRect(0, 0, size, size);
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  return texture;
+}
 
 /**
  * The physics chapter: a real gravitational N-body integrator, velocity
@@ -115,6 +134,12 @@ export function OrbitsScene() {
     () => new Float32Array(BODIES * (TRAIL - 1) * 2 * 3),
     [],
   );
+  const trailColors = React.useMemo(
+    () => new Float32Array(BODIES * (TRAIL - 1) * 2 * 3),
+    [],
+  );
+  const glowTexture = React.useMemo(() => makeGlow(), []);
+  const glows = React.useRef<THREE.Group>(null);
 
   useFrame((_, delta) => {
     const g = group.current;
@@ -150,6 +175,11 @@ export function OrbitsScene() {
       s.trails[base + 2] = s.pos[i * 3 + 2]!;
     }
     mesh.instanceMatrix.needsUpdate = true;
+    if (glows.current) {
+      glows.current.children.forEach((sprite, i) => {
+        sprite.position.set(s.pos[i * 3]!, s.pos[i * 3 + 1]!, s.pos[i * 3 + 2]!);
+      });
+    }
     s.head = (s.head + 1) % TRAIL;
     s.filled = Math.min(TRAIL, s.filled + 1);
 
@@ -157,17 +187,25 @@ export function OrbitsScene() {
     const geometry = trailGeometry.current;
     if (geometry) {
       const array = geometry.attributes.position!.array as Float32Array;
+      const colors = geometry.attributes.color!.array as Float32Array;
       let k = 0;
+      let c = 0;
       for (let i = 0; i < BODIES; i++) {
         for (let t = 0; t < s.filled - 1; t++) {
           const a = (i * TRAIL + ((s.head + t) % TRAIL)) * 3;
           const b = (i * TRAIL + ((s.head + t + 1) % TRAIL)) * 3;
           array[k++] = s.trails[a]!; array[k++] = s.trails[a + 1]!; array[k++] = s.trails[a + 2]!;
           array[k++] = s.trails[b]!; array[k++] = s.trails[b + 1]!; array[k++] = s.trails[b + 2]!;
+          // Old samples fade toward the ground so every orbit has a direction.
+          const fade = 0.05 + 0.95 * (t / Math.max(1, s.filled - 2)) ** 1.5;
+          for (let v = 0; v < 2; v++) {
+            colors[c++] = 0.373 * fade; colors[c++] = 0.827 * fade; colors[c++] = 0.902 * fade;
+          }
         }
       }
       geometry.setDrawRange(0, k / 3);
       geometry.attributes.position!.needsUpdate = true;
+      geometry.attributes.color!.needsUpdate = true;
     }
 
     const p = progress.physics;
@@ -175,13 +213,13 @@ export function OrbitsScene() {
     const leave = ease(p.exit / 0.3);
     const base = narrow
       ? { x: 0, y: -0.62, s: 0.46 }
-      : { x: -Math.min(0.75, halfW - 1.0), y: 0.15, s: 0.8 };
+      : { x: -Math.min(0.75, halfW - 1.0), y: 0.15, s: 0.9 };
     g.position.set(base.x, base.y + (1 - enter) * -0.6 + leave * 1.2, 0);
     const size = base.s * enter * (1 - leave);
     g.scale.setScalar(Math.max(0.0001, size));
     g.visible = size > 0.12;
     g.rotation.set(0.55, p.pin * 0.4 - 0.2, 0);
-    if (trailMaterial.current) trailMaterial.current.opacity = 0.45 * smooth.current.on * enter;
+    if (trailMaterial.current) trailMaterial.current.opacity = 0.9 * smooth.current.on * enter;
   });
 
   return (
@@ -190,6 +228,21 @@ export function OrbitsScene() {
         <sphereGeometry args={[1, 24, 24]} />
         <meshBasicMaterial color={INK} />
       </instancedMesh>
+      {/* Glows: a big soft one on the sun, small ones on the planets. */}
+      <group ref={glows}>
+        {Array.from({ length: BODIES }, (_, i) => (
+          <sprite key={i} scale={i === 0 ? 0.9 : 0.16}>
+            <spriteMaterial
+              map={glowTexture}
+              color={i === 0 ? "#9fe6f2" : "#5fd3e6"}
+              transparent
+              opacity={i === 0 ? 0.85 : 0.6}
+              blending={THREE.AdditiveBlending}
+              depthWrite={false}
+            />
+          </sprite>
+        ))}
+      </group>
       <lineSegments>
         <bufferGeometry ref={trailGeometry}>
           <bufferAttribute
@@ -197,8 +250,13 @@ export function OrbitsScene() {
             args={[trailSegments, 3]}
             usage={THREE.DynamicDrawUsage}
           />
+          <bufferAttribute
+            attach="attributes-color"
+            args={[trailColors, 3]}
+            usage={THREE.DynamicDrawUsage}
+          />
         </bufferGeometry>
-        <lineBasicMaterial ref={trailMaterial} color={TEAL} transparent opacity={0.55} />
+        <lineBasicMaterial ref={trailMaterial} vertexColors transparent opacity={0.9} />
       </lineSegments>
     </group>
   );
