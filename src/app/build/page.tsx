@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 export const metadata: Metadata = pageMetadata({
   title: "Build",
   description:
-    "Want something built? Workflows automated, internal tools, integrations and MCP servers, fast public sites. Say what you need.",
+    "Want me to help with something? Workflows automated, internal tools, integrations and MCP servers, fast public sites. Tell me what you need.",
   path: "/build/",
 });
 

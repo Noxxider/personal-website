@@ -117,7 +117,7 @@ export function BuildScene({ assembled = false }: { assembled?: boolean }) {
   }, [assembled]);
   return (
     <Canvas
-      camera={{ position: [0, 0.6, 5.2], fov: 32 }}
+      camera={{ position: [0, 0.6, assembled ? 6.8 : 5.2], fov: 32 }}
       dpr={[1, 1.75]}
       gl={{ antialias: true, alpha: true }}
       onCreated={({ gl }) => gl.setClearColor(0x000000, 0)}
