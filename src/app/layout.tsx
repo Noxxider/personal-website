@@ -3,6 +3,7 @@ import Script from "next/script";
 import { Fraunces, Geist, Geist_Mono } from "next/font/google";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { ScrollProvider } from "@/components/scroll-provider";
 import { site } from "@/content/site";
 import "./globals.css";
 
@@ -125,11 +126,13 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        <SiteHeader />
-        <main id="main" className="flex-1">
-          {children}
-        </main>
-        <SiteFooter />
+        <ScrollProvider>
+          <SiteHeader />
+          <main id="main" className="flex-1">
+            {children}
+          </main>
+          <SiteFooter />
+        </ScrollProvider>
 
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${site.gaMeasurementId}`}

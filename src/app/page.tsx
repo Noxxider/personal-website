@@ -1,159 +1,273 @@
 import Link from "next/link";
-import { ArrowRightIcon } from "@/components/icons";
-import { Container, Section } from "@/components/section";
+import type { Route } from "next";
+import { ArrowRightIcon, ArrowUpRightIcon } from "@/components/icons";
+import { Chapter } from "@/components/film/chapter";
+import { FilmMotion } from "@/components/film/film-motion";
 import { ScheduleField } from "@/components/schedule-field";
-import { Reveal } from "@/components/reveal";
-import { WorkCard } from "@/components/work-card";
-import { Prose } from "@/components/prose";
+import { Container } from "@/components/section";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { capabilities, projects, roles } from "@/content/work";
+import { projects, roles } from "@/content/work";
 import { site } from "@/content/site";
 
 const current = roles.find((r) => r.current)!;
 
-const heroFacts = [
-  { label: "Currently", value: site.employer },
-  { label: "Focus", value: "Healthcare systems, web" },
-  { label: "Mostly", value: "TypeScript, React, .NET" },
+/** Shared type for the one-line chapter headings. */
+const chapterTitle =
+  "font-display text-title max-w-[22ch] text-balance text-ink";
+const chapterBody =
+  "mt-6 max-w-[52ch] text-body text-ink-muted [&>p+p]:mt-4";
+
+const offers = [
+  {
+    title: "A workflow automated",
+    body: "Approvals, reporting, compliance checks, anything a spreadsheet is currently doing badly.",
+  },
+  {
+    title: "A tool for your team",
+    body: "Internal apps, dashboards and integrations that fit how the work actually happens.",
+  },
+  {
+    title: "A fast public site",
+    body: "Real HTML at build time, small pages, accessible by default, and no loading spinner.",
+  },
 ];
 
 export default function HomePage() {
   return (
     <>
-      {/* ---------------------------------------------------------------- Hero */}
-      <Container>
-        <div className="pt-14 pb-10 sm:pt-20 sm:pb-14">
-          <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
-            <div>
-              <h1 className="max-w-[15ch] font-display text-display">
-                {site.name}
-              </h1>
-
-              <Prose className="mt-8 text-lead">
-                <p>
-                  Clinical informatics analyst at {site.employer}. I keep the
-                  scheduling software a health region of{" "}
-                  <em>about a million people</em> books its appointments
-                  through.
-                </p>
-              </Prose>
-
-              <div className="mt-10 flex flex-wrap gap-3">
-                <Link
-                  href="/work"
-                  className={buttonVariants({ variant: "solid", size: "lg" })}
-                >
-                  See the work
-                  <ArrowRightIcon aria-hidden className="size-4" />
-                </Link>
-                <Link
-                  href="/contact"
-                  className={buttonVariants({ variant: "outline", size: "lg" })}
-                >
-                  Get in touch
-                </Link>
-              </div>
+      <FilmMotion>
+        {/* ------------------------------------------------ 00, arrival */}
+        <Chapter
+          id="arrival"
+          index="00"
+          label="Arrival"
+          length={0.8}
+          intro
+          align="center"
+          visual={
+            <div className="glow absolute inset-0">
+              <div className="globe-ring" />
             </div>
-
-            <ScheduleField className="aspect-[5/4] w-full sm:aspect-[3/2] lg:aspect-[4/5]" />
-          </div>
-
-          <div className="mt-16 grid gap-px border-t border-line pt-6 sm:grid-cols-3 sm:gap-8">
-            {heroFacts.map((fact) => (
-              <div key={fact.label} className="py-2">
-                <p className="label">{fact.label}</p>
-                <p className="mt-2 text-[0.9375rem] text-ink">{fact.value}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </Container>
-
-      {/* ----------------------------------------------------------------- Now */}
-      <Section title="What I do now">
-        <div className="grid gap-10 lg:grid-cols-[1fr_1.35fr] lg:gap-16">
-          <Reveal>
-            <h3 className="font-display text-[1.75rem] leading-tight tracking-tight text-balance sm:text-[2rem]">
-              {current.title}
-            </h3>
-            <p className="mt-4 font-mono text-[0.8125rem] text-ink-faint">
-              {current.organisation}
-              <span className="mx-2 text-line-strong">/</span>
-              {current.period}
-            </p>
-          </Reveal>
-          <Reveal delay={90}>
-            <Prose>
-              <p>{current.summary}</p>
-              <p>
-                It is a good place to learn what software looks like when the
-                stakes are real: people notice immediately when a clinic cannot
-                book a patient. That habit carries into everything else I do.
-              </p>
-            </Prose>
-          </Reveal>
-        </div>
-      </Section>
-
-      {/* -------------------------------------------------------------- Work */}
-      <Section title="Selected work">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-          {projects.map((project, i) => (
-            <Reveal key={project.slug} delay={i * 90} className="flex">
-              <WorkCard project={project} className="w-full" />
-            </Reveal>
-          ))}
-        </div>
-        <Reveal delay={240} className="mt-14">
-          <Link
-            href="/work"
-            className="link-underline inline-flex items-center gap-2 text-sm font-medium text-ink"
+          }
+        >
+          <h1
+            id="arrival-title"
+            className="font-display text-display text-ink"
+            data-line
           >
-            Everything, including earlier roles
-            <ArrowRightIcon aria-hidden className="size-4" />
-          </Link>
-        </Reveal>
-      </Section>
+            {site.name}
+          </h1>
+          <p
+            className="mt-8 max-w-[34ch] text-lead text-ink-muted"
+            data-line
+          >
+            I keep the scheduling systems a health region runs on, and I build
+            for the web.
+          </p>
+          <p className="label mt-14" data-line>
+            Scroll
+          </p>
+        </Chapter>
 
-      {/* ------------------------------------------------------- Capabilities */}
-      <Section title="What I work with">
-        <div className="grid grid-cols-2 gap-x-8 gap-y-12 lg:grid-cols-4">
-          {capabilities.map((group, i) => (
-            <Reveal
-              key={group.group}
-              delay={i * 70}
-              className="border-t border-line pt-5"
+        {/* --------------------------------------------------- 01, canada */}
+        <Chapter
+          id="canada"
+          index="01"
+          label="Canada"
+          length={1.2}
+          visual={
+            <div
+              className="absolute inset-0"
+              style={{
+                ["--ring-scale" as string]:
+                  "calc(1.05 + var(--progress) * 1.9)",
+              }}
             >
-              <h3 className="label">{group.group}</h3>
-              <ul className="mt-4 space-y-2">
-                {group.items.map((item) => (
-                  <li key={item} className="text-[0.9375rem] text-ink-muted">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-          ))}
-        </div>
-      </Section>
-
-      {/* ----------------------------------------------------------- Contact */}
-      <Section>
-        <Reveal className="max-w-3xl border-t border-line pt-8">
-          <h2 className="font-display text-title text-balance">
-            Always happy to talk about healthcare systems, web performance, or
-            how something you are working on is put together.
+              <div className="globe-ring" />
+            </div>
+          }
+        >
+          <h2 id="canada-title" className={chapterTitle} data-line>
+            Canada.
           </h2>
+          <div className={chapterBody}>
+            <p data-line>
+              Where I live and work. That is as close as this page zooms in.
+            </p>
+          </div>
+        </Chapter>
+
+        {/* -------------------------------------------------- 02, systems */}
+        <Chapter
+          id="systems"
+          index="02"
+          label="Systems"
+          length={1.3}
+          visual={
+            <div className="absolute inset-x-0 top-0 h-[42svh] opacity-70 sm:inset-y-0 sm:right-0 sm:left-auto sm:h-auto sm:w-[46vw]">
+              <ScheduleField className="h-full w-full px-5 pt-24 sm:px-0" />
+            </div>
+          }
+        >
+          <h2 id="systems-title" className={chapterTitle} data-line>
+            {current.title} at {current.organisation}.
+          </h2>
+          <div className={chapterBody}>
+            <p data-line>
+              I keep the scheduling software a health region of{" "}
+              <em className="font-display text-[1.15em] text-ink not-italic">
+                about a million people
+              </em>{" "}
+              books its appointments through: configuration, debugging, release
+              testing, and direct support for the clinical staff who depend on
+              it every day.
+            </p>
+            <p data-line>
+              It is a good place to learn what software looks like when the
+              stakes are real. People notice immediately when a clinic cannot
+              book a patient.
+            </p>
+          </div>
+        </Chapter>
+
+        {/* -------------------------------------------------- 03, physics */}
+        <Chapter id="physics" index="03" label="Physics" length={1}>
+          <h2 id="physics-title" className={chapterTitle} data-line>
+            I studied physics. It left me with one habit: measure, then decide.
+          </h2>
+          <div className={chapterBody}>
+            <p data-line>
+              The degree taught me to sit with a problem I did not understand
+              yet. The programming started as a way through problem sets and
+              never stopped. Most of what I do now is the same move: instrument
+              it, look at the numbers, then change one thing.
+            </p>
+          </div>
+        </Chapter>
+
+        {/* ------------------------------------------------------ 04, web */}
+        <Chapter id="web" index="04" label="Web" length={1}>
+          <h2 id="web-title" className={chapterTitle} data-line>
+            Small, fast pages that are real HTML before any JavaScript runs.
+          </h2>
+          <ul className="mt-8 grid max-w-3xl gap-px sm:grid-cols-3">
+            {projects.map((project) => (
+              <li
+                key={project.slug}
+                className="border-t border-line pt-4 pr-6"
+                data-line
+              >
+                <Link
+                  href={
+                    (project.href.startsWith("/") ? project.href : "/work") as Route
+                  }
+                  className="group inline-flex items-center gap-1.5 font-display text-2xl text-ink hover:text-signal"
+                >
+                  {project.title}
+                  <ArrowUpRightIcon
+                    aria-hidden
+                    className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  />
+                </Link>
+                <p className="mt-2 text-sm leading-relaxed text-ink-muted">
+                  {project.blurb}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </Chapter>
+
+        {/* ------------------------------------------ 05, off the clock */}
+        <Chapter id="off-the-clock" index="05" label="Off the clock" length={0.9}>
+          <h2 id="off-the-clock-title" className="sr-only">
+            Off the clock
+          </h2>
+          <div className="grid gap-10 sm:grid-cols-2 sm:gap-16">
+            <div>
+              <p className="font-display text-title text-accent" data-line>
+                Hockey.
+              </p>
+              <p className="mt-4 max-w-[36ch] text-body text-ink-muted" data-line>
+                The one hour a week where nobody can reach me and the only
+                system that matters is the one on the ice.
+              </p>
+            </div>
+            <div>
+              <p className="font-display text-title text-ink" data-line>
+                Tower of God.
+              </p>
+              <p className="mt-4 max-w-[36ch] text-body text-ink-muted" data-line>
+                The thing I read. Still the story I would hand to someone who
+                thinks they do not like comics.
+              </p>
+            </div>
+          </div>
+        </Chapter>
+
+        {/* -------------------------------------------------- 06, symbols */}
+        <Chapter
+          id="elsewhere"
+          index="06"
+          label="Elsewhere"
+          length={0.6}
+          hold
+          align="center"
+        >
+          <h2 id="elsewhere-title" className="sr-only">
+            Elsewhere
+          </h2>
+          <ul className="flex flex-col gap-4 sm:flex-row sm:gap-16">
+            {site.socials.map((s) => (
+              <li key={s.href} data-line>
+                <a
+                  href={s.href}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="group inline-flex items-baseline gap-3 font-display text-display text-ink transition-colors hover:text-signal"
+                >
+                  {s.label}
+                  <ArrowUpRightIcon
+                    aria-hidden
+                    className="size-8 translate-y-1 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5 sm:size-10"
+                  />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </Chapter>
+      </FilmMotion>
+
+      {/* ------------------------------------------------------ 07, the offer */}
+      <section aria-labelledby="offer-title" className="border-t border-line">
+        <Container className="py-20 sm:py-28">
+          <p className="label">07 / The offer</p>
+          <h2
+            id="offer-title"
+            className="mt-6 max-w-[16ch] font-display text-display text-ink"
+          >
+            Want something built?
+          </h2>
+          <ul className="mt-14 grid gap-10 sm:grid-cols-3 sm:gap-8">
+            {offers.map((offer) => (
+              <li key={offer.title} className="border-t border-line pt-5">
+                <h3 className="font-display text-2xl text-ink">{offer.title}</h3>
+                <p className="mt-3 text-[0.9375rem] leading-relaxed text-ink-muted">
+                  {offer.body}
+                </p>
+              </li>
+            ))}
+          </ul>
+          {/* Points at the contact form until the /build page lands. */}
           <Link
             href="/contact"
-            className={cn(buttonVariants({ variant: "solid" }), "mt-8")}
+            className={cn(buttonVariants({ variant: "solid", size: "lg" }), "mt-14")}
           >
-            Get in touch
+            Say what you need
             <ArrowRightIcon aria-hidden className="size-4" />
           </Link>
-        </Reveal>
-      </Section>
+        </Container>
+      </section>
     </>
   );
 }
